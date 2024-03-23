@@ -1,0 +1,198 @@
+body{
+
+
+    background: linear-gradient(264.67deg,#7f7fd5 -9.26%,#86a8e7 45.82%,#91eae4 106.96%);
+}
+
+
+.create-account-form .input-box input[type="submit"], .create-account-form .input-box .submit-btn {
+    padding-right: 0;
+    background: #ffde59;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border-radius: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -ms-border-radius: 9px;
+    -o-border-radius: 9px;
+    background: linear-gradient(264.67deg,#7f7fd5 -9.26%,#86a8e7 45.82%,#91eae4 106.96%);
+}
+
+label {
+    display: inline-block;
+    color: #8293da;
+}
+
+
+.slideshow {
+    display: none; /* تبدأ بإخفاء الصور */
+  }
+  
+
+
+
+
+  .photo {
+    position: absolute;
+    animation: round 36s infinite;
+    opacity: 0;
+  }
+  
+  @keyframes round {
+    5% {
+        opacity: 1;
+      }
+      
+    25% {
+      opacity: 1;
+    }
+    30% {
+      opacity: 0;
+    }
+    50% {
+        opacity: 0;
+      }
+      80% {
+        opacity: 0;
+      }
+  }
+
+  img:nth-child(1) {
+    animation-delay: 0s;
+  }  img:nth-child(5) {
+    animation-delay: 0s;
+  }
+  
+  img:nth-child(2) {
+    animation-delay: 9s;
+  }  img:nth-child(6) {
+    animation-delay: 9s;
+  }
+  
+  img:nth-child(3) {
+    animation-delay: 18s;
+  }  img:nth-child(7) {
+    animation-delay: 18s;
+  }
+  
+  img:nth-child(4) {
+    animation-delay: 27s;
+  }  img:nth-child(8) {
+    animation-delay: 27s;
+  }
+  
+ 
+
+
+.photo {
+    position: absolute;
+    animation: round 36s infinite;
+    opacity: 0;
+    max-width: 820px;
+}
+.vh-100 {
+    height: 86vh!important;
+}
+
+.card-body2 {
+   
+    height: 624px;
+}
+
+
+.text-center {
+    text-align: center!important;
+    color: #8293da;
+}
+
+
+
+body > div.container-fluid > div > div:nth-child(2) > div > div > img:nth-child(5){
+    position: relative;
+    top: 189px;
+    left: -279px;
+    height: 46px;
+    width: 163px;
+}
+
+
+
+
+/*
+  .photo {
+    position: absolute;
+    animation: round 16s infinite;
+    opacity: 0;
+  }
+  
+  @keyframes round {
+    25% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 0;
+    }
+  }
+
+  img:nth-child(1) {
+    animation-delay: 12s;
+  }
+  
+  img:nth-child(2) {
+    animation-delay: 8s;
+  }
+  
+  img:nth-child(3) {
+    animation-delay: 4s;
+  }
+  
+  img:nth-child(4) {
+    animation-delay: 0s;
+  }
+
+.create-account-form .input-box input {
+    padding-right: 40px;
+    height: 40px;
+    color: #8293da;
+    background: #fff;
+    border: 1px solid #8293da;
+    font-size: 14px;
+    border-radius: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -ms-border-radius: 9px;
+    -o-border-radius: 9px;
+}
+
+.create-account-form .form-title {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: #86a8e7;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+
+
+
+
+@media (min-width: 1200px){
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1140px;
+    position: relative;
+    top: 319px;
+    left: 601px;
+}
+}
+
+.container2{
+
+    position: relative;
+    top: -27px;
+    left: 60px;
+}
+*/

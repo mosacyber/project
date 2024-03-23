@@ -1,0 +1,307 @@
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+:root{
+    --main-dark: #1D1E26;
+    --alt-dark: #262932;
+    --text-dark: #d1d1d1;
+    --border-dark: #323D4E;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    opacity: 1;
+    margin: 0;
+    --main: #e7e6e6;
+    --alt: #FFFFFF;
+    --text-color: #333;
+    --simillar: #3f82ff;
+    --active: #3f82ff8e;
+    --hover: #1b68f827;
+    --label: #858585;
+    --border: #b7b7b8;
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+body.theme-dark{
+    --main: var(--main-dark);
+    --alt: var(--alt-dark);
+    --text-color: var(--text-dark);
+    --border: var(--border-dark);
+}
+@media (prefers-color-scheme : dark){
+    body.theme-auto{
+        --main: var(--main-dark);
+        --alt: var(--alt-dark);
+        --text-color: var(--text-dark);
+        --border: var(--border-dark);
+    }
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+li {
+    list-style: none;
+}
+h4 {
+    font-size: 1.275rem;
+    color: var(--text-color);
+}
+
+/* Layout for admin dashboard skeleton */
+.wrapper {
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+}
+#sidebar {
+    max-width: 264px;
+    min-width: 264px;
+    background: var(--alt);
+    transition: all 0.35s ease-in-out;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    width: 100%;
+    background: var(--main);
+    z-index: 2;
+}
+
+/* Sidebar Elements Style */
+.sidebar-logo {
+    padding: 1.15rem;
+}
+.sidebar-logo a {
+    color: var(--simillar);
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+.sidebar-nav {
+    padding: 0 !important;
+}
+.sidebar-header {
+    color: var(--label) !important;
+    font-size: .75rem;
+    padding: 1.5rem 1.5rem .150rem;
+}
+
+a.sidebar-link {
+    padding: .625rem 1.625rem;
+    color: var(--text-color);
+    position: relative;
+    display: block;
+    font-size: 0.875rem;
+}
+.sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 14.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+}
+.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+    transition: all .2s ease-out;
+}
+.avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.navbar-expand .navbar-nav {
+    margin-right: auto;
+}
+.content {
+    flex: 1;
+    max-width: 100vw;
+    width: 100vw;
+}
+@media (min-width:768px) {
+    .content {
+        max-width: auto;
+        width: auto;
+    }
+}
+.li-hover{
+    transition: 0.4s;
+    border-right: 4px solid var(--alt);
+    transition: 0.5s;
+}
+.li-hover:hover{
+    background-color: var(--hover);
+}
+.li-hover.active{
+    border-right: 4px solid var(--active);
+}
+.li-child:hover{
+    background-color: var(--simillar);
+}
+.li-child.activeChild{
+    border-right: 3px solid  greenyellow;
+}
+
+/* Sidebar Toggle */
+#sidebar.collapsed {
+    margin-left: -264px;
+}
+.hamber{
+    background-color: transparent;
+    color: var(--text-color);
+}
+.navbar{
+    background-color: var(--alt);
+}
+
+/* contetn container */
+.contetn-container{
+    background-color: var(--alt);
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+
+
+/* tables start */
+.a-table{
+    width: 100%;
+    text-align: center;
+}
+.a-table th{
+    background-color: var(--simillar) !important;
+    color: var(--text-color);
+    padding: 10px;
+}
+.a-table td{
+    padding: 8px;
+}
+.a-table tr{
+    background-color: var(--alt);
+    transition: 0.3s;
+}
+.a-table tr:nth-child(even) {background-color: var(--alt) !important;}
+.a-table tr:nth-child(odd) {background-color: var(--main) !important;}
+.a-table tr:hover{
+    background-color: var(--border) !important;
+}
+.table-info{
+    border-top: 1px solid var(--border);
+    color: var(--text-color);
+}
+
+
+/* tables end */
+
+/* loading spring */
+/* Container for the loader */
+.loader {
+    position: relative;
+    width: 10em;
+    height: 10em;
+  }
+  /* Track elements */
+  .track, .inner-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset -0.1em -0.1em 0.2em #d1d1d1, inset 0.1em 0.1em 0.2em #ffffff;
+  }
+  
+  .inner-track {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    border: 2em solid #f0f0f0;
+  }
+  /* Orb element */
+  .orb {
+    position: absolute;
+    width: 1.5em;
+    height: 1.5em;
+    top: 50%;
+    left: 50%;
+    background-color: #c0cfda;
+    border-radius: 50%;
+    animation: spin 1.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    background: radial-gradient(circle at 30% 30%, #ffffff, #ccc);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(255, 255, 255, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Animations */
+  @keyframes spin {
+    0% {
+      transform: translate(-50%, -50%) rotate(90deg) translate(3em) rotate(-90deg);
+    }
+  
+    100% {
+      transform: translate(-50%, -50%) rotate(450deg) translate(3em) rotate(-450deg);
+    }
+  }
+  /* end loading spring */
+ 
+/* add neomorphism style */
+
+/* start loading full screen */
+/* CSS برای تیرگی صفحه */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* اینجا شما می‌توانید شفافیت را تنظیم کنید */
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CSS برای سپینر */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3); /* اینجا شما می‌توانید رنگ مرز سپینر را تنظیم کنید */
+    border-top: 4px solid #ffffff; /* اینجا شما می‌توانید رنگ بالای سپینر را تنظیم کنید */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+/* این کد برای انیمیشن چرخش سپینر استفاده می‌شود */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* end loading full screen */
+
+
+
+
+
+
+/* custom styles */
+.bg-alt{
+    background-color: var(--alt);
+}
+.lable-color{
+    color: var(--label);
+}

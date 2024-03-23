@@ -1,0 +1,8 @@
+1_-_admin
+2_-_student
+3_-_President_of_the_University_مدير_الجامعه
+4_-_Vice_President_for_Academic_Affairs_وكيل_الجامعه
+5_-_Dean_of_the_College_عميد_الكلية
+6_-_Program_Coordinator_منسق_البرنامج
+7_-_Academic_Advisor_المرشد_الاكاديمي
+8_-_Faculty_Member_عضو_هيئه_التدريس
