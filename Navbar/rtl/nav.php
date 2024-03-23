@@ -348,7 +348,7 @@ echo '
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> 
             <a class="nav-link" href="#">
-            Compact menu
+            التقارير
             </a>
             </li>
             <li class="nav-item">
