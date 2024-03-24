@@ -229,7 +229,7 @@
   <link rel="stylesheet" href="../../style.css">
 </head>
 
-<body>
+<body class="rtl">
   
 <?php 
 $navbar_path = "Navbar/rtl/nav.php";
@@ -280,7 +280,7 @@ for ($i = 0; $i < 9; $i++) {
                 </div>
               </div>
             </div>
-          </a>
+          </a> 
 
           </div>
         </div><!-- End Sales Card -->

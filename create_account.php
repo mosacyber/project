@@ -229,7 +229,7 @@ input[type=submit] {
       hx-swap="afterend"
       afterbegin
     -->
-      <form  id="myForm"  class="create-account-form" hx-post="./api.php?action=sign" hx-target=".ssdd" hx-swap="innerhtml" >
+    <form id="myForm" class="create-account-form" method="POST" action="">
       <h3 align="center">انشاء  حساب جديد</h3>
       
       
@@ -258,8 +258,8 @@ input[type=submit] {
       <div class="input-box email">
   <label>كلمة المرور</label>
  <!-- <input name="Password" id="pass" type="password" class="form-control" placeholder="كلمة المرور" /> -->
-  <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." required>
-  <div id="accountIDValidationMessage-pass"></div>
+ <input type="password" id="psw" name="Password"  data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." required>
+ <div id="accountIDValidationMessage-pass"></div>
   
 
 
@@ -277,189 +277,11 @@ input[type=submit] {
      
 
       <div class="input-box">
-    <button class="submit-btn" type="submit"  >تسجيل</button>
+      <button class="submit-btn" type="submit" name="sign">تسجيل</button>
 </div>
 
     </form>
-<div id="message">
-  <h3>Password must contain the following:</h3>
-  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-  <p id="number" class="invalid">A <b>number</b></p>
-  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-</div>
 
-
-
-<script>
-
-
-
-
-
-
-var myInput = document.getElementById("psw");
-var letter = document.getElementById("letter");
-var capital = document.getElementById("capital");
-var number = document.getElementById("number");
-var length = document.getElementById("length");
-
-// When the user clicks on the password field, show the message box
-myInput.onfocus = function() {
-  document.getElementById("message").style.display = "block";
-}
-
-// When the user clicks outside of the password field, hide the message box
-myInput.onblur = function() {
-  document.getElementById("message").style.display = "none";
-}
-
-// When the user starts to type something inside the password field
-myInput.onkeyup = function() {
-  // Validate lowercase letters
-  var lowerCaseLetters = /[a-z]/g;
-  if(myInput.value.match(lowerCaseLetters)) {  
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-  } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-  }
-  
-  // Validate capital letters
-  var upperCaseLetters = /[A-Z]/g;
-  if(myInput.value.match(upperCaseLetters)) {  
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-  }
-
-  // Validate numbers
-  var numbers = /[0-9]/g;
-  if(myInput.value.match(numbers)) {  
-    number.classList.remove("invalid");
-    number.classList.add("valid");
-  } else {
-    number.classList.remove("valid");
-    number.classList.add("invalid");
-  }
-  
-  // Validate length
-  if(myInput.value.length >= 8) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById("pass").addEventListener("input", function() {
-  // قواعد كلمة المرور
-  const minLength = 8;
-  const hasUpperCase = /[A-Z]/.test(this.value);
-  const hasLowerCase = /[a-z]/.test(this.value);
-  const hasNumber = /\d/.test(this.value);
-
-  // التحقق من تحقق المتطلبات
-  const isValid =
-    this.value.length >= minLength &&
-    hasUpperCase &&
-    hasLowerCase &&
-    hasNumber;
-
-  // إذا لم تكن كلمة المرور صالحة، قم بعرض رسالة الخطأ
-  if (!isValid) {
-    document.getElementById("accountIDValidationMessage-pass").textContent = "كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، وعلى الأقل حرف كبير وحرف صغير ورقم.";
-  } else {
-    document.getElementById("accountIDValidationMessage-pass").textContent = "";
-  }
-});
-
-
-
-
-
-/* بداية */
-// تحقق من عدد الارقام //
-
-      // للتحقق من ان رقم الهاتف فقط لا يتجاوز 10 ارقام
-      document.getElementById("number").addEventListener("input", function() {
-        // الحد الأقصى لعدد الأرقام المسموح به
-        const maxDigits = 10;
-
-        // قم بالتحقق من عدد الأرقام في الحقل
-        const inputValue = this.value.replace(/\D/g, ''); // استخدم \D لإزالة غير الأرقام
-        const numberOfDigits = inputValue.length;
-
-        // إذا تجاوز العدد المسموح، قم بقص التفاصيل الإضافية
-        if (numberOfDigits > maxDigits) {
-          this.value = inputValue.slice(0, maxDigits);
-        }
-      });
-
-/* نهاية */
-
-/* بداية */
-// تحقق من الاسم الاول //
-      document.getElementById("FName").addEventListener("input", function() {
-        // السماح فقط بالأحرف وعدم السماح بالأرقام أو المسافات
-        const inputValue = this.value;
-        const isValid = /^[ء-ي]+$/.test(inputValue);
-
-        // إذا لم يكن الإدخال صالحًا، قم بإظهار رسالة الخطأ وقم بإزالة الأحرف غير الصالحة
-        if (!isValid) {
-          this.value = inputValue.replace(/[^ء-ي]/g, ''); // قم بإزالة أي شيء غير الأحرف العربية
-          document.getElementById("accountIDValidationMessage-FName").textContent = "يجب أن يحتوي الاسم الاول على أحرف فقط.";
-        } else {
-          document.getElementById("accountIDValidationMessage-FName").textContent = "";
-        }
-      });
-
-/* نهاية */
-
-/* بداية */
-// تحقق من الاسم الاخير //
-      document.getElementById("LName").addEventListener("input", function() {
-        // السماح فقط بالأحرف وعدم السماح بالأرقام أو المسافات
-        const inputValue = this.value;
-        const isValid = /^[ء-ي]+$/.test(inputValue);
-
-        // إذا لم يكن الإدخال صالحًا، قم بإظهار رسالة الخطأ وقم بإزالة الأحرف غير الصالحة
-        if (!isValid) {
-          this.value = inputValue.replace(/[^ء-ي]/g, ''); // قم بإزالة أي شيء غير الأحرف العربية
-          document.getElementById("accountIDValidationMessage-LName").textContent = "يجب أن يحتوي الاسم الأخير على أحرف فقط.";
-        } else {
-          document.getElementById("accountIDValidationMessage-LName").textContent = "";
-        }
-      });
-
-/* نهاية */
-
-
-
-
-
-
-
-
-
-</script>
 
 
 
@@ -467,30 +289,70 @@ document.getElementById("pass").addEventListener("input", function() {
 
 
     <?php
-                        if (isset($_POST['sign'])) {
-                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                $Account_ID = $_POST['Account_ID'];
-                                $First_Name = $_POST['First_Name'];
-                                $Last_Name = $_POST['Last_Name'];
-                                $Email = $_POST['Email']; 
-                                $Mobile = $_POST['Mobile'];
-                                $Password = $_POST['Password'];
+$errors = []; // تعريف متغير $errors كمصفوفة فارغة
 
-if (!count($errors)) {
-    $Password = password_hash($Password, PASSWORD_DEFAULT);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // التحقق من وجود عنصر "Password" في الطلب المرسل
+    if (isset($_POST['Password']) && !empty($_POST['Password'])) {
+      // استخدام كلمة المرور بشكل آمن هنا
+      $password = $_POST['Password'];
+  } else {
+      // عرض رسالة خطأ إذا لم يتم تقديم كلمة مرور
+      echo "كلمة المرور مطلوبة.";
+  }
+  
 }
 
-$Position = $_POST['Position'];
+// التحقق من وجود مصفوفة $errors وعدم فراغها قبل استخدامها
+if (!empty($errors)) {
+    // إذا كانت $errors غير فارغة، يمكنك عرض رسائل الخطأ هنا
+    foreach ($errors as $error) {
+        echo "<p>$error</p>";
+    }
+}
 
-$sql = "INSERT INTO accounts (Account_ID, First_Name, Last_Name, Email, Password, Mobile, Position, Admin_ID) VALUES ('$Account_ID', '$First_Name', '$Last_Name', '$Email', '$Password', '$Mobile', '$Position', '1')";
-                                if ($mysqli->query($sql) === TRUE) {
+// التأكد من تعريف المتغير $mysqli
+if (!isset($mysqli)) {
+    // يمكنك تعريف وتهيئة المتغير $mysqli هنا
+    // على سبيل المثال:
+    $mysqli = new mysqli("localhost", "root", "", "university_info");
 
-                                    echo '<p id="success-message" class="date">تمت إضافة التصنيف بنجاح</p>';
-                                } else {
-                                    echo '<p class="date">حدث خطأ في إدخال البيانات: ' . $mysqli->error . '</p>';
-                                }
-                            }
-                        }
+    // التحقق من الاتصال بقاعدة البيانات
+    if ($mysqli->connect_error) {
+        die("فشل الاتصال بقاعدة البيانات: " . $mysqli->connect_error);
+    }
+}
+
+// الآن يمكنك استخدام $mysqli بشكل آمن في الشفرة الخاصة بك
+?>
+
+
+
+    <?php
+                        if (isset($_POST['sign'])) {
+                          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $Account_ID = $_POST['Account_ID'];
+                            $First_Name = $_POST['First_Name'];
+                            $Last_Name = $_POST['Last_Name'];
+                            $Email = $_POST['Email']; 
+                            $Mobile = $_POST['Mobile'];
+                            $Password = $_POST['Password']; // تم تغيير هنا
+
+                            if (!empty($Password)) { // تم تغيير هنا
+                              $Password = password_hash($Password, PASSWORD_DEFAULT);
+                          }
+                  
+                          $Position = $_POST['Position'];
+                  
+                          $sql = "INSERT INTO accounts (Account_ID, First_Name, Last_Name, Email, Password, Mobile, Position) VALUES ('$Account_ID', '$First_Name', '$Last_Name', '$Email', '$Password', '$Mobile', '$Position')";
+                          if ($mysqli->query($sql) === TRUE) {
+                  
+                              echo '<p id="success-message" class="date">تمت إضافة التصنيف بنجاح</p>';
+                          } else {
+                              echo '<p class="date">حدث خطأ في إدخال البيانات: ' . $mysqli->error . '</p>';
+                          }
+                      }
+                  }
                         ?>
 
 

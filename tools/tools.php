@@ -1,5 +1,85 @@
 <?php
 
+function css() {
+
+  echo'
+  
+
+
+
+
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../vendors/iconfonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.addons.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+
+
+
+
+
+
+
+
+
+
+
+$css_files = [
+  "style.css",
+  "css/style.css",
+  "images/favicon.png",
+  "assets/vendor/simple-datatables/style.css",
+  "css/materialize.min.css",
+  "vendors/css/vendor.bundle.addons.css",
+  "vendors/css/vendor.bundle.base.css",
+];
+// تحقق من وجود ملفات الـ CSS وقم بتضمينها
+foreach ($css_files as $css_file) {
+  for ($i = 0; $i < 9; $i++) {
+      $path = str_repeat("../", $i) . $css_file;
+      if (file_exists($path)) {
+          echo "<link href="$path" rel="stylesheet">\n";
+          break;
+      }
+  }
+}
+
+  ';
+}
+
+function js() {
+
+  echo'
+  
+  ';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function download_css() {
 

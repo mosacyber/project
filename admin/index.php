@@ -97,7 +97,7 @@ $conn->close();
 
 
 
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -123,7 +123,14 @@ $conn->close();
 
   <style>
     <?php
-    include '../tools/tools.php';
+    $navbar_path = "tools/tools.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+}
     download_css();
     print_css();
     ?>
