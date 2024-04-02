@@ -89,8 +89,9 @@ for ($i = 0; $i < 9; $i++) {
           </div>
           <div class="page-header">
             <h3 class="page-title">
-السجل الاكاديمي
-            </h3>
+النتائج
+المتوقعه من التنبؤ
+          </h3>
           </div>
 
           <div class="row">
@@ -102,39 +103,79 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
-
         <!-- Sales Card -->
         <div class="col-xxl-12 col-md-12">
   <div class="card info-card sales-card">
     <div class="card-body">
+<h2>التنبؤ بدرجه الماده</h2>
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">رمز المقرر</th>
               <th scope="col">اسم المقرر</th>
               <th scope="col">الساعات</th>
-              <th scope="col">العلامة</th>
-              <th scope="col">التقدير</th>
+              <th scope="col">الدرجة</th>
+              <th scope="col">اللون</th>
             </tr>
           </thead>
           <tbody>
-            <!-- أضف البيانات هنا -->
-            <tr>
-              <td>رمز المقرر 1</td>
-              <td>اسم المقرر 1</td>
-              <td>ساعات المقرر 1</td>
-              <td>العلامة</td>
-              <td>التقدير</td>
-            </tr>
-            <tr>
-              <td>رمز المقرر 2</td>
-              <td>اسم المقرر 2</td>
-              <td>ساعات المقرر 2</td>
-              <td>العلامة</td>
-              <td>التقدير</td>
-            </tr>
-            <!-- يمكنك إضافة المزيد من البيانات هنا -->
+          <?php
+           if(isset($_SESSION['Account_ID'])) {
+                        // استعلام SQL لاسترداد بيانات معينة من الجدول
+                        $sql = "SELECT a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
+                            FROM current_semester c
+                            INNER JOIN accounts a ON a.Account_ID = c.student_id 
+                            INNER JOIN accounts a2 ON a2.Account_ID = c.Faculty_member_ID
+                            INNER JOIN subjects s ON c.subject_code = s.subject_code
+                            WHERE c.student_id = {$_SESSION['Account_ID']}
+                            AND c.Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester WHERE student_id = {$_SESSION['Account_ID']})
+                            ORDER BY c.Semester_Number DESC;";
+                        $result = $conn->query($sql);
+
+                        // التحقق من وجود بيانات للعرض
+                        if ($result->num_rows > 0) {
+                            // عرض البيانات
+                            $sql2 = "SELECT * from academic_record where subject_code = $row[subject_code] and  student_id = {$_SESSION['Account_ID']} ";
+                          $result2 = $conn->query($sql2);
+                          $row2 = $result2->fetch_assoc();
+                            while ($row = $result->fetch_assoc()) {
+                              
+                                // عرض الصفوف لكل بيان في الجدول
+                                echo '<tr>';
+                                echo '<td>' . $row["subject_code"] . '</td>';
+                                echo '<td>' . $row["subject_name"] . '</td>';
+                                echo '<td>' . $row["credit_hours"] . '</td>';
+                                echo "<td>";
+                                echo "<div class='progress'>";
+                                if ($row["grade"]  < 50) {
+                                    echo "<div class='progress-bar bg-danger' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
+                                } else if($row["grade"]  < 70){
+                                    echo "<div class='progress-bar bg-warning' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
+                                }else if($row["grade"]  < 100){
+                                  echo "<div class='progress-bar bg-success' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
+                                }else{
+                                  echo "<div class='progress-bar bg-primary' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
+                            
+                                }
+                                echo "</div>";
+                                echo "</td>";
+                                echo '</tr>';
+                            }
+                        } else {
+                            // إذا لم يتم العثور على بيانات
+                            echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
+                        }
+                      }else {
+                          echo"
+                          <div class='alert alert-danger'>
+                          تنبيه
+                          <hr>
+                              <p>
+                        هناك مشكله في السشن
+                              </p>
+                        </div>";
+                        }
+                        ?>
           </tbody>
         </table>
       </div>
@@ -142,18 +183,47 @@ for ($i = 0; $i < 9; $i++) {
   </div>
 </div>
 <!-- End Sales Card -->
+
+
+<h1></h1><h1></h1>
+
+
+
+ 
+
+
+<h1></h1>
 <h1></h1>
 
         <!-- Sales Card -->
         <div class="col-xxl-12 col-md-12">
   <div class="card info-card sales-card">
     <div class="card-body">
+      <h2>التنبؤ بالتخرج</h2>
+      <hr>
  <h5>
-مجموع الساعات المعتمدة
- </h5><br>
+التقدير المتوقع الحصول عليه  </h5><br>
  <h5>
-الساعات المتبقية في الخطة
+B+
  </h5>
+ <h5>
+اللون 
+</h5>
+ <!-- دائره بداخلها الدرجه b+ والدائره فيها اللون -->
+ <!--
+
+
+
+ من
+ student_gpa
+ 
+	Semster_Number 
+
+مثلا 
+451
+الفصل الاول 
+452 الثاني
+-->
     </div>
   </div>
 </div>

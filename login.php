@@ -4,29 +4,31 @@
 <?php include './config/app.php';  
 
 
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'student'){
-  header('location: Actors/student/student.php');
+if (isset($_SESSION['role']) && $_SESSION['role'] == '1'){
+  header('location: Actors/student');
 }
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+else if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
   header('location: admin');
 }
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Dean_of_the_College'){
+else if (isset($_SESSION['role']) && $_SESSION['role'] == '2'){
   header('location: Actors/Dean_of_the_College');
 }
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Program_Coordinator'){
+else if (isset($_SESSION['role']) && $_SESSION['role'] == '3'){
   header('location: Actors/Program_Coordinator');
 }
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Academic_Advisor'){
+else if (isset($_SESSION['role']) && $_SESSION['role'] == '4'){
   header('location: Actors/Academic_Advisor');
 }
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Faculty_Member'){
+else if (isset($_SESSION['role']) && $_SESSION['role'] == '8'){
   header('location: Actors/Faculty_Member');
 }
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Vice_President_for_Academic_Affairs'){
+else if (isset($_SESSION['role']) && $_SESSION['role'] == '6'){
   header('location: Actors/Vice_President_for_Academic_Affairs');
 }
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'President_of_the_University'){
+else if (isset($_SESSION['role']) && $_SESSION['role'] == '7'){
   header('location: Actors/President_of_the_University');
+}else {
+
 }
 
 
@@ -102,29 +104,28 @@ $Account_ID = '';
                                     $foundUser = $userExists->fetch_assoc();
                                     if (password_verify($Password, $foundUser['Password'])) {
                                       $_SESSION['logged_in'] = true;
-                                      $_SESSION['user_id'] = $foundUser['Account_ID']; // تم تصحيح اسم العمود
+                                      $_SESSION['Account_ID'] = $foundUser['Account_ID']; // تم تصحيح اسم العمود
                                       $_SESSION['First_Name'] = $foundUser['First_Name'];
                                       $_SESSION['Last_Name'] = $foundUser['Last_Name'];
                                       $_SESSION['role'] = $foundUser['Position'];
                                   
-                                      if ($foundUser['Position'] == 'student') {
-                                          header('location: Actors/student/student.php');
-                                      }elseif($foundUser['Position'] == 'admin'){
+                                      if ($foundUser['Position'] == '1' /*student*/ ) {
+                                          header('location: Actors/student/');
+                                      }elseif($foundUser['Position'] == 'admin'  /**/){
                                         header('location: admin');
-                                      }elseif($foundUser['Position'] == 'Dean_of_the_College'){
-                                        header('location: Actors/Dean_of_the_College/Dean_of_the_College.php');
-                                      }elseif($foundUser['Position'] == 'Program_Coordinator'){
-                                        header('location: Actors/Program_Coordinator/Program_Coordinator.php');
-                                      }elseif($foundUser['Position'] == 'Academic_Advisor'){
-                                        header('location: Actors/Academic_Advisor/Academic_Advisor.php');
-                                      }elseif($foundUser['Position'] == 'Faculty_Member'){
-                                        header('location: Actors/Faculty_Member/Faculty_Member.php');
-                                      }elseif($foundUser['Position'] == 'President_of_the_University'){
-                                        header('location: Actors/President_of_the_University/President_of_the_University.php');
-                                      }elseif($foundUser['Position'] == 'Vice_President_for_Academic_Affairs'){
-                                        header('location: Actors/Vice_President_for_Academic_Affairs/Vice_President_for_Academic_Affairs.php');
+                                      }elseif($foundUser['Position'] == '2' /*Dean_of_the_College*/){
+                                        header('location: Actors/Dean_of_the_College/');
+                                      }elseif($foundUser['Position'] == '3' /*Program_Coordinator*/){
+                                        header('location: Actors/Program_Coordinator/');
+                                      }elseif($foundUser['Position'] == '4' /*Academic_Advisor*/){
+                                        header('location: Actors/Academic_Advisor/');
+                                      }elseif($foundUser['Position'] == '8' /*Faculty_Member*/){
+                                        header('location: Actors/Faculty_Member/');
+                                      }elseif($foundUser['Position'] == '7' /*President_of_the_University*/){
+                                        header('location: Actors/President_of_the_University/');
+                                      }elseif($foundUser['Position'] == '6' /*Vice_President_for_Academic_Affairs*/){
+                                        header('location: Actors/Vice_President_for_Academic_Affairs/');
                                       }else {
-                                          $_SESSION['success message'] = "Welcome back, $foundUser[First_Name]"; // تم تصحيح اسم المتغير
                                           header('location: index.php');
                                       }
                                   }

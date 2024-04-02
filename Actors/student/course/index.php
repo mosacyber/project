@@ -1,3 +1,16 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,6 +116,7 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
+
         <!-- Sales Card -->
         <div class="col-xxl-12 col-md-12">
   <div class="card info-card sales-card">
@@ -110,6 +124,53 @@ for ($i = 0; $i < 9; $i++) {
       <div class="table-responsive">
         <table class="table">
           <thead>
+          <?php
+
+
+// استعلام SQL لاسترداد بيانات معينة من الجدول
+$sql = "SELECT a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
+FROM current_semester c
+INNER JOIN accounts a ON a.Account_ID = c.student_id 
+INNER JOIN accounts a2 ON a2.Account_ID = c.Faculty_member_ID
+INNER JOIN subjects s ON c.subject_code = s.subject_code
+WHERE c.student_id = 421002998
+AND c.Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester WHERE student_id = 421002998)
+ORDER BY c.Semester_Number DESC;
+";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+
+
+// تحديد الفصل الدراسي بناءً على قيمة Semester_Number
+$semester_number = $row["Semester_Number"];
+$last_digit = substr($semester_number, -1);
+$semester_name = "";
+
+switch ($last_digit) {
+    case "1":
+        $semester_name = "الأول";
+        break;
+    case "2":
+        $semester_name = "الثاني";
+        break;
+    case "3":
+        $semester_name = "الثالث";
+        break;
+    // إضافة حالات إضافية حسب الحاجة
+    default:
+        // حالة الافتراضية في حالة عدم تطابق الرقم
+        $semester_name = "غير محدد";
+        break;
+}
+
+// عرض اسم الفصل الدراسي
+echo '<h4>الفصل الدراسي : <span>'.$semester_name.'</span></h4>';
+
+// استخراج العام الدراسي من Semester_Number
+$academic_year = substr($semester_number, 0, 2);
+echo '<h4>العام الدراسي : 14'.$academic_year.'هـ</span></h4>';
+
+             ?>
             <tr>
               <th scope="col">رمز المقرر</th>
               <th scope="col">اسم المقرر</th>
@@ -118,20 +179,47 @@ for ($i = 0; $i < 9; $i++) {
             </tr>
           </thead>
           <tbody>
-            <!-- أضف البيانات هنا -->
-            <tr>
-              <td>رمز المقرر 1</td>
-              <td>اسم المقرر 1</td>
-              <td>ساعات المقرر 1</td>
-              <td>اسم المحاضر 1</td>
-            </tr>
-            <tr>
-              <td>رمز المقرر 2</td>
-              <td>اسم المقرر 2</td>
-              <td>ساعات المقرر 2</td>
-              <td>اسم المحاضر 2</td>
-            </tr>
-            <!-- يمكنك إضافة المزيد من البيانات هنا -->
+          <?php
+           if(isset($_SESSION['Account_ID'])) {
+                        // استعلام SQL لاسترداد بيانات معينة من الجدول
+                        $sql = "SELECT a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
+                            FROM current_semester c
+                            INNER JOIN accounts a ON a.Account_ID = c.student_id 
+                            INNER JOIN accounts a2 ON a2.Account_ID = c.Faculty_member_ID
+                            INNER JOIN subjects s ON c.subject_code = s.subject_code
+                            WHERE c.student_id = {$_SESSION['Account_ID']}
+                            AND c.Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester WHERE student_id = {$_SESSION['Account_ID']})
+                            ORDER BY c.Semester_Number DESC;";
+                        $result = $conn->query($sql);
+
+                        // التحقق من وجود بيانات للعرض
+                        if ($result->num_rows > 0) {
+                            // عرض البيانات
+                            while ($row = $result->fetch_assoc()) {
+                                // عرض الصفوف لكل بيان في الجدول
+                                echo '<tr>';
+                                echo '<td>' . $row["subject_code"] . '</td>';
+                                echo '<td>' . $row["subject_name"] . '</td>';
+                                echo '<td>' . $row["credit_hours"] . '</td>';
+                                echo '<td>' . $row["Faculty_Name"] . '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            // إذا لم يتم العثور على بيانات
+                            echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
+                        }
+                      }else {
+                          echo"
+                          <div class='alert alert-danger'>
+                          تنبيه
+                          <hr>
+                              <p>
+                        هناك مشكله في السشن
+                              </p>
+                        </div>";
+                        }
+                        ?>
+
           </tbody>
         </table>
       </div>
@@ -145,16 +233,127 @@ for ($i = 0; $i < 9; $i++) {
         <div class="col-xxl-12 col-md-12">
   <div class="card info-card sales-card">
     <div class="card-body">
- <h5>
-مجموع الساعات المعتمدة
- </h5><br>
- <h5>
-الساعات المتبقية في الخطة
- </h5>
+      <div class="table-responsive">
+
+
+
+
+<?php
+
+  //  للتحقق من السشن اذا موجود او لا
+  if(isset($_SESSION['Account_ID'])) {
+// استعلام SQL لاسترداد بيانات معينة من الجدول
+$sql = "SELECT  a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
+FROM current_semester c
+INNER JOIN accounts a ON a.Account_ID = c.student_id 
+INNER JOIN accounts a2 ON a2.Account_ID = c.Faculty_member_ID
+INNER JOIN subjects s ON c.subject_code = s.subject_code
+WHERE c.student_id = {$_SESSION['Account_ID']}
+ORDER BY c.Semester_Number DESC
+LIMIT 1;";
+  // استعلام SQL آخر لاسترداد بيانات معينة من الجدول الآخر
+ 
+// تنفيذ الاستعلام
+$result = $conn->query($sql);
+
+// التحقق من وجود نتائج
+if ($result->num_rows > 0) {
+  // عرض البيانات
+  while($row = $result->fetch_assoc()) {
+  
+    
+    // تنفيذ الاستعلام
+    $result_accounts = $conn->query($sql);
+
+    // التحقق من وجود نتائج
+    if ($result_accounts->num_rows > 0) {
+      // عرض بيانات الحساب
+      while($row_accounts = $result_accounts->fetch_assoc()) { 
+          echo "<h2>اسم المشرف الاكاديمي : " . $row_accounts["Faculty_Name"] . "</h2><br>";
+          echo '<a href="'.$config['mail']."?id=".$row_accounts["Account_ID"]."&subject_code="."Advisor".'"><button>تواصل</button></a>';
+      }    
+  }
+     else {
+      echo "No account found";
+    }
+  }
+} else {
+  echo"
+  <div class='alert alert-danger'>
+  تنبيه
+  <hr>
+      <p>لا يوجد لديك مشرف اكاديمي</p>
+</div>";
+}
+} else {
+  echo"
+  <div class='alert alert-danger'>
+  تنبيه
+  <hr>
+      <p>
+هناك مشكله في السشن
+      </p>
+</div>";
+}
+
+// إغلاق الاتصال بقاعدة البيانات
+$conn->close();
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
     </div>
   </div>
 </div>
 <!-- End Sales Card -->
+<h1></h1>
+
+<script>
+    // الحصول على العنصر الذي يحتوي على شريط التقدم
+    var progressBar = document.querySelector('.progress-bar');
+
+    // قراءة النسبة المئوية من العنصر
+    var percentage = parseFloat(progressBar.style.width);
+
+    // حساب النسبة المئوية من 5
+    var calculatedPercentage = (percentage / 100) * 5;
+
+    // تحديث نص النسبة المئوية في العنصر
+    progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
+
+</script>
+
+
+
+          </div>
+       
+       
+       
+
+
+        </div>
+        <!-- content-wrapper ends -->
 
 
           </div>
