@@ -70,7 +70,7 @@ $connection = [
   if ($mysqli->connect_error){
   
     die("Error connecting to database" . $mysqli->connect_error);
-  }
+  } 
   
 
   /* if(isset($_SESSION['logged_in'])) {

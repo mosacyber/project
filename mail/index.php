@@ -89,13 +89,10 @@ for ($i = 0; $i < 9; $i++) {
 <?PHP
                         // استعلام SQL لاسترداد بيانات معينة من الجدول
                         $sql = "select c.*, a.* ,s.subject_name , CONCAT(a.First_Name, ' ', a.Last_Name)  'full' from current_semester c 
-
                         inner join accounts a 
                         inner join subjects s 
-                        
-                         where  c.Faculty_member_ID = a.Account_ID and c.Semester_Number = 451 and  c.subject_code = s.subject_code";
+                         where  c.Faculty_member_ID = a.Account_ID and c.Semester_Number = 451 and  c.subject_code = s.subject_code and c.student_id= $_SESSION[Account_ID]";
                         $result = $conn->query($sql);
-
                         // التحقق من وجود بيانات للعرض
                         if ($result->num_rows > 0) {
                             // عرض البيانات
@@ -110,8 +107,6 @@ for ($i = 0; $i < 9; $i++) {
                     </ul>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>

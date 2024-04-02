@@ -93,14 +93,14 @@ for ($i = 0; $i < 9; $i++) {
                         inner join accounts a 
                         inner join subjects s 
                         
-                         where  c.Faculty_member_ID = a.Account_ID and c.Semester_Number = 451 and  c.subject_code = s.subject_code";
+                         where  c.Faculty_member_ID = a.Account_ID and c.Semester_Number = 451 and  c.subject_code = s.subject_code and c.student_id= $_SESSION[Account_ID]";
                         $result = $conn->query($sql);
 
                         // التحقق من وجود بيانات للعرض
                         if ($result->num_rows > 0) {
                             // عرض البيانات
                             while ($row = $result->fetch_assoc()) {
-                        echo '<li class="profile-list-item"> <a href="#"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$row["subject_name"].'</p></div> </a></li>';
+                        echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=".$row["subject_code"].'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$row["subject_name"].'</p></div> </a></li>';
                             }
                         } else {
                             // إذا لم يتم العثور على بيانات
