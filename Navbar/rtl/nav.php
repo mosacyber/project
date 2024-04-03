@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 // جلسة جديدة
 // تعيين قيمة للمتغير في السشن
 
-
+if(isset($_SESSION['role'])) {
 $sql = "SELECT * FROM accounts WHERE Account_ID =$_SESSION[Account_ID]";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
@@ -41,9 +41,9 @@ $row = $result->fetch_assoc();
 
 $_SESSION['Position'] =$row['position_name'];
 
-
-
-
+}else{
+  header('location: '.$config['app_url'].'login.php');
+}
 
 
 
@@ -189,9 +189,12 @@ echo '
           <div class="profile-image">
             <img src="../../assets/img/profile-img.png" alt="image"/>
           </div>
-          <div class="profile-name">
-            <p class="name">' . $_SESSION['Name'] . '</p>
-            <p id="Account_ID" class="designation">' . $_SESSION['Account_ID'] . '</p>
+          <div class="profile-name">';
+          if(isset($_SESSION['role'])) {
+            echo '<p class="name">' . $_SESSION['Name'] . '</p>';
+            echo ' <p id="Account_ID" class="designation">' . $_SESSION['Account_ID'] . '</p>';
+          }
+          echo '
           </div>
         </div>
       </li>';
