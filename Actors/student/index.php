@@ -115,11 +115,6 @@ for ($i = 0; $i < 9; $i++) {
           </div>
         </div><!-- End Sales Card -->
 
-
-
-
-
-
         <!-- Revenue Card -->
         <div class="col-xxl-4 col-md-6">
           <div class="card info-card revenue-card">
