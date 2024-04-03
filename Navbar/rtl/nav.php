@@ -350,7 +350,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
 </li>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="'.$config['Actors'].'student/course/index.php">
+      <a class="nav-link" href="'.$config['Actors'].'student/Current_Semester.php">
         <i class="fa fa-home menu-icon"></i>
         <span class="menu-title">
         المقررات المسجلة
@@ -358,7 +358,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
       </a>
     </li>
     <li class="nav-item">
-    <a class="nav-link" href="'.$config['Actors'].'student/course/index2.php">
+    <a class="nav-link" href="'.$config['Actors'].'student/Prediction.php">
       <i class="fa fa-home menu-icon"></i>
       <span class="menu-title">
       التنبؤ 
@@ -366,7 +366,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
     </a>
   </li>
     <li class="nav-item">
-    <a class="nav-link" href="'.$config['Actors'].'student/course/index3.php">
+    <a class="nav-link" href="'.$config['Actors'].'student/acadmic_record.php">
       <i class="fa fa-home menu-icon"></i>
       <span class="menu-title">
 السجل الاكاديمي
