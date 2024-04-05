@@ -141,12 +141,13 @@ if ($result->num_rows > 0) {
             echo '<h4>العام الدراسي : 14' . substr($semester_number, 0, 2) . 'هـ</span></h4>';
 
             // استعلام SQL لاسترداد بيانات المواد للفصل الدراسي الحالي
-            $sql_subjects = "SELECT c.subject_code, s.subject_name, s.credit_hours, ar.grade
-                             FROM current_semester c
-                             INNER JOIN subjects s ON c.subject_code = s.subject_code
-                             LEFT JOIN academic_record ar ON c.student_id = ar.student_id AND c.subject_code = ar.subject_code
-                             WHERE c.student_id = {$_SESSION['Account_ID']} AND c.Semester_Number = '$semester_number'
-                             ORDER BY c.Semester_Number DESC";
+            $sql_subjects = "SELECT c.subject_code, s.subject_name, s.credit_hours, IFNULL(ar.grade, 'غير متوفرة') AS grade
+            FROM current_semester c
+            INNER JOIN subjects s ON c.subject_code = s.subject_code
+            LEFT JOIN academic_record ar ON c.student_id = ar.student_id AND c.subject_code = ar.subject_code AND c.Semester_Number = ar.Semster_Number
+            WHERE c.student_id = {$_SESSION['Account_ID']} AND c.Semester_Number = '$semester_number'
+            ORDER BY c.Semester_Number DESC
+            ";
             $result_subjects = $conn->query($sql_subjects);
 
             // التحقق من وجود نتائج
@@ -163,30 +164,77 @@ if ($result->num_rows > 0) {
                               <th scope='col'>رمز المقرر</th>
                               <th scope='col'>اسم المقرر</th>
                               <th scope='col'>الساعات</th>
+                              <th scope='col'>التقدير</th>
                               <th scope='col'>العلامة</th>
                             </tr>
                           </thead>
                           <tbody>";
 
                 while ($row_subject = $result_subjects->fetch_assoc()) {
+
+                  if (!empty($row_subject['grade']) && is_numeric($row_subject['grade'])) {
+                    if ($row_subject['grade'] >= 95) {
+                        $mark = "A+";
+                    } else if ($row_subject['grade'] >= 90) {
+                      $mark = "A";
+                     } else if ($row_subject['grade'] >= 85) {
+                      $mark = "B+";
+                     } else if ($row_subject['grade'] >= 80) {
+                      $mark = "B";
+                     } else if ($row_subject['grade'] >= 75) {
+                      $mark = "C+";
+                     } else if ($row_subject['grade'] >= 70) {
+                      $mark = "C";
+                     } else if ($row_subject['grade'] >= 65) {
+                      $mark = "D+";
+                     } else if ($row_subject['grade'] >= 60) {
+                      $mark = "D";
+                     }else {
+                        $mark = "F";
+                    }
+                } else {
+                    $mark = "غير متوفرة";
+                }
+                
                     // عرض بيانات المقرر في الجدول
                     echo "<tr>";
                     echo "<td>{$row_subject['subject_code']}</td>";
                     echo "<td>{$row_subject['subject_name']}</td>";
                     echo "<td>{$row_subject['credit_hours']}</td>";
                     echo "<td>{$row_subject['grade']}</td>";
+                    echo "<td>$mark</td>";
                     echo "</tr>";
                 }
 
-                // إغلاق الجدول
-                echo "
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <h1></h1>";
+// إغلاق الجدول
+echo "
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<h1></h1>
+<!-- Sales Card -->
+<div class='col-xxl-12 col-md-12'>
+  <div class='card info-card sales-card'>
+    <div class='card-body'>
+    
+      <h5>
+        فصلي
+      </h5><br>
+      <h5>
+        تراكمي
+      </h5>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- End Sales Card --><h1><h1>
+";
+
 
                 // تعيين قيمة للتأكيد على عرض الجدول لهذا السمستر بالفعل
                 $table_displayed[$semester_number] = true;
@@ -236,34 +284,8 @@ if ($result->num_rows > 0) {
 
 
 
-        <!-- Sales Card -->
-        <div class="col-xxl-12 col-md-12">
-  <div class="card info-card sales-card">
-    <div class="card-body">
- <h5>
-فصلي
- </h5><br>
- <h5>
-تراكمي
- </h5>
- <!--
 
 
-
- من
- student_gpa
- 
-	Semster_Number 
-
-مثلا 
-451
-الفصل الاول 
-452 الثاني
--->
-    </div>
-  </div>
-</div>
-<!-- End Sales Card -->
 
 
           </div>
