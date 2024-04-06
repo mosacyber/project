@@ -149,28 +149,28 @@ $Account_ID = '';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="../assets/css_rtl/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css_rtl/bootstrap.min.css" />
 
   <!-- style css File RTL-->
-  <link rel="stylesheet" href="../assets/css_rtl/style.css" />
+  <link rel="stylesheet" href="assets/css_rtl/style.css" />
 
   <!-- style css File Ltr-->
   <!-- <link rel="stylesheet" href="css_ltr/style.css" /> -->
 
   <!-- Title Icon -->
-  <link rel="icon" href="../assets/img/fav-icon.png" />
+  <link rel="icon" href="assets/img/fav-icon.png" />
 
   <title>تسجيل الدخول</title>
-  <link href="navbar.css" rel="stylesheet">
+  <link href="assets/css/navbar.css" rel="stylesheet">
 
 
 
- <link href="navbar.css" rel="stylesheet"> <meta charset="utf-8">
+ <link href="assets/css/navbar.css" rel="stylesheet"> <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
     <style>
 body > div.container-fluid > div > div:nth-child(1) > div > div > form > div:nth-child(5) > button{
     background: linear-gradient(264.67deg,#7f7fd5 -9.26%,#86a8e7 45.82%,#91eae4 106.96%);
@@ -346,10 +346,10 @@ border: 0px solid #fff;
   <!-- End Create Account Form -->
 
   <!--Bootstrap  -->
-  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/js/bootstrap.bundle.min.js"></script>
 
   <!-- javascript file -->
-  <script src="js/script.js"></script>
+  <script src="assets/js/js/script.js"></script>
 
 
 

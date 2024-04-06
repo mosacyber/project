@@ -16,7 +16,7 @@ function css() {
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png" />
 
@@ -31,11 +31,11 @@ function css() {
 
 
 $css_files = [
-  "style.css",
-  "css/style.css",
+  "assets/css/style.css",
+  "assets/css/css/style.css",
   "images/favicon.png",
   "assets/vendor/simple-datatables/style.css",
-  "css/materialize.min.css",
+  "assets/css/css/materialize.min.css",
   "vendors/css/vendor.bundle.addons.css",
   "vendors/css/vendor.bundle.base.css",
 ];

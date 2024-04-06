@@ -6,7 +6,7 @@ $css_files = [
     "vendors/iconfonts/font-awesome/css/all.min.css",
     "vendors/css/vendor.bundle.base.css",
     "vendors/css/vendor.bundle.addons.css",
-    "style.css",
+    "assets/css/stylee.css",
     "images/favicon.png" ,
     "assets/vendor/bootstrap/css/bootstrap.min.css",
     "assets/vendor/bootstrap-icons/bootstrap-icons.css",

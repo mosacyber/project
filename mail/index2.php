@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../vendors/css/vendor.bundle.addons.css">
   <!-- endinject -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/stylee.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.png" />
   <style>

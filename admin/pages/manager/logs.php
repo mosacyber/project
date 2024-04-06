@@ -16,7 +16,7 @@
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../../../assets/css/stylee.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png" />
 
