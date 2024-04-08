@@ -132,7 +132,7 @@ if ($row2) {
     if ($result->num_rows > 0) {
         // عرض البيانات
         while ($row = $result->fetch_assoc()) {
-            echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"].'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">مرشد اكاديمي</p></div> </a></li>';
+            echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">مرشد اكاديمي</p></div> </a></li>';
         }
     } else {
         // إذا لم يتم العثور على بيانات

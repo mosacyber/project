@@ -76,26 +76,24 @@ for ($i = 0; $i < 9; $i++) {
             <div class="row align-items-stretch">
               <div class="mail-sidebar d-none d-lg-block col-md-2 pt-3 bg-white">
                 <div class="menu-bar">
-                  <ul class="menu-items">
+                <ul class="menu-items">
                     <li class="compose mb-3"><button class="btn btn-primary btn-block">Compose</button></li>
                     <li class="active"><a href="#"><i class="fa fa-envelope-open"></i> Inbox</a><span class="badge badge-pill badge-success">8</span></li>
                     <li><a href="#"><i class="fas fa-trash"></i> Trash</a></li>
                   </ul>
                   <div class="wrapper">
                     <div class="online-status d-flex justify-content-between align-items-center">
-                    <p class="chat">المحادثات</p> <span class="status offline online"></span></div>
+                    <p class="chat">المقررات الحالية</p> <span class="status offline online"></span></div>
                   </div>
                   <ul class="profile-list">
+                    
 <?PHP
                         // استعلام SQL لاسترداد بيانات معينة من الجدول
                         $sql = "select c.*, a.* ,s.subject_name , CONCAT(a.First_Name, ' ', a.Last_Name)  'full' from current_semester c 
-
                         inner join accounts a 
                         inner join subjects s 
-                        
                          where  c.Faculty_member_ID = a.Account_ID and c.Semester_Number = 451 and  c.subject_code = s.subject_code and c.student_id= $_SESSION[Account_ID]";
                         $result = $conn->query($sql);
-
                         // التحقق من وجود بيانات للعرض
                         if ($result->num_rows > 0) {
                             // عرض البيانات
@@ -106,8 +104,46 @@ for ($i = 0; $i < 9; $i++) {
                             // إذا لم يتم العثور على بيانات
                             echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
                         }
-
 ?>
+                    </ul>
+
+
+
+                    <div class="wrapper">
+                    <div class="online-status d-flex justify-content-between align-items-center">
+                    <p class="chat">المرشد الاكاديمي</p> <span class="status offline online"></span></div>
+                  </div>
+                  <ul class="profile-list">
+                  <?php
+// استعلام SQL لاسترداد بيانات معينة من الجدول
+$sql2 = "select Faculty_member_ID from current_semester where student_id= $_SESSION[Account_ID]";
+$result2 = $conn->query($sql2);
+$row2 = $result2->fetch_assoc();
+
+if ($row2) {
+    // الحصول على Faculty_member_ID فقط إذا كانت هناك نتائج
+    $faculty_member_id = $row2['Faculty_member_ID'];
+
+    // استعلام SQL لاسترداد بيانات من جدول accounts باستخدام Faculty_member_ID
+    $sql = "select * , CONCAT(First_Name, ' ',Last_Name) AS 'full' from accounts where Account_ID = $faculty_member_id";
+    $result = $conn->query($sql);
+
+    // التحقق من وجود بيانات للعرض
+    if ($result->num_rows > 0) {
+        // عرض البيانات
+        while ($row = $result->fetch_assoc()) {
+            echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">مرشد اكاديمي</p></div> </a></li>';
+        }
+    } else {
+        // إذا لم يتم العثور على بيانات
+        echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
+    }
+} else {
+    // إذا لم يتم العثور على Faculty_member_ID
+    echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
+}
+?>
+
                     </ul>
                 </div>
               </div>
