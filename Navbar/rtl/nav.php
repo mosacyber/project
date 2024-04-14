@@ -145,7 +145,7 @@ echo '
             الاعدادات
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="logout/logout.php">
+          <a class="dropdown-item" href="'.$config["app_url"].'logout/logout.php">
             <i class="fas fa-power-off text-primary"></i>
             تسجيل خروج
           </a>

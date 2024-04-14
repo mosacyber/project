@@ -13,7 +13,6 @@ echo '
 </div>
 </footer>
 
-<h1>الصفحة الرئيسية</h1>
 
 
 
@@ -28,4 +27,13 @@ echo '
 
 
 
-'; ?>
+'; ?><?php
+$navbar_path = "tools/js.php";
+for ($i = 0; $i < 9; $i++) {
+$path = str_repeat("../", $i) . $navbar_path;
+if (file_exists($path)) {
+  include $path;
+    break;
+}
+}
+?>

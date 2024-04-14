@@ -12,12 +12,12 @@ $js_files = [
     "assets/js/main.js",
     "vendors/js/vendor.bundle.base.js",
     "vendors/js/vendor.bundle.addons.js",
-    "js/off-canvas.js",
-    "js/hoverable-collapse.js",
-    "js/misc.js",
-    "js/settings.js",
-    "js/todolist.js",
-    "js/dashboard.js"
+    "assets/js/js/off-canvas.js",
+    "assets/js/js/hoverable-collapse.js",
+    "assets/js/js/misc.js",
+    "assets/js/js/settings.js",
+    "assets/js/js/todolist.js",
+    "assets/js/js/dashboard.js"
 
     
   ];

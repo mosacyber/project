@@ -98,7 +98,7 @@ for ($i = 0; $i < 9; $i++) {
                         if ($result->num_rows > 0) {
                             // عرض البيانات
                             while ($row = $result->fetch_assoc()) {
-                        echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=".$row["subject_code"].'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$row["subject_name"].'</p></div> </a></li>';
+                        echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=".$row["subject_code"].'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$row["subject_name"]." - ".$row["subject_code"].'</p></div> </a></li>';
                             }
                         } else {
                             // إذا لم يتم العثور على بيانات
@@ -200,7 +200,7 @@ if ($row2) {
                     // التحقق من وجود بيانات للعرض
                     if ($result5->num_rows > 0) {
                         $row5 = $result5->fetch_assoc();
-                        echo $row5["subject_name"];
+                        echo $row5["subject_name"]." - ".$row5["subject_code"];
                     } else {
                         // إذا لم يتم العثور على بيانات
                         echo 'لا يوجد بيانات لعرضها';

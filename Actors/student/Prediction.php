@@ -21,7 +21,7 @@ for ($i = 0; $i < 9; $i++) {
       include $path;
         break;
     }
-}
+} 
 
 
     ?>
@@ -119,63 +119,25 @@ for ($i = 0; $i < 9; $i++) {
             </tr>
           </thead>
           <tbody>
-          <?php
-           if(isset($_SESSION['Account_ID'])) {
-                        // استعلام SQL لاسترداد بيانات معينة من الجدول
-                        $sql = "SELECT a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
-                            FROM current_semester c
-                            INNER JOIN accounts a ON a.Account_ID = c.student_id 
-                            INNER JOIN accounts a2 ON a2.Account_ID = c.Faculty_member_ID
-                            INNER JOIN subjects s ON c.subject_code = s.subject_code
-                            WHERE c.student_id = {$_SESSION['Account_ID']}
-                            AND c.Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester WHERE student_id = {$_SESSION['Account_ID']})
-                            ORDER BY c.Semester_Number DESC;";
-                        $result = $conn->query($sql);
-
-                        // التحقق من وجود بيانات للعرض
-                        if ($result->num_rows > 0) {
-                            // عرض البيانات
-                            $sql2 = "SELECT * from academic_record where subject_code = $row[subject_code] and  student_id = {$_SESSION['Account_ID']} ";
-                          $result2 = $conn->query($sql2);
-                          $row2 = $result2->fetch_assoc();
-                            while ($row = $result->fetch_assoc()) {
-                              
-                                // عرض الصفوف لكل بيان في الجدول
-                                echo '<tr>';
-                                echo '<td>' . $row["subject_code"] . '</td>';
-                                echo '<td>' . $row["subject_name"] . '</td>';
-                                echo '<td>' . $row["credit_hours"] . '</td>';
-                                echo "<td>";
-                                echo "<div class='progress'>";
-                                if ($row["grade"]  < 50) {
-                                    echo "<div class='progress-bar bg-danger' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
-                                } else if($row["grade"]  < 70){
-                                    echo "<div class='progress-bar bg-warning' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
-                                }else if($row["grade"]  < 100){
-                                  echo "<div class='progress-bar bg-success' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
-                                }else{
-                                  echo "<div class='progress-bar bg-primary' role='progressbar' style='width:  " . $row["grade"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
+                                <tr>
+                                <td>"subject_code"</td>
+                                <td>"subject_name"</td>
+                                <td>"credit_hours"</td>
+                                <td>
+                                <div class='progress'>
+                                
+                                    <div class='progress-bar bg-danger' role='progressbar' style='width:4%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
+                                
+                                    <div class='progress-bar bg-warning' role='progressbar' style='width:5%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
+                                
+                                  <div class='progress-bar bg-success' role='progressbar' style='width:5%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
+                               
+                                  <div class='progress-bar bg-primary' role='progressbar' style='width:6%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
                             
-                                }
-                                echo "</div>";
-                                echo "</td>";
-                                echo '</tr>';
-                            }
-                        } else {
-                            // إذا لم يتم العثور على بيانات
-                            echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
-                        }
-                      }else {
-                          echo"
-                          <div class='alert alert-danger'>
-                          تنبيه
-                          <hr>
-                              <p>
-                        هناك مشكله في السشن
-                              </p>
-                        </div>";
-                        }
-                        ?>
+                                
+                                </div>
+                                </td>
+                                </tr>
           </tbody>
         </table>
       </div>
@@ -294,18 +256,7 @@ for ($i = 0; $i < 9; $i++) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
   <!-- تضمين Bootstrap السكريبت -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<?php
-    $navbar_path = "tools/js.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
-        break;
-    }
-}
 
-
-?>
 
 
 

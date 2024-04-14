@@ -344,18 +344,7 @@ for ($i = 0; $i < 9; $i++) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
   <!-- تضمين Bootstrap السكريبت -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<?php
-    $navbar_path = "tools/js.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
-        break;
-    }
-}
 
-
-?>
 
 
 
