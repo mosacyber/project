@@ -89,7 +89,7 @@ for ($i = 0; $i < 9; $i++) {
           </div>
           <div class="page-header">
             <h3 class="page-title">
-طلاب المرشد الاكاديمي
+ المرشد الاكاديمي
             </h3>
           </div>
 
@@ -103,64 +103,6 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
-        <!-- Sales Card -->
-        <div class="col-xxl-12 col-md-12">
-  <div class="card info-card sales-card">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">اسم الطالب</th>
-              <th scope="col">التخصص</th>
-              <th scope="col">معدله</th>
-
-              <th scope="col">
-              نسبته الحاليه
-            </th>
-              <th scope="col">/</th>
-            </tr>
-          </thead>
-          <tbody>
-
-
-    
-   <tr>
-   <td>موسى</td>
-   <td>حاسب</td>
-   <td>4.5</td>
-   <td>
-   <div class='progress'>
-       <div class='progress-bar bg-danger' role='progressbar' style='width:99%' ></div>
-   </div>
-   </td>
-   <td>عرض</td>
-   </tr>
-    
-            <!-- يمكنك إضافة المزيد من البيانات هنا -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Sales Card -->
-<h1></h1>
-
-<script>
-    // الحصول على العنصر الذي يحتوي على شريط التقدم
-    var progressBar = document.querySelector('.progress-bar');
-
-    // قراءة النسبة المئوية من العنصر
-    var percentage = parseFloat(progressBar.style.width);
-
-    // حساب النسبة المئوية من 5
-    var calculatedPercentage = (percentage / 100) * 5;
-
-    // تحديث نص النسبة المئوية في العنصر
-    progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
-
-</script>
 
 
 

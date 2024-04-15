@@ -460,6 +460,80 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
 
 
 
+
+
+
+
+
+
+
+
+/*********************************/
+/*********************************/
+/* المرشد الاكاديمي */
+/*********************************/
+/*********************************/
+if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
+  echo'      <li class="nav-item">
+  <a class="nav-link" href="' . $config['Actors'] . 'Academic_Advisor">
+    <i class="fa fa-home menu-icon"></i>
+    <span class="menu-title">
+    الصفحه الرئيسية
+    </span>
+  </a>
+</li>
+      </li>
+    <li class="nav-item">
+    <a class="nav-link" href="'.$config['Actors'].'Academic_Advisor/students.php">
+      <i class="fa fa-home menu-icon"></i>
+      <span class="menu-title">
+الطلاب
+      </span>
+    </a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link" href="'.$config['app_url'].'mail">
+    <i class="fa fa-home menu-icon"></i>
+    <span class="menu-title">
+التواصل
+    </span>
+  </a>
+</li>
+
+     ';
+      }
+/*********************************/
+/*********************************/
+/* المرشد الاكاديمي */
+/*********************************/
+/*********************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       echo'
       <li class="nav-item">
         <a class="nav-link" href="'.$config['app_url'].'/logout/logout.php">
