@@ -170,7 +170,7 @@ $Account_ID = '';
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <link rel="stylesheet" href="assets/css/login.css" />
+    <link rel="stylesheet" href="assets/css/index.css" />
     <style>
 body > div.container-fluid > div > div:nth-child(1) > div > div > form > div:nth-child(5) > button{
     background: linear-gradient(264.67deg,#7f7fd5 -9.26%,#86a8e7 45.82%,#91eae4 106.96%);
@@ -240,7 +240,7 @@ border: 0px solid #fff;
       </ul>        <form>
           <input class="form-control" type="text" placeholder="Search" aria-label="Search">
         </form>
-        <a href="login.php"><button type="submit"  class="btn btn-primary llcol">تسجيل الدخول</button></a> 
+        <a href="index.php"><button type="submit"  class="btn btn-primary llcol">تسجيل الدخول</button></a> 
     </div>
   </div>
 </nav>

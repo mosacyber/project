@@ -42,7 +42,7 @@ $row = $result->fetch_assoc();
 $_SESSION['Position'] =$row['position_name'];
 
 }else{
-  header('location: '.$config['app_url'].'login.php');
+  header('location: '.$config['app_url'].'index.php');
 }
 
 
