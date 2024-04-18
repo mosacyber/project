@@ -107,33 +107,35 @@ for ($i = 0; $i < 9; $i++) {
         <div class="col-xxl-12 col-md-12">
   <div class="card info-card sales-card">
     <div class="card-body">
-<h2>التنبؤ بدرجه الماده</h2>
+<h2> 1 الماده</h2>
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">اسم المقرر</th>
-              <th scope="col">الساعات</th>
+              <th scope="col">نوع النشاط الدراسي</th>
               <th scope="col">الدرجة</th>
               <th scope="col">اللون</th>
             </tr>
           </thead>
           <tbody>
                                 <tr>
-                                <td>"subject_code"</td>
-                                <td>"subject_name"</td>
-                                <td>"credit_hours"</td>
+                                <td>mid 1</td>
+                                <td>54</td>
                                 <td>
                                 <div class='progress'>
                                 
-                                    <div class='progress-bar bg-danger' role='progressbar' style='width:4%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
-                                
-                                    <div class='progress-bar bg-warning' role='progressbar' style='width:5%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
-                                
-                                  <div class='progress-bar bg-success' role='progressbar' style='width:5%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
-                               
-                                  <div class='progress-bar bg-primary' role='progressbar' style='width:6%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
-                            
+                                    <div class='progress-bar bg-danger' role='progressbar' style='width:45%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
+
+                                </div>
+                                </td>
+                                </tr>                                <tr>
+                                <td>mid 2</td>
+                                <td>54</td>
+                                <td>
+                                <div class='progress'>
+
+                                    <div class='progress-bar bg-warning' role='progressbar' style='width:59%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
+
                                 
                                 </div>
                                 </td>
@@ -147,9 +149,53 @@ for ($i = 0; $i < 9; $i++) {
 <!-- End Sales Card -->
 
 
+
 <h1></h1><h1></h1>
 
+            <!-- Sales Card -->
+            <div class="col-xxl-12 col-md-12">
+  <div class="card info-card sales-card">
+    <div class="card-body">
+<h2> 2 الماده</h2>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">نوع النشاط الدراسي</th>
+              <th scope="col">الدرجة</th>
+              <th scope="col">اللون</th>
+            </tr>
+          </thead>
+          <tbody>
+                                <tr>
+                                <td>mid 1</td>
+                                <td>54</td>
+                                <td>
+                                <div class='progress'>
+                                
+                                    <div class='progress-bar bg-danger' role='progressbar' style='width:45%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
 
+                                </div>
+                                </td>
+                                </tr>                                <tr>
+                                <td>mid 2</td>
+                                <td>54</td>
+                                <td>
+                                <div class='progress'>
+
+                                    <div class='progress-bar bg-warning' role='progressbar' style='width:59%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
+
+                                
+                                </div>
+                                </td>
+                                </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Sales Card -->
 
  
 

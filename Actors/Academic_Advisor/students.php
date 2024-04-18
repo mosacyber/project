@@ -136,12 +136,10 @@ for ($i = 0; $i < 9; $i++) {
             <tr>
               <th scope="col">اسم الطالب</th>
               <th scope="col">التخصص</th>
-              <th scope="col">معدله</th>
+              <th scope="col">المعدل</th> <!-- معدله كل ترم من قاعده البيانات student_gpa -->
 
-              <th scope="col">
-              نسبته الحاليه
-            </th>
-              <th scope="col">/</th>
+
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -160,7 +158,6 @@ for ($i = 0; $i < 9; $i++) {
               echo '<td>' . $row["First_Name"] . '</td>';
               echo '<td>' . $row["Last_Name"] . '</td>';
               echo '<td>' . $row["Last_Name"] . '</td>';
-              echo '<td>' . $row["Position"] . '</td>';
               // زر "عرض" لفتح ال Modal
               echo '<td>';
               echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailsModal' . $row["Account_ID"] . '">عرض</button>';
@@ -187,18 +184,26 @@ for ($i = 0; $i < 9; $i++) {
               echo '<table class="table">';
               echo '<thead>';
               echo '<tr>';
-              echo '<th>رمز المادة</th>';
-              echo '<th>اسم المادة</th>';
-              echo '<th>ساعات الائتمان</th>';
+              echo '<th>رمز المقرر</th>';
+              echo '<th>اسم المقرر</th>';
+              echo '<th>عدد الساعات</th>';
+              echo '<th>العلامة</th>';
+              echo '<th>التقدير</th>';
               echo '</tr>';
               echo '</thead>';
               echo '<tbody id="subjectTableBody' . $row["Account_ID"] . '">';
-              // الجدول سيتم ملؤه باستخدام AJAX
+              echo '<td>' . $row["First_Name"] . '</td>';
+              echo '<td>' . $row["Last_Name"] . '</td>';
+              echo '<td>5</td>';
+              echo '<td>98</td>';
+              echo '<td>A+</td>';
               echo '</tbody>';
               echo '</table>';
               echo '</div>';
               echo '<div class="modal-footer">';
               echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>';
+              echo '<button type="button" class="btn btn-primary" data-dismiss="modal">تواصل</button>';
+
               echo '</div>';
               echo '</div>';
               echo '</div>';
