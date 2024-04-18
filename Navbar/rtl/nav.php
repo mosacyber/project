@@ -385,67 +385,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
     </span>
   </a>
 </li>
-      <li class="nav-item d-none d-lg-block">
-        <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false" aria-controls="sidebar-layouts">
-          <i class="fas fa-columns menu-icon"></i>
-          <span class="menu-title">
-          متابعه وانشاء التقارير
-          </span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="sidebar-layouts">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> 
-            <a class="nav-link" href="#">
-            التقارير
-            </a>
-            </li>
-            <li class="nav-item">
-             <a class="nav-link" href="#">
-            Icon menu
-            </a>
-            </li>
-            <li class="nav-item">
-             <a class="nav-link" href="#">
-            Sidebar Hidden
-            </a>
-            </li>
-            <li class="nav-item"> 
-            <a class="nav-link" href="#">
-            Sidebar Overlay
-            </a>
-            </li>
-            <li class="nav-item"> 
-            <a class="nav-link" href="#">
-            Sidebar Fixed
-            </a>
-            </li>
-          </ul>
-        </div>
-      </li> 
-      <li class="nav-item d-none d-lg-block">
-        <a class="nav-link" data-toggle="collapse" href="#layouts3" aria-expanded="false" aria-controls="layouts3">
-          <i class="fas fa-columns menu-icon"></i>
-          <span class="menu-title">
-اعدادات النظام
-          </span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="layouts3">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> 
-            <a class="nav-link" href="#">
-            الاعدادت الاساسية
-            </a>
-            </li>
-            <li class="nav-item">
-             <a class="nav-link" href="'.$config['admin'].'/pages/manager/logs.php">
-            سجلات النظام
-            </a>
-            </li>
-          </ul>
-        </div>
-      </li> 
+ 
      ';
       }
 /*********************************/
