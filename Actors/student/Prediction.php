@@ -116,7 +116,7 @@ for ($i = 0; $i < 9; $i++) {
               <th scope="col">الدرجة</th>
               <th scope="col">اللون</th>
             </tr>
-          </thead>
+          </thead> 
           <tbody>
                                 <tr>
                                 <td>mid 1</td>

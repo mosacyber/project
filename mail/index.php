@@ -1,23 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
 
-<!-- Mirrored from www.urbanui.com/melody/template/pages/apps/email.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:09:09 GMT -->
+<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Melody Admin</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="../vendors/iconfonts/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="../vendors/css/vendor.bundle.addons.css">
-  <!-- endinject -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="../assets/css/stylee.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="../images/favicon.png" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+
+  <?php
+    $navbar_path = "tools/css.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+} 
+
+
+    ?>
+
   <style>
+    
+    <?php
+    $navbar_path = "tools/tools.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+}
+    download_css();
+    print_css();
+    ?>
+
+.table thead th, .jsgrid .jsgrid-table thead th {
+    border-top: 0;
+    border-bottom-width: 1px;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: #392e6e;
+    color: #fff;
+}
+
     .message {
     display: flex;
     flex-direction: column;
@@ -47,8 +79,7 @@
 
   </style>
 </head>
-
-<body class="sidebar-icon-only sidebar-fixed">
+<body class="rtl">
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     
@@ -68,7 +99,6 @@ for ($i = 0; $i < 9; $i++) {
 }
 ?>
       
-      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -77,13 +107,12 @@ for ($i = 0; $i < 9; $i++) {
               <div class="mail-sidebar d-none d-lg-block col-md-2 pt-3 bg-white">
                 <div class="menu-bar">
                   <ul class="menu-items">
-                    <li class="compose mb-3"><button class="btn btn-primary btn-block">Compose</button></li>
-                    <li class="active"><a href="#"><i class="fa fa-envelope-open"></i> Inbox</a><span class="badge badge-pill badge-success">8</span></li>
-                    <li><a href="#"><i class="fas fa-trash"></i> Trash</a></li>
+                    <li class="compose mb-3"><h1 class="btn btn-primary btn-block">تحديث</ا></li>
+                    <li class="active"><a href="#"><i class="fa fa-envelope-open"></i> البريد الوارد </a><span class="badge badge-pill badge-success">8</span></li>
                   </ul>
                   <div class="wrapper">
                     <div class="online-status d-flex justify-content-between align-items-center">
-                    <p class="chat">المقررات الحالية</p> <span class="status offline online"></span></div>
+                    <p class="chat">المقررات الحالية</p> </div>
                   </div>
                   <ul class="profile-list">
                     
@@ -92,7 +121,7 @@ for ($i = 0; $i < 9; $i++) {
                         $sql = "select c.*, a.* ,s.subject_name , CONCAT(a.First_Name, ' ', a.Last_Name)  'full' from current_semester c 
                         inner join accounts a 
                         inner join subjects s 
-                         where  c.Faculty_member_ID = a.Account_ID and c.Semester_Number = 451 and  c.subject_code = s.subject_code and c.student_id= $_SESSION[Account_ID]";
+                         where  c.Faculty_member_ID = a.Account_ID and c.Semester_Number = $_SESSION[Max_Semester_Number] and  c.subject_code = s.subject_code and c.student_id= $_SESSION[Account_ID]";
                         $result = $conn->query($sql);
                         // التحقق من وجود بيانات للعرض
                         if ($result->num_rows > 0) {
@@ -111,7 +140,7 @@ for ($i = 0; $i < 9; $i++) {
 
                     <div class="wrapper">
                     <div class="online-status d-flex justify-content-between align-items-center">
-                    <p class="chat">المرشد الاكاديمي</p> <span class="status offline online"></span></div>
+                    <p class="chat">المرشد الاكاديمي</p> </div>
                   </div>
                   <ul class="profile-list">
                   <?php
@@ -151,35 +180,63 @@ if ($row2) {
           </div>
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
-          </div>
-        </footer>
+        <?php
+$navbar_path = "footer/Footer.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+}
+?>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="../vendors/js/vendor.bundle.base.js"></script>
-  <script src="../vendors/js/vendor.bundle.addons.js"></script>
-  <!-- endinject -->
-  <!-- inject:js -->
-  <script src="../js/off-canvas.js"></script>
-  <script src="../js/hoverable-collapse.js"></script>
-  <script src="../js/misc.js"></script>
-  <script src="../js/settings.js"></script>
-  <script src="../js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
+
+
 </body>
 
 
-<!-- Mirrored from www.urbanui.com/melody/template/pages/apps/email.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:09:23 GMT -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+ download_js();
+ print_js();
+?>
+
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
+  <!-- تضمين Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
+  <!-- تضمين Bootstrap السكريبت -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 </html>

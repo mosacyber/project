@@ -17,16 +17,6 @@ echo '
 
 
 
-
-
-
-
-
-
-
-
-
-
 '; ?><?php
 $navbar_path = "tools/js.php";
 for ($i = 0; $i < 9; $i++) {

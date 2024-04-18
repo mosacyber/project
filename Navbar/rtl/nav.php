@@ -26,6 +26,10 @@ $sql = "SELECT * FROM accounts WHERE Account_ID =$_SESSION[Account_ID]";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
+$sql2 = "SELECT MAX(Semester_Number) AS Max_Semester_Number FROM current_semester WHERE student_id = '$_SESSION[Account_ID]'";
+$result2 = $conn->query($sql2);
+$row2 = $result2->fetch_assoc();
+$_SESSION['Max_Semester_Number'] = $row2['Max_Semester_Number'];
 
 $_SESSION['Name'] =$row['First_Name']." ".$row['Last_Name'];
 $_SESSION['Mobile'] =$row['Mobile'];
