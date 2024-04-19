@@ -111,7 +111,7 @@
           INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
           INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
           INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
-          WHERE grades.student_id = " . $_SESSION['Account_ID'] . "";
+          WHERE grades.student_id = " . $_SESSION['Account_ID'] . " AND coursework.subject_code = grades.subject_code";
           $SQL2 = mysqli_query($con, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
           FROM grades
           INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
@@ -138,7 +138,7 @@
                 echo '<div class="col-xxl-12 col-md-12">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h2>' . $row["subject_name"] .' '. $row["subject_code"] . '</h2>
+                  <h2>' . $row["subject_name"] . ' ' . $row["subject_code"] . '</h2>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -172,7 +172,7 @@
                       <td>
                         <div class="progress">
                           <div class="progress-bar" role="progressbar" style="width:' . $progress_width . '%; background-color:' . $progress_color . ';" aria-valuenow="' . $progress_width . '"
-                            aria-valuemin="0" aria-valuemax="100">'. $row["coursework_mark"] .'</div>
+                            aria-valuemin="0" aria-valuemax="100">' . $row["coursework_mark"] . '</div>
                         </div>
                       </td>
                     </tr>';
@@ -184,12 +184,52 @@
             }
             echo '</tbody></table></div></div></div></div><br><br>';
           } ?>
+
+<?php
+$sql1 = "SELECT cs.subject_code, s.subject_name
+        FROM current_semester cs
+        LEFT JOIN subjects s ON cs.subject_code = s.subject_code
+        WHERE cs.student_id = " . $_SESSION['Account_ID'] . " AND NOT EXISTS (
+            SELECT 1 FROM grades g 
+            WHERE g.student_id = cs.student_id
+            AND g.subject_code = cs.subject_code
+        ) ORDER BY cs.subject_code";
+
+$result1 = mysqli_query($con, $sql1);
+
+if ($result1->num_rows > 0) {
+    while ($row1 = $result1->fetch_assoc()) {
+        echo '<div class="col-xxl-12 col-md-12">
+                <div class="card info-card sales-card">
+                    <div class="card-body">
+                        <h2>' . $row1["subject_name"] . ' ' . $row1["subject_code"] . '</h2>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">نوع النشاط الدراسي</th>
+                                        <th scope="col">درجة النشاط الدراسي</th>
+                                        <th scope="col">درجة الطالب</th>
+                                    </tr>
+                                </thead>
+                                <tbody>';
+                       echo '</tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div><br><br>';
+    }
+}
+?>
+
+
+
           <!-- End Sales Card -->
           <!-- Sales Card -->
           <!-- End Sales Card -->
           <h1></h1>
           <h1></h1>
-
 
           <!-- Sales Card -->
           <div class="col-xxl-12 col-md-12">
