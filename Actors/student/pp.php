@@ -62,12 +62,12 @@ if ($result_subjects->num_rows > 0) {
 // تعيين ترميز الاتصال بقاعدة البيانات إلى UTF-8
 $conn->set_charset("utf8");
 
-$sql = "SELECT c.subject_code, s.subject_name, s.credit_hours, ar.grade
-        FROM current_semester c
-        INNER JOIN subjects s ON c.subject_code = s.subject_code
-        LEFT JOIN academic_record ar ON c.student_id = ar.student_id AND c.subject_code = ar.subject_code
-        WHERE c.student_id = 431002997 AND c.Semester_Number = 461
-        ORDER BY c.Semester_Number DESC";
+$sql = "SELECT DISTINCT subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
+FROM grades
+INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
+INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
+INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
+WHERE grades.student_id =  421002998";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

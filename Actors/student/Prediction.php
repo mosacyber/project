@@ -106,7 +106,7 @@
           $previous_subject = null; // تعريف متغير لتتبع اسم المادة السابقة
           $A = 0;
 
-          $sql = "SELECT DISTINCT subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
+          $sql = "SELECT DISTINCT subjects.subject_code, subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
           FROM grades
           INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
           INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
@@ -138,7 +138,7 @@
                 echo '<div class="col-xxl-12 col-md-12">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h2>' . $row["subject_name"] . '</h2>
+                  <h2>' . $row["subject_name"] .' '. $row["subject_code"] . '</h2>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -168,7 +168,7 @@
 
               echo '<tr>
                       <td>' . $row["coursework_type_name"] . '</td>
-                      <td>' . $row["coursework_grade"] . '</td>
+                      <td>' . $row["coursework_mark"] . '</td>
                       <td>
                         <div class="progress">
                           <div class="progress-bar" role="progressbar" style="width:' . $progress_width . '%; background-color:' . $progress_color . ';" aria-valuenow="' . $progress_width . '"
