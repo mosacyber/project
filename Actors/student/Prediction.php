@@ -144,8 +144,8 @@
                       <thead>
                         <tr>
                           <th scope="col">نوع النشاط الدراسي</th>
-                          <th scope="col">الدرجة</th>
-                          <th scope="col">اللون</th>
+                          <th scope="col">درجة النشاط الدراسي</th>
+                          <th scope="col">درجة الطالب</th>
                         </tr>
                       </thead>
                       <tbody>';
@@ -168,11 +168,11 @@
 
               echo '<tr>
                       <td>' . $row["coursework_type_name"] . '</td>
-                      <td>' . $row["coursework_mark"] . '</td>
+                      <td>' . $row["coursework_grade"] . '</td>
                       <td>
                         <div class="progress">
                           <div class="progress-bar" role="progressbar" style="width:' . $progress_width . '%; background-color:' . $progress_color . ';" aria-valuenow="' . $progress_width . '"
-                            aria-valuemin="0" aria-valuemax="100"></div>
+                            aria-valuemin="0" aria-valuemax="100">'. $row["coursework_mark"] .'</div>
                         </div>
                       </td>
                     </tr>';
