@@ -2,11 +2,11 @@
 
 $config =[
 
-'app_url' => 'http://127.0.0.1/project/',
-'admin' => 'http://127.0.0.1/project/admin',
-'mail' =>'http://127.0.0.1/project/mail/index2.php',
+'app_url' => 'localhost:8080/project/',
+'admin' => 'localhost:8080/project/admin',
+'mail' =>'localhost:8080/project/mail/index2.php',
 
-'Actors' => 'http://127.0.0.1/project/Actors/'
+'Actors' => 'localhost:8080/project/Actors/'
 ];
 
 
