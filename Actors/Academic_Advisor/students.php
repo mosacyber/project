@@ -320,7 +320,7 @@
                 echo '<p>لا يوجد بيانات للعرض</p>';
               }
             } else {
-                                echo "
+                echo "
             <div class='alert alert-danger'>
                 <strong>تنبيه</strong>
                 <hr>

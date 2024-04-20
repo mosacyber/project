@@ -185,8 +185,8 @@
             echo '</tbody></table></div></div></div></div><br><br>';
           } ?>
 
-<?php
-$sql1 = "SELECT cs.subject_code, s.subject_name
+          <?php
+          $sql1 = "SELECT cs.subject_code, s.subject_name
         FROM current_semester cs
         LEFT JOIN subjects s ON cs.subject_code = s.subject_code
         WHERE cs.student_id = " . $_SESSION['Account_ID'] . " AND NOT EXISTS (
@@ -195,11 +195,11 @@ $sql1 = "SELECT cs.subject_code, s.subject_name
             AND g.subject_code = cs.subject_code
         ) ORDER BY cs.subject_code";
 
-$result1 = mysqli_query($con, $sql1);
+          $result1 = mysqli_query($con, $sql1);
 
-if ($result1->num_rows > 0) {
-    while ($row1 = $result1->fetch_assoc()) {
-        echo '<div class="col-xxl-12 col-md-12">
+          if ($result1->num_rows > 0) {
+            while ($row1 = $result1->fetch_assoc()) {
+              echo '<div class="col-xxl-12 col-md-12">
                 <div class="card info-card sales-card">
                     <div class="card-body">
                         <h2>' . $row1["subject_name"] . ' ' . $row1["subject_code"] . '</h2>
@@ -213,15 +213,15 @@ if ($result1->num_rows > 0) {
                                     </tr>
                                 </thead>
                                 <tbody>';
-                       echo '</tbody>
+              echo '</tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div><br><br>';
-    }
-}
-?>
+            }
+          }
+          ?>
 
 
 
