@@ -302,13 +302,13 @@ function getReceivedMessages($recipientId) {
   $messages = [];
 
   if (file_exists($filePath)) {
-      $allMessages = json_decode(file_get_contents($filePath), true);
+    $allMessages = json_decode(file_get_contents($filePath), true);
 
-      foreach ($allMessages as $message) {
-          if ($message['recipient'] == $recipientId) {
-              $messages[] = $message;
-          }
+    foreach ($allMessages as $message) {
+      if ($message['recipient'] == $recipientId && $message['sender'] != $recipientId) {
+        $messages[] = $message;
       }
+    }
   }
 
   return $messages;
@@ -329,41 +329,40 @@ if (isset($_SESSION['Account_ID']) && isset($_POST['send_message'])) {
   // إعادة تحميل الرسائل بعد إرسال رسالة جديدة
   $messages = getMessages($recipientId);  
 }
-
+$receivedMessages = getReceivedMessages($_SESSION['Account_ID']);
+$allMessages = array_merge($receivedMessages, $messages);
+usort($allMessages, function($a, $b) {
+  return $a['timestamp'] - $b['timestamp'];
+});
 ?>
 
-      <div class="message">
-                    <br><br>
-        <?php
-          $receivedMessages = getReceivedMessages($_SESSION['Account_ID']);
-          foreach ($receivedMessages as $message): ?>
-              <div class="message-content received">
-                  <p><?php echo $message['content']; ?></p>
-                  <p><?php echo date('H:i', $message['timestamp']); ?></p>
-              </div>
-          <?php endforeach; ?>
-              <?php foreach ($messages as $message): ?>
-              <?php if ($message['sender'] == $_GET['id']): ?>
-                  <!-- كود عرض الرسائل المرسلة -->
-              <?php else: ?>
-                  <div class="message-content sent">
-                      <p><?php echo $message['content']; ?></p>
-                      <p><?php echo date('H:i', $message['timestamp']); ?></p>
-                  </div>
-              <?php endif; ?>
-          <?php endforeach;  ?>
-    <br><br>
-</div>
-
-<div class="attachments-sections">
-      <form method="POST">
-        <div class="input-group">
-            <input type="text" class="form-control" name="message_contents" placeholder="أدخل رسالتك هنا..." />
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit" name="send_message">Send</button>
-        </div>
+    <div class="message">
+      <br><br>
+      <?php foreach ($allMessages as $message): ?>
+        <?php if ($message['sender'] == $_GET['id']): ?>
+          <div class="message-content received">
+            <p><?php echo $message['content']; ?></p>
+            <p><?php echo date('H:i', $message['timestamp']); ?></p>
+          </div>
+        <?php elseif($message['sender'] == $_SESSION['Account_ID']): ?>
+          <div class="message-content sent">
+            <p><?php echo $message['content']; ?></p>
+            <p><?php echo date('H:i', $message['timestamp']); ?></p>
+          </div>
+        <?php endif; ?>
+      <?php endforeach; ?>
+      <br><br>
     </div>
-  </form>
+
+    <div class="attachments-sections">
+          <form method="POST">
+            <div class="input-group">
+                <input type="text" class="form-control" name="message_contents" placeholder="أدخل رسالتك هنا..." />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit" name="send_message">Send</button>
+            </div>
+        </div>
+      </form>
     <ul>
                     </ul>
                   </div>
