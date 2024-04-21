@@ -171,9 +171,9 @@
                         <tr>
                           <th scope='col'>رمز المقرر</th>
                           <th scope='col'>اسم المقرر</th>
-                          <th scope='col'>الساعات</th>
-                          <th scope='col'>التقدير</th>
+                          <th scope='col'>الساعات</th>                          
                           <th scope='col'>العلامة</th>
+                          <th scope='col'>التقدير</th>
                         </tr>
                       </thead>
                       <tbody>";
@@ -209,8 +209,8 @@
               echo "<td>{$row['course_code']}</td>";
               echo "<td>{$row['course_name']}</td>";
               echo "<td>{$row['credit_hours']}</td>";
-              echo "<td>$mark</td>";
               echo "<td>{$row['grade']}</td>";
+              echo "<td>$mark</td>";
               echo "</tr>";
               $GPA = $row['student_GPA'];
             }
@@ -272,16 +272,10 @@
                 s.credit_hours,
                 COALESCE(ar.grade, 'لا يوجد درجة') AS grade,
                 COALESCE(sg.GPA, 'لا يوجد معدل') AS gpa
-            FROM 
-                academic_record ar
-            LEFT JOIN 
-                subjects s ON ar.subject_code = s.subject_code
-            LEFT JOIN 
-                student_gpa sg ON ar.student_ID = sg.student_ID 
-                              AND ar.Semster_Number = sg.Semster_Number
-            WHERE 
-                ar.student_ID = '431002997'
-                AND ar.Semster_Number NOT IN (SELECT Semester_Number FROM current_semester WHERE student_id = {$_SESSION['Account_ID']})
+            FROM academic_record ar
+            LEFT JOIN subjects s ON ar.subject_code = s.subject_code
+            LEFT JOIN  student_gpa sg ON ar.student_ID = sg.student_ID AND ar.Semster_Number = sg.Semster_Number
+            WHERE ar.student_ID = {$_SESSION['Account_ID']} AND ar.Semster_Number NOT IN (SELECT Semester_Number FROM current_semester WHERE student_id = {$_SESSION['Account_ID']})
             ORDER BY 
                 ar.Semster_Number DESC";
 
@@ -306,8 +300,8 @@
                 <th scope='col'>رمز المقرر</th>
                 <th scope='col'>اسم المقرر</th>
                 <th scope='col'>الساعات</th>
-                <th scope='col'>التقدير</th>
-                <th scope='col'>العلامة</th>
+                <th scope='col'>التقدير</th> 
+                <th scope='col'>العلامة</th>                                                              
                 </tr></thead><tbody>";
                 $current_academic_year = $row['academic_year'];
                 $current_semester = $row['semester'];
@@ -338,9 +332,9 @@
 
               echo "<tr><td>" . $row['subject_code'] . "</td>
                       <td>" . $row['subject_name'] . "</td>
-                      <td>" . $row['credit_hours'] . "</td>
-                      <td>$mark</td>
-                      <td>" . $row['grade'] . "</td></tr>";
+                      <td>" . $row['credit_hours'] . "</td>                      
+                      <td>" . $row['grade'] . "</td></tr>
+                      <td>$mark</td>";
               $GPA = $row['gpa'];
 
             }
