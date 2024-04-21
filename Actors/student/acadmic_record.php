@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
 
 <!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -14,97 +16,99 @@
 
 
   <?php
-    $navbar_path = "tools/css.php";
-for ($i = 0; $i < 9; $i++) {
+  $navbar_path = "tools/css.php";
+  for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $navbar_path;
     if (file_exists($path)) {
       include $path;
-        break;
+      break;
     }
-}
+  }
 
 
-    ?>
+  ?>
 
   <style>
     <?php
     $navbar_path = "tools/tools.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
+    for ($i = 0; $i < 9; $i++) {
+      $path = str_repeat("../", $i) . $navbar_path;
+      if (file_exists($path)) {
+        include $path;
         break;
+      }
     }
-}
     download_css();
     print_css();
     ?>
 
-.table thead th, .jsgrid .jsgrid-table thead th {
-    border-top: 0;
-    border-bottom-width: 1px;
-    font-weight: bold;
-    font-size: 1rem;
-    background-color: #392e6e;
-    color: #fff;
-}
+    .table thead th,
+    .jsgrid .jsgrid-table thead th {
+      border-top: 0;
+      border-bottom-width: 1px;
+      font-weight: bold;
+      font-size: 1rem;
+      background-color: #392e6e;
+      color: #fff;
+    }
   </style>
 </head>
+
 <body class="rtl">
   <div class="container-scroller">
 
 
-<?php 
-$navbar_path = "Navbar/rtl/nav.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
+    <?php
+    $navbar_path = "Navbar/rtl/nav.php";
+    for ($i = 0; $i < 9; $i++) {
+      $path = str_repeat("../", $i) . $navbar_path;
+      if (file_exists($path)) {
+        include $path;
         break;
+      }
     }
-}
-?>
+    ?>
 
 
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="raw">
+    <!-- partial -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="raw">
           <div class="col-md-12 grid-margin ">
             <div class="card">
-                <div class="card-body">               
-                  <div class="template-demo">
-                    <nav>
-                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">
-                         الصفحة الرئيسية 
+              <div class="card-body">
+                <div class="template-demo">
+                  <nav>
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item active" aria-current="page">
+                        الصفحة الرئيسية
                       </li>
-                      </ol>
-                    </nav>
-                    
-                  </div>
+                    </ol>
+                  </nav>
+
                 </div>
               </div>
             </div>
           </div>
-          <div class="page-header">
-            <h3 class="page-title">
-السجل الاكاديمي
-            </h3>
-          </div>
+        </div>
+        <div class="page-header">
+          <h3 class="page-title">
+            السجل الاكاديمي
+          </h3>
+        </div>
 
-          <div class="row">
-            
+        <div class="row">
 
 
 
-  <?php
-// تعيين المتغير الذي سيتم استخدامه لتتبع عرض الفصل والعام الدراسي
-$semester_displayed = false;
-$GPA = 0;
 
-// استعلام SQL الجديد
-$sql = "SELECT CONCAT('14', LEFT(ar.Semster_Number, 2)) AS academic_year,
+          <?php
+          // تعيين المتغير الذي سيتم استخدامه لتتبع عرض الفصل والعام الدراسي
+          $semester_displayed = false;
+          $GPA = 0;
+
+          // استعلام SQL الجديد
+          $sql = "SELECT CONCAT('14', LEFT(ar.Semster_Number, 2)) AS academic_year,
         CASE RIGHT(ar.Semster_Number, 1)
             WHEN '0' THEN 'التحضيري'
             WHEN '1' THEN 'الأول'
@@ -139,25 +143,25 @@ $sql = "SELECT CONCAT('14', LEFT(ar.Semster_Number, 2)) AS academic_year,
         CASE WHEN ar.Semster_Number IS NOT NULL THEN 0 ELSE 1 END,
         cs.Semester_Number ASC";
 
-$result = $conn->query($sql);
+          $result = $conn->query($sql);
 
-// التحقق من وجود نتائج
-if ($result->num_rows > 0) {
-    // عرض البيانات لكل فصل دراسي
-    while ($row = $result->fetch_assoc()) {
-        // تحديد متغير لتخزين الفصل الدراسي الحالي
-        $semester = $row['semester'];
-        // تحقق مما إذا كان الفصل الدراسي تم عرضه بالفعل
-        if (!$semester_displayed) {
-            // عرض بيانات الفصل الدراسي الجديد
-            echo "<h4>الفصل الدراسي: {$row['semester']}</h4>";
-            echo "<h4>العام الدراسي: {$row['academic_year']} هـ</h4>";
+          // التحقق من وجود نتائج
+          if ($result->num_rows > 0) {
+            // عرض البيانات لكل فصل دراسي
+            while ($row = $result->fetch_assoc()) {
+              // تحديد متغير لتخزين الفصل الدراسي الحالي
+              $semester = $row['semester'];
+              // تحقق مما إذا كان الفصل الدراسي تم عرضه بالفعل
+              if (!$semester_displayed) {
+                // عرض بيانات الفصل الدراسي الجديد
+                echo "<h4>الفصل الدراسي: {$row['semester']}</h4>";
+                echo "<h4>العام الدراسي: {$row['academic_year']} هـ</h4>";
 
-            // تعيين قيمة للتأكيد على عرض الفصل والعام الدراسي
-            $semester_displayed = true;
+                // تعيين قيمة للتأكيد على عرض الفصل والعام الدراسي
+                $semester_displayed = true;
 
-            // بدء جدول جديد لعرض المقررات
-            echo "
+                // بدء جدول جديد لعرض المقررات
+                echo "
             <div class='col-xxl-12 col-md-12'>
               <div class='card info-card sales-card'>
                 <div class='card-body'>
@@ -173,48 +177,48 @@ if ($result->num_rows > 0) {
                         </tr>
                       </thead>
                       <tbody>";
-        }
+              }
 
-        // تحويل الدرجات إلى تقدير بحسب الشروط الموجودة في الكود الأصلي
-        if (!empty($row['grade']) && is_numeric($row['grade'])) {
-            if ($row['grade'] >= 95) {
-                $mark = "A+";
-            } else if ($row['grade'] >= 90) {
-                $mark = "A";
-            } else if ($row['grade'] >= 85) {
-                $mark = "B+";
-            } else if ($row['grade'] >= 80) {
-                $mark = "B";
-            } else if ($row['grade'] >= 75) {
-                $mark = "C+";
-            } else if ($row['grade'] >= 70) {
-                $mark = "C";
-            } else if ($row['grade'] >= 65) {
-                $mark = "D+";
-            } else if ($row['grade'] >= 60) {
-                $mark = "D";
-            } else {
-                $mark = "F";
+              // تحويل الدرجات إلى تقدير بحسب الشروط الموجودة في الكود الأصلي
+              if (!empty($row['grade']) && is_numeric($row['grade'])) {
+                if ($row['grade'] >= 95) {
+                  $mark = "A+";
+                } else if ($row['grade'] >= 90) {
+                  $mark = "A";
+                } else if ($row['grade'] >= 85) {
+                  $mark = "B+";
+                } else if ($row['grade'] >= 80) {
+                  $mark = "B";
+                } else if ($row['grade'] >= 75) {
+                  $mark = "C+";
+                } else if ($row['grade'] >= 70) {
+                  $mark = "C";
+                } else if ($row['grade'] >= 65) {
+                  $mark = "D+";
+                } else if ($row['grade'] >= 60) {
+                  $mark = "D";
+                } else {
+                  $mark = "F";
+                }
+              } else {
+                $mark = "غير متوفرة";
+              }
+
+              // عرض بيانات المقرر في الجدول
+              echo "<tr>";
+              echo "<td>{$row['course_code']}</td>";
+              echo "<td>{$row['course_name']}</td>";
+              echo "<td>{$row['credit_hours']}</td>";
+              echo "<td>$mark</td>";
+              echo "<td>{$row['grade']}</td>";
+              echo "</tr>";
+              $GPA = $row['student_GPA'];
             }
-        } else {
-            $mark = "غير متوفرة";
-        }
-
-        // عرض بيانات المقرر في الجدول
-        echo "<tr>";
-        echo "<td>{$row['course_code']}</td>";
-        echo "<td>{$row['course_name']}</td>";
-        echo "<td>{$row['credit_hours']}</td>";
-        echo "<td>$mark</td>";
-        echo "<td>{$row['grade']}</td>";
-        echo "</tr>";
-        $GPA= $row['student_GPA'];
-    }   
 
 
 
-    // عرض المعدل التراكمي بعد الحلقة
-    echo "
+            // عرض المعدل التراكمي بعد الحلقة
+            echo "
     </tbody>
   </table>
 </div>
@@ -238,20 +242,18 @@ if ($result->num_rows > 0) {
 ";
 
 
-} else {
-    echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
-}
-?>
+          } else {
+            echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
+          }
+          ?>
 
 
-<?php
-    // متغيران لتتبع العام الدراسي والفصل الدراسي الحاليين
-    $current_academic_year = "";
-    $current_semester = "";
-    $GPA = 0;
+          <?php
+          $current_academic_year = "";
+          $current_semester = "";
+          $GPA = 0;
 
-    // استعلام SQL لاسترداد بيانات المواد لكل فصل دراسي
-    $sql = "SELECT 
+          $sql = "SELECT 
                 CONCAT('14', LEFT(ar.Semster_Number, 2)) AS academic_year,
                 CASE RIGHT(ar.Semster_Number, 1)
                     WHEN '0' THEN 'التحضيري'
@@ -279,17 +281,17 @@ if ($result->num_rows > 0) {
                               AND ar.Semster_Number = sg.Semster_Number
             WHERE 
                 ar.student_ID = '431002997'
-                AND ar.Semster_Number NOT IN (SELECT Semester_Number FROM current_semester WHERE student_id = '431002997')
+                AND ar.Semster_Number NOT IN (SELECT Semester_Number FROM current_semester WHERE student_id = {$_SESSION['Account_ID']})
             ORDER BY 
                 ar.Semster_Number DESC";
 
-    $result = $conn->query($sql);
+          $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            if ($current_academic_year != $row['academic_year'] || $current_semester != $row['semester']) {
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              if ($current_academic_year != $row['academic_year'] || $current_semester != $row['semester']) {
                 if ($current_academic_year != "") {
-                    echo "</tbody>
+                  echo "</tbody>
                     </table>
                     </div></div></div></div><h1></h1><div class='col-xxl-12 col-md-12'><div class='card info-card sales-card'><div class='card-body'><h5>فصلي</h5><br><h5>المعدل التراكمي: $GPA</h5></div></div><br></div><!-- End Sales Card --><h1><h1>";
                 }
@@ -309,40 +311,40 @@ if ($result->num_rows > 0) {
                 </tr></thead><tbody>";
                 $current_academic_year = $row['academic_year'];
                 $current_semester = $row['semester'];
-            }
-            if (!empty($row['grade']) && is_numeric($row['grade'])) {
-              if ($row['grade'] >= 95) {
-                  $mark = "A+";
-              } else if ($row['grade'] >= 90) {
-                  $mark = "A";
-              } else if ($row['grade'] >= 85) {
-                  $mark = "B+";
-              } else if ($row['grade'] >= 80) {
-                  $mark = "B";
-              } else if ($row['grade'] >= 75) {
-                  $mark = "C+";
-              } else if ($row['grade'] >= 70) {
-                  $mark = "C";
-              } else if ($row['grade'] >= 65) {
-                  $mark = "D+";
-              } else if ($row['grade'] >= 60) {
-                  $mark = "D";
-              } else {
-                  $mark = "F";
               }
-          } else {
-              $mark = "غير متوفرة";
-          }
+              if (!empty($row['grade']) && is_numeric($row['grade'])) {
+                if ($row['grade'] >= 95) {
+                  $mark = "A+";
+                } else if ($row['grade'] >= 90) {
+                  $mark = "A";
+                } else if ($row['grade'] >= 85) {
+                  $mark = "B+";
+                } else if ($row['grade'] >= 80) {
+                  $mark = "B";
+                } else if ($row['grade'] >= 75) {
+                  $mark = "C+";
+                } else if ($row['grade'] >= 70) {
+                  $mark = "C";
+                } else if ($row['grade'] >= 65) {
+                  $mark = "D+";
+                } else if ($row['grade'] >= 60) {
+                  $mark = "D";
+                } else {
+                  $mark = "F";
+                }
+              } else {
+                $mark = "غير متوفرة";
+              }
 
-            echo "<tr><td>" . $row['subject_code'] . "</td>
+              echo "<tr><td>" . $row['subject_code'] . "</td>
                       <td>" . $row['subject_name'] . "</td>
                       <td>" . $row['credit_hours'] . "</td>
                       <td>$mark</td>
                       <td>" . $row['grade'] . "</td></tr>";
-                      $GPA = $row['gpa'];
+              $GPA = $row['gpa'];
 
-        }
-        echo "</tbody>
+            }
+            echo "</tbody>
         </table></div>
         </div></div>
         </div><h1></h1>
@@ -353,14 +355,10 @@ if ($result->num_rows > 0) {
         </div><br></div>
         <!-- End Sales Card -->
         <h1><h1>";
-    } else {
-        echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
-    }
-?>
-
-
-
-         
+          } else {
+            echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
+          }
+          ?>
 
 
 
@@ -402,34 +400,38 @@ if ($result->num_rows > 0) {
 
 
 
-          </div>
-       
-       
-       
+
+
 
 
         </div>
-        <!-- content-wrapper ends -->
-
-        
-<?php
-$navbar_path = "footer/Footer.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
-        break;
-    }
-}
-?>
 
 
 
-        <!-- partial -->
+
+
       </div>
-      <!-- main-panel ends -->
+      <!-- content-wrapper ends -->
+
+
+      <?php
+      $navbar_path = "footer/Footer.php";
+      for ($i = 0; $i < 9; $i++) {
+        $path = str_repeat("../", $i) . $navbar_path;
+        if (file_exists($path)) {
+          include $path;
+          break;
+        }
+      }
+      ?>
+
+
+
+      <!-- partial -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
 
@@ -450,26 +452,30 @@ for ($i = 0; $i < 9; $i++) {
 
 
 <?php
- download_js();
- print_js();
+download_js();
+print_js();
 ?>
 
 
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+  rel="stylesheet">
 
 
-  <!-- تضمين Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
-  <!-- تضمين Bootstrap السكريبت -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- تضمين Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
+<!-- تضمين Bootstrap السكريبت -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 
 
 
 
 <!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
+
 </html>
