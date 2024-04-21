@@ -119,7 +119,7 @@
           INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
           WHERE grades.student_id = " . $_SESSION['Account_ID'] . "");
           $S = mysqli_fetch_array($SQL2);
-          $count = $S[0]; // قيمة العدد المحسوب
+          $count = $S[0]; 
           $B = 8;
           $C = 0;
           $result = $con->query($sql);

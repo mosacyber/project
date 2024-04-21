@@ -98,136 +98,138 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
+  <?php
+// تعيين المتغير الذي سيتم استخدامه لتتبع عرض الفصل والعام الدراسي
+$semester_displayed = false;
+$GPA = 0;
 
+// استعلام SQL الجديد
+$sql = "SELECT CONCAT('14', LEFT(ar.Semster_Number, 2)) AS academic_year,
+        CASE RIGHT(ar.Semster_Number, 1)
+            WHEN '0' THEN 'التحضيري'
+            WHEN '1' THEN 'الأول'
+            WHEN '2' THEN 'الثاني'
+            WHEN '3' THEN 'الثالث'
+            WHEN '4' THEN 'الرابع'
+            WHEN '5' THEN 'الخامس'
+            WHEN '6' THEN 'السادس'
+            WHEN '7' THEN 'السابع'
+            WHEN '8' THEN 'الثامن'
+            WHEN '9' THEN 'التاسع'
+        END AS semester,
+        cs.subject_code AS course_code,
+        sub.subject_name AS course_name,
+        sub.credit_hours,
+        IFNULL(ar.grade, 'لا يوجد درجة') AS grade,
+        IFNULL(sg.GPA, 'لا يوجد معدل') AS student_GPA
+        FROM 
+        current_semester cs
+        JOIN 
+        subjects sub ON cs.subject_code = sub.subject_code
+        LEFT JOIN 
+        academic_record ar ON cs.student_id = ar.student_id 
+                            AND cs.subject_code = ar.subject_code 
+                            AND cs.Semester_Number = ar.Semster_Number
+        LEFT JOIN 
+        student_gpa sg ON cs.student_id = sg.student_ID 
+                        AND cs.Semester_Number = sg.Semster_Number
+        WHERE 
+        cs.student_id = {$_SESSION['Account_ID']}
+        ORDER BY 
+        CASE WHEN ar.Semster_Number IS NOT NULL THEN 0 ELSE 1 END,
+        cs.Semester_Number ASC";
 
-
-
-          <?php
-// متغير لتتبع عرض الجدول لكل سمستر
-$table_displayed = array();
-
-// استعلام SQL لاسترداد بيانات معينة من الجدول
-$sql = "SELECT * FROM current_semester WHERE student_id = {$_SESSION['Account_ID']} ORDER BY Semester_Number DESC";
 $result = $conn->query($sql);
 
 // التحقق من وجود نتائج
 if ($result->num_rows > 0) {
     // عرض البيانات لكل فصل دراسي
     while ($row = $result->fetch_assoc()) {
-        // تحديد الفصل الدراسي بناءً على قيمة Semester_Number
-        $semester_number = $row["Semester_Number"];
-        $last_digit = substr($semester_number, -1);
-        $semester_name = "";
+        // تحديد متغير لتخزين الفصل الدراسي الحالي
+        $semester = $row['semester'];
+        // تحقق مما إذا كان الفصل الدراسي تم عرضه بالفعل
+        if (!$semester_displayed) {
+            // عرض بيانات الفصل الدراسي الجديد
+            echo "<h4>الفصل الدراسي: {$row['semester']}</h4>";
+            echo "<h4>العام الدراسي: {$row['academic_year']} هـ</h4>";
 
-        switch ($last_digit) {
-            case "1":
-                $semester_name = "الأول";
-                break;
-            case "2":
-                $semester_name = "الثاني";
-                break;
-            case "3":
-                $semester_name = "الثالث";
-                break;
-            default:
-                $semester_name = "غير محدد";
-                break;
+            // تعيين قيمة للتأكيد على عرض الفصل والعام الدراسي
+            $semester_displayed = true;
+
+            // بدء جدول جديد لعرض المقررات
+            echo "
+            <div class='col-xxl-12 col-md-12'>
+              <div class='card info-card sales-card'>
+                <div class='card-body'>
+                  <div class='table-responsive'>
+                    <table class='table'>
+                      <thead>
+                        <tr>
+                          <th scope='col'>رمز المقرر</th>
+                          <th scope='col'>اسم المقرر</th>
+                          <th scope='col'>الساعات</th>
+                          <th scope='col'>التقدير</th>
+                          <th scope='col'>العلامة</th>
+                        </tr>
+                      </thead>
+                      <tbody>";
         }
 
-        // التحقق من عدم عرض الجدول لهذا السمستر بالفعل
-        if (!isset($table_displayed[$semester_number])) {
-            // عرض اسم الفصل الدراسي
-            echo '<h4>الفصل الدراسي : <span>' . $semester_name . '</span></h4>';
-            echo '<h4>العام الدراسي : 14' . substr($semester_number, 0, 2) . 'هـ</span></h4>';
+        // تحويل الدرجات إلى تقدير بحسب الشروط الموجودة في الكود الأصلي
+        if (!empty($row['grade']) && is_numeric($row['grade'])) {
+            if ($row['grade'] >= 95) {
+                $mark = "A+";
+            } else if ($row['grade'] >= 90) {
+                $mark = "A";
+            } else if ($row['grade'] >= 85) {
+                $mark = "B+";
+            } else if ($row['grade'] >= 80) {
+                $mark = "B";
+            } else if ($row['grade'] >= 75) {
+                $mark = "C+";
+            } else if ($row['grade'] >= 70) {
+                $mark = "C";
+            } else if ($row['grade'] >= 65) {
+                $mark = "D+";
+            } else if ($row['grade'] >= 60) {
+                $mark = "D";
+            } else {
+                $mark = "F";
+            }
+        } else {
+            $mark = "غير متوفرة";
+        }
 
-            // استعلام SQL لاسترداد بيانات المواد للفصل الدراسي الحالي
-            $sql_subjects = "SELECT c.subject_code, s.subject_name, s.credit_hours, IFNULL(ar.grade, 'غير متوفرة') AS grade
-            FROM current_semester c
-            INNER JOIN subjects s ON c.subject_code = s.subject_code
-            LEFT JOIN academic_record ar ON c.student_id = ar.student_id AND c.subject_code = ar.subject_code AND c.Semester_Number = ar.Semster_Number
-            WHERE c.student_id = {$_SESSION['Account_ID']} AND c.Semester_Number = '$semester_number'
-            ORDER BY c.Semester_Number DESC
-            ";
-            $result_subjects = $conn->query($sql_subjects);
+        // عرض بيانات المقرر في الجدول
+        echo "<tr>";
+        echo "<td>{$row['course_code']}</td>";
+        echo "<td>{$row['course_name']}</td>";
+        echo "<td>{$row['credit_hours']}</td>";
+        echo "<td>$mark</td>";
+        echo "<td>{$row['grade']}</td>";
+        echo "</tr>";
+        $GPA= $row['student_GPA'];
+    }   
 
-            // التحقق من وجود نتائج
-            if ($result_subjects->num_rows > 0) {
-                // عرض بداية الجدول
-                echo "
-                <div class='col-xxl-12 col-md-12'>
-                  <div class='card info-card sales-card'>
-                    <div class='card-body'>
-                      <div class='table-responsive'>
-                        <table class='table'>
-                          <thead>
-                            <tr>
-                              <th scope='col'>رمز المقرر</th>
-                              <th scope='col'>اسم المقرر</th>
-                              <th scope='col'>الساعات</th>
-                              <th scope='col'>التقدير</th>
-                              <th scope='col'>العلامة</th>
-                            </tr>
-                          </thead>
-                          <tbody>";
 
-                while ($row_subject = $result_subjects->fetch_assoc()) {
 
-                  if (!empty($row_subject['grade']) && is_numeric($row_subject['grade'])) {
-                    if ($row_subject['grade'] >= 95) {
-                        $mark = "A+";
-                    } else if ($row_subject['grade'] >= 90) {
-                      $mark = "A";
-                     } else if ($row_subject['grade'] >= 85) {
-                      $mark = "B+";
-                     } else if ($row_subject['grade'] >= 80) {
-                      $mark = "B";
-                     } else if ($row_subject['grade'] >= 75) {
-                      $mark = "C+";
-                     } else if ($row_subject['grade'] >= 70) {
-                      $mark = "C";
-                     } else if ($row_subject['grade'] >= 65) {
-                      $mark = "D+";
-                     } else if ($row_subject['grade'] >= 60) {
-                      $mark = "D";
-                     }else {
-                        $mark = "F";
-                    }
-                } else {
-                    $mark = "غير متوفرة";
-                }
-                
-                    // عرض بيانات المقرر في الجدول
-                    echo "<tr>";
-                    echo "<td>{$row_subject['subject_code']}</td>";
-                    echo "<td>{$row_subject['subject_name']}</td>";
-                    echo "<td>{$row_subject['credit_hours']}</td>";
-                    echo "<td>{$row_subject['grade']}</td>";
-                    echo "<td>$mark</td>";
-                    echo "</tr>";
-                }
-
-// إغلاق الجدول
-echo "
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    // عرض المعدل التراكمي بعد الحلقة
+    echo "
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
 </div>
 <h1></h1>
 <!-- Sales Card -->
 <div class='col-xxl-12 col-md-12'>
-  <div class='card info-card sales-card'>
-    <div class='card-body'>
-    
-      <h5>
-        فصلي
-      </h5><br>
-      <h5>
-        تراكمي
-      </h5>
-    </div>
-  </div>
+<div class='card info-card sales-card'>
+<div class='card-body'>
+<h5>فصلي</h5><br>
+<h5>المعدل التراكمي: $GPA</h5>
+</div>
+</div><br>
 </div>
 
 
@@ -236,17 +238,129 @@ echo "
 ";
 
 
-                // تعيين قيمة للتأكيد على عرض الجدول لهذا السمستر بالفعل
-                $table_displayed[$semester_number] = true;
-            } else {
-                echo '<p>لا توجد مواد لعرضها في هذا الفصل الدراسي.</p>';
-            }
-        }
-    }
 } else {
     echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
 }
 ?>
+
+
+<?php
+    // متغيران لتتبع العام الدراسي والفصل الدراسي الحاليين
+    $current_academic_year = "";
+    $current_semester = "";
+    $GPA = 0;
+
+    // استعلام SQL لاسترداد بيانات المواد لكل فصل دراسي
+    $sql = "SELECT 
+                CONCAT('14', LEFT(ar.Semster_Number, 2)) AS academic_year,
+                CASE RIGHT(ar.Semster_Number, 1)
+                    WHEN '0' THEN 'التحضيري'
+                    WHEN '1' THEN 'الأول'
+                    WHEN '2' THEN 'الثاني'
+                    WHEN '3' THEN 'الثالث'
+                    WHEN '4' THEN 'الرابع'
+                    WHEN '5' THEN 'الخامس'
+                    WHEN '6' THEN 'السادس'
+                    WHEN '7' THEN 'السابع'
+                    WHEN '8' THEN 'الثامن'
+                    WHEN '9' THEN 'التاسع'
+                END AS semester,
+                ar.subject_code,
+                s.subject_name,
+                s.credit_hours,
+                COALESCE(ar.grade, 'لا يوجد درجة') AS grade,
+                COALESCE(sg.GPA, 'لا يوجد معدل') AS gpa
+            FROM 
+                academic_record ar
+            LEFT JOIN 
+                subjects s ON ar.subject_code = s.subject_code
+            LEFT JOIN 
+                student_gpa sg ON ar.student_ID = sg.student_ID 
+                              AND ar.Semster_Number = sg.Semster_Number
+            WHERE 
+                ar.student_ID = '431002997'
+                AND ar.Semster_Number NOT IN (SELECT Semester_Number FROM current_semester WHERE student_id = '431002997')
+            ORDER BY 
+                ar.Semster_Number DESC";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if ($current_academic_year != $row['academic_year'] || $current_semester != $row['semester']) {
+                if ($current_academic_year != "") {
+                    echo "</tbody>
+                    </table>
+                    </div></div></div></div><h1></h1><div class='col-xxl-12 col-md-12'><div class='card info-card sales-card'><div class='card-body'><h5>فصلي</h5><br><h5>المعدل التراكمي: $GPA</h5></div></div><br></div><!-- End Sales Card --><h1><h1>";
+                }
+                echo "<h4>العام الدراسي: " . $row['academic_year'] . " هـ</h4>";
+                echo "<h4>الفصل الدراسي: " . $row['semester'] . "</h4>";
+                echo "<div class='col-xxl-12 col-md-12'>
+                <div class='card info-card sales-card'>
+                <div class='card-body'>
+                <div class='table-responsive'>
+                <table class='table'>
+                <thead><tr>
+                <th scope='col'>رمز المقرر</th>
+                <th scope='col'>اسم المقرر</th>
+                <th scope='col'>الساعات</th>
+                <th scope='col'>التقدير</th>
+                <th scope='col'>العلامة</th>
+                </tr></thead><tbody>";
+                $current_academic_year = $row['academic_year'];
+                $current_semester = $row['semester'];
+            }
+            if (!empty($row['grade']) && is_numeric($row['grade'])) {
+              if ($row['grade'] >= 95) {
+                  $mark = "A+";
+              } else if ($row['grade'] >= 90) {
+                  $mark = "A";
+              } else if ($row['grade'] >= 85) {
+                  $mark = "B+";
+              } else if ($row['grade'] >= 80) {
+                  $mark = "B";
+              } else if ($row['grade'] >= 75) {
+                  $mark = "C+";
+              } else if ($row['grade'] >= 70) {
+                  $mark = "C";
+              } else if ($row['grade'] >= 65) {
+                  $mark = "D+";
+              } else if ($row['grade'] >= 60) {
+                  $mark = "D";
+              } else {
+                  $mark = "F";
+              }
+          } else {
+              $mark = "غير متوفرة";
+          }
+
+            echo "<tr><td>" . $row['subject_code'] . "</td>
+                      <td>" . $row['subject_name'] . "</td>
+                      <td>" . $row['credit_hours'] . "</td>
+                      <td>$mark</td>
+                      <td>" . $row['grade'] . "</td></tr>";
+                      $GPA = $row['gpa'];
+
+        }
+        echo "</tbody>
+        </table></div>
+        </div></div>
+        </div><h1></h1>
+        <div class='col-xxl-12 col-md-12'>
+        <div class='card info-card sales-card'>
+        <div class='card-body'><h5>فصلي</h5>
+        <br><h5>المعدل التراكمي: $GPA</h5></div>
+        </div><br></div>
+        <!-- End Sales Card -->
+        <h1><h1>";
+    } else {
+        echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
+    }
+?>
+
+
+
+         
 
 
 
