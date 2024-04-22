@@ -436,6 +436,14 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
     </a>
   </li>
   <li class="nav-item">
+  <a class="nav-link" href="'.$config['Actors'].'Academic_Advisor/Subject_grades.php">
+    <i class="fa fa-home menu-icon"></i>
+    <span class="menu-title">
+درجات المواد
+    </span>
+  </a>
+</li>
+  <li class="nav-item">
   <a class="nav-link" href="'.$config['app_url'].'mail">
     <i class="fa fa-home menu-icon"></i>
     <span class="menu-title">
