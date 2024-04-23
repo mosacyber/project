@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18 أبريل 2024 الساعة 02:20
--- إصدار الخادم: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Apr 23, 2024 at 02:55 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `academic_advisor`
+-- Table structure for table `academic_advisor`
 --
 
 CREATE TABLE `academic_advisor` (
@@ -33,17 +33,17 @@ CREATE TABLE `academic_advisor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `academic_advisor`
+-- Dumping data for table `academic_advisor`
 --
 
 INSERT INTO `academic_advisor` (`Academic_Advisor_ID`, `From_To`) VALUES
-(123456, '2024-04-15'),
-(233334, '2024-03-30');
+(123456, '2023-02-17'),
+(230041, '2022-06-30');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `academic_advisor_for_student`
+-- Table structure for table `academic_advisor_for_student`
 --
 
 CREATE TABLE `academic_advisor_for_student` (
@@ -52,16 +52,19 @@ CREATE TABLE `academic_advisor_for_student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `academic_advisor_for_student`
+-- Dumping data for table `academic_advisor_for_student`
 --
 
 INSERT INTO `academic_advisor_for_student` (`Academic_Advisor_ID`, `student_id`) VALUES
-(233334, 421002998);
+(123456, 381003212),
+(123456, 381003233),
+(230041, 421002999),
+(230041, 421004034);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `academic_record`
+-- Table structure for table `academic_record`
 --
 
 CREATE TABLE `academic_record` (
@@ -72,20 +75,26 @@ CREATE TABLE `academic_record` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `academic_record`
+-- Dumping data for table `academic_record`
 --
 
 INSERT INTO `academic_record` (`student_id`, `subject_code`, `Semster_Number`, `grade`) VALUES
-(421002998, '1', 451, 66),
-(421002998, '2', 461, 78),
-(431002997, '1', 451, 99),
-(431002997, '2', 461, 83),
-(431002997, '3', 441, 5);
+(381003212, 'CIT203', 451, 88),
+(381003212, 'CIT234', 451, 88),
+(381003212, 'CSC101', 451, 85),
+(381003212, 'CSC201', 451, 86),
+(381003233, 'CIT234', 451, 81),
+(381003233, 'CIT453', 451, 82),
+(381003233, 'CSC331', 451, 78),
+(421002999, 'CIT203', 451, 88),
+(421002999, 'CIT453', 451, 90),
+(421004034, 'CSC101', 451, 85),
+(421004034, 'CSC201', 451, 95);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `accounts`
+-- Table structure for table `accounts`
 --
 
 CREATE TABLE `accounts` (
@@ -99,19 +108,27 @@ CREATE TABLE `accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `accounts`
+-- Dumping data for table `accounts`
 --
 
 INSERT INTO `accounts` (`Account_ID`, `First_Name`, `Last_Name`, `Email`, `Password`, `Mobile`, `Position`) VALUES
-(123456, 'موسى', 'بارقي', 'mosacyber@gmail.com', '$2y$10$JnK.CezNBRBxT8yIsYg7U.GeW2/Ja7EmY5IW6JyIiy9fKLjeSD./2', 559718489, 4),
-(233334, 'موسى', 'بارقي', 'mosa@gmail.com', '123', 1234567890, 8),
-(421002998, 'طالب ', 'جديد', 'mosa@gmail.com', '123', 1234567890, 1),
-(431002997, 'f', 'ffffff', 'mosacyber@gmail.com', '$2y$10$T4m.sXR9WjwyPHKZYFV8q.U02hqb6ObO03diRIzv/alfD7HOAii1e', 559718489, 1);
+(123456, 'عمر', 'العسيري', '123456@ut.edu.sa', '$2y$10$JnK.CezNBRBxT8yIsYg7U.GeW2/Ja7EmY5IW6JyIiy9fKLjeSD./2', 559718489, 4),
+(200342, 'عبدالله', 'الذيابي', '200342@ut.edu.sa', '$2y$10$C4MUpxHF0H7o6aTgV89Zh.L10uSgBjgGWC32JW1uKEkSnk9sMf/XG', 599992232, 7),
+(211091, 'محمد', 'العتيبي', '211091@ut.edu.sa', '$2y$10$5fO.SicuFAgjtOgOzCS3huBxX.cYjAzjoMXVAGMDmbosyfQvmfz0G', 531111232, 8),
+(222512, 'يوسف', 'الفيفي', '222512@ut.edu.sa', '$2y$10$LkY/gEdPW.j9wwWUiRjHo.JpZTaYPwW6DdKRByoDVXn/lUuVV2pFW', 531892232, 3),
+(230041, 'عوض', 'محمد', '230041@ut.edu.sa', '$2y$10$ldfEbYIVubB5JP2RbqBruOyoND/cHd1LLNhzJhovR.u8JU6gAsVgq', 555711232, 4),
+(233331, 'عبدالله', 'المالكي', '233331@ut.edu.sa', '$2y$10$aj0ZOJ7QIwXOLVgUYjLMbO/zrHJPyDU6ewMi1neZQN3XyOd933L9O', 599012232, 8),
+(266001, 'مشعل', 'العنزي', '266001@ut.edu.sa', '$2y$10$L2YdpW67NeWs073.4KA.GOBu/Z4Sl/PAiHEZBJcPe2JhtRiG6ilY.', 509341232, 6),
+(268841, 'ماجد', 'ابوركبة', '268841@ut.edu.sa', '$2y$10$DmjcqlBDzj.YiKTMqvcFkuXNH9stfZjEe6GZVZ/CM7uQGkMFKyJTy', 555711232, 2),
+(381003212, 'سلطان', 'العواجي', '381003212@stu.ut.edu.sa', '$2y$10$PiJdwSr2m5ntqcwoENRgz./Q09P3Kjqv3rOQft/SezOcq3DEM.Gay', 556712232, 1),
+(381003233, 'عصام', 'العتيبي', '381003233@stu.ut.edu.sa', '$2y$10$uj62MVU7CXQypaNS7O7RHejpK7CTbhqievI3CeM3/KSKDIsd1TOfu', 556111132, 1),
+(421002999, 'موسى', 'بارقي', '421002999@stu.ut.edu.sa', '$2y$10$oEqF17irn1MI5c1dU8VbxetMlZLKwXPHvwHFYpggeBDFi6AtXHhyS', 556122232, 1),
+(421004034, 'صالح', 'العنزي', '421004034@stu.ut.edu.sa', '$2y$10$C8tef1GzO9b.nIYnizlzjez5x73ZhWnmODUVbB6D.Hf.dnTsg7Kka', 556177732, 1);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `admins`
+-- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
@@ -123,10 +140,18 @@ CREATE TABLE `admins` (
   `Admin_Mobile` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`Admin_ID`, `First_Name`, `Last_Name`, `Admin_Email`, `Admin_Password`, `Admin_Mobile`) VALUES
+(1, 'صالح', 'الذيابي', 'saleh.cyper@gmail.com', '123', 500188641),
+(2, 'موسى', 'الفيفي', 'mousacyper@gmail.com', '', 555111325);
+
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `colleges`
+-- Table structure for table `colleges`
 --
 
 CREATE TABLE `colleges` (
@@ -135,7 +160,7 @@ CREATE TABLE `colleges` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `colleges`
+-- Dumping data for table `colleges`
 --
 
 INSERT INTO `colleges` (`College_ID`, `College_Name`) VALUES
@@ -147,7 +172,7 @@ INSERT INTO `colleges` (`College_ID`, `College_Name`) VALUES
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `college_dean`
+-- Table structure for table `college_dean`
 --
 
 CREATE TABLE `college_dean` (
@@ -156,10 +181,17 @@ CREATE TABLE `college_dean` (
   `College_ID` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `college_dean`
+--
+
+INSERT INTO `college_dean` (`College_Dean_ID`, `From_To`, `College_ID`) VALUES
+(268841, '2019-04-03', 7);
+
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `coursework`
+-- Table structure for table `coursework`
 --
 
 CREATE TABLE `coursework` (
@@ -170,16 +202,45 @@ CREATE TABLE `coursework` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `coursework`
+-- Dumping data for table `coursework`
 --
 
 INSERT INTO `coursework` (`coursework_id`, `coursework_type_ID`, `coursework_grade`, `subject_code`) VALUES
-(1, 1, 20, '1');
+(1, 1, 20, 'CIT203'),
+(1, 1, 20, 'CIT234'),
+(1, 1, 20, 'CIT453'),
+(1, 1, 15, 'CSC101'),
+(1, 1, 15, 'CSC201'),
+(2, 2, 20, 'CIT203'),
+(2, 2, 20, 'CIT234'),
+(2, 2, 20, 'CIT453'),
+(2, 2, 15, 'CSC101'),
+(2, 2, 15, 'CSC201'),
+(3, 4, 10, 'CIT203'),
+(3, 4, 5, 'CIT234'),
+(3, 6, 5, 'CIT453'),
+(3, 4, 5, 'CSC101'),
+(3, 4, 10, 'CSC201'),
+(4, 5, 10, 'CIT203'),
+(4, 5, 5, 'CIT234'),
+(4, 7, 5, 'CIT453'),
+(4, 5, 5, 'CSC101'),
+(4, 5, 10, 'CSC201'),
+(5, 3, 40, 'CIT203'),
+(5, 8, 10, 'CIT234'),
+(5, 4, 10, 'CIT453'),
+(5, 4, 10, 'CSC101'),
+(5, 8, 20, 'CSC201'),
+(6, 3, 40, 'CIT234'),
+(6, 3, 40, 'CIT453'),
+(6, 8, 20, 'CSC101'),
+(6, 3, 30, 'CSC201'),
+(7, 3, 30, 'CSC101');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `coursework_type`
+-- Table structure for table `coursework_type`
 --
 
 CREATE TABLE `coursework_type` (
@@ -188,16 +249,23 @@ CREATE TABLE `coursework_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `coursework_type`
+-- Dumping data for table `coursework_type`
 --
 
 INSERT INTO `coursework_type` (`coursework_type_id`, `coursework_type_name`) VALUES
-(1, 'mid 1');
+(1, 'اختبار الدور الاول'),
+(2, 'اختبار الدور الثاني'),
+(3, 'الاختبار النهائي'),
+(4, 'اختبار قصير 1'),
+(5, 'اختبار قصير 2'),
+(6, 'الواجب الاول'),
+(7, 'الواجب الثاني'),
+(8, 'المشروع');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `current_semester`
+-- Table structure for table `current_semester`
 --
 
 CREATE TABLE `current_semester` (
@@ -208,20 +276,26 @@ CREATE TABLE `current_semester` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `current_semester`
+-- Dumping data for table `current_semester`
 --
 
 INSERT INTO `current_semester` (`student_id`, `subject_code`, `Faculty_member_ID`, `Semester_Number`) VALUES
-(421002998, '1', 233334, 451),
-(421002998, '2', 233334, 461),
-(431002997, '1', 233334, 451),
-(431002997, '2', 233334, 461),
-(431002997, '3', 233334, 451);
+(381003233, 'CIT203', 123456, 452),
+(381003233, 'CSC201', 123456, 452),
+(421002999, 'CIT234', 123456, 452),
+(421004034, 'CIT234', 123456, 452),
+(381003212, 'CIT453', 211091, 452),
+(421002999, 'CSC101', 211091, 452),
+(421004034, 'CIT203', 222512, 452),
+(421004034, 'CIT453', 222512, 452),
+(381003212, 'CSC331', 230041, 452),
+(381003233, 'CSC101', 233331, 452),
+(421002999, 'CSC201', 233331, 452);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `departments`
+-- Table structure for table `departments`
 --
 
 CREATE TABLE `departments` (
@@ -230,7 +304,7 @@ CREATE TABLE `departments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `departments`
+-- Dumping data for table `departments`
 --
 
 INSERT INTO `departments` (`Department_ID`, `Department_Name`) VALUES
@@ -240,7 +314,7 @@ INSERT INTO `departments` (`Department_ID`, `Department_Name`) VALUES
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `faculty_member`
+-- Table structure for table `faculty_member`
 --
 
 CREATE TABLE `faculty_member` (
@@ -251,61 +325,95 @@ CREATE TABLE `faculty_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `faculty_member`
+-- Dumping data for table `faculty_member`
 --
 
 INSERT INTO `faculty_member` (`Faculty_member_ID`, `Major`, `Academic_Rank`, `Department_ID`) VALUES
-(123456, 'تقنيه المعلومات', 'استاذ مساعد', 701),
-(233334, 'تقنيه المعلومات', 'استاذ', 701);
+(123456, 'تقنية المعلومات', 'استاذ مساعد', 701),
+(200342, 'تقنية المعلومات', 'استاذ مساعد', 701),
+(211091, 'تقنية المعلومات', 'استاذ', 701),
+(222512, 'تقنية المعلومات', 'استاذ مساعد', 701),
+(230041, 'علوم الحاسب', 'استاذ مشارك', 701),
+(233331, 'تقنية المعلومات', 'استاذ مساعد', 702),
+(266001, 'علوم الحاسب', 'استاذ مشارك', 702),
+(268841, 'تقنية المعلومات', 'استاذ مشارك', 701);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `grades`
+-- Table structure for table `grades`
 --
 
 CREATE TABLE `grades` (
   `student_ID` int(9) NOT NULL,
   `coursework_id` int(2) NOT NULL,
   `coursework_Mark` int(3) NOT NULL,
-  `subject_code` varchar(6) NOT NULL
+  `Subject_Code` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `grades`
+-- Dumping data for table `grades`
 --
 
-INSERT INTO `grades` (`student_ID`, `coursework_id`, `coursework_Mark`, `subject_code`) VALUES
-(431002997, 1, 15, '1');
+INSERT INTO `grades` (`student_ID`, `coursework_id`, `coursework_Mark`, `Subject_Code`) VALUES
+(381003233, 1, 12, 'CIT203'),
+(381003233, 1, 13, 'CIT234'),
+(381003233, 1, 14, 'CSC201'),
+(381003233, 2, 14, 'CIT203'),
+(381003233, 2, 14, 'CIT234'),
+(381003233, 2, 15, 'CSC201'),
+(381003233, 3, 7, 'CIT203'),
+(381003233, 3, 3, 'CIT234'),
+(381003233, 3, 10, 'CSC201'),
+(381003233, 4, 6, 'CIT203'),
+(381003233, 4, 4, 'CIT234'),
+(381003233, 4, 10, 'CSC201'),
+(381003233, 5, 31, 'CIT203'),
+(381003233, 5, 7, 'CIT234'),
+(381003233, 5, 20, 'CSC201'),
+(381003233, 6, 28, 'CIT234'),
+(381003233, 6, 30, 'CSC201'),
+(421002999, 1, 12, 'CSC201'),
+(421002999, 2, 11, 'CSC201'),
+(421002999, 3, 8, 'CSC201'),
+(421002999, 4, 9, 'CSC201'),
+(421002999, 5, 18, 'CSC201'),
+(421002999, 6, 36, 'CSC201'),
+(421004034, 1, 18, 'CIT234'),
+(421004034, 2, 19, 'CIT234'),
+(421004034, 3, 5, 'CIT234'),
+(421004034, 4, 4, 'CIT234'),
+(421004034, 5, 10, 'CIT234'),
+(421004034, 6, 38, 'CIT234');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `position`
+-- Table structure for table `position`
 --
 
 CREATE TABLE `position` (
   `position_id` int(2) NOT NULL,
-  `position_name` varchar(25) NOT NULL
+  `position_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `position`
+-- Dumping data for table `position`
 --
 
 INSERT INTO `position` (`position_id`, `position_name`) VALUES
-(1, 'student'),
-(2, 'Dean_of_the_College'),
-(3, 'Program_Coordinator'),
-(4, 'Academic_Advisor'),
-(6, 'Vice_President'),
-(7, 'President'),
-(8, 'Faculty_Member');
+(1, 'طالب'),
+(2, 'عميد الكلية'),
+(3, 'منسق البرنامج'),
+(4, 'المرشد الاكاديمي'),
+(6, 'وكيل شؤون الطلاب التعليمية'),
+(7, 'مدير الجامعة'),
+(8, 'عضو هيئة التدريس');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `programs`
+-- Table structure for table `programs`
 --
 
 CREATE TABLE `programs` (
@@ -314,18 +422,18 @@ CREATE TABLE `programs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `programs`
+-- Dumping data for table `programs`
 --
 
 INSERT INTO `programs` (`Program_ID`, `Program_Name`) VALUES
-(50101, 'برنامج الكيمياء البكالوريوس'),
-(70101, 'برنامج تقنية المعلومات البكالوريوس'),
-(70201, 'برنامج علوم الحاسب البكالوريوس');
+(50101, 'الكيمياء البكالوريوس'),
+(70101, 'تقنية المعلومات البكالوريوس'),
+(70201, 'علوم الحاسب البكالوريوس');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `program_coordinator`
+-- Table structure for table `program_coordinator`
 --
 
 CREATE TABLE `program_coordinator` (
@@ -334,10 +442,17 @@ CREATE TABLE `program_coordinator` (
   `Program_ID` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `program_coordinator`
+--
+
+INSERT INTO `program_coordinator` (`Program_Coordinator_ID`, `From_To`, `Program_ID`) VALUES
+(222512, '2022-06-30', 70101);
+
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `school_type`
+-- Table structure for table `school_type`
 --
 
 CREATE TABLE `school_type` (
@@ -346,16 +461,17 @@ CREATE TABLE `school_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `school_type`
+-- Dumping data for table `school_type`
 --
 
 INSERT INTO `school_type` (`School_type_id`, `School_type_name`) VALUES
-(1, 'حكومي');
+(1, 'حكومية'),
+(2, 'أهلية');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `students`
+-- Table structure for table `students`
 --
 
 CREATE TABLE `students` (
@@ -368,17 +484,19 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `students`
+-- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`student_id`, `School_type_id`, `school_percentage`, `aptitude_test`, `acadmic_achievement`, `Program_ID`) VALUES
-(421002998, 1, 77, 88, 99, 70101),
-(431002997, 1, 77, 5, 4, 70101);
+(381003212, 2, 88, 80, 90, 70201),
+(381003233, 2, 92, 78, 82, 70201),
+(421002999, 1, 89, 89, 90, 70101),
+(421004034, 1, 98, 87, 85, 70101);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `student_gpa`
+-- Table structure for table `student_gpa`
 --
 
 CREATE TABLE `student_gpa` (
@@ -388,16 +506,19 @@ CREATE TABLE `student_gpa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `student_gpa`
+-- Dumping data for table `student_gpa`
 --
 
 INSERT INTO `student_gpa` (`student_ID`, `Semster_Number`, `GPA`) VALUES
-(431002997, 451, 4.98);
+(381003212, 451, 4.25),
+(381003233, 451, 3.9),
+(421002999, 451, 4.3),
+(421004034, 451, 4.85);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `subjects`
+-- Table structure for table `subjects`
 --
 
 CREATE TABLE `subjects` (
@@ -408,18 +529,21 @@ CREATE TABLE `subjects` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `subjects`
+-- Dumping data for table `subjects`
 --
 
 INSERT INTO `subjects` (`subject_code`, `Program_ID`, `subject_name`, `credit_hours`) VALUES
-('1', 70101, 'هندسه البرمجيات', 3),
-('2', 70101, 'احصاء', 7),
-('3', 70101, 'كمياء', 5);
+('CIT203', 70101, 'برمجة مرئية', 3),
+('CIT234', 70101, 'نظم تشغيل', 3),
+('CIT453', 70101, 'تراكيب بيانات وخوارزميات', 3),
+('CSC101', 70201, 'برمجة 1', 4),
+('CSC201', 70201, 'برمجة 2', 4),
+('CSC331', 70201, 'الذكاء الاصطناعي', 3);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `university_president`
+-- Table structure for table `university_president`
 --
 
 CREATE TABLE `university_president` (
@@ -427,16 +551,30 @@ CREATE TABLE `university_president` (
   `From_To` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `university_president`
+--
+
+INSERT INTO `university_president` (`President_ID`, `From_To`) VALUES
+(200342, '2020-01-01');
+
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `vice_president`
+-- Table structure for table `vice_president`
 --
 
 CREATE TABLE `vice_president` (
   `Vice_President_ID` int(6) NOT NULL,
   `From_To` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vice_president`
+--
+
+INSERT INTO `vice_president` (`Vice_President_ID`, `From_To`) VALUES
+(266001, '2023-09-28');
 
 --
 -- Indexes for dumped tables
@@ -532,10 +670,10 @@ ALTER TABLE `faculty_member`
 -- Indexes for table `grades`
 --
 ALTER TABLE `grades`
-  ADD PRIMARY KEY (`student_ID`,`coursework_id`,`subject_code`),
-  ADD KEY `grades_coursework2` (`coursework_id`),
-  ADD KEY `student_ID` (`student_ID`,`coursework_id`,`subject_code`) USING BTREE,
-  ADD KEY `grades_subjects` (`subject_code`);
+  ADD PRIMARY KEY (`student_ID`,`coursework_id`,`Subject_Code`),
+  ADD KEY `student_ID` (`student_ID`,`coursework_id`,`Subject_Code`),
+  ADD KEY `Grade_coursework` (`coursework_id`),
+  ADD KEY `Grade_subject` (`Subject_Code`);
 
 --
 -- Indexes for table `position`
@@ -619,13 +757,13 @@ ALTER TABLE `colleges`
 -- AUTO_INCREMENT for table `coursework`
 --
 ALTER TABLE `coursework`
-  MODIFY `coursework_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `coursework_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `coursework_type`
 --
 ALTER TABLE `coursework_type`
-  MODIFY `coursework_type_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `coursework_type_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -643,54 +781,54 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `school_type`
 --
 ALTER TABLE `school_type`
-  MODIFY `School_type_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `School_type_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- قيود الجداول المُلقاة.
+-- Constraints for dumped tables
 --
 
 --
--- قيود الجداول `academic_advisor`
+-- Constraints for table `academic_advisor`
 --
 ALTER TABLE `academic_advisor`
   ADD CONSTRAINT `Academic_Faculty1` FOREIGN KEY (`Academic_Advisor_ID`) REFERENCES `faculty_member` (`Faculty_member_ID`);
 
 --
--- قيود الجداول `academic_advisor_for_student`
+-- Constraints for table `academic_advisor_for_student`
 --
 ALTER TABLE `academic_advisor_for_student`
   ADD CONSTRAINT `Academic_Faculty` FOREIGN KEY (`Academic_Advisor_ID`) REFERENCES `academic_advisor` (`Academic_Advisor_ID`),
   ADD CONSTRAINT `Academic_Students` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`);
 
 --
--- قيود الجداول `academic_record`
+-- Constraints for table `academic_record`
 --
 ALTER TABLE `academic_record`
   ADD CONSTRAINT `presubject_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`),
   ADD CONSTRAINT `presubject_subject` FOREIGN KEY (`subject_code`) REFERENCES `subjects` (`subject_code`);
 
 --
--- قيود الجداول `accounts`
+-- Constraints for table `accounts`
 --
 ALTER TABLE `accounts`
   ADD CONSTRAINT `account_position` FOREIGN KEY (`Position`) REFERENCES `position` (`position_id`);
 
 --
--- قيود الجداول `college_dean`
+-- Constraints for table `college_dean`
 --
 ALTER TABLE `college_dean`
   ADD CONSTRAINT `Dean_Faculty` FOREIGN KEY (`College_Dean_ID`) REFERENCES `faculty_member` (`Faculty_member_ID`),
   ADD CONSTRAINT `Dean_college` FOREIGN KEY (`College_ID`) REFERENCES `colleges` (`College_ID`);
 
 --
--- قيود الجداول `coursework`
+-- Constraints for table `coursework`
 --
 ALTER TABLE `coursework`
   ADD CONSTRAINT `Coursework_type` FOREIGN KEY (`coursework_type_ID`) REFERENCES `coursework_type` (`coursework_type_id`),
   ADD CONSTRAINT `coursework_type1` FOREIGN KEY (`subject_code`) REFERENCES `subjects` (`subject_code`);
 
 --
--- قيود الجداول `current_semester`
+-- Constraints for table `current_semester`
 --
 ALTER TABLE `current_semester`
   ADD CONSTRAINT `CRsemester_Faculty` FOREIGN KEY (`Faculty_member_ID`) REFERENCES `faculty_member` (`Faculty_member_ID`),
@@ -698,29 +836,29 @@ ALTER TABLE `current_semester`
   ADD CONSTRAINT `CRsemester_Subject` FOREIGN KEY (`subject_code`) REFERENCES `subjects` (`subject_code`);
 
 --
--- قيود الجداول `faculty_member`
+-- Constraints for table `faculty_member`
 --
 ALTER TABLE `faculty_member`
   ADD CONSTRAINT `Faculty_Departments` FOREIGN KEY (`Department_ID`) REFERENCES `departments` (`Department_ID`),
   ADD CONSTRAINT `Faculty_account` FOREIGN KEY (`Faculty_member_ID`) REFERENCES `accounts` (`Account_ID`);
 
 --
--- قيود الجداول `grades`
+-- Constraints for table `grades`
 --
 ALTER TABLE `grades`
-  ADD CONSTRAINT `grades_coursework2` FOREIGN KEY (`coursework_id`) REFERENCES `coursework` (`coursework_id`),
-  ADD CONSTRAINT `grades_student2` FOREIGN KEY (`student_ID`) REFERENCES `students` (`student_id`),
-  ADD CONSTRAINT `grades_subjects` FOREIGN KEY (`subject_code`) REFERENCES `subjects` (`subject_code`);
+  ADD CONSTRAINT `Grade_coursework` FOREIGN KEY (`coursework_id`) REFERENCES `coursework` (`coursework_id`),
+  ADD CONSTRAINT `Grade_student` FOREIGN KEY (`student_ID`) REFERENCES `students` (`student_id`),
+  ADD CONSTRAINT `Grade_subject` FOREIGN KEY (`Subject_Code`) REFERENCES `subjects` (`subject_code`);
 
 --
--- قيود الجداول `program_coordinator`
+-- Constraints for table `program_coordinator`
 --
 ALTER TABLE `program_coordinator`
   ADD CONSTRAINT `ProgramCR_Faculty` FOREIGN KEY (`Program_Coordinator_ID`) REFERENCES `faculty_member` (`Faculty_member_ID`),
   ADD CONSTRAINT `ProgramCR_program` FOREIGN KEY (`Program_ID`) REFERENCES `programs` (`Program_ID`);
 
 --
--- قيود الجداول `students`
+-- Constraints for table `students`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `student_account` FOREIGN KEY (`student_id`) REFERENCES `accounts` (`Account_ID`),
@@ -728,25 +866,25 @@ ALTER TABLE `students`
   ADD CONSTRAINT `student_type` FOREIGN KEY (`School_type_id`) REFERENCES `school_type` (`School_type_id`);
 
 --
--- قيود الجداول `student_gpa`
+-- Constraints for table `student_gpa`
 --
 ALTER TABLE `student_gpa`
   ADD CONSTRAINT `student` FOREIGN KEY (`student_ID`) REFERENCES `students` (`student_id`);
 
 --
--- قيود الجداول `subjects`
+-- Constraints for table `subjects`
 --
 ALTER TABLE `subjects`
   ADD CONSTRAINT `subject_Program` FOREIGN KEY (`Program_ID`) REFERENCES `programs` (`Program_ID`);
 
 --
--- قيود الجداول `university_president`
+-- Constraints for table `university_president`
 --
 ALTER TABLE `university_president`
   ADD CONSTRAINT `President_Faculty` FOREIGN KEY (`President_ID`) REFERENCES `faculty_member` (`Faculty_member_ID`);
 
 --
--- قيود الجداول `vice_president`
+-- Constraints for table `vice_president`
 --
 ALTER TABLE `vice_president`
   ADD CONSTRAINT `vicePresident_Faculty` FOREIGN KEY (`Vice_President_ID`) REFERENCES `faculty_member` (`Faculty_member_ID`);
