@@ -62,12 +62,8 @@ if ($result_subjects->num_rows > 0) {
 // تعيين ترميز الاتصال بقاعدة البيانات إلى UTF-8
 $conn->set_charset("utf8");
 
-$sql = "SELECT DISTINCT subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
-FROM grades
-INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
-INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
-INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
-WHERE grades.student_id =  421002998";
+$sql = "INSERT INTO grades (student_ID, coursework_id, coursework_Mark,Subject_Code)
+VALUES ('431002997', '1', '12','CIT203')";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

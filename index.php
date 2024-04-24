@@ -285,7 +285,7 @@ border: 0px solid #fff;
                 </div>
                 <br>
                 <div class="form-floating">
-                <input name="Password" type="Password" class="form-control" placeholder="كلمة المرور"  data-bs-toggle="popover" data-bs-title="dffffffff" data-bs-content="fdddddd"/>
+                <input name="Password" type="Password" class="form-control" placeholder="كلمة المرور" />
                 <label for="كلمة المرور">كلمة المرور</label>
                 <span class="show-Password"></span>
                 </div>

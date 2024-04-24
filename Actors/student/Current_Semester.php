@@ -114,49 +114,61 @@ for ($i = 0; $i < 9; $i++) {
           <thead>
           <?php
 
-
-// استعلام SQL لاسترداد بيانات معينة من الجدول
 $sql = "SELECT a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
 FROM current_semester c
 INNER JOIN accounts a ON a.Account_ID = c.student_id 
 INNER JOIN accounts a2 ON a2.Account_ID = c.Faculty_member_ID
 INNER JOIN subjects s ON c.subject_code = s.subject_code
-WHERE c.student_id = 421002998
-AND c.Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester WHERE student_id = 421002998)
-ORDER BY c.Semester_Number DESC;
-";
+WHERE c.student_id = $_SESSION[Account_ID]
+AND c.Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester WHERE student_id = $_SESSION[Account_ID])
+ORDER BY c.Semester_Number DESC;";
+
+// تنفيذ الاستعلام
 $result = $conn->query($sql);
-$row = $result->fetch_assoc();
 
- 
-// تحديد الفصل الدراسي بناءً على قيمة Semester_Number
-$semester_number = $row["Semester_Number"];
-$last_digit = substr($semester_number, -1);
-$semester_name = "";
+// التحقق من نجاح الاستعلام
+if ($result) {
+    // التحقق من عدم عودة نتائج فارغة
+    if ($result->num_rows > 0) {
+        // استخدام البيانات المسترجعة
+        $row = $result->fetch_assoc();
 
-switch ($last_digit) {
-    case "1":
-        $semester_name = "الأول";
-        break;
-    case "2":
-        $semester_name = "الثاني";
-        break;
-    case "3":
-        $semester_name = "الثالث";
-        break;
-    // إضافة حالات إضافية حسب الحاجة
-    default:
-        // حالة الافتراضية في حالة عدم تطابق الرقم
-        $semester_name = "غير محدد";
-        break;
+        // تحديد الفصل الدراسي بناءً على قيمة Semester_Number
+        $semester_number = $row["Semester_Number"];
+        $last_digit = substr($semester_number, -1);
+        $semester_name = "";
+
+        switch ($last_digit) {
+            case "1":
+                $semester_name = "الأول";
+                break;
+            case "2":
+                $semester_name = "الثاني";
+                break;
+            case "3":
+                $semester_name = "الثالث";
+                break;
+            // إضافة حالات إضافية حسب الحاجة
+            default:
+                // حالة الافتراضية في حالة عدم تطابق الرقم
+                $semester_name = "غير محدد";
+                break;
+        }
+
+        // عرض اسم الفصل الدراسي
+        echo '<h4>الفصل الدراسي : <span>'.$semester_name.'</span></h4>';
+
+        // استخراج العام الدراسي من Semester_Number
+        $academic_year = substr($semester_number, 0, 2);
+        echo '<h4>العام الدراسي : 14'.$academic_year.'هـ</span></h4>';
+    } else {
+        // عرض رسالة في حالة عدم وجود بيانات
+        echo '<div class="alert alert-danger">تنبيه: لا توجد بيانات لعرضها.</div>';
+    }
+} else {
+    // عرض رسالة في حالة فشل الاستعلام
+    echo '<div class="alert alert-danger">تنبيه: فشل في استعلام قاعدة البيانات.</div>';
 }
-
-// عرض اسم الفصل الدراسي
-echo '<h4>الفصل الدراسي : <span>'.$semester_name.'</span></h4>';
-
-// استخراج العام الدراسي من Semester_Number
-$academic_year = substr($semester_number, 0, 2);
-echo '<h4>العام الدراسي : 14'.$academic_year.'هـ</span></h4>';
 
              ?>
             <tr>
@@ -200,7 +212,7 @@ echo '<h4>العام الدراسي : 14'.$academic_year.'هـ</span></h4>';
                           echo"
                           <div class='alert alert-danger'>
                           تنبيه
-                          <hr>
+                          <hr> 
                               <p>
                         هناك مشكله في السشن
                               </p>

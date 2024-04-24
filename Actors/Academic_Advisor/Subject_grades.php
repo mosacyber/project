@@ -163,7 +163,12 @@
 
               }
             } else {
-              echo "0 results";
+              echo "
+              <div class='alert alert-danger'>
+              تنبيه
+              <hr>
+              <p>لا يوجد بيانات للعرض</p>
+          </div>";
             }
             ?>
           </div>

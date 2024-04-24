@@ -317,7 +317,12 @@
 
                 }
               } else {
-                echo '<p>لا يوجد بيانات للعرض</p>';
+                echo "
+                <div class='alert alert-danger'>
+                تنبيه
+                <hr>
+                <p>لا يوجد بيانات للعرض</p>
+            </div>";
               }
             } else {
                 echo "
