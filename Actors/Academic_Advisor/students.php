@@ -198,7 +198,7 @@
                   INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
                   INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
                   INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
-                  WHERE grades.student_id = " . $row["Account_ID"] . " AND coursework.subject_code = grades.subject_code";
+                  WHERE grades.student_id = " . $row["Account_ID"] . " AND coursework.subject_code = grades.subject_code  ORDER by  subjects.subject_code";
                   $SQL2 = mysqli_query($conn, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
                   FROM grades
                   INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
