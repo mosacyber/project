@@ -135,10 +135,10 @@
             <?php
             $coursework_ids = array();
             $subjectCode = '';
-            $sql = "SELECT CONCAT(s.subject_code, ' - ', s.subject_name) AS subject_code_and_name, s.subject_code
-        FROM current_semester cs
-        JOIN subjects s ON cs.subject_code = s.subject_code
-        WHERE cs.Faculty_member_ID = {$_SESSION['Account_ID']} AND cs.Semester_Number = 452";
+            $sql = "SELECT DISTINCT CONCAT(s.subject_code, ' - ', s.subject_name) AS subject_code_and_name, s.subject_code
+            FROM current_semester cs
+            JOIN subjects s ON cs.subject_code = s.subject_code
+            WHERE cs.Faculty_member_ID = {$_SESSION['Account_ID']} AND cs.Semester_Number = 452";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -217,7 +217,9 @@
                 $sum_deg = array_sum($columns_data);
               }
               echo "<th scope='col'>المجموع / $sum_deg</th>
-                        </tr></thead><tbody>";
+              <th></th>
+              <th></th>
+              </tr></thead><tbody>";
 
             } else {
               echo "0 results";
