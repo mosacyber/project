@@ -335,8 +335,8 @@
               echo "<tr><td>" . $row['subject_code'] . "</td>
                       <td>" . $row['subject_name'] . "</td>
                       <td>" . $row['credit_hours'] . "</td>                      
-                      <td>" . $row['grade'] . "</td></tr>
-                      <td>$mark</td>";
+                      <td>" . $row['grade'] . "</td>
+                      <td>$mark</td></tr>";
               $GPA = $row['gpa'];
 
             }
