@@ -38,7 +38,11 @@ for ($i = 0; $i < 9; $i++) {
 }
     download_css();
     print_css();
+    footer_css()
     ?>
+
+
+
   </style>
 </head>
 <body class="rtl">
@@ -90,175 +94,115 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
-        <!-- Sales Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
 
-           
 
-          <a href="Student/Student.php"> 
-            <div class="card-body">
-              <h5 class="card-title"> </h5>
 
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
-                </div>
-                <div class="ps-3">
-                  <h6> الطلاب </h6>
 
-                </div>
-              </div>
-            </div>
-          </a> 
 
-          </div>
-        </div><!-- End Sales Card -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- Revenue Card -->
-        <div class="col-xxl-4 col-md-6">
+        <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
 
       
-          <a href="index2.php"> 
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-currency-dollar"></i>
-                </div>
-                <div class="ps-3">
-                  <h6>مدير الجامعة</h6>
-
-                </div>
-              </div>
-            </div>
-            </a>
-          </div>
-        </div><!-- End Revenue Card -->
-
-
-
-
-
         
 
-        <!-- Sales Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
+              </ul>
+              <div class="tab-content pt-2">
 
-           
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
-          <a href="Student/Student.php"> 
-            <div class="card-body">
-              <h5 class="card-title"> </h5>
+                <?php
 
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
-                </div>
-                <div class="ps-3">
-                  <h6> الطلاب </h6>
+$sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
+$result4 = $conn->query($sql4);
+if ($result4->num_rows > 0) {
+    $row4 = $result4->fetch_assoc();
 
-                </div>
-              </div>
-            </div>
-          </a> 
+    $sql5 = "SELECT * FROM programs WHERE Program_ID = {$row4['Program_ID']}";
+    $result5 = $conn->query($sql5);
+    if ($result5->num_rows > 0) {
+        $row5 = $result5->fetch_assoc();
+    } else {
+        // عرض التنبيه في حالة عدم العثور على البرنامج
+        echo "
+        <div class='alert alert-danger'>
+            <p>تنبيه: لا يوجد بيانات برنامج</p>
+        </div>";
+        // تعيين قيم افتراضية
+        $row5 = array('Program_Name' => 'برنامج غير معروف');
+    }
 
-          </div>
-        </div><!-- End Sales Card -->
-
-
-
-
-
-
-        <!-- Revenue Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card revenue-card">
-
-      
-          <a href="index2.php"> 
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-currency-dollar"></i>
-                </div>
-                <div class="ps-3">
-                  <h6>مدير الجامعة</h6>
-
-                </div>
-              </div>
-            </div>
-            </a>
-          </div>
-        </div><!-- End Revenue Card -->
-
-
+    if (isset($_SESSION['role'])) {
+        // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
+        switch ($_SESSION['role']) {
+            case '1':
+                $Specialization = "";
+                $Degree = "طالب";
+                $Major = $row5['Program_Name'];
+                break;
+            default:
+                // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
+                break;
+        }
+    }
+} else {
+    // عرض التنبيه في حالة عدم العثور على الطالب
+    echo "
+    <div class='alert alert-danger'>
+        <p>تنبيه: لا يوجد بيانات طالب</p>
+    </div>";
+    // تعيين قيم افتراضية
+    $row4 = array();
+    $row5 = array('Program_Name' => 'برنامج غير معروف');
+    $Specialization = "تخصص غير معروف";
+    $Degree = "درجة غير معروفة";
+    $Major = "تخصص غير معروف";
+}
 
 
 
 
+                ?>            
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">التخصص</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $Major ?></div>
+                  </div>
 
 
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">الدرجه العلميه</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $Degree ?></div>
+                  </div>
 
 
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">القسم</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Mobile']; ?></div>
+                  </div>
 
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">الكليه</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Email']; ?></div>
+                  </div>
 
-
-                <!-- Sales Card -->
-                <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
-
-           
-
-          <a href="Student/Student.php"> 
-            <div class="card-body">
-              <h5 class="card-title"> </h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
-                </div>
-                <div class="ps-3">
-                  <h6> الطلاب </h6>
-
-                </div>
-              </div>
-            </div>
-          </a> 
-
-          </div>
-        </div><!-- End Sales Card -->
-
-
-
-
-
-
-        <!-- Revenue Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card revenue-card">
-
-      
-          <a href="index2.php"> 
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-currency-dollar"></i>
-                </div>
-                <div class="ps-3">
-                  <h6>مدير الجامعة</h6>
-
-                </div>
-              </div>
-            </div>
-            </a>
           </div>
         </div><!-- End Revenue Card -->
 

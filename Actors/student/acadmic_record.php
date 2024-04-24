@@ -243,8 +243,10 @@
 
 
           } else {
-            echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
-          }
+            echo "
+            <div class='alert alert-danger'>
+
+            <p></p>";          }
           ?>
 
 
@@ -350,11 +352,15 @@
         <!-- End Sales Card -->
         <h1><h1>";
           } else {
-            echo '<p>لا توجد نتائج متاحة لعرضها.</p>';
+            echo "
+            <div class='alert alert-danger'>
+            تنبيه
+            <hr>
+            <p>لا توجد نتائج متاحة لعرضها.</p>";
           }
           ?>
 
-
+ 
 
 
 

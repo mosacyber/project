@@ -241,9 +241,22 @@ function download_js() {
   
 
 
+  function footer_css() {
+    echo '
+ body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
- 
-
+.footer {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  position: fixed;
+  bottom: 0;
+}';
+}
 
 
 

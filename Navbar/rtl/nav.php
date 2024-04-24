@@ -443,6 +443,14 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
     </span>
   </a>
 </li>
+<li class="nav-item">
+<a class="nav-link" href="'.$config['Actors'].'Academic_Advisor/report.php">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+التقارير
+  </span>
+</a>
+</li>
   <li class="nav-item">
   <a class="nav-link" href="'.$config['app_url'].'mail">
     <i class="fa fa-home menu-icon"></i>
