@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -133,12 +134,13 @@
 
           <div class="row">
             <?php
+            
             $coursework_ids = array();
             $subjectCode = '';
             $sql = "SELECT DISTINCT CONCAT(s.subject_code, ' - ', s.subject_name) AS subject_code_and_name, s.subject_code
-            FROM current_semester cs
-            JOIN subjects s ON cs.subject_code = s.subject_code
-            WHERE cs.Faculty_member_ID = {$_SESSION['Account_ID']} AND cs.Semester_Number = 452";
+        FROM current_semester cs
+        JOIN subjects s ON cs.subject_code = s.subject_code
+        WHERE cs.Faculty_member_ID = {$_SESSION['Account_ID']} AND cs.Semester_Number = 452";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -149,16 +151,13 @@
                 echo "<div class='card-body'>";
                 echo "<div class='d-flex align-items-center'>";
                 echo "<div class='card-icon rounded-circle d-flex align-items-center justify-content-center'></div>";
-                echo "<button class='btn btn-primary subject-button' style='font-size: 20px; text-align: center; margin: auto;' id='$subjectBoxId'>" . $row['subject_code_and_name'] . "</button>";
+                echo '<button name="subjectCode" class="btn btn-primary subject-button" style="font-size: 20px; text-align: center; margin: auto;" id='.$subjectBoxId.' data-subject-code='.$row['subject_code'].'>'.$row['subject_code_and_name'].'</button>';
                 echo "</div></div></div>";
                 echo "</div>";
 
                 echo "<script>";
                 echo "document.getElementById('$subjectBoxId').addEventListener('click', function() {";
-                echo "var subjectCode = '" . $row['subject_code'] . "';";
                 echo "document.getElementById('grades-table').style.display = 'block';";
-                echo "document.getElementById('subject-heading').innerText = '" . $row['subject_code_and_name'] . "';";
-                echo "updateTable(subjectCode);";
                 echo "});";
                 echo "</script>";
 
@@ -168,130 +167,48 @@
             }
             ?>
           </div>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script> 
+        $(document).ready(function(){
+            $('.subject-button').click(function(){
+                var subjectCode = $(this).data('subject-code');
+                var subjectName = $(this).text(); // الحصول على قيمة النص من الزر
+                $.ajax({
+                    url: 'process_grades.php',
+                    method: 'POST',
+                    data: { 
+                        subjectCode: subjectCode,
+                        subjectName: subjectName // تمرير قيمة النص كمتغير جديد
+                    },
+                    success: function(response){
+                        $('#grades-table').html(response);
+                    },
+                    error: function(xhr, status, error){
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
 
-          <?php
-          echo "</div>
-    
-                <div class='col-xxl-12 col-md-12'>
-                <div id='grades-table' class='card info-card sales-card'>
-                    <div class='card-body'>
-                    <div id='subject-heading' style='text-align: center; margin-bottom: 20px; font-size: 24px;'></div>
-                    <button class='btn btn-success mb-3' id='add-data-btn' data-toggle='modal' data-target='#insertModal' >
-                    <i class='bi bi-plus-circle'>اضافة علامات الطلاب</i> 
-                </button>
-                    <div class='table-responsive'>
-                        <table class='table'>
-                          <thead>
-                            <tr>
-                              <th scope='col'>الرقم الجامعي</th>
-                              <th scope='col'>اسم الطالب</th>";
-          $sql1 = "SELECT coursework_id
-                        FROM coursework
-                        WHERE subject_code = '$subjectCode'";
-
-          $result1 = $conn->query($sql1);
-
-          // تحقق من نتائج الاستعلام
-          if ($result1->num_rows > 0) {
-            $coursework_ids = array();
-            while ($row1 = $result1->fetch_assoc()) {
-              $coursework_ids[] = $row1['coursework_id'];
-            }
-
-            $sql2 = "SELECT ct.coursework_type_name, cw.coursework_grade 
-                             FROM coursework cw
-                             JOIN coursework_type ct ON cw.coursework_type_ID = ct.coursework_type_id
-                             WHERE cw.coursework_id IN (" . implode(",", $coursework_ids) . ")
-                             AND cw.subject_code = '$subjectCode'";
-
-            $result2 = $conn->query($sql2);
-
-            if ($result2->num_rows > 0) {
-              $columns_data = array();
-              while ($row2 = $result2->fetch_assoc()) {
-                $columns_data[$row2['coursework_type_name']] = $row2['coursework_grade'];
-              }
-
-              foreach ($columns_data as $column_name => $grade) {
-                echo "<th scope='col'>$column_name / $grade</th>";
-                $sum_deg = array_sum($columns_data);
-              }
-              echo "<th scope='col'>المجموع / $sum_deg</th>
-              <th></th>
-              <th></th>
-              </tr></thead><tbody>";
-
-            } else {
-              echo "0 results";
-            }
-          }
-          $sql_students_grades = "SELECT 
-                cs.student_id, 
-                CONCAT(ac.First_Name, ' ', ac.Last_Name) AS student_name, ";
-          foreach ($coursework_ids as $coursework_id) {
-            $sql_students_grades .= "MAX(CASE WHEN coursework.coursework_id = $coursework_id THEN grades.coursework_Mark ELSE 0 END) AS \"$coursework_id\", ";
-          }
-          ;
-          $sql_students_grades .= "cs.Semester_Number
-                FROM current_semester cs
-                JOIN grades ON cs.student_id = grades.student_ID
-                JOIN coursework ON grades.coursework_id = coursework.coursework_id
-                JOIN accounts ac ON cs.student_id = ac.Account_ID
-                WHERE cs.subject_code = '$subjectCode' 
-                AND cs.Faculty_member_ID = {$_SESSION['Account_ID']} 
-                AND cs.Semester_Number = 452
-                GROUP BY cs.student_id, ac.First_Name, ac.Last_Name";
-          $result_students_grades = $conn->query($sql_students_grades);
-
-          if ($result_students_grades->num_rows > 0) {
-            while ($row_students_grades = $result_students_grades->fetch_assoc()) {
-              echo "<tr>";
-              echo "<td>" . $row_students_grades['student_id'] . "</td>";
-              echo "<td>" . $row_students_grades['student_name'] . "</td>";
-              foreach ($coursework_ids as $coursework_id) {
-                echo "<td>" . $row_students_grades[$coursework_id] . "</td>";
-              }
-              echo "<td>
-                <button class='btn btn-warning' data-toggle='modal' data-target='#editModal'>تعديل</button>
-                <button class='btn btn-danger'>حذف</button></td>";
-
-              echo "</tr>";
-            }
-
-            echo "</tbody>";
-          } else {
-            echo "<tr><td colspan='3'>لا يوجد درجات تم رصدها سابقًا.</td></tr>";
-          }
-
-          ?>
+      
+  
 
 
-          </table>
+
         </div>
-        <button id='close-table-btn' class='btn btn-danger'>إغلاق الجدول</button>
-        <style>
-          #close-table-btn {
-            display: block;
-            margin: auto;
-            margin-top: 20px;
-            width: fit-content;
-            font-size: 1.2rem;
-            transform: translateX(-50%);
-            left: 50%;
-            padding: 10px 20px;
-          }
-        </style>
+    
+                <div id='grades-table' class='card info-card sales-card'>
+                    <div class='table-responsive'>
+                      
+                      
+
+
+        </div>
+        
       </div>
 
-      <?php
-      echo "
-  <script>
-  document.getElementById('close-table-btn').addEventListener('click', function() {
-      document.getElementById('grades-table').style.display = 'none';
-  });
-  </script>
-  ";
-      ?>
+
     </div>
 
 

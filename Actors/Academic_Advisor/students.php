@@ -142,8 +142,10 @@
                     </thead>
                     <tbody>
 
-      <?php
+            <?php
+
             if (isset($_SESSION['Account_ID'])) {
+              // استعلام SQL لاسترداد بيانات معينة من الجدول
               $sql = "SELECT a.Account_ID,CONCAT(a.First_Name, ' ', a.Last_Name) AS Student_Name,
               p.Program_Name,sg.GPA
               FROM academic_advisor_for_student ad
@@ -172,157 +174,160 @@
                   echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailsModal' . $row["Account_ID"] . '">عرض</button>';
                   echo '</td>';
                   // جدول الدراسات
-               // جدول الدراسات
-                echo '<td>';
-                echo '<div class="modal fade" id="detailsModal' . $row["Account_ID"] . '" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel' . $row["Account_ID"] . '" aria-hidden="true">';
-                echo '<div class="modal-dialog" role="document">';
-                echo '<div class="modal-content">';
-                echo '<div class="modal-header">';
-                echo '<h5 class="modal-title" id="detailsModalLabel' . $row["Account_ID"] . '">تفاصيل الصف</h5>';
-                echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-                echo '<span aria-hidden="true">&times;</span>';
-                echo '</button>';
-                echo '</div>';
-                echo '<div class="modal-body">';
-                //بداية النافذة
-                echo '<p>الرقم الجامعي : ' . $row["Account_ID"] . '</p>';
-                echo '<p>اسم الطالب : ' . $row["Student_Name"] . '</p>';
-                echo '<br>';
-                // جدول الدراسات
-                $previous_subject = null; 
-                $A = 0;
-                $sql1 = "SELECT DISTINCT subjects.subject_code, subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
-                FROM grades
-                INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
-                INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
-                INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
-                WHERE grades.student_id = " . $row["Account_ID"] . " AND coursework.subject_code = grades.subject_code ORDER by  subjects.subject_code";
-                $SQL2 = mysqli_query($conn, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
-                FROM grades
-                INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
-                INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
-                INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
-                WHERE grades.student_id =  " . $row["Account_ID"] . " ");
-                $S = mysqli_fetch_array($SQL2);
-                $count = $S[0]; // قيمة العدد المحسوب
-                $B = 8;
-                $result1 = $conn->query($sql1);
-                if ($result1->num_rows > 0) {
-                  $current_subject = ''; // تهيئة المادة الحالية
+                  echo '<td>';
+                  echo '<div class="modal fade" id="detailsModal' . $row["Account_ID"] . '" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel' . $row["Account_ID"] . '" aria-hidden="true">';
+                  echo '<div class="modal-dialog" role="document">';
+                  echo '<div class="modal-content">';
+                  echo '<div class="modal-header">';
+                  echo '<h5 class="modal-title" id="detailsModalLabel' . $row["Account_ID"] . '">تفاصيل الصف</h5>';
+                  echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+                  echo '<span aria-hidden="true">&times;</span>';
+                  echo '</button>';
+                  echo '</div>';
+                  echo '<div class="modal-body">';
+                  // تفاصيل الصف تظهر هنا
+                  echo '<p>الرقم الجامعي : ' . $row["Account_ID"] . '</p>';
+                  echo '<p>اسم الطالب : ' . $row["Student_Name"] . '</p>';
+                  echo '<br>';
+                  // جدول الدراسات
+                  $previous_subject = null; // تعريف متغير لتتبع اسم المادة السابقة
+                  $A = 0;
 
-                  while ($row1 = $result1->fetch_assoc()) {
-                if ($row1["subject_name"] != $current_subject) {
-                $A++;
-                $C = 0;
-                if ($previous_subject != '') {
-                  echo '</tbody></table></div></div></div></div><br><br>';
-                }
-                echo '<div class="col-xxl-12 col-md-12">
-                <div class="card info-card sales-card">
-                  <div class="card-body">
-                    <h2>' . $row1["subject_name"] . ' ' . $row1["subject_code"] . '</h2>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">نوع النشاط الدراسي</th>
-                            <th scope="col">درجة النشاط الدراسي</th>
-                            <th scope="col">درجة الطالب</th>
-                          </tr>
-                        </thead>
-                        <tbody>';
-              $current_subject = $row1["subject_name"]; // تحديث المادة الحالية
-            }
+                  $sql1 = "SELECT DISTINCT subjects.subject_code, subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
+                  FROM grades
+                  INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
+                  INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
+                  INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
+                  WHERE grades.student_id = " . $row["Account_ID"] . " AND coursework.subject_code = grades.subject_code";
+                  $SQL2 = mysqli_query($conn, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
+                  FROM grades
+                  INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
+                  INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
+                  INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
+                  WHERE grades.student_id =  " . $row["Account_ID"] . " ");
+                  $S = mysqli_fetch_array($SQL2);
+                  $count = $S[0]; // قيمة العدد المحسوب
+                  $B = 8;
+                  $result1 = $conn->query($sql1);
 
-                  $progress_width = ($row1["coursework_mark"] / $row1["coursework_grade"]) * 100;
+                  if ($result1->num_rows > 0) {
+                    $previous_subject = '';
 
-                  if ($progress_width > 90) {
-                    $progress_color = "#6fe381";
-                  } elseif ($progress_width >= 80 && $progress_width <= 89) {
-                    $progress_color = "#d3ef5e";
-                  } elseif ($progress_width >= 70 && $progress_width <= 79) {
-                    $progress_color = "#fee43f";
-                  } elseif ($progress_width >= 60 && $progress_width <= 69) {
-                    $progress_color = "#f19c26";
-                  } else {
-                    $progress_color = "#ed4c36";
-                  }
+                    while ($row1 = $result1->fetch_assoc()) {
+                      if ($row1["subject_name"] != $previous_subject) {
+                        $A++;
+                        $C = 0;
+                        if ($previous_subject != '') {
+                          echo '</tbody></table></div></div></div></div><br><br>';
+                        }
 
-                  echo '<tr>
-                    <td>' . $row1["coursework_type_name"] . '</td>
-                    <td>' . $row1["coursework_grade"] . '</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width:' . $progress_width . '%; background-color:' . $progress_color . ';" aria-valuenow="' . $progress_width . '"
-                          aria-valuemin="0" aria-valuemax="100">' . $row1["coursework_mark"] . '</div>
-                      </div>
-                    </td>
-                  </tr>';
-                  $C++;
-                  $previous_subject = $row1["subject_name"];
-                  if ($count == $A && $C == $B) {
-                    break;
-                  }
-                }
-                echo '</tbody></table></div></div></div></div><br><br>';
-              } 
-
-              $sql2 = "SELECT cs.subject_code, s.subject_name
-              FROM current_semester cs
-              LEFT JOIN subjects s ON cs.subject_code = s.subject_code
-              WHERE cs.student_id =" . $row["Account_ID"] . " AND NOT EXISTS (
-              SELECT 1 FROM grades g 
-              WHERE g.student_id = cs.student_id
-              AND g.subject_code = cs.subject_code) ORDER BY cs.subject_code";
-
-              $result2 = mysqli_query($conn, $sql2);
-
-              // التحقق من وجود بيانات للعرض
-              if ($result2->num_rows > 0) {
-                // عرض المواد التي لم تحصل على درجات بعد
-                while ($row2 = $result2->fetch_assoc()) {
-                  echo '<div class="col-xxl-12 col-md-12">
+                        echo '<div class="col-xxl-12 col-md-12">
                     <div class="card info-card sales-card">
-                        <div class="card-body">
-                            <h2>' . $row2["subject_name"] . ' ' . $row2["subject_code"] . '</h2>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">نوع النشاط الدراسي</th>
-                                            <th scope="col">درجة النشاط الدراسي</th>
-                                            <th scope="col">درجة الطالب</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-                                                echo '</tbody>
-                                </table>
+                      <div class="card-body">
+                        <h2>' . $row1["subject_name"] . ' ' . $row1["subject_code"] . '</h2>
+                        <div class="table-responsive">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">نوع النشاط الدراسي</th>
+                                <th scope="col">درجة النشاط الدراسي</th>
+                                <th scope="col">درجة الطالب</th>
+                              </tr>
+                            </thead>
+                            <tbody>';
+                      }
+
+                      $progress_width = ($row1["coursework_mark"] / $row1["coursework_grade"]) * 100;
+
+                      if ($progress_width > 90) {
+                        $progress_color = "#6fe381";
+                      } elseif ($progress_width >= 80 && $progress_width <= 89) {
+                        $progress_color = "#d3ef5e";
+                      } elseif ($progress_width >= 70 && $progress_width <= 79) {
+                        $progress_color = "#fee43f";
+                      } elseif ($progress_width >= 60 && $progress_width <= 69) {
+                        $progress_color = "#f19c26";
+                      } else {
+                        $progress_color = "#ed4c36";
+                      }
+
+                      echo '<tr>
+                        <td>' . $row1["coursework_type_name"] . '</td>
+                        <td>' . $row1["coursework_grade"] . '</td>
+                        <td>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width:' . $progress_width . '%; background-color:' . $progress_color . ';" aria-valuenow="' . $progress_width . '"
+                              aria-valuemin="0" aria-valuemax="100">' . $row1["coursework_mark"] . '</div>
+                          </div>
+                        </td>
+                      </tr>';
+                      $C++;
+                      $previous_subject = $row1["subject_name"];
+                      if ($count == $A && $C == $B) {
+                        break;
+                      }
+                    }
+                    echo '</tbody></table></div></div></div></div><br><br>';
+                  } else {
+                    echo '<p>لا يوجد بيانات للعرض</p>';
+                  }
+                  $sql2 = "SELECT cs.subject_code, s.subject_name
+                  FROM current_semester cs
+                  LEFT JOIN subjects s ON cs.subject_code = s.subject_code
+                  WHERE cs.student_id =" . $row["Account_ID"] . " AND NOT EXISTS (
+                  SELECT 1 FROM grades g 
+                  WHERE g.student_id = cs.student_id
+                  AND g.subject_code = cs.subject_code) ORDER BY cs.subject_code";
+
+                  $result2 = mysqli_query($conn, $sql2);
+
+                  // التحقق من وجود بيانات للعرض
+                  if ($result2->num_rows > 0) {
+                    // عرض المواد التي لم تحصل على درجات بعد
+                    while ($row2 = $result2->fetch_assoc()) {
+                      echo '<div class="col-xxl-12 col-md-12">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h2>' . $row2["subject_name"] . ' ' . $row2["subject_code"] . '</h2>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">نوع النشاط الدراسي</th>
+                                                <th scope="col">درجة النشاط الدراسي</th>
+                                                <th scope="col">درجة الطالب</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>';
+                                                    echo '</tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                </div><br><br>';
+                        
+                    </div><br><br>';
 
-                }
-              }
-              echo '<div class="modal-footer">';
-              echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>';
-              echo '<button type="button" class="btn btn-primary" data-dismiss="modal">تواصل</button>';
+                    }
+                  }
+                  echo '<div class="modal-footer">';
+                  echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>';
+                  echo '<button type="button" class="btn btn-primary" data-dismiss="modal">تواصل</button>';
 
-              echo '</div>';
-                         }
-                } else {
-                  echo '<p>لا يوجد بيانات للعرض</p>';
+                  echo '</div>';
+
                 }
               } else {
-                  echo "
-              <div class='alert alert-danger'>
-                  <strong>تنبيه</strong>
-                  <hr>
-                  <p>هناك مشكلة في السيشن</p>
-              </div>";
-                }
-              ?>
+                echo '<p>لا يوجد بيانات للعرض</p>';
+              }
+            } else {
+                echo "
+            <div class='alert alert-danger'>
+                <strong>تنبيه</strong>
+                <hr>
+                <p>هناك مشكلة في السيشن</p>
+            </div>";
+              }
+            ?>
 
                       <script>
                         // استدعاء الدالة عند فتح النافذة المنبثقة
