@@ -95,12 +95,12 @@ $Account_ID = '';
                               // التحقق من عدم وجود أخطاء قبل استعلام قاعدة البيانات
                               if (!count($errors)) {
                                   $userExists = $mysqli->query("SELECT * FROM accounts WHERE Account_ID='$Account_ID' LIMIT 1");
-                          
+                                  $userExists2 = $mysqli->query("SELECT * FROM admins WHERE Admin_ID='$Account_ID' LIMIT 1");
                                   if (!$userExists) {
                                       die("حدث خطأ أثناء تنفيذ الاستعلام: " . $mysqli->error);
                                   }
                           
-                                  if ($userExists->num_rows) {
+                                  if ($userExists->num_rows > 0 || $userExists2->num_rows > 0) {
                                     $foundUser = $userExists->fetch_assoc();
                                     if (password_verify($Password, $foundUser['Password'])) {
                                       $_SESSION['logged_in'] = true;
@@ -134,6 +134,8 @@ $Account_ID = '';
 
                                       }
                                   } else {
+
+
                                       array_push($errors, "رقمك الجامعي, $Account_ID غير مسجل في قاعدة البيانات.");
                                   }
                               }
