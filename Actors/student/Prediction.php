@@ -119,7 +119,7 @@
           INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
           WHERE grades.student_id = " . $_SESSION['Account_ID'] . "");
           $S = mysqli_fetch_array($SQL2);
-          $count = $S[0]; 
+          $count = $S[0];
           $B = 8;
           $C = 0;
           $result = $con->query($sql);
@@ -154,7 +154,7 @@
 
               $progress_width = ($row["coursework_mark"] / $row["coursework_grade"]) * 100;
 
-              if ($progress_width > 90) {
+              if ($progress_width >= 90) {
                 $progress_color = "#6fe381";
               } elseif ($progress_width >= 80 && $progress_width <= 89) {
                 $progress_color = "#d3ef5e";
