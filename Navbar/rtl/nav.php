@@ -564,6 +564,85 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '8') {
 
 
 
+/*********************************/
+/*********************************/
+/*  منسق البرنامج */
+/*********************************/
+/*********************************/
+if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
+  echo'      <li class="nav-item">
+  <a class="nav-link" href="' . $config['admin'] . '">
+    <i class="fa fa-home menu-icon"></i>
+    <span class="menu-title">
+    الصفحه الرئيسية
+    </span>
+  </a>
+</li>
+      </li>
+
+<li class="nav-item">
+<a class="nav-link" href="'.$config['admin'].'/data.php">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+البيانات
+  </span>
+</a>
+</li>
+
+
+
+
+<li class="nav-item">
+<a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+  <i class="fab fa-trello menu-icon"></i>
+  <span class="menu-title">
+  عرض البيانات
+  </span>
+  <i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="page-layouts">
+  <ul class="nav flex-column sub-menu">
+    <li class="nav-item d-none d-lg-block"> 
+    <a class="nav-link" href="boxed-layout.html">
+    جميع البيانات
+    </a>
+    </li>
+    <li class="nav-item"> 
+    <a class="nav-link" href="rtl-layout.html">
+    بيانات الطلاب
+    </a>
+    </li>
+    <li class="nav-item d-none d-lg-block"> 
+    <a class="nav-link" href="horizontal-menu.html">
+    بيانات اعضاء التدريس
+    </a>
+    </li>
+  </ul>
+</div>
+</li>
+
+
+
+
+
+
+
+     ';
+      }
+/*********************************/
+/*********************************/
+/*  منسق البرنامج */
+/*********************************/
+/*********************************/
+
+
+
+
+
+
+
+
+
 
 
       echo'
