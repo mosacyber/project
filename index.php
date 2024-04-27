@@ -118,11 +118,11 @@ $Account_ID = '';
                                         header('location: Actors/Program_Coordinator/');
                                       }elseif($foundUser['Position'] == '4' /*Academic_Advisor*/){
                                         header('location: Actors/Academic_Advisor/');
-                                      }elseif($foundUser['Position'] == '8' /*Faculty_Member*/){
+                                      }elseif($foundUser['Position'] == '7' /*Faculty_Member*/){
                                         header('location: Actors/Faculty_Member/');
-                                      }elseif($foundUser['Position'] == '7' /*President_of_the_University*/){
+                                      }elseif($foundUser['Position'] == '6' /*President_of_the_University*/){
                                         header('location: Actors/President_of_the_University/');
-                                      }elseif($foundUser['Position'] == '6' /*Vice_President_for_Academic_Affairs*/){
+                                      }elseif($foundUser['Position'] == '5' /*Vice_President_for_Academic_Affairs*/){
                                         header('location: Actors/Vice_President_for_Academic_Affairs/');
                                       }else {
                                           header('location: index.php');

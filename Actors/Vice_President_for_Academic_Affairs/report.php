@@ -114,24 +114,14 @@ for ($i = 0; $i < 9; $i++) {
         </div>   
         <?php
 
-// First, execute the query to get the Program_ID
-$sql1 = "SELECT College_ID FROM college_dean WHERE College_Dean_ID = $_SESSION[Account_ID]";
-$result1 = $conn->query($sql1);
 
-if ($result1 && $result1->num_rows > 0) {
-    // Fetch the result from the first query
-    $row1 = $result1->fetch_assoc();
-    $College_ID = $row1['College_ID'];
-
-    // Now use the fetched Program_ID in the second query
 
 $sql = "SELECT COUNT(CASE WHEN GPA >= 4.75 THEN 1 END) AS count_students1,
 COUNT(CASE WHEN GPA >= 4.25 AND GPA < 4.75 THEN 1 END) AS count_students2,
 COUNT(CASE WHEN GPA >= 3.75 AND GPA < 4.25 THEN 1 END) AS count_students3,
 COUNT(CASE WHEN GPA >= 3 AND GPA < 3.75 THEN 1 END) AS count_students4,
 COUNT(CASE WHEN GPA >= 2 AND GPA < 3 THEN 1 END) AS count_students5 FROM students St
-INNER JOIN student_gpa S ON S.student_ID = St.student_id
-WHERE Program_ID = $College_ID";
+INNER JOIN student_gpa S ON S.student_ID = St.student_id";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -148,9 +138,7 @@ if ($result->num_rows > 0) {
     $count_students4 = 0;
     $count_students5 = 0;
 }
-} else {
-    echo "<p>لا توجد بيانات</p>";
-}
+
 ?>
 <script>
     const labels = ['4.75', '4.25', '3.75', '3', '2'];
@@ -268,23 +256,23 @@ if ($result->num_rows > 0) {
         <div class="card-body">
             <h4 class="card-title">عدد الطلاب</h4>
             <?php
-            $sql = "SELECT COUNT(*) AS total_students FROM academic_advisor_for_student WHERE Academic_Advisor_ID = $_SESSION[Account_ID]";
-            $result = $conn->query($sql);
 
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $total_students = $row['total_students'];
-                echo "<h3>$total_students</h3>";
-            } else {
-                echo "<p>لا توجد بيانات</p>";
-            }
-            ?>
+    $sql2 = "SELECT COUNT(*) AS total_students FROM students";
+    $result2 = $conn->query($sql2);
+
+    if ($result2 && $result2->num_rows > 0) {
+        $row2 = $result2->fetch_assoc();
+        $total_students = $row2['total_students'];
+        echo "<h3>$total_students</h3>";
+    } else {
+        echo "<p>لا توجد بيانات</p>";
+    }
+
+?>
+
         </div>
     </div>
 </div>
-
-
-
 
 
 <?php
@@ -349,7 +337,6 @@ if ($result->num_rows > 0) {
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 
 
 <?php
@@ -427,20 +414,6 @@ for ($i = 0; $i < 9; $i++) {
 
 </body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
  download_js();
  print_js();
@@ -471,10 +444,4 @@ for ($i = 0; $i < 9; $i++) {
 
 ?>
 
-
-
-
-
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 </html>

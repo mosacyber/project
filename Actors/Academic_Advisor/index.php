@@ -140,19 +140,6 @@ for ($i = 0; $i < 9; $i++) {
 </body>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
  download_js();
  print_js();

@@ -91,7 +91,7 @@ for ($i = 0; $i < 9; $i++) {
           </div>
           <div class="page-header">
             <h3 class="page-title">
- المرشد الاكاديمي
+           عضو هيئة التدريس 
             </h3>
           </div>
 

@@ -182,22 +182,6 @@ if ($result->num_rows > 0) {
     );
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-lg-4 ">
             <div class="card">
                 <div class="card-body">
@@ -282,27 +266,6 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 
@@ -445,20 +408,6 @@ for ($i = 0; $i < 9; $i++) {
   <!-- container-scroller -->
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
  download_js();

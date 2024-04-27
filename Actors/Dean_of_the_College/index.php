@@ -95,32 +95,6 @@ for ($i = 0; $i < 9; $i++) {
             </h3>
           </div>
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- Revenue Card -->
         <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
@@ -278,22 +252,7 @@ if ($result->num_rows > 0) {
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
           </div>
-       
-       
-       
-       
 
 
         </div>
