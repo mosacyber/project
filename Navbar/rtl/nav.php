@@ -135,7 +135,7 @@ echo '
         </div>
       </li>
       <li class="nav-item dropdown" >
-      <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="../../mail/index.php" data-toggle="dropdown" aria-expanded="false">
+      <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="'.$config["app_url"].'mail/index.php" data-toggle="dropdown" aria-expanded="false">
         <i class="fas fa-envelope mx-0"></i>
       </a>
     </li>
@@ -474,6 +474,39 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
 
 
 
+/*********************************/
+/*********************************/
+/*  العميد */
+/*********************************/
+/*********************************/
+if(isset($_SESSION['role']) && $_SESSION['role'] === '2') {
+  echo'      <li class="nav-item">
+  <a class="nav-link" href="' . $config['Actors'] . 'Dean_of_the_College">
+    <i class="fa fa-home menu-icon"></i>
+    <span class="menu-title">
+    الصفحه الرئيسية
+    </span>
+  </a>
+</li>
+      </li>
+
+<li class="nav-item">
+<a class="nav-link" href="'.$config['Actors'].'Dean_of_the_College/report.php">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+التقارير
+  </span>
+</a>
+</li>
+
+
+     ';
+      }
+/*********************************/
+/*********************************/
+/*  العميد */
+/*********************************/
+/*********************************/
 
 
 
@@ -482,7 +515,46 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
 
 
 
+/*********************************/
+/*********************************/
+/*  admin */
+/*********************************/
+/*********************************/
+if(isset($_SESSION['role']) && $_SESSION['role'] === '8') {
+  echo'      <li class="nav-item">
+  <a class="nav-link" href="' . $config['admin'] . '">
+    <i class="fa fa-home menu-icon"></i>
+    <span class="menu-title">
+    الصفحه الرئيسية
+    </span>
+  </a>
+</li>
+      </li>
 
+<li class="nav-item">
+<a class="nav-link" href="'.$config['admin'].'/data.php">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+البيانات
+  </span>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="'.$config['admin'].'/report2.php">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+التقارير
+  </span>
+</a>
+</li>
+
+     ';
+      }
+/*********************************/
+/*********************************/
+/*  admin */
+/*********************************/
+/*********************************/
 
 
 

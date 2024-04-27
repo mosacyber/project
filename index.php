@@ -95,12 +95,11 @@ $Account_ID = '';
                               // التحقق من عدم وجود أخطاء قبل استعلام قاعدة البيانات
                               if (!count($errors)) {
                                   $userExists = $mysqli->query("SELECT * FROM accounts WHERE Account_ID='$Account_ID' LIMIT 1");
-                                  $userExists2 = $mysqli->query("SELECT * FROM admins WHERE Admin_ID='$Account_ID' LIMIT 1");
                                   if (!$userExists) {
                                       die("حدث خطأ أثناء تنفيذ الاستعلام: " . $mysqli->error);
                                   }
                           
-                                  if ($userExists->num_rows > 0 || $userExists2->num_rows > 0) {
+                                  if ($userExists->num_rows) {
                                     $foundUser = $userExists->fetch_assoc();
                                     if (password_verify($Password, $foundUser['Password'])) {
                                       $_SESSION['logged_in'] = true;
@@ -111,7 +110,7 @@ $Account_ID = '';
                                   
                                       if ($foundUser['Position'] == '1' /*student*/ ) {
                                           header('location: Actors/student/');
-                                      }elseif($foundUser['Position'] == 'admin'  /**/){
+                                      }elseif($foundUser['Position'] == '8'  /**/){
                                         header('location: admin');
                                       }elseif($foundUser['Position'] == '2' /*Dean_of_the_College*/){
                                         header('location: Actors/Dean_of_the_College/');

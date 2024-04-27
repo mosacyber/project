@@ -137,6 +137,49 @@ if ($result4->num_rows > 0) {
 
     $sql5 = "SELECT * FROM programs WHERE Program_ID = {$row4['Program_ID']}";
     $result5 = $conn->query($sql5);
+
+    $firstDigit = substr($row4['Program_ID'], 0, 1);
+
+    $startPosition = 1; // الموضع البدئي للرقمين المطلوبين
+    $middleDigits = substr($row4['Program_ID'], $startPosition, 2); // يأخذ رقمين ابتداءً من الموضع البدئي
+    
+
+    $endDigits = substr($row4['Program_ID'], -2);
+    
+
+
+
+    $sql6 = "SELECT * FROM colleges WHERE College_ID = $firstDigit";
+    $result6 = $conn->query($sql6);
+    if ($result6->num_rows > 0) {
+        $row6 = $result6->fetch_assoc();
+
+
+        $College_Name= $row6['College_Name'];
+        
+
+    }
+
+    $sql7 = "SELECT * FROM departments WHERE Department_ID = '{$firstDigit}{$middleDigits}'";
+    $result7 = $conn->query($sql7);
+    if ($result7->num_rows > 0) {
+        $row7 = $result7->fetch_assoc();
+
+
+        $Department_Name= $row7['Department_Name'];
+        
+
+    }
+
+
+
+
+
+
+
+
+
+
     if ($result5->num_rows > 0) {
         $row5 = $result5->fetch_assoc();
     } else {
@@ -146,7 +189,7 @@ if ($result4->num_rows > 0) {
             <p>تنبيه: لا يوجد بيانات برنامج</p>
         </div>";
         // تعيين قيم افتراضية
-        $row5 = array('Program_Name' => 'برنامج غير معروف');
+        $row5 = array('Program_Name' => 'برنامج غير معروف'); 
     }
 
     if (isset($_SESSION['role'])) {
@@ -181,6 +224,21 @@ if ($result4->num_rows > 0) {
 
                 ?>            
 
+
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الاسم</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الرقم الجامعي</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
+                  </div>
+
+
+
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">التخصص</div>
                     <div class="col-lg-9 col-md-8"><?php echo $Major ?></div>
@@ -195,13 +253,15 @@ if ($result4->num_rows > 0) {
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">القسم</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Mobile']; ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $Department_Name ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">الكليه</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Email']; ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $College_Name ?></div>
                   </div>
+
+
 
           </div>
         </div><!-- End Revenue Card -->

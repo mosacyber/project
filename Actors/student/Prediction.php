@@ -135,7 +135,7 @@
                   echo '</tbody></table></div></div></div></div><br><br>';
                 }
 
-                echo '<div class="col-xxl-12 col-md-12">
+                echo '<div class="col-xxl-10 col-md-12">
               <div class="card info-card sales-card">
                 <div class="card-body">
                   <h2>' . $row["subject_name"] . ' ' . $row["subject_code"] . '</h2>
@@ -182,7 +182,56 @@
                 break;
               }
             }
-            echo '</tbody></table></div></div></div></div><br><br>';
+            echo '</tbody></table></div></div></div></div><br><br>
+            
+            
+
+            
+
+            <div class="col-md-2 grid-margin">
+            <div class="card" style="background-color: #1DC51D;">
+              <div class="card-body">
+                <div style="text-align: center;">
+                  <h5 style="color: white; margin-top: 10px;">نتيجتك المتوقعة للمادة</h5>
+                  <i class="fas fa-lightbulb" style="font-size: 24px; color: white; position: absolute; top: 10px; left: 10px; cursor: pointer;" onclick="toggleMessage()"></i>
+
+                  <div style="width: 100px; height: 100px; border-radius: 50%; background-color: white; margin: 0 auto;">
+                    <h1 style="line-height: 100px; margin: 0;">A+</h1>
+                  </div>                  <div id="message" style="display: none; background-color: rgba(255, 255, 255, 0.8); border-radius: 5px; padding: 10px; margin-top: 40px;">
+                  <p style="margin: 0;">طف اللمبة</p>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <script>
+          function toggleMessage() {
+            var message = document.getElementById("message");
+            if (message.style.display === "none") {
+              message.style.display = "block";
+            } else {
+              message.style.display = "none";
+            }
+          }
+          </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+          <hr>
+            ';
           } ?>
 
           <?php
@@ -199,7 +248,7 @@
 
           if ($result1->num_rows > 0) {
             while ($row1 = $result1->fetch_assoc()) {
-              echo '<div class="col-xxl-12 col-md-12">
+              echo '<div class="col-xxl-10 col-md-12">
                 <div class="card info-card sales-card">
                     <div class="card-body">
                         <h2>' . $row1["subject_name"] . ' ' . $row1["subject_code"] . '</h2>
@@ -218,7 +267,45 @@
                         </div>
                     </div>
                 </div>
-            </div><br><br>';
+            </div><br><br>      
+            
+            
+            
+            <div class="col-md-2 grid-margin">
+            <div class="card" style="background-color: #1DC5A9;">
+              <div class="card-body">
+                <div style="text-align: center;">
+                  <h5 style="color: white; margin-top: 10px;">نتيجتك المتوقعة للمادة</h5>
+                  <i class="fas fa-lightbulb" style="font-size: 24px; color: white; position: absolute; top: 10px; left: 10px; cursor: pointer;" onclick="toggleMessage()"></i>
+
+                  <div style="width: 100px; height: 100px; border-radius: 50%; background-color: white; margin: 0 auto;">
+                    <h1 style="line-height: 100px; margin: 0;">؟</h1>
+                  </div>                  <div id="message" style="display: none; background-color: rgba(255, 255, 255, 0.8); border-radius: 5px; padding: 10px; margin-top: 40px;">
+                  <p style="margin: 0;">طف اللمبة</p>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <script>
+          function toggleMessage() {
+            var message = document.getElementById("message");
+            if (message.style.display === "none") {
+              message.style.display = "block";
+            } else {
+              message.style.display = "none";
+            }
+          }
+          </script>
+          
+          
+          
+          
+          
+          
+          <hr>
+          ';
             }
           }
           ?>
