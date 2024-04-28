@@ -1,145 +1,10 @@
 <?PHP session_start(); ?>
 <?php include '../db/db.php';  ?>
 
-<?php include '../config/app.php';  
-
-
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'student'){
-  header('location: Actors/student/student.php');
-}
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
-  header('location: Actors/student/student.php');
-}
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Dean_of_the_College'){
-  header('location: Actors/student/student.php');
-}
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Program_Coordinator'){
-  header('location: Actors/student/student.php');
-}
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Academic_Advisor'){
-  header('location: Actors/student/student.php');
-}
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Faculty_Member'){
-  header('location: Actors/student/student.php');
-}
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'Vice_President_for_Academic_Affairs'){
-  header('location: Actors/student/student.php');
-}
-if (isset($_SESSION['role']) && $_SESSION['role'] == 'President_of_the_University'){
-  header('location: Actors/student/student.php');
-}
+<?php include '../config/app.php';  ?>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$connection = [
-  'host' => 'localhost',
-  'user' => 'root',
-  'Password' => '',
-  'database' => 'university_info'
-  ];
-  $mysqli = new mysqli(
-  $connection ['host'],
-  $connection ['user'],
-  $connection ['Password'],
-  $connection ['database']
-  );
-  if ($mysqli->connect_error){
-  
-    die("Error connecting to database" . $mysqli->connect_error);
-  }
-  
-
-  /* if(isset($_SESSION['logged_in'])) {
-    header('location: index.php');
-  }*/
-
-$errors=[];
-/*  عشان اذا حدث الصفحه الاولى تبقا بيانات  */
-$Account_ID = '';
-                            /*  هنا يقوم بفلتره المدخل حتى لو في ثغره يقوم بفلترتها  */
-                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                              $Account_ID = mysqli_real_escape_string($mysqli, $_POST['Account_ID']);
-                              $Password = mysqli_real_escape_string($mysqli, $_POST['Password']);
-                          
-                              if (empty($Account_ID)) {
-                                  array_push($errors, "الرقم الجامعي  ");
-                              }
-                              if (empty($Password)) {
-                                  array_push($errors, "كلمة المرور مطلوبة");
-                              }
-                          
-                              // التحقق من عدم وجود أخطاء قبل استعلام قاعدة البيانات
-                              if (!count($errors)) {
-                                  $userExists = $mysqli->query("SELECT * FROM accounts WHERE Account_ID='$Account_ID' LIMIT 1");
-                          
-                                  if (!$userExists) {
-                                      die("حدث خطأ أثناء تنفيذ الاستعلام: " . $mysqli->error);
-                                  }
-                          
-                                  if ($userExists->num_rows) {
-                                    $foundUser = $userExists->fetch_assoc();
-                                    if (password_verify($Password, $foundUser['Password'])) {
-                                      $_SESSION['logged_in'] = true;
-                                      $_SESSION['user_id'] = $foundUser['Account_ID']; // تم تصحيح اسم العمود
-                                      $_SESSION['First_Name'] = $foundUser['First_Name'];
-                                      $_SESSION['Last_Name'] = $foundUser['Last_Name'];
-                                      $_SESSION['role'] = $foundUser['Position'];
-                                  
-                                      if ($foundUser['Position'] == 'student') {
-                                          header('location: Actors/student/student.php');
-                                      }elseif($foundUser['Position'] == 'admin'){
-                                        header('location: admin/admin.php');
-                                      }elseif($foundUser['Position'] == 'Dean_of_the_College'){
-                                        header('location: Actors/Dean_of_the_College/Dean_of_the_College.php');
-                                      }elseif($foundUser['Position'] == 'Program_Coordinator'){
-                                        header('location: Actors/Program_Coordinator/Program_Coordinator.php');
-                                      }elseif($foundUser['Position'] == 'Academic_Advisor'){
-                                        header('location: Actors/Academic_Advisor/Academic_Advisor.php');
-                                      }elseif($foundUser['Position'] == 'Faculty_Member'){
-                                        header('location: Actors/Faculty_Member/Faculty_Member.php');
-                                      }elseif($foundUser['Position'] == 'President_of_the_University'){
-                                        header('location: Actors/President_of_the_University/President_of_the_University.php');
-                                      }elseif($foundUser['Position'] == 'Vice_President_for_Academic_Affairs'){
-                                        header('location: Actors/Vice_President_for_Academic_Affairs/Vice_President_for_Academic_Affairs.php');
-                                      }else {
-                                          $_SESSION['success message'] = "Welcome back, $foundUser[First_Name]"; // تم تصحيح اسم المتغير
-                                          header('location: index.php');
-                                      }
-                                  }
-                                   else {
-                                        array_push($errors, "الرقم الجامعي أو كلمة المرور غير صحيحة");
-
-                                      }
-                                  } else {
-                                      array_push($errors, "رقمك الجامعي, $Account_ID غير مسجل في قاعدة البيانات.");
-                                  }
-                              }
-                          }
-
-
-?>
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 
@@ -148,10 +13,10 @@ $Account_ID = '';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="../../assets/css_rtl/bootstrap.min.css" />
+  <link rel="stylesheet" href="../assets/css_rtl/bootstrap.min.css" />
 
   <!-- style css File RTL-->
-  <link rel="stylesheet" href="../../assets/css_rtl/style.css" />
+  <link rel="stylesheet" href="../assets/css_rtl/style.css" />
 
   <!-- style css File Ltr-->
   <!-- <link rel="stylesheet" href="css_ltr/style.css" /> -->
@@ -160,16 +25,16 @@ $Account_ID = '';
   <link rel="icon" href="../assets/img/fav-icon.png" />
 
   <title>تسجيل الدخول</title>
-  <link href="../navbar.css" rel="stylesheet">
+  <link href="../assets/css/navbar.css" rel="stylesheet">
 
 
 
- <link href="navbar.css" rel="stylesheet"> <meta charset="utf-8">
+ <link href="../assets/css/navbar.css" rel="stylesheet"> <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="../assets/css/index.css" />
     <style>
 body > div.container-fluid > div > div:nth-child(1) > div > div > form > div:nth-child(5) > button{
     background: linear-gradient(264.67deg,#7f7fd5 -9.26%,#86a8e7 45.82%,#91eae4 106.96%);
@@ -239,7 +104,7 @@ border: 0px solid #fff;
       </ul>        <form>
           <input class="form-control" type="text" placeholder="Search" aria-label="Search">
         </form>
-        <a href="login.php"><button type="submit"  class="btn btn-primary llcol">تسجيل الدخول</button></a> 
+        <a href="index.php"><button type="submit"  class="btn btn-primary llcol">تسجيل الدخول</button></a> 
     </div>
   </div>
 </nav>
@@ -259,12 +124,15 @@ border: 0px solid #fff;
 
 
 
-  <div class="container-fluid">
+ <div class="container-fluid">
 
 
 
 
-  <div class="col-12 col-lg-12">
+<div class="col-12 col-lg-12">
+
+
+
 
 
 
@@ -273,22 +141,22 @@ border: 0px solid #fff;
         <div class="card">
           <div class="card-body">  
 
-            <h2 class="text-center mb-4">تحديث كلمة المرور</h2>
+            <h2 class="text-center mb-4">طلب استعاده كلمه المرور</h2>
             <form action="" method="POST">
                 <div class="form-floating">
-                <input name="Account_ID" type="number" class="form-control" placeholder="" />
-                <label for="">كلمة السر الجديد</label>
+                <input name="Account_ID" type="number" class="form-control" placeholder="البريد الجامعي " />
+                <label for="الرقم الجامعي"> البريد الجامعي</label>
                 </div>
                 <br>
-                <div class="form-floating">
-                <input name="Password" type="Password" class="form-control" placeholder="كلمة المرور"  data-bs-toggle="popover" data-bs-title="dffffffff" data-bs-content="fdddddd"/>
-                <label for="">اعد كلمة السر</label>
-                <span class="show-Password"></span>
-                </div>
+
+
+                
+
+                
                 <br>
                 <?php include '../errors/errors.php';  ?>
                 <div align="center">
-                <button type="submit" class="btn btn-primary btn-block llcol">تحديث البيانات</button>
+                <button type="submit" class="btn btn-primary btn-block llcol">ارسال رمز الدخول </button>
                 </div>
             </form>
 
@@ -299,11 +167,13 @@ border: 0px solid #fff;
       <div class="col-6 col-lg-6">
   <div class="card">
     <div class="card-body2" >
-      <img class='col-12 photo img-fluid' src="../uu.png" alt="">
-      <img class='col-12 photo img-fluid' src="../fdfd1.png" alt="">
-      <img class='col-12 photo img-fluid' src="../uu.png" alt="">
-      <img class='col-12 photo img-fluid' src="../fdfd1.png" alt="">
+      <img class='col-12 photo img-fluid' src="../assets/img/uu.png" alt="">
+      <img class='col-12 photo img-fluid' src="../assets/img/fdfd1.png" alt="">
+      <img class='col-12 photo img-fluid' src="../assets/img/uu.png" alt="">
+      <img class='col-12 photo img-fluid' src="../assets/img/fdfd1.png" alt="">
       <img class='col-12 photo img-fluid' src="https://shaguf.com/site/assets/img/stars.gif" alt="">
+
+
     </div>
   </div>
 </div>
@@ -340,10 +210,10 @@ border: 0px solid #fff;
   <!-- End Create Account Form -->
 
   <!--Bootstrap  -->
-  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/js/bootstrap.bundle.min.js"></script>
 
   <!-- javascript file -->
-  <script src="js/script.js"></script>
+  <script src="../assets/js/js/script.js"></script>
 
 
 

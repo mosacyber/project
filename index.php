@@ -291,6 +291,10 @@ border: 0px solid #fff;
                 <span class="show-Password"></span>
                 </div>
                 <br>
+                
+                <a href="./reast/res.php" for="كلمة المرور"> استعاده </a>
+                
+                <br>
                 <?php include './errors/errors.php';  ?>
                 <div align="center">
                 <button type="submit" class="btn btn-primary btn-block llcol">تسجيل الدخول</button>
