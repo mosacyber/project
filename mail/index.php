@@ -121,8 +121,7 @@ for ($i = 0; $i < 9; $i++) {
               <div class="mail-sidebar d-none d-lg-block col-md-2 pt-3 bg-white">
                 <div class="menu-bar">
                   <ul class="menu-items">
-                    <li class="compose mb-3"><h1 class="btn btn-primary btn-block">تحديث</ا></li>
-                    <li class="active"><a href="#"><i class="fa fa-envelope-open"></i> البريد الوارد </a><span class="badge badge-pill badge-success">8</span></li>
+                  <li class="compose mb-3"><h1 class="btn btn-primary btn-block" onclick="location.reload();">تحديث</h1></li>
                   </ul>
                   <div class="wrapper">
                     <div class="online-status d-flex justify-content-between align-items-center">
@@ -265,8 +264,7 @@ if ($row2) {
               <div class="mail-sidebar d-none d-lg-block col-md-2 pt-3 bg-white">
                 <div class="menu-bar">
                   <ul class="menu-items">
-                    <li class="compose mb-3"><h1 class="btn btn-primary btn-block">تحديث</ا></li>
-                    <li class="active"><a href="#"><i class="fa fa-envelope-open"></i> البريد الوارد </a><span class="badge badge-pill badge-success">8</span></li>
+                  <li class="compose mb-3"><h1 class="btn btn-primary btn-block" onclick="location.reload();">تحديث</h1></li>
                   </ul>
                   <div class="wrapper">
                     <div class="online-status d-flex justify-content-between align-items-center">

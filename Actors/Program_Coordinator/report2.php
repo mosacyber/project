@@ -237,9 +237,29 @@ if ($result->num_rows > 0) {
 
 
         </div>
-        </div>
-        </div>
         <!-- content-wrapper ends -->
+
+        
+<?php
+$navbar_path = "footer/Footer.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+}
+?>
+
+
+
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+
+    <br>
           </div>
           <div class="page-header">
             <h3 class="page-title">
@@ -265,13 +285,25 @@ if ($result->num_rows > 0) {
             </div>
         </div>   
         <?php
+
+// First, execute the query to get the Program_ID
+$sql1 = "SELECT Program_ID FROM program_coordinator WHERE Program_Coordinator_ID = $_SESSION[Account_ID]";
+$result1 = $conn->query($sql1);
+
+if ($result1 && $result1->num_rows > 0) {
+    // Fetch the result from the first query
+    $row1 = $result1->fetch_assoc();
+    $program_id = $row1['Program_ID'];
+
+    // Now use the fetched Program_ID in the second query
+
 $sql = "SELECT COUNT(CASE WHEN GPA >= 4.75 THEN 1 END) AS count_students1,
 COUNT(CASE WHEN GPA >= 4.25 AND GPA < 4.75 THEN 1 END) AS count_students2,
 COUNT(CASE WHEN GPA >= 3.75 AND GPA < 4.25 THEN 1 END) AS count_students3,
 COUNT(CASE WHEN GPA >= 3 AND GPA < 3.75 THEN 1 END) AS count_students4,
-COUNT(CASE WHEN GPA >= 2 AND GPA < 3 THEN 1 END) AS count_students5 FROM academic_advisor_for_student A
-INNER JOIN student_gpa S ON S.student_ID = A.student_id
-WHERE A.Academic_Advisor_ID = $_SESSION[Account_ID];";
+COUNT(CASE WHEN GPA >= 2 AND GPA < 3 THEN 1 END) AS count_students5 FROM students St
+INNER JOIN student_gpa S ON S.student_ID = St.student_id
+WHERE Program_ID = $program_id";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -287,6 +319,9 @@ if ($result->num_rows > 0) {
     $count_students3 = 0;
     $count_students4 = 0;
     $count_students5 = 0;
+}
+} else {
+    echo "<p>لا توجد بيانات</p>";
 }
 ?>
 <script>
@@ -333,6 +368,7 @@ if ($result->num_rows > 0) {
         config
     );
 </script>
+
 
         <div class="col-lg-4 ">
             <div class="card">
@@ -404,38 +440,39 @@ if ($result->num_rows > 0) {
         <div class="card-body">
             <h4 class="card-title">عدد الطلاب</h4>
             <?php
-            $sql = "SELECT COUNT(*) AS total_students FROM academic_advisor_for_student WHERE Academic_Advisor_ID = $_SESSION[Account_ID]";
-            $result = $conn->query($sql);
 
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $total_students = $row['total_students'];
-                echo "<h3>$total_students</h3>";
-            } else {
-                echo "<p>لا توجد بيانات</p>";
-            }
-            ?>
+    $sql2 = "SELECT COUNT(*) AS total_students FROM students WHERE Program_ID = $program_id";
+    $result2 = $conn->query($sql2);
+
+    if ($result2 && $result2->num_rows > 0) {
+        $row2 = $result2->fetch_assoc();
+        $total_students = $row2['total_students'];
+        echo "<h3>$total_students</h3>";
+    } else {
+        echo "<p>لا توجد بيانات</p>";
+    }
+
+?>
+
         </div>
     </div>
 </div>
 
+
 <?php
 
-$sql = "SELECT Semster_Number, COUNT(CASE WHEN grade >= 85 THEN 1 END) AS passing_students,
-        COUNT(CASE WHEN grade <= 60 THEN 1 END) AS failing_students
-        FROM academic_record
-        WHERE Semster_Number = (SELECT MAX(Semster_Number) FROM academic_record)";
+$sql = "SELECT DISTINCT Semester_Number  
+FROM current_semester 
+WHERE Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester)";
 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
-    $sum_students1 = $row['passing_students'];
-    $sum_students2 = $row['failing_students'];
 
     // عرض الفصل الدراسي
-    $Max_Semster_Number = $row['Semster_Number'];
+    $Max_Semster_Number = $row['Semester_Number'];
     // التأكد من وجود الفصل الدراسي
     if ($Max_Semster_Number !== null) {
         // استخدام switch مباشرة للتحقق من الفصل الدراسي
@@ -474,10 +511,10 @@ if ($result->num_rows > 0) {
 
                 <hr>
                     <h4 class="card-title">عدد الطلاب المتفوقين</h4>
-                    <h3><?php echo $sum_students1  ?></h3>
+                    <h3><?php echo $count_students1 + $count_students2  ?></h3>
                     <br>
                     <h4 class="card-title">عدد الطلاب المتعثرين</h4>
-                    <h3><?php echo $sum_students2  ?></h3>
+                    <h3><?php echo $count_students5  ?></h3>
                 </div>
             </div>
         </div>

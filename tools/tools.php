@@ -151,6 +151,26 @@ echo'
   margin-left: 8px;
 }
 
+
+
+
+
+
+
+
+
+
+
+';//هذا حق شعار الموقع
+echo'
+
+.navbar.default-layout-navbar .navbar-brand-wrapper .navbar-brand img {
+  width: calc(134px - 100px);
+  max-width: 100%;
+  height: 100%;
+  margin: auto;
+  vertical-align: middle;
+}
 ';
 }
 function print_css() {

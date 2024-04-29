@@ -199,6 +199,10 @@ body > div.container-fluid > div > div:nth-child(1) > div > div > form > div:nth
   background: linear-gradient(264.67deg,#7f7fd5 -9.26%,#86a8e7 45.82%,#91eae4 106.96%);
 
 border: 0px solid #fff;
+}body > nav > div > a > img{
+
+  width: 39px;
+      
 }
 
   </style>
@@ -214,35 +218,12 @@ border: 0px solid #fff;
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">تجريبي</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand brand-logo-mini" href="' . $config['admin'] . '/index.php" ><img src="assets/img/logoo.png" alt="logo"/></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExample09">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">الرئيسية</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">الروابط</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">مغلق</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">اكثر</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown09">
-            <li><a class="dropdown-item" href="#">واحد</a></li>
-            <li><a class="dropdown-item" href="#">اثنين</a></li>
-            <li><a class="dropdown-item" href="#">ثلاث</a></li>
-          </ul>
-        </li>
-      </ul>        <form>
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </form>
-        <a href="index.php"><button type="submit"  class="btn btn-primary llcol">تسجيل الدخول</button></a> 
-    </div>
+
   </div>
 </nav>
 
@@ -305,19 +286,13 @@ border: 0px solid #fff;
           </div>
         </div>
       </div>
-      <div class="col-6 col-lg-6">
-  <div class="card">
-    <div class="card-body2" >
-      <img class='col-12 photo img-fluid' src="assets/img/uu.png" alt="">
-      <img class='col-12 photo img-fluid' src="assets/img/fdfd1.png" alt="">
-      <img class='col-12 photo img-fluid' src="assets/img/uu.png" alt="">
-      <img class='col-12 photo img-fluid' src="assets/img/fdfd1.png" alt="">
+      <div class="col-6 col-lg-6" >
+      <img class='col-12 photo img-fluid' src="assets/img/uu3.png" alt="">
+      <img class='col-12 photo img-fluid' src="assets/img/uu3.png" alt="">
+      <img class='col-12 photo img-fluid' src="assets/img/uu3.png" alt="">
+      <img class='col-12 photo img-fluid' src="assets/img/uu3.png" alt="">
       <img class='col-12 photo img-fluid' src="https://shaguf.com/site/assets/img/stars.gif" alt="">
-
-
-    </div>
-  </div>
-</div>
+      </div>
 
       </div>
     </div>

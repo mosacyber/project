@@ -72,23 +72,168 @@ for ($i = 0; $i < 9; $i++) {
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
-          <div class="col-md-12 grid-margin ">
-            <div class="card">
-                <div class="card-body">               
-                  <div class="template-demo">
-                    <nav>
-                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">
-                         الصفحة الرئيسية 
-                      </li>
-                      </ol>
-                    </nav>
-                    
+          <div class="col-xxl-12 col-md-12">
+          <div class="card info-card revenue-card">
+
+      
+        
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                <?php
+if (isset($_SESSION['role'])) {
+// استعلام SQL لاسترداد البيانات من جدول faculty_member
+$sql = "SELECT * FROM faculty_member WHERE Faculty_member_ID = $_SESSION[Account_ID]";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    $sql2 = "SELECT * FROM departments WHERE Department_ID =  $row[Department_ID]";
+    $result2 = $conn->query($sql2);
+    if ($result2->num_rows > 0) {
+        $row2 = $result2->fetch_assoc();
+
+        $firstDigit = substr($row['Department_ID'], 0, 1);
+
+        $sql3 = "SELECT * FROM colleges WHERE College_ID =  $firstDigit";
+        $result3 = $conn->query($sql3);
+        if ($result3->num_rows > 0) {
+            $row3 = $result3->fetch_assoc();
+
+            $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
+            $result4 = $conn->query($sql4);
+            if ($result4->num_rows > 0) {
+                // بيانات الطالب موجودة ويمكن معالجتها هنا
+            } else {
+
+            }
+        } else {
+            echo "لا يوجد بيانات كلية";
+        }
+    } else {
+        echo "
+        <div class='alert alert-danger'>
+        تنبيه
+        <hr>
+            <p>لا يوجد بيانات قسم</p>
+    </div>";
+    }
+} else {
+  echo "
+    <div class='alert alert-danger'>
+    تنبيه
+    <hr>
+        <p>لا يوجد بيانات عضو هيئة تدريس</p>
+</div>";
+}
+
+    
+    
+    // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
+    switch ($_SESSION['role']) {
+        case '1':
+            $Specialization = "";
+            $Degree = "طالب";
+
+
+            $Major = $row4['Program_ID']; 
+
+            break;
+        case '2':
+            $Specialization = "عميد الكلية";
+            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
+            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
+            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
+            $Major = isset($row['Major']) ? $row['Major'] : "";
+            
+            break;
+        case '3':
+            $Specialization = "منسق البرنامج";
+            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
+            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
+            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
+            $Major = isset($row['Major']) ? $row['Major'] : "";
+            
+            break;
+        case '4':
+            $Specialization = "المرشد الاكاديمي";
+            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
+            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
+            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
+            $Major = isset($row['Major']) ? $row['Major'] : "";
+            break;
+        case '8':
+            $Specialization = "عضو هيئة التدريس";
+            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
+            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
+            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
+            $Major = isset($row['Major']) ? $row['Major'] : "";
+            break;
+        case '6':
+            $Specialization = "وكيل شؤون الطلاب التعليمية";
+            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
+            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
+            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
+            $Major = isset($row['Major']) ? $row['Major'] : "";
+            break;
+        case '7':
+            $Specialization = "مدير الجامعة";
+            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
+            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
+            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
+            $Major = isset($row['Major']) ? $row['Major'] : "";
+            break;
+        case 'admin':
+            // تعيين التخصص لحالة الادمن هنا
+            break;
+        default:
+            // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
+            break;
+    }
+}
+?>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الاسم</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
                   </div>
-                </div>
-              </div>
-            </div>
+
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الرقم الوظيفي</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
+                  </div>
+
+
+<div class="row">
+    <div class="col-lg-3 col-md-4 label">التخصص</div>
+    <div class="col-lg-9 col-md-8"><?php echo  $Major  ?></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-md-4 label">الدرجه العلميه</div>
+    <div class="col-lg-9 col-md-8"><?php echo $Degree ?></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-md-4 label">القسم</div>
+    <div class="col-lg-9 col-md-8"><?php echo $departments ?></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-md-4 label">الكليه</div>
+    <div class="col-lg-9 col-md-8"><?php echo $college ?></div>
+</div>
+
+
           </div>
+
+
+        </div>
+          </div>
+          <br>
           <div class="page-header">
             <h3 class="page-title">
 التقارير
@@ -114,16 +259,14 @@ for ($i = 0; $i < 9; $i++) {
         </div>   
         <?php
 
-// First, execute the query to get the Program_ID
-$sql1 = "SELECT Program_ID FROM program_coordinator WHERE Program_Coordinator_ID = $_SESSION[Account_ID]";
-$result1 = $conn->query($sql1);
 
-if ($result1 && $result1->num_rows > 0) {
-    // Fetch the result from the first query
-    $row1 = $result1->fetch_assoc();
-    $program_id = $row1['Program_ID'];
+$sql2 = "SELECT Program_ID FROM students";
+$result2 = $conn->query($sql2);
+$row2 = $result2->fetch_assoc();
+$first_digit = substr($row2['Program_ID'], 0, 1);     
 
-    // Now use the fetched Program_ID in the second query
+
+
 
 $sql = "SELECT COUNT(CASE WHEN GPA >= 4.75 THEN 1 END) AS count_students1,
 COUNT(CASE WHEN GPA >= 4.25 AND GPA < 4.75 THEN 1 END) AS count_students2,
@@ -131,7 +274,7 @@ COUNT(CASE WHEN GPA >= 3.75 AND GPA < 4.25 THEN 1 END) AS count_students3,
 COUNT(CASE WHEN GPA >= 3 AND GPA < 3.75 THEN 1 END) AS count_students4,
 COUNT(CASE WHEN GPA >= 2 AND GPA < 3 THEN 1 END) AS count_students5 FROM students St
 INNER JOIN student_gpa S ON S.student_ID = St.student_id
-WHERE Program_ID = $program_id";
+WHERE $first_digit = $firstDigit";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -148,9 +291,7 @@ if ($result->num_rows > 0) {
     $count_students4 = 0;
     $count_students5 = 0;
 }
-} else {
-    echo "<p>لا توجد بيانات</p>";
-}
+
 ?>
 <script>
     const labels = ['4.75', '4.25', '3.75', '3', '2'];
@@ -197,94 +338,164 @@ if ($result->num_rows > 0) {
     );
 </script>
 
+<?php
+// الاستعلام عن الأقسام المتوفرة
+$sql_departments = "SELECT * FROM departments";
+$result_departments = $conn->query($sql_departments);
+
+// قائمة لتخزين عدد الطلاب لكل قسم
+$students_count_per_department = [];
+
+if ($result_departments->num_rows > 0) {
+    while ($row_department = $result_departments->fetch_assoc()) {
+        // الحصول على بادئة القسم
+        $department_prefix = substr($row_department['Department_ID'], 0, 3); // افتراضاً أن بادئة القسم تتكون من 3 أرقام
+
+        // الاستعلام عن عدد الطلاب في القسم المحدد
+        $sql_students_count = "SELECT COUNT(*) AS students_count FROM students WHERE Program_ID LIKE '$department_prefix%'";
+        $result_students_count = $conn->query($sql_students_count);
+
+        // إذا تم العثور على عدد الطلاب
+        if ($result_students_count && $result_students_count->num_rows > 0) {
+            $row_students_count = $result_students_count->fetch_assoc();
+            // تخزين عدد الطلاب لهذا القسم
+            $students_count_per_department[$row_department['Department_Name']] = $row_students_count['students_count'];
+        } else {
+            // في حالة عدم العثور على عدد الطلاب لهذا القسم
+            $students_count_per_department[$row_department['Department_Name']] = 0;
+        }
+    }
+}
+
+// تحويل البيانات إلى صيغة قابلة للاستخدام في JavaScript
+$department_names = array_keys($students_count_per_department);
+$students_count = array_values($students_count_per_department);
+?>
+
+
+
+
+
+
+
+
+
 
         <div class="col-lg-4 ">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">عدد الطلاب لكل عام دراسي</h4>
+                    <h4 class="card-title">عدد الطلاب للبرنامج  </h4>
                     <!-- عنصر Canvas لرسم الرسم البياني -->
-                    <canvas id="barChart2"></canvas>
+                    <canvas id="barChart3"></canvas>
                 </div>
             </div>
         </div>
         <script>
-        const labels2 = ['march', 'april', 'may', 'jun', 'july', 'Aug', 'Sep'];
-        const data2 = {
-            labels2: labels2,
-            datasets: [{
-                label2: 'My First Dataset',
-                data2: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
-                ],
-                borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
-                ],
-                borderWidth: 1
-            }]
-        };
-    </script>
+    const labels2 = <?php echo json_encode($department_names); ?>;
+    const data2 = {
+        labels: labels2,
+        datasets: [{
+            label: 'عدد الطلاب',
+            data: <?php echo json_encode($students_count); ?>,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+        }]
+    };
 
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const config2 = {
-            type: 'bar',
-            data2: data2,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
-            },
-        };
-        const myChart2 = new Chart(
-            document.getElementById('barChart2'),
-            config
-        );
-    </script>
+            }
+        },
+    };
+
+    const myChart2 = new Chart(
+        document.getElementById('barChart3'),
+        config2
+    );
+</script>
+
 
 
 
         
+
+
+
+
+
+
+
+ 
+
+
 
 <div class="col-lg-2">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">عدد الطلاب</h4>
             <?php
+  
 
-    $sql2 = "SELECT COUNT(*) AS total_students FROM students WHERE Program_ID = $program_id";
-    $result2 = $conn->query($sql2);
+            $sql = "SELECT COUNT(*) AS total_students FROM students WHERE $first_digit = $firstDigit";
+            $result = $conn->query($sql);
 
-    if ($result2 && $result2->num_rows > 0) {
-        $row2 = $result2->fetch_assoc();
-        $total_students = $row2['total_students'];
-        echo "<h3>$total_students</h3>";
-    } else {
-        echo "<p>لا توجد بيانات</p>";
-    }
-
-?>
-
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $total_students = $row['total_students'];
+                echo "<h3>$total_students</h3>";
+            } else {
+                echo "<p>لا توجد بيانات</p>";
+            }
+            ?>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <?php
@@ -349,6 +560,7 @@ if ($result->num_rows > 0) {
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 
 <?php
@@ -426,34 +638,42 @@ for ($i = 0; $i < 9; $i++) {
 
 </body>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
- download_js();
- print_js();
+// Download and print JavaScript functions (presumably defined elsewhere)
+download_js();
+print_js();
 ?>
-
-
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-
-  <!-- تضمين Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
-  <!-- تضمين Bootstrap السكريبت -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 <?php
-    $navbar_path = "tools/js.php";
+$navbar_path = "tools/js.php";
+
+// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
-        break;
-    }
+  $path = str_repeat("../", $i) . $navbar_path;
+  if (file_exists($path)) {
+    include $path;
+    break;
+  }
 }
-
-
 ?>
 
 </html>

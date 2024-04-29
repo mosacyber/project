@@ -55,8 +55,8 @@ echo '
 <!-- partial:../../partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-    <a class="navbar-brand brand-logo" href="' . $config['admin'] . '/index.php"><img src="../../images/logo.svg" alt="logo"/></a>
-    <a class="navbar-brand brand-logo-mini" href="' . $config['admin'] . '/index.php"><img src="../../images/logo-mini.svg" alt="logo"/></a>
+    <a class="navbar-brand brand-logo" href="' . $config['admin'] . '/index.php"><img src="../../assets/img/logoo.png" alt="logo"/></a>
+    <a class="navbar-brand brand-logo-mini" href="' . $config['admin'] . '/index.php"><img src="../../assets/img/logoo.png" alt="logo"/></a>
    </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -65,20 +65,7 @@ echo '
     
     <ul class="navbar-nav navbar-nav-right">
      
-      <li class="nav-item dropdown d-none d-lg-flex">
-        <div class="nav-link">
-          <span class="dropdown-toggle btn btn-outline-dark" id="languageDropdown" data-toggle="dropdown">English</span>
-          <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
-            <a class="dropdown-item font-weight-medium" href="#">
-            English
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item font-weight-medium" href="#">
-              Arabic
-            </a>
-          </div>
-        </div>
-      </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
           <i class="fas fa-bell mx-0"></i>
@@ -163,26 +150,7 @@ echo '
 </nav>
 <!-- partial -->
 <div class="container-fluid page-body-wrapper">
-  <!-- partial:../../partials/_settings-panel.html -->
-  <div class="theme-setting-wrapper">
-    <div id="settings-trigger"><i class="fas fa-fill-drip"></i></div>
-    <div id="theme-settings" class="settings-panel">
-      <i class="settings-close fa fa-times"></i>
-      <p class="settings-heading">SIDEBAR SKINS</p>
-      <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-      <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
-      <p class="settings-heading mt-2">HEADER SKINS</p>
-      <div class="color-tiles mx-0 px-4">
-        <div class="tiles primary"></div>
-        <div class="tiles success"></div>
-        <div class="tiles warning"></div>
-        <div class="tiles danger"></div>
-        <div class="tiles info"></div>
-        <div class="tiles dark"></div>
-        <div class="tiles default"></div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- partial -->
   <!-- partial:../../partials/_sidebar.html -->
