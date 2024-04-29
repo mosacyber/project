@@ -333,71 +333,7 @@ if ($result->num_rows > 0) {
         config
     );
 </script>
-
-        <div class="col-lg-4 ">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">عدد الطلاب لكل عام دراسي</h4>
-                    <!-- عنصر Canvas لرسم الرسم البياني -->
-                    <canvas id="barChart2"></canvas>
-                </div>
-            </div>
-        </div>
-        <script>
-        const labels2 = ['march', 'april', 'may', 'jun', 'july', 'Aug', 'Sep'];
-        const data2 = {
-            labels2: labels2,
-            datasets: [{
-                label2: 'My First Dataset',
-                data2: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
-                ],
-                borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
-                ],
-                borderWidth: 1
-            }]
-        };
-    </script>
-
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const config2 = {
-            type: 'bar',
-            data2: data2,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            },
-        };
-        const myChart2 = new Chart(
-            document.getElementById('barChart2'),
-            config
-        );
-    </script>
-
-
-
-        
+     
 
 <div class="col-lg-2">
     <div class="card">
@@ -469,15 +405,15 @@ if ($result->num_rows > 0) {
         <div class="col-lg-2 ">
             <div class="card"><!--  academic_record اعلى سمستر -->
                 <div class="card-body">
-                <h4 class="card-title">السمستر الحالي | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
+                <h4 class="card-title">العام الدراسي الحالي | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
                 <h4 class="card-title">الفصل الدراسي  | <?php echo $name ?></h4>
 
                 <hr>
-                    <h4 class="card-title">عدد الطلاب المتفوقين</h4>
-                    <h3><?php echo $sum_students1  ?></h3>
+                <h4 class="card-title">عدد الطلاب المتفوقين</h4>
+                    <h3><?php echo $count_students1 + $count_students2  ?></h3>
                     <br>
                     <h4 class="card-title">عدد الطلاب المتعثرين</h4>
-                    <h3><?php echo $sum_students2  ?></h3>
+                    <h3><?php echo $count_students5  ?></h3>
                 </div>
             </div>
         </div>

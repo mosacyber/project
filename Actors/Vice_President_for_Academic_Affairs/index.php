@@ -91,35 +91,9 @@ for ($i = 0; $i < 9; $i++) {
           </div>
           <div class="page-header">
             <h3 class="page-title">
- المرشد الاكاديمي
+            عضو هيئة التدريس
             </h3>
           </div>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <!-- Revenue Card -->
         <div class="col-xxl-12 col-md-12">
@@ -222,7 +196,7 @@ if ($result->num_rows > 0) {
             $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
             $Major = isset($row['Major']) ? $row['Major'] : "";
             break;
-        case '6':
+        case '5':
             $Specialization = "وكيل شؤون الطلاب التعليمية";
             $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
             $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";

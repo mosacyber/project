@@ -260,13 +260,16 @@ if ($result->num_rows > 0) {
         <?php
 
 
-$sql2 = "SELECT Program_ID FROM students";
-$result2 = $conn->query($sql2);
-$row2 = $result2->fetch_assoc();
-$first_digit = substr($row2['Program_ID'], 0, 1);     
+// First, execute the query to get the Program_ID
+$sql1 = "SELECT Program_ID FROM program_coordinator WHERE Program_Coordinator_ID = $_SESSION[Account_ID]";
+$result1 = $conn->query($sql1);
 
+if ($result1 && $result1->num_rows > 0) {
+    // Fetch the result from the first query
+    $row1 = $result1->fetch_assoc();
+    $program_id = $row1['Program_ID'];
 
-
+    // Now use the fetched Program_ID in the second query
 
 $sql = "SELECT COUNT(CASE WHEN GPA >= 4.75 THEN 1 END) AS count_students1,
 COUNT(CASE WHEN GPA >= 4.25 AND GPA < 4.75 THEN 1 END) AS count_students2,
@@ -274,7 +277,7 @@ COUNT(CASE WHEN GPA >= 3.75 AND GPA < 4.25 THEN 1 END) AS count_students3,
 COUNT(CASE WHEN GPA >= 3 AND GPA < 3.75 THEN 1 END) AS count_students4,
 COUNT(CASE WHEN GPA >= 2 AND GPA < 3 THEN 1 END) AS count_students5 FROM students St
 INNER JOIN student_gpa S ON S.student_ID = St.student_id
-WHERE $first_digit = $firstDigit";
+WHERE Program_ID = $program_id";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -291,7 +294,9 @@ if ($result->num_rows > 0) {
     $count_students4 = 0;
     $count_students5 = 0;
 }
-
+} else {
+    echo "<p>لا توجد بيانات</p>";
+}
 ?>
 <script>
     const labels = ['4.75', '4.25', '3.75', '3', '2'];
@@ -339,47 +344,38 @@ if ($result->num_rows > 0) {
 </script>
 
 <?php
+
+
 // الاستعلام عن الأقسام المتوفرة
-$sql_departments = "SELECT * FROM departments";
-$result_departments = $conn->query($sql_departments);
+$sql_programs = "SELECT * FROM programs WHERE Program_ID = $program_id";
+$result_programs = $conn->query($sql_programs);
 
-// قائمة لتخزين عدد الطلاب لكل قسم
-$students_count_per_department = [];
+// مصفوفة لتخزين عدد الطلاب لكل قسم
+$students_count_per_Programs = [];
 
-if ($result_departments->num_rows > 0) {
-    while ($row_department = $result_departments->fetch_assoc()) {
-        // الحصول على بادئة القسم
-        $department_prefix = substr($row_department['Department_ID'], 0, 3); // افتراضاً أن بادئة القسم تتكون من 3 أرقام
+if ($result_programs->num_rows > 0) {
+    while ($row_Program = $result_programs->fetch_assoc()) {
+      
+            // الاستعلام عن عدد الطلاب في القسم المحدد
+            $sql_students_count = "SELECT COUNT(*) AS students_count FROM students WHERE Program_ID = $program_id";
+            $result_students_count = $conn->query($sql_students_count);
 
-        // الاستعلام عن عدد الطلاب في القسم المحدد
-        $sql_students_count = "SELECT COUNT(*) AS students_count FROM students WHERE Program_ID LIKE '$department_prefix%'";
-        $result_students_count = $conn->query($sql_students_count);
-
-        // إذا تم العثور على عدد الطلاب
-        if ($result_students_count && $result_students_count->num_rows > 0) {
-            $row_students_count = $result_students_count->fetch_assoc();
-            // تخزين عدد الطلاب لهذا القسم
-            $students_count_per_department[$row_department['Department_Name']] = $row_students_count['students_count'];
-        } else {
-            // في حالة عدم العثور على عدد الطلاب لهذا القسم
-            $students_count_per_department[$row_department['Department_Name']] = 0;
+            if ($result_students_count && $result_students_count->num_rows > 0) {
+                $row_students_count = $result_students_count->fetch_assoc();
+                // تخزين عدد الطلاب لهذا القسم
+                $students_count_per_Programs[$row_Program['Program_Name']] = $row_students_count['students_count'];
+            } else {
+                // في حالة عدم العثور على عدد الطلاب لهذا القسم
+                $students_count_per_Programs[$row_Program['Program_Name']] = 0;
+            }
         }
-    }
 }
 
 // تحويل البيانات إلى صيغة قابلة للاستخدام في JavaScript
-$department_names = array_keys($students_count_per_department);
-$students_count = array_values($students_count_per_department);
+$Program_names = array_keys($students_count_per_Programs);
+$students_count = array_values($students_count_per_Programs);
+
 ?>
-
-
-
-
-
-
-
-
-
 
         <div class="col-lg-4 ">
             <div class="card">
@@ -391,7 +387,7 @@ $students_count = array_values($students_count_per_department);
             </div>
         </div>
         <script>
-    const labels2 = <?php echo json_encode($department_names); ?>;
+    const labels2 = <?php echo json_encode($Program_names); ?>;
     const data2 = {
         labels: labels2,
         datasets: [{
@@ -436,67 +432,6 @@ $students_count = array_values($students_count_per_department);
         config2
     );
 </script>
-
-
-
-
-        
-
-
-
-
-
-
-
- 
-
-
-
-<div class="col-lg-2">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">عدد الطلاب</h4>
-            <?php
-  
-
-            $sql = "SELECT COUNT(*) AS total_students FROM students WHERE $first_digit = $firstDigit";
-            $result = $conn->query($sql);
-
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $total_students = $row['total_students'];
-                echo "<h3>$total_students</h3>";
-            } else {
-                echo "<p>لا توجد بيانات</p>";
-            }
-            ?>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 
@@ -545,7 +480,7 @@ if ($result->num_rows > 0) {
         <div class="col-lg-2 ">
             <div class="card"><!--  academic_record اعلى سمستر -->
                 <div class="card-body">
-                <h4 class="card-title">السمستر الحالي | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
+                <h4 class="card-title">العام الدراسي الحالي | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
                 <h4 class="card-title">الفصل الدراسي  | <?php echo $name ?></h4>
 
                 <hr>

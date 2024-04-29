@@ -185,70 +185,95 @@ if ($result->num_rows > 0) {
     );
 </script>
 
+<?php
+
+// الاستعلام عن الأقسام المتوفرة
+$sql_programs = "SELECT * FROM colleges";
+$result_programs = $conn->query($sql_programs);
+
+// مصفوفة لتخزين عدد الطلاب لكل قسم
+$students_count_per_Programs = [];
+
+if ($result_programs->num_rows > 0) {
+    while ($row_Program = $result_programs->fetch_assoc()) {
+        // الاستعلام عن عدد الطلاب في القسم المحدد
+        $college_id = $row_Program['College_ID'];
+        $sql_students_count = "SELECT COUNT(*) AS students_count FROM students WHERE LEFT(Program_ID, 1) = $college_id";
+        $result_students_count = $conn->query($sql_students_count);
+
+        if ($result_students_count && $result_students_count->num_rows > 0) {
+            $row_students_count = $result_students_count->fetch_assoc();
+            // تخزين عدد الطلاب لهذا القسم
+            $students_count_per_Programs[$row_Program['College_Name']] = $row_students_count['students_count'];
+        } else {
+            // في حالة عدم العثور على عدد الطلاب لهذا القسم
+            $students_count_per_Programs[$row_Program['College_Name']] = 0;
+        }
+    }
+}
+
+// تحويل البيانات إلى صيغة قابلة للاستخدام في JavaScript
+$Program_names = array_keys($students_count_per_Programs);
+$students_count = array_values($students_count_per_Programs);
+
+?>
+
 
         <div class="col-lg-4 ">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">عدد الطلاب لكل عام دراسي</h4>
+                    <h4 class="card-title">عدد طلاب الكليات  </h4>
                     <!-- عنصر Canvas لرسم الرسم البياني -->
-                    <canvas id="barChart2"></canvas>
+                    <canvas id="barChart3"></canvas>
                 </div>
             </div>
         </div>
         <script>
-        const labels2 = ['march', 'april', 'may', 'jun', 'july', 'Aug', 'Sep'];
-        const data2 = {
-            labels2: labels2,
-            datasets: [{
-                label2: 'My First Dataset',
-                data2: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
-                ],
-                borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
-                ],
-                borderWidth: 1
-            }]
-        };
-    </script>
+    const labels2 = <?php echo json_encode($Program_names); ?>;
+    const data2 = {
+        labels: labels2,
+        datasets: [{
+            label: 'عدد الطلاب',
+            data: <?php echo json_encode($students_count); ?>,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+        }]
+    };
 
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const config2 = {
-            type: 'bar',
-            data2: data2,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
-            },
-        };
-        const myChart2 = new Chart(
-            document.getElementById('barChart2'),
-            config
-        );
-    </script>
+            }
+        },
+    };
 
-
-
+    const myChart2 = new Chart(
+        document.getElementById('barChart3'),
+        config2
+    );
+</script>
         
 
 <div class="col-lg-2">
@@ -322,7 +347,7 @@ if ($result->num_rows > 0) {
         <div class="col-lg-2 ">
             <div class="card"><!--  academic_record اعلى سمستر -->
                 <div class="card-body">
-                <h4 class="card-title">السمستر الحالي | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
+                <h4 class="card-title">العام الدراسي الحالي | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
                 <h4 class="card-title">الفصل الدراسي  | <?php echo $name ?></h4>
 
                 <hr>

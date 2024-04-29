@@ -376,19 +376,46 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '2') {
     </span>
   </a>
 </li>
-      </li>
-
+  
 <li class="nav-item">
-<a class="nav-link" href="'.$config['Actors'].'Dean_of_the_College/report.php">
+<a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
   <i class="fa fa-home menu-icon"></i>
   <span class="menu-title">
-التقارير
+المواد
   </span>
 </a>
 </li>
 
+<li class="nav-item">
+<a class="nav-link" href="'.$config['app_url'].'mail">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+التواصل
+  </span>
+</a>
+</li>
 
-     ';
+<li class="nav-item">
+<a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+<i class="fab fa-trello menu-icon"></i>
+<span class="menu-title">
+عميد الكلية
+</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="page-layouts">
+<ul class="nav flex-column sub-menu">
+ 
+
+  <li class="nav-item d-none d-lg-block"> 
+  <a class="nav-link" href="'.$config['Actors'].'Dean_of_the_College/report.php">
+  التقارير 
+  </a>
+  </li>
+</ul>
+</div>
+</li>
+   ';
       }
 /*********************************/
 /*********************************/
@@ -412,19 +439,46 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '6') {
     </span>
   </a>
 </li>
-      </li>
 
 <li class="nav-item">
-<a class="nav-link" href="'.$config['Actors'].'President_of_the_University/report.php">
+<a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
   <i class="fa fa-home menu-icon"></i>
   <span class="menu-title">
-التقارير
+المواد
   </span>
 </a>
 </li>
 
+<li class="nav-item">
+<a class="nav-link" href="'.$config['app_url'].'mail">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+التواصل
+  </span>
+</a>
+</li>
 
-     ';
+<li class="nav-item">
+<a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+<i class="fab fa-trello menu-icon"></i>
+<span class="menu-title">
+مدير الجامعة 
+</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="page-layouts">
+<ul class="nav flex-column sub-menu">
+ 
+
+  <li class="nav-item d-none d-lg-block"> 
+  <a class="nav-link" href="'.$config['Actors'].'President_of_the_University/report.php">
+  التقارير 
+  </a>
+  </li>
+</ul>
+</div>
+</li>
+   ';
       }
 /*********************************/
 /*********************************/
@@ -449,18 +503,46 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '5') {
   </a>
 </li>
       </li>
-
+    
 <li class="nav-item">
-<a class="nav-link" href="'.$config['Actors'].'Vice_President_for_Academic_Affairs/report.php">
+<a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
   <i class="fa fa-home menu-icon"></i>
   <span class="menu-title">
-التقارير
+المواد
   </span>
 </a>
 </li>
 
+<li class="nav-item">
+<a class="nav-link" href="'.$config['app_url'].'mail">
+  <i class="fa fa-home menu-icon"></i>
+  <span class="menu-title">
+التواصل
+  </span>
+</a>
+</li>
 
-     ';
+<li class="nav-item">
+<a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+<i class="fab fa-trello menu-icon"></i>
+<span class="menu-title">
+    وكيل الطلاب لشؤون التعليمية  
+</span>
+<i class="menu-arrow"></i>
+</a>
+<div class="collapse" id="page-layouts">
+<ul class="nav flex-column sub-menu">
+ 
+
+  <li class="nav-item d-none d-lg-block"> 
+  <a class="nav-link" href="'.$config['Actors'].'Vice_President_for_Academic_Affairs/report.php">
+  التقارير 
+  </a>
+  </li>
+</ul>
+</div>
+</li>
+   ';
       }
 /*********************************/
 /*********************************/
