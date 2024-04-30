@@ -651,6 +651,12 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
         التقارير 
         </a>
         </li>
+              
+        <li class="nav-item d-none d-lg-block"> 
+        <a class="nav-link" href="'.$config['Actors'].'Program_Coordinator/programs.php">
+        البرنامج 
+        </a>
+        </li>
       </ul>
     </div>
     </li>
