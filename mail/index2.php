@@ -109,20 +109,23 @@ for ($i = 0; $i < 9; $i++) {
                   <ul class="menu-items">
                     <li class="compose mb-3"><h1 class="btn btn-primary btn-block">تحديث</ا></li>
                     <li class="active"><a href="#"><i class="fa fa-envelope-open"></i> البريد الوارد </a><span class="badge badge-pill badge-success">8</span></li>
-                  </ul>
-                  <div class="wrapper">
-                    <div class="online-status d-flex justify-content-between align-items-center">
-                    <p class="chat">المقررات الحالية</p> </div>
-                  </div>
-                  <ul class="profile-list">
-                    
-<?PHP
+              
+              
+            <?php 
+              if($_SESSION['role'] == 1){
+                echo" </ul>
+                <div class='wrapper'>
+                  <div class='online-status d-flex justify-content-between align-items-center'>
+                  <p class='chat'>المقررات الحالية</p> </div>
+                </div>
+                <ul class='profile-list'>";
+              }
                         // استعلام SQL لاسترداد بيانات معينة من الجدول
-                        $sql = "SELECT c.*, a.*, s.subject_name, CONCAT(a.First_Name, ' ', a.Last_Name) AS full
-                        FROM current_semester c
-                        INNER JOIN accounts a ON c.Faculty_member_ID = a.Account_ID
-                        INNER JOIN subjects s ON c.subject_code = s.subject_code
-                        WHERE c.Semester_Number = '{$_SESSION['Max_Semester_Number']}'";
+              $sql = "SELECT c.*, a.*, s.subject_name, CONCAT(a.First_Name, ' ', a.Last_Name) AS full
+              FROM current_semester c
+              INNER JOIN accounts a ON c.Faculty_member_ID = a.Account_ID
+              INNER JOIN subjects s ON c.subject_code = s.subject_code
+              WHERE c.Semester_Number = '{$_SESSION['Max_Semester_Number']}'";
                 $role = "";
                 if ($_SESSION['role'] == '1') {
                     $sql .= " AND c.student_id = '{$_SESSION['Account_ID']}'";
@@ -138,11 +141,9 @@ for ($i = 0; $i < 9; $i++) {
                             while ($row = $result->fetch_assoc()) {
                         echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=".$row["subject_code"].'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$row["subject_name"]." - ".$row["subject_code"].'</p></div> </a></li>';
                             }
-                        } else {
-                            // إذا لم يتم العثور على بيانات
-                            echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
-                        }
-?>
+                        } 
+
+            ?>
                     </ul>
 
 
@@ -153,47 +154,51 @@ for ($i = 0; $i < 9; $i++) {
                   </div>
                   <ul class="profile-list">
       <?php
-// استعلام SQL لاسترداد بيانات معينة من الجدول
-$sql2 = "";
-if ($_SESSION['role'] == '1') {
-  $sql2 .= "SELECT Faculty_member_ID FROM current_semester WHERE student_id = '{$_SESSION['Account_ID']}'";
-}else {
-  $sql2 .= "SELECT student_id FROM current_semester WHERE Faculty_member_ID = '{$_SESSION['Account_ID']}'";
-}
-$result2 = $conn->query($sql2);
-$row2 = $result2->fetch_assoc();
+            // استعلام SQL لاسترداد بيانات معينة من الجدول
+            $sql2 = "";
+            if ($_SESSION['role'] == '1') {
+              $sql2 .= "SELECT Faculty_member_ID FROM current_semester WHERE student_id = '{$_SESSION['Account_ID']}'";
+            }else {
+              $sql2 .= "SELECT student_id FROM current_semester WHERE Faculty_member_ID = '{$_SESSION['Account_ID']}'";
+            }
+            $result2 = $conn->query($sql2);
+            $row2 = $result2->fetch_assoc();
 
-if ($row2) {
-    // الحصول على Faculty_member_ID فقط إذا كانت هناك نتائج
-    $faculty_member_id = "";
-    if ($_SESSION['role'] == '1') {
-      $faculty_member_id .= $row2["Faculty_member_ID"];
-    }else {
-      $faculty_member_id .= $row2["student_id"];
-    }
-    // استعلام SQL لاسترداد بيانات من جدول accounts باستخدام Faculty_member_ID
-    $sql = "select * , CONCAT(First_Name, ' ',Last_Name) AS 'full' from accounts where Account_ID = $faculty_member_id";
-    $result = $conn->query($sql);
+            if ($row2) {
+                // الحصول على Faculty_member_ID فقط إذا كانت هناك نتائج
+                $faculty_member_id = "";
+                if ($_SESSION['role'] == '1') {
+                  $faculty_member_id .= $row2["Faculty_member_ID"];
+                }else {
+                  $faculty_member_id .= $row2["student_id"];
+                }
+                $pos = '';
+                if($_SESSION['role'] == 1){
+                  $Pos = 'مرشد أكاديمي'; 
+              }
+              else{
+                $Pos = 'طالب';
+                }
+                // استعلام SQL لاسترداد بيانات من جدول accounts باستخدام Faculty_member_ID
+                $sql = "select * , CONCAT(First_Name, ' ',Last_Name) AS 'full' from accounts where Account_ID = $faculty_member_id";
+                $result = $conn->query($sql);
 
-    // التحقق من وجود بيانات للعرض
-    if ($result->num_rows > 0) {
-        // عرض البيانات
-        while ($row = $result->fetch_assoc()) {
-            echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">مرشد اكاديمي</p></div> </a></li>';
-        }
-    } else {
-        // إذا لم يتم العثور على بيانات
-        echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
-    }
-} else {
-    // إذا لم يتم العثور على Faculty_member_ID
-    echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
-}
-?>
-
-                    </ul>
-                </div>
-              </div>
+                // التحقق من وجود بيانات للعرض
+                if ($result->num_rows > 0) {
+                    // عرض البيانات
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$Pos.'</p></div> </a></li>';
+                    }
+                } else {
+                    // إذا لم يتم العثور على بيانات
+                    echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
+                }
+            } else {
+                // إذا لم يتم العثور على Faculty_member_ID
+                echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
+            }
+            ?>
+              </ul></div></div>
 
               <div class="mail-view d-none d-md-block col-md-9 col-lg-7 bg-white">
                 <div class="message-body">
@@ -218,14 +223,10 @@ if ($row2) {
                         ?>
                           </p>
                           <p class="sender-email">
-                            <?php 
-
-
-                            echo "Advisor";
+                <?php 
+                    echo $Pos;
                       
-                      }else{
-
-
+                  }else{
                     $sql3 = "SELECT * , CONCAT(First_Name, ' ', Last_Name)  'full' FROM accounts WHERE Account_ID = {$_GET['id']}";
                     $result3 = $conn->query($sql3);
                     
@@ -240,156 +241,149 @@ if ($row2) {
                     ?>
                       </p>
                       <p class="sender-email">
-                        <?php 
-$sql5 = "SELECT * FROM subjects WHERE subject_code = ?";
-$stmt = $conn->prepare($sql5);
-$stmt->bind_param("s", $_GET['subject_code']);
-$stmt->execute();
-$result5 = $stmt->get_result();
+                  <?php 
+                    $sql5 = "SELECT * FROM subjects WHERE subject_code = ?";
+                    $stmt = $conn->prepare($sql5);
+                    $stmt->bind_param("s", $_GET['subject_code']);
+                    $stmt->execute();
+                    $result5 = $stmt->get_result();
 
-if ($result5->num_rows > 0) {
-    $row5 = $result5->fetch_assoc();
-    echo $row5["subject_name"] . " - " . $row5["subject_code"];
-} else {
-    // إذا لم يتم العثور على بيانات
-    echo 'لا يوجد بيانات لعرضها';
-}
+                    if ($result5->num_rows > 0) {
+                        $row5 = $result5->fetch_assoc();
+                        echo $row5["subject_name"] . " - " . $row5["subject_code"];
+                    } else {
+                        // إذا لم يتم العثور على بيانات
+                        echo 'لا يوجد بيانات لعرضها';
+                    } } ?>
+                  </p></div></div>
 
+            <?php
+              function sendMessage($senderId, $recipientId, $message) {
+                if (!is_dir('messages')) {
+                    mkdir('messages');
+                }
 
+                $filePath = "messages/{$recipientId}.json";
+                $messages = [];
+
+                if (file_exists($filePath)) {
+                    $messages = json_decode(file_get_contents($filePath), true);
+                }
+
+                $newMessage = [
+                    'sender' => $senderId,
+                    'recipient' => $recipientId,
+                    'timestamp' => time(),
+                    'content' => $message
+                ];
+                $messages[] = $newMessage;
+
+                file_put_contents($filePath, json_encode($messages));
+              }
+
+              function getMessages($recipientId) {
+                $filePath = "messages/{$recipientId}.json";
+                $messages = [];
+
+                if (file_exists($filePath)) {
+                    $messages = json_decode(file_get_contents($filePath), true);
+                }
+
+                return $messages;
+              }
+              function getReceivedMessages($recipientId) {
+                $filePath = "messages/{$recipientId}.json";
+                $messages = [];
+
+                if (file_exists($filePath)) {
+                  $allMessages = json_decode(file_get_contents($filePath), true);
+
+                  foreach ($allMessages as $message) {
+                    if ($message['recipient'] == $recipientId && $message['sender'] != $recipientId) {
+                      $messages[] = $message;
+                    }
                   }
-                    ?>
+                }
 
-                      </p>
+                return $messages;
+              }
+              // تحميل الرسائل عند بدء تشغيل الصفحة
+              if (isset($_GET['id'])) {
+                $recipientId = $_GET['id'];
+                $messages = getMessages($recipientId);
+              }
+
+              if (isset($_SESSION['Account_ID']) && isset($_POST['send_message'])) {
+                $senderId = $_SESSION['Account_ID'];
+                $recipientId = $_GET['id'];
+                $message = $_POST['message_contents'];
+
+                sendMessage($senderId, $recipientId, $message);
+
+                // إعادة تحميل الرسائل بعد إرسال رسالة جديدة
+                $messages = getMessages($recipientId);  
+              }
+              $receivedMessages = getReceivedMessages($_SESSION['Account_ID']);
+              $allMessages = array_merge($receivedMessages, $messages);
+              usort($allMessages, function($a, $b) {
+                return $a['timestamp'] - $b['timestamp'];
+              });
+              ?>
+
+                  <div class="message">
+                    <br><br>
+                    <?php foreach ($allMessages as $message): ?>
+                      <?php if ($message['sender'] == $_GET['id']): ?>
+                        <div class="message-content received">
+                          <p><?php echo $message['content']; ?></p>
+                          <p><?php echo date('H:i', $message['timestamp']); ?></p>
+                        </div>
+                      <?php elseif($message['sender'] == $_SESSION['Account_ID']): ?>
+                        <div class="message-content sent">
+                          <p><?php echo $message['content']; ?></p>
+                          <p><?php echo date('H:i', $message['timestamp']); ?></p>
+                        </div>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                    <br><br>
+                  </div>
+
+                  <div class="attachments-sections">
+                        <form method="POST">
+                          <div class="input-group" style="margin-buttun=0;">
+                              <input type="text" class="form-control" name="message_contents" placeholder="أدخل رسالتك هنا..." />
+                              <div class="input-group-append">
+                                  <button class="btn btn-primary" type="submit" name="send_message">Send</button>
+                          </div>
+                          </div>
+                    </form>
+                  <ul>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <?php
+              $navbar_path = "footer/Footer.php";
+              for ($i = 0; $i < 9; $i++) {
+                  $path = str_repeat("../", $i) . $navbar_path;
+                  if (file_exists($path)) {
+                    include $path;
+                      break;
+                  }
+              }
+              ?>
+                      <!-- partial -->
                     </div>
+                    <!-- main-panel ends -->
                   </div>
-<?php
-
-function sendMessage($senderId, $recipientId, $message) {
-  if (!is_dir('messages')) {
-      mkdir('messages');
-  }
-
-  $filePath = "messages/{$recipientId}.json";
-  $messages = [];
-
-  if (file_exists($filePath)) {
-      $messages = json_decode(file_get_contents($filePath), true);
-  }
-
-  $newMessage = [
-      'sender' => $senderId,
-      'recipient' => $recipientId,
-      'timestamp' => time(),
-      'content' => $message
-  ];
-  $messages[] = $newMessage;
-
-  file_put_contents($filePath, json_encode($messages));
-}
-
-function getMessages($recipientId) {
-  $filePath = "messages/{$recipientId}.json";
-  $messages = [];
-
-  if (file_exists($filePath)) {
-      $messages = json_decode(file_get_contents($filePath), true);
-  }
-
-  return $messages;
-}
-function getReceivedMessages($recipientId) {
-  $filePath = "messages/{$recipientId}.json";
-  $messages = [];
-
-  if (file_exists($filePath)) {
-    $allMessages = json_decode(file_get_contents($filePath), true);
-
-    foreach ($allMessages as $message) {
-      if ($message['recipient'] == $recipientId && $message['sender'] != $recipientId) {
-        $messages[] = $message;
-      }
-    }
-  }
-
-  return $messages;
-}
-// تحميل الرسائل عند بدء تشغيل الصفحة
-if (isset($_GET['id'])) {
-  $recipientId = $_GET['id'];
-  $messages = getMessages($recipientId);
-}
-
-if (isset($_SESSION['Account_ID']) && isset($_POST['send_message'])) {
-  $senderId = $_SESSION['Account_ID'];
-  $recipientId = $_GET['id'];
-  $message = $_POST['message_contents'];
-
-  sendMessage($senderId, $recipientId, $message);
-
-  // إعادة تحميل الرسائل بعد إرسال رسالة جديدة
-  $messages = getMessages($recipientId);  
-}
-$receivedMessages = getReceivedMessages($_SESSION['Account_ID']);
-$allMessages = array_merge($receivedMessages, $messages);
-usort($allMessages, function($a, $b) {
-  return $a['timestamp'] - $b['timestamp'];
-});
-?>
-
-    <div class="message">
-      <br><br>
-      <?php foreach ($allMessages as $message): ?>
-        <?php if ($message['sender'] == $_GET['id']): ?>
-          <div class="message-content received">
-            <p><?php echo $message['content']; ?></p>
-            <p><?php echo date('H:i', $message['timestamp']); ?></p>
-          </div>
-        <?php elseif($message['sender'] == $_SESSION['Account_ID']): ?>
-          <div class="message-content sent">
-            <p><?php echo $message['content']; ?></p>
-            <p><?php echo date('H:i', $message['timestamp']); ?></p>
-          </div>
-        <?php endif; ?>
-      <?php endforeach; ?>
-      <br><br>
-    </div>
-
-    <div class="attachments-sections">
-          <form method="POST">
-            <div class="input-group">
-                <input type="text" class="form-control" name="message_contents" placeholder="أدخل رسالتك هنا..." />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit" name="send_message">Send</button>
-            </div>
-        </div>
-      </form>
-    <ul>
-                    </ul>
-                  </div>
+                  <!-- page-body-wrapper ends -->
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <?php
-$navbar_path = "footer/Footer.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
-        break;
-    }
-}
-?>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
 
 
-</body>
+              </body>
 
 
 
