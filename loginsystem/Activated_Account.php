@@ -279,10 +279,10 @@ const popoverList = [...popoverTriggerList].map (popoverTriggerEl=> new bootstra
                     $mail->SMTPAuth = true;
                     $mail->SMTPSecure = 'tls';
     
-                    $mail->Username = 'taskmanager202390@gmail.com';
-                    $mail->Password = 'mxir qnji xxjb ynfp';
+                    $mail->Username = '';
+                    $mail->Password = '';
     
-                    $mail->setFrom('taskmanager202390@gmail.com', 'فريق الدعم');
+                    $mail->setFrom('اكتبوا الايميل', 'فريق الدعم');
                     $mail->addAddress($email);
     
                     $mail->isHTML(true);

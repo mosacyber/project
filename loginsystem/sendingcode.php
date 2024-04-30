@@ -274,10 +274,10 @@ if (isset($_POST["recover"])) {
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
 
-        $mail->Username = 'taskmanager202390@gmail.com'; 
-        $mail->Password = 'mxir qnji xxjb ynfp';
+        $mail->Username = ''; 
+        $mail->Password = '';
 
-        $mail->setFrom('taskmanager202390@gmail.com', 'فريق الدعم الخاص بمنصة الجامعة الألكترونية');
+        $mail->setFrom('', 'فريق الدعم الخاص بمنصة الجامعة الألكترونية');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
