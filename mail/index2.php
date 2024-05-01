@@ -233,7 +233,7 @@
                       <?php
                       if ($_GET['subject_code'] == "Advisor") {
                         //خاصه للمرشد الاكاديمي
-                        $sql2 = "SELECT * , CONCAT(First_Name, ' ', Last_Name)  'full' FROM accounts WHERE Account_ID = (select Academic_Advisor_ID from academic_advisor_for_student where student_id ='{$_SESSION['Account_ID']}' )";
+                        $sql2 = "SELECT * , CONCAT(First_Name, ' ', Last_Name)  'full' FROM accounts WHERE Account_ID = {$_GET['id']}";
                         $result2 = $conn->query($sql2);
 
                         // التحقق من وجود بيانات للعرض
