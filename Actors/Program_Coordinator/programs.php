@@ -79,6 +79,8 @@ for ($i = 0; $i < 9; $i++) {
 
 
   </style>
+      <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script> -->
+
 </head>
 <body class="rtl">
   <div class="container-scroller">
@@ -123,6 +125,7 @@ for ($i = 0; $i < 9; $i++) {
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
                 <?php
+
 if (isset($_SESSION['role'])) {
 // استعلام SQL لاسترداد البيانات من جدول faculty_member
 
@@ -132,7 +135,7 @@ $sql_program = "SELECT * FROM program_coordinator WHERE Program_Coordinator_ID =
 $result_program = $conn->query($sql_program);
 $row_program = $result_program->fetch_assoc();
 $Program_ID = $row_program['Program_ID'];
-
+$_SESSION['Program_ID'] = $row_program['Program_ID'];
 $sql = "SELECT * FROM faculty_member WHERE Faculty_member_ID = $_SESSION[Account_ID]";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -296,7 +299,6 @@ if ($result->num_rows > 0) {
 
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">هنا من متى صار منسق يظهر وعلى اي برنامج</h4>
 <?php
 $sql_program = "SELECT * FROM programs WHERE Program_ID = $Program_ID";
 $result_program = $conn->query($sql_program);
@@ -320,7 +322,10 @@ $Program_Name = $row_program['Program_Name'];
 
             <div class="card">
                 <div class="card-body">
-                <form action="edit_subject.php" method="post">
+                <button class='btn btn-success mb-3' id='add-data-btn' data-toggle='modal' data-target='#insertModal' >
+                   <i class='bi bi-plus-circle'>اضافة مقررات للبرنامج </i> 
+                </button>
+                <form action="" method="post">
     <?php
     $sql = "SELECT * FROM subjects where Program_ID = $Program_ID";
     $result = $conn->query($sql);
@@ -343,62 +348,15 @@ $Program_Name = $row_program['Program_Name'];
                         <td><?= $row["subject_code"] ?></td>
                         <td><?= $row["subject_name"] ?></td>
                         <td><?= $row["credit_hours"] ?></td>
-                        <>
-                        <a class='btn btn-warning' data-toggle='modal' data-target='#editModal'>تعديل</a>
-</td>
+                        <td>
+                        <a class='btn btn-warning' data-toggle='modal' data-target='#editModal'>تعديل</a></td>
 
                         <td>
-                            <button type="button" class="btn btn-danger deletBtn">
+                            <button type="button" class="btn btn-danger DeleteBtn" data-toggle="modal" data-target="#WarningModal">
                                 حذف
                             </button></td>
                     </tr>
-                <?php endwhile; 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
+                <?php endwhile;?>
             </tbody>
         </table>
     <?php else: ?>
@@ -406,8 +364,54 @@ $Program_Name = $row_program['Program_Name'];
     <?php endif; ?>
 </form>
 
-
-
+<!-- Window Insert -->
+<div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="direction: rtl;">
+          <h5 class="modal-title" id="insertModalLabel">أضافة برنامج</h5>
+          <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="popup-form" id="popupForm">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb-3">
+                  <label for="programName" class="form-label">أسم البرنامج</label><br>
+                  <input type="text" class="form-control" name="programName" id="programName" value="<?php echo $Program_Name; ?>" readonly>
+                </div>
+                <div class="mb-3">
+                  <label for="programID" class="form-label">رقم البرنامج</label><br>
+                  <input type="number" class="form-control" name="programID" id="programID" value="<?php echo $Program_ID; ?>" readonly>
+               </div>
+               </div>
+              <div class="col-md-6">
+              <div class="mb-3">
+                  <label for="subjecName" class="form-label">أسم المقرر</label><br>
+                  <input type="text" class="form-control" name="subjectName" id="subjectName" value="" required>
+                </div>
+                <div class="mb-3">
+                  <label for="subjectCode" class="form-label">كود المقرر</label><br>
+                  <input type="text" class="form-control" name="subjectCode" id="subjectCode" value="" required>
+               </div>
+               <div class="mb-3">
+                  <label for="NumberHour" class="form-label">عدد الساعات</label><br>
+                  <input type="number" class="form-control" min="0" name="NumberHour" id="NumberHour" value="" required>
+               </div>
+              </div>
+          </div>
+          <br /> <br />
+            <button class="btn btn-primary" id="sbtn">أضافة</button>
+            <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- window Update -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -422,10 +426,19 @@ $Program_Name = $row_program['Program_Name'];
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
+                                <label for="Ecode" class="form-label">رمز المقرر</label>
+                                <input type="text" class="form-control" id="Ecode" name="Ecode" value="" readonly/>
+                            </div>
+                            <div class="mb-3 center">
+                                <label for="Hour" class="form-label">عدد الساعات</label>
+                                <input type="number" class="form-control" min="1" numaxlength="1" id="Hour" name="Hour" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
                                 <label for="Esubject" class="form-label">اسم المقرر</label>
                                 <input type="text" class="form-control" id="Esubject" name="Esubject" value="" readonly/>
                             </div>
-                            
                         </div>
                     </div>
                     <br /> <br />
@@ -438,15 +451,144 @@ $Program_Name = $row_program['Program_Name'];
 </div>
 
 
-
+<!-- Window Delete -->
+<div class="modal fade" id="WarningModal" tabindex="-1" role="dialog" aria-labelledby="WarningModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="direction: rtl;">
+                <h5 class="modal-title" id="WarningModalLabel">رسالة تنبيه</h5>
+                <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="popup-form" id="popupForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3 text-end">
+                            <label for="eventName" class="form-label">المقرر : <input type="text" id="Dsubject" style="border: none;"></label>
+                            <label for="eventName" class="form-label">الساعات : <input type="text" id="Dhour" style="border: none;"></label>
+                            <input type="text" id="code" style="border: none; display: none;">
+                            <label for="Message" class="form-label">هل ترغب في حذف هذا البرنامج ؟</label>
+                            </div>
+                            <br /> <br />
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-danger" id="Dbtn">حذف</button>
+                                <span style="color: white;">h</span>
+                                <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">إلغاء</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- واجهة نجاح التنفيذ -->
+<div class="modal fade" id="OKModal" tabindex="-1" role="dialog" aria-labelledby="OKModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="direction: rtl;">
+                <h5 class="modal-title" id="WarningModalLabel">رسالة نجاح</h5>
+                <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="popup-form" id="popupForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class=" text-end">
+                            <input type="text" id="Co" style="display: none;">
+                                <label for="eventName" class="form-label">تمت العملية بنجاح</label>
+                            </div>
+                            <br /> <br />
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-primary me" id="OK">موافق</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
 <script>
-    $(document).on('click', '#Ebtn', function(){
-    var subjectCode = $('#Esubject').val();
+ document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("sbtn").addEventListener("click", function() {
+         var programName = document.getElementById("programName").value;
+         var programID = document.getElementById("programID").value;
+         var subjectName = document.getElementById("subjectName").value;
+         var subjectCode = document.getElementById("subjectCode").value;
+         var numberHour = document.getElementById("NumberHour").value;
+            if (programName === '' || programID === '' || subjectName === '' || subjectCode === '' || numberHour === '') {
+                alert("يرجى ملء جميع الحقول");
+            } else {
+                var programID = $('#programName').val();
+                var subjectName = $('#subjectName').val();
+                var subjectCode = $('#subjectCode').val();
+                var numberHour = $('#NumberHour').val();
+                 $.ajax({
+                        url: 'insert_subject.php',
+                        type: 'POST',
+                        data: {
+                            programID: programID,
+                            subjectName: subjectName,
+                            subjectCode: subjectCode,
+                            numberHour: numberHour
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $('#insertModal').modal('hide');
+                            $('#OKModal').modal('show');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+            }
+        });
+    });
+$('#NumberHour').on('input', function() {
+         var enteredValue = parseFloat($(this).val());
+        if (enteredValue > 9) {
+            alert("القيمة المدخلة يجب ألا تتجاوز " + 9);
+            $(this).val(0);
+            }
+});
+$(document).ready(function(){
+    var originalHour;
+    $('body').on('click', '.btn-warning', function(){
+        var row = $(this).closest('tr');
+        var Scode = row.find('td:eq(0)').text();
+        var Sname = row.find('td:eq(1)').text();
+        var Hour = row.find('td:eq(2)').text();
+        originalHour = Hour;
+        $('#Ecode').val(Scode); 
+        $('#Esubject').val(Sname);
+        $('#Hour').val(Hour);
+        $('#Hour').attr('max', 9);
+        $('#editModal').modal('show');
+        $('#Hour').on('input', function() {
+            var enteredValue = parseFloat($(this).val());
+            if (enteredValue > 9) {
+                alert("القيمة المدخلة يجب ألا تتجاوز " + 9);
+                $(this).val(originalHour);
+            }
+        });
+    });
+});
+$(document).on('click', '#Ebtn', function(){
+    var subjectName = $('#Esubject').val();
+    var Hour = $('#Hour').val();
     $.ajax({
-        url: 'update_data.php',
+        url: 'update_subject.php',
         type: 'POST',
         data: {
-            subjectCode: subjectCode
+            subjectName: subjectName,
+            Hour: Hour
         },
         success: function(response) {
             console.log(response);
@@ -456,6 +598,50 @@ $Program_Name = $row_program['Program_Name'];
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
         }
+    });
+});
+$(document).ready(function(){
+    $('body').on('click', '.DeleteBtn', function(){
+        var row = $(this).closest('tr');
+        var Sname = row.find('td:eq(1)').text();
+        var Hour = row.find('td:eq(2)').text();
+        var code = row.find('td:eq(0)').text();
+        $('#Dsubject').val(Sname);
+        $('#Dhour').val(Hour);
+        $('#code').val(code);
+        $('#WarningModal').modal('show');
+    });
+});
+$(document).on('click', '#Dbtn', function(){
+    var subjectName = $('#Dsubject').val();
+    var Hour = $('#Dhour').val();
+    var code = $('#code').val();
+    $.ajax({
+        url: 'delete_subject.php',
+        type: 'POST',
+        data: {
+            subjectName: subjectName,
+            Hour: Hour,
+            code: code
+        },
+        success: function(response) {
+            console.log(response);
+            $('#WarningModal').modal('hide');
+            $('#OKModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+});
+$(document).on('click', '#OK', function(){
+    $('#OKModal').modal('hide');
+    location.reload();
+});
+$(document).ready(function(){
+    $('body').on('click', '.close-left', function(){
+        $('#editModal').modal('hide');
+        $('#WarningModal').modal('hide');
     });
 });
 </script>

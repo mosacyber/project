@@ -163,40 +163,46 @@ for ($i = 0; $i < 9; $i++) {
             }
             $result2 = $conn->query($sql2);
             $row2 = $result2->fetch_assoc();
-
-            if ($row2) {
-                // الحصول على Faculty_member_ID فقط إذا كانت هناك نتائج
-                $faculty_member_id = "";
-                if ($_SESSION['role'] == '1') {
-                  $faculty_member_id .= $row2["Faculty_member_ID"];
-                }else {
-                  $faculty_member_id .= $row2["student_id"];
+    
+                if ($result2->num_rows > 0) {
+                  $Pos = '';
+                  if($_SESSION['role'] == 1){
+                    $Pos = 'مرشد أكاديمي'; 
                 }
-                $pos = '';
-                if($_SESSION['role'] == 1){
-                  $Pos = 'مرشد أكاديمي'; 
-              }
-              else{
-                $Pos = 'طالب';
-                }
-                // استعلام SQL لاسترداد بيانات من جدول accounts باستخدام Faculty_member_ID
-                $sql = "select * , CONCAT(First_Name, ' ',Last_Name) AS 'full' from accounts where Account_ID = $faculty_member_id";
-                $result = $conn->query($sql);
-
-                // التحقق من وجود بيانات للعرض
-                if ($result->num_rows > 0) {
-                    // عرض البيانات
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$Pos.'</p></div> </a></li>';
+                else{
+                  $Pos = 'طالب';
+                  }
+                  // تخزين القيم المحصل عليها في مصفوفة مؤقتة
+                  $faculty_member_ids = [];
+                  while ($row2 = $result2->fetch_assoc()) {
+                      if ($_SESSION['role'] == '1') {
+                          $faculty_member_ids[] = $row2["Faculty_member_ID"];
+                      } else {
+                          $faculty_member_ids[] = $row2["student_id"];
+                      }
+                  }
+                  foreach ($faculty_member_ids as $faculty_member_id) {
+                  
+                    // استعلام SQL لاسترداد بيانات المرشد الأكاديمي باستخدام Faculty_member_ID
+                    $sql3 = "SELECT * , CONCAT(First_Name, ' ', Last_Name) AS 'full' FROM accounts WHERE Account_ID = $faculty_member_id";
+                    $result3 = $conn->query($sql3);
+                
+                    // التحقق من وجود بيانات للعرض
+                    if ($result3->num_rows > 0) {
+                        // عرض البيانات
+                        while ($row3 = $result3->fetch_assoc()) {
+                            echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row3["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row3["full"].'</p><p class="u-designation">'.$Pos.'</p></div> </a></li>';
+                        }
+                    } else {
+                        // إذا لم يتم العثور على بيانات
+                        echo "
+                        <div class='alert alert-danger'>
+                        تنبيه
+                        <hr>
+                        <tr><td colspan='4'>لا يوجد بيانات لعرضها</td></tr></div>";
                     }
-                } else {
-                    // إذا لم يتم العثور على بيانات
-                    echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
+                } 
                 }
-            } else {
-                // إذا لم يتم العثور على Faculty_member_ID
-                echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
-            }
             ?>
               </ul></div></div>
 

@@ -318,25 +318,29 @@ if ($row2) {
             $result2 = $conn->query($sql2);
             $row2 = $result2->fetch_assoc();
 
-            if ($row2) {
-                // الحصول على Faculty_member_ID فقط إذا كانت هناك نتائج
-                $faculty_member_id = "";
-                if ($_SESSION['role'] == '1') {
-                  $faculty_member_id .= $row2["Faculty_member_ID"];
-                }else {
-                  $faculty_member_id .= $row2["student_id"];
-                }
-                $Pos = '';
-                if($_SESSION['role'] == 1){
-                  $Pos = 'مرشد أكاديمي'; 
+            if ($result2->num_rows > 0) {
+              $pos = '';
+              if($_SESSION['role'] == 1){
+                $Pos = 'مرشد أكاديمي'; 
+            }
+            else{
+              $Pos = 'طالب';
               }
-              else{
-                $Pos = 'طالب';
-                }
+              // تخزين القيم المحصل عليها في مصفوفة مؤقتة
+              $faculty_member_ids = [];
+              while ($row2 = $result2->fetch_assoc()) {
+                  if ($_SESSION['role'] == '1') {
+                      $faculty_member_ids[] = $row2["Faculty_member_ID"];
+                  } else {
+                      $faculty_member_ids[] = $row2["student_id"];
+                  }
+              }
+              foreach ($faculty_member_ids as $faculty_member_id) {
+              
                 // استعلام SQL لاسترداد بيانات المرشد الأكاديمي باستخدام Faculty_member_ID
                 $sql3 = "SELECT * , CONCAT(First_Name, ' ', Last_Name) AS 'full' FROM accounts WHERE Account_ID = $faculty_member_id";
                 $result3 = $conn->query($sql3);
-
+            
                 // التحقق من وجود بيانات للعرض
                 if ($result3->num_rows > 0) {
                     // عرض البيانات
@@ -351,13 +355,7 @@ if ($row2) {
                     <hr>
                     <tr><td colspan='4'>لا يوجد بيانات لعرضها</td></tr></div>";
                 }
-            } else {
-                // إذا لم يتم العثور على Faculty_member_ID
-                echo "
-                <div class='alert alert-danger'>
-                تنبيه
-                <hr>
-                <tr><td colspan='4'>لا يوجد بيانات لعرضها</td></tr></div>";
+            } 
             }
             ?>
             </ul></ul></div></div></div></div></div>
