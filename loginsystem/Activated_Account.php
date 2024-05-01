@@ -242,6 +242,13 @@ const popoverList = [...popoverTriggerList].map (popoverTriggerEl=> new bootstra
 </body>
 </html>
 <?php
+
+
+if (isset($_SESSION['alert'])) {
+  $alertMessage = $_SESSION['alert'];
+  echo "<script>alert('$alertMessage');</script>";
+  unset($_SESSION['alert']); 
+}
     include('connect/connection.php');
 
     if (isset($_POST["register"])) {
@@ -282,7 +289,7 @@ const popoverList = [...popoverTriggerList].map (popoverTriggerEl=> new bootstra
                     $mail->Username = '';
                     $mail->Password = '';
     
-                    $mail->setFrom('اكتبوا الايميل', 'فريق الدعم');
+                    $mail->setFrom('', 'فريق الدعم');
                     $mail->addAddress($email);
     
                     $mail->isHTML(true);

@@ -71,29 +71,36 @@ if ($mysqli->connect_error) {
 }*/
 
 $errors = [];
-/*  عشان اذا حدث الصفحه الاولى تبقا بيانات  */
 $Account_ID = '';
-/*  هنا يقوم بفلتره المدخل حتى لو في ثغره يقوم بفلترتها  */
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $Account_ID = mysqli_real_escape_string($mysqli, $_POST['Account_ID']);
-  $Password = mysqli_real_escape_string($mysqli, $_POST['Password']);
+    $Account_ID = mysqli_real_escape_string($mysqli, $_POST['Account_ID']);
+    $Password = mysqli_real_escape_string($mysqli, $_POST['Password']);
 
-  if (empty($Account_ID)) {
-    array_push($errors, "الرقم الجامعي  ");
-  }
-  if (empty($Password)) {
-    array_push($errors, "كلمة المرور مطلوبة");
-  }
-
-  // التحقق من عدم وجود أخطاء قبل استعلام قاعدة البيانات
-  if (!count($errors)) {
-    $userExists = $mysqli->query("SELECT * FROM accounts WHERE Account_ID='$Account_ID' LIMIT 1");
-    if (!$userExists) {
-      die("حدث خطأ أثناء تنفيذ الاستعلام: " . $mysqli->error);
+    if (empty($Account_ID)) {
+        array_push($errors, "الرقم الجامعي مطلوب");
+    }
+    if (empty($Password)) {
+        array_push($errors, "كلمة المرور مطلوبة");
     }
 
-    if ($userExists->num_rows) {
-      $foundUser = $userExists->fetch_assoc();
+    if (!count($errors)) {
+        $query = "SELECT * FROM accounts WHERE Account_ID = '$Account_ID' LIMIT 1";
+        $userExists = $mysqli->query($query);
+
+        if (!$userExists) {
+            die("حدث خطأ أثناء تنفيذ الاستعلام: " . $mysqli->error);
+        }
+
+        if ($userExists->num_rows) {
+            $foundUser = $userExists->fetch_assoc();
+            // التحقق من حالة الحساب
+            if ($foundUser['Status_ID'] == '0') {
+              $_SESSION['alert'] = "حسابك بحاجة إلى التنشيط. يرجى تنشيط حسابك للمتابعة.";
+                header('location: loginsystem/Activated_Account.php'); // توجيه المستخدم إلى صفحة التنشيط
+                exit;
+            }
+   
       if (password_verify($Password, $foundUser['Password'])) {
         $_SESSION['logged_in'] = true;
         $_SESSION['Account_ID'] = $foundUser['Account_ID']; // تم تصحيح اسم العمود
@@ -293,8 +300,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php include './errors/errors.php'; ?>
                 <div align="center">
                   <button type="submit" class="btn btn-primary btn-block llcol">تسجيل الدخول</button>
-                  <a href="loginsystem/Activated_Account.php"><button type="button"
-                      class="btn btn-primary btn-block llcol">انشاء - تفعيل الحساب الجامعي</button></a>
+                  <!-- <a href="loginsystem/Activated_Account.php"><button type="button"
+                      class="btn btn-primary btn-block llcol">انشاء - تفعيل الحساب الجامعي</button></a> -->
                 </div>
               </form>
 

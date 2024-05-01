@@ -182,9 +182,19 @@ for ($i = 0; $i < 9; $i++) {
                       }
                   }
                   foreach ($faculty_member_ids as $faculty_member_id) {
-                  
+                      $sql3 = "";
                     // استعلام SQL لاسترداد بيانات المرشد الأكاديمي باستخدام Faculty_member_ID
-                    $sql3 = "SELECT * , CONCAT(First_Name, ' ', Last_Name) AS 'full' FROM accounts WHERE Account_ID = $faculty_member_id";
+                    if ($_SESSION['role'] == 1) {
+                    $sql3 .= "SELECT DISTINCT a.* , CONCAT(First_Name, ' ', Last_Name) AS 'full' FROM accounts a 
+                    JOIN current_semester s ON  s.Faculty_member_ID = a.Account_ID 
+                    WHERE s.Faculty_member_ID = $faculty_member_id AND s.student_id = '{$_SESSION['Account_ID']}'";
+                    }else {
+                      $sql3 .= "SELECT DISTINCT a.*, CONCAT(First_Name, ' ', Last_Name) AS 'full' 
+                      FROM accounts a 
+                      JOIN current_semester s ON s.student_id = a.Account_ID 
+                      WHERE s.Faculty_member_ID = '{$_SESSION['Account_ID']}'";
+                    }
+                  }
                     $result3 = $conn->query($sql3);
                 
                     // التحقق من وجود بيانات للعرض
@@ -192,7 +202,8 @@ for ($i = 0; $i < 9; $i++) {
                         // عرض البيانات
                         while ($row3 = $result3->fetch_assoc()) {
                             echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row3["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row3["full"].'</p><p class="u-designation">'.$Pos.'</p></div> </a></li>';
-                        }
+                                                   
+                          }
                     } else {
                         // إذا لم يتم العثور على بيانات
                         echo "
@@ -202,7 +213,7 @@ for ($i = 0; $i < 9; $i++) {
                         <tr><td colspan='4'>لا يوجد بيانات لعرضها</td></tr></div>";
                     }
                 } 
-                }
+                
             ?>
               </ul></div></div>
 
@@ -215,7 +226,7 @@ for ($i = 0; $i < 9; $i++) {
                       <?php 
                       if($_GET['subject_code']=="Advisor"){
                         //خاصه للمرشد الاكاديمي
-                        $sql2 = "SELECT * , CONCAT(First_Name, ' ', Last_Name)  'full' FROM accounts WHERE Account_ID = {$_GET['id']}";
+                        $sql2 = "SELECT * , CONCAT(First_Name, ' ', Last_Name)  'full' FROM accounts WHERE Account_ID = (select Academic_Advisor_ID from academic_advisor_for_student where student_id ='{$_SESSION['Account_ID']}' )";
                         $result2 = $conn->query($sql2);
                         
                         // التحقق من وجود بيانات للعرض
@@ -356,7 +367,7 @@ for ($i = 0; $i < 9; $i++) {
 
                   <div class="attachments-sections">
                         <form method="POST">
-                          <div class="input-group" style="margin-buttun=0;">
+                          <div class="input-group" style="margin-buttun: 0;">
                               <input type="text" class="form-control" name="message_contents" placeholder="أدخل رسالتك هنا..." />
                               <div class="input-group-append">
                                   <button class="btn btn-primary" type="submit" name="send_message">Send</button>
