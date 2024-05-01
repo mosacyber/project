@@ -148,13 +148,13 @@ if (isset($_POST['subjectCode'])) {
                 echo "</div>";
             }
         } else {
-            echo "<p>لا يوجد طلاب مسجلين في هذا الموضوع.</p>";
+            echo "<p>لا يوجد طلاب مسجلين في هذا القمرر.</p>";
         }
     } else {
-        echo "<p>لا يوجد أنواع عمل دراسي مسجلة لهذا الموضوع.</p>";
+        echo "<p>لا يوجد أنواع عمل دراسي مسجلة لهذا المقرر.</p>";
     }
 } else {
-    echo "<p>لم يتم تقديم معرف الموضوع.</p>";
+    echo "<p>لم يتم تقديم معرف المقرر.</p>";
 }
 ?>
 <button id='close-table-btn' class='btn btn-danger'>إغلاق الجدول</button>
@@ -233,7 +233,7 @@ echo "
                             </div>
                             <div class="input-group mb-3" id="grade">
                                 <span class="input-group-text">الدرجة</span>
-                                <input type="number" class="form-control" id="gradeInput" name="gradeInput" value="">
+                                <input type="number" class="form-control" id="gradeInput" min="0" name="gradeInput" value="">
                             </div>
                             <input type="hidden" class="form-control" id="grade_insert" name="grade_insert" value="">
                         </div>
@@ -288,7 +288,7 @@ echo "
 
                             <div class="mb-3">
                                 <label for="Ework" class="form-label">درجة الطالب</label>
-                                <input type="number" class="form-control" id="Ework" name="Ework" value="" max="" />
+                                <input type="number" class="form-control" min="0" id="Ework" name="Ework" value="" max="" />
                                 <input type="hidden" class="form-control" id="Full_grade" name="Full_grade" value=""
                                     max="" />
                             </div>
