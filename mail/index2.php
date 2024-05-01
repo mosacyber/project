@@ -187,7 +187,7 @@ for ($i = 0; $i < 9; $i++) {
                     if ($_SESSION['role'] == 1) {
                     $sql3 .= "SELECT DISTINCT a.* , CONCAT(First_Name, ' ', Last_Name) AS 'full' FROM accounts a 
                     JOIN current_semester s ON  s.Faculty_member_ID = a.Account_ID 
-                    WHERE s.Faculty_member_ID = $faculty_member_id AND s.student_id = '{$_SESSION['Account_ID']}'";
+                    WHERE a.Account_ID =(select Academic_Advisor_ID from academic_advisor_for_student where student_id ='{$_SESSION['Account_ID']}')";
                     }else {
                       $sql3 .= "SELECT DISTINCT a.*, CONCAT(First_Name, ' ', Last_Name) AS 'full' 
                       FROM accounts a 
