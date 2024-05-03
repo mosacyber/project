@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Melody Admin</title>
+    <title>الطلاب</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
@@ -253,10 +253,11 @@ if ($result->num_rows > 0) {
         </div>
         <!-- content-wrapper ends -->
         </div>
+        <br>
+        <br>
+
         <div class="page-header">
-          <h3 class="page-title">
-            طلاب المرشد الاكاديمي
-          </h3>
+          <h3 class="page-title">الطلاب المشرف عليهم كمرشد أكاديمي         </h3>
         </div>
 
         <div class="row">

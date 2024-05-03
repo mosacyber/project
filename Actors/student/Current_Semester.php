@@ -76,9 +76,6 @@ for ($i = 0; $i < 9; $i++) {
         <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
 
-      
-        
-
               </ul>
               <div class="tab-content pt-2">
 
@@ -167,14 +164,7 @@ if ($result4->num_rows > 0) {
     $Degree = "درجة غير معروفة";
     $Major = "تخصص غير معروف";
 }
-
-
-
-
                 ?>            
-
-
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">الاسم :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
@@ -209,22 +199,9 @@ if ($result4->num_rows > 0) {
                     <div class="col-lg-3 col-md-4 label">الكلية :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $College_Name ?></div>
                   </div>
-
-
-
           </div>
         </div><!-- End Revenue Card -->
-
-
           </div>  
-          
-          
-          
-          
-          
-          
-          
-          
           <br><br>
           <div class="page-header">
             <h3 class="page-title">
@@ -233,17 +210,6 @@ if ($result4->num_rows > 0) {
           </div>
 
           <div class="row">
-            
-
-
-
-
-
-
-
-
-
-        <!-- Sales Card -->
         <div class="col-xxl-12 col-md-12">
   <div class="card info-card sales-card">
     <div class="card-body">
@@ -373,9 +339,6 @@ if ($result) {
     <div class="card-body">
       <div class="table-responsive">
 
-
-
-
 <?php
 
   //  للتحقق من السشن اذا موجود او لا
@@ -438,28 +401,6 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
     </div>
   </div>
@@ -481,27 +422,11 @@ $conn->close();
     progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
 
 </script>
-
-
-
-          </div>
-       
-       
-       
-
-
+          </div>    
         </div>
-        <!-- content-wrapper ends -->
-
-
-          </div>
+      </div>
+    </div>
        
-       
-       
-
-
-        </div>
-        <!-- content-wrapper ends -->
 
         
 <?php
@@ -515,8 +440,6 @@ for ($i = 0; $i < 9; $i++) {
 }
 ?>
 
-
-
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -526,20 +449,6 @@ for ($i = 0; $i < 9; $i++) {
   <!-- container-scroller -->
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 // Download and print JavaScript functions (presumably defined elsewhere)

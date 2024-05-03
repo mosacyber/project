@@ -5,7 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Melody Admin</title>
+  <title>المقررات</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- تضمين ملفات CSS -->
@@ -254,9 +255,11 @@ if ($result->num_rows > 0) {
         </div>
         </div>
         </div>
+  
                 </div>
+                <br>
                 <div class="page-header">
-                    <h3 class="page-title">المواد الخاصة  بعضو هيئة التدريس <span> <? echo $_SESSION['Account_ID']?></span></h3>
+                    <h3 class="page-title">المقررات المسجلة<span> <? echo $_SESSION['Account_ID']?></span></h3>
                 </div>
 
                 <div class="row">
@@ -298,7 +301,7 @@ if ($result->num_rows > 0) {
 
             }
         } else {
-            echo "0 results";
+            echo "<h3>لا توجد مقررات في الفصل الحالي.</h3>";
         }
         ?>
     </div>
@@ -350,71 +353,8 @@ for ($i = 0; $i < 9; $i++) {
   <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-
-  <!-- واجهة التعديل -->
-  <!-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="popup-form" id="popupForm">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="DName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="DName" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="AName" class="form-label">Name</label><br>
-                                <select class="form-select" id="AName">
-                                    <option value="">Enter Name name</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="BName" class="form-label">Name</label><br>
-                                <select class="form-select" id="BName">
-                                    <option value="">Enter Name name</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="CName" class="form-label">Name</label><br>
-                                <select class="form-select" id="CName">
-                                    <option value="">User Name</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Note</label>
-                                <textarea class="form-control" id="descriptiond" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Txtt" class="form-label">name</label>
-                                <input type="text" class="form-control" id="Txtt"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="Txt" class="form-label">Name</label>
-                                <input type="Text" class="form-control" id="Txt"/>
-                            </div>
-                            <div class="input-group mt-3">
-                                <span class="input-group-text">grade</span>
-                                <input type="text" class="form-control" id="durationd" readonly />
-                            </div>
-                        </div>
-                    </div>
-                    <br /> <br />
-                    <button class="btn btn-primary" id="sbtn">Insert</button>
-                    <button class="btn btn-secondary" id="closeForm">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
+  <!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller -->
+  <!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller -->
 
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>

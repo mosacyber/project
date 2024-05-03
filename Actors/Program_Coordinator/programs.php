@@ -10,7 +10,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Melody Admin</title>
+    <title>البرنامج</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -52,18 +52,6 @@
             color: #fff;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         /* للجدول  */
         .datatable-table>thead>tr>th {
             vertical-align: bottom;
@@ -77,8 +65,6 @@
 
 <body class="rtl">
     <div class="container-scroller">
-
-
         <?php
         $navbar_path = "Navbar/rtl/nav.php";
         for ($i = 0; $i < 9; $i++) {
@@ -89,45 +75,27 @@
             }
         }
         ?>
-
-
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="raw">
-
                 </div>
-
-
                 <div class="row">
-
-
-
-
-
                     <!-- Revenue Card -->
                     <div class="col-xxl-12 col-md-12">
                         <div class="card info-card revenue-card">
-
-
-
-
                             </ul>
                             <div class="tab-content pt-2">
-
                                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
                                     <?php
-
                                     if (isset($_SESSION['role'])) {
-                                        // استعلام SQL لاسترداد البيانات من جدول faculty_member
-                                    
-
-
+                                        // استعلام SQL لاسترداد البيانات من جدول faculty_member                  
                                         $sql_program = "SELECT * FROM program_coordinator WHERE Program_Coordinator_ID = $_SESSION[Account_ID]";
                                         $result_program = $conn->query($sql_program);
                                         $row_program = $result_program->fetch_assoc();
                                         $Program_ID = $row_program['Program_ID'];
+                                        $Program_date = $row_program['From_To'];
                                         $_SESSION['Program_ID'] = $row_program['Program_ID'];
                                         $sql = "SELECT * FROM faculty_member WHERE Faculty_member_ID = $_SESSION[Account_ID]";
                                         $result = $conn->query($sql);
@@ -172,9 +140,6 @@
         <p>لا يوجد بيانات عضو هيئة تدريس</p>
 </div>";
                                         }
-
-
-
                                         // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
                                         switch ($_SESSION['role']) {
                                             case '1':
@@ -282,10 +247,6 @@
                         </div>
                     </div>
 
-
-
-
-
                 </div><br>
                 <div class="col-lg-12">
 
@@ -297,22 +258,15 @@
                             $result_program = $conn->query($sql_program);
                             $row_program = $result_program->fetch_assoc();
                             $Program_Name = $row_program['Program_Name'];
-
-
-
                             ?>
                             <h4 class="card-title">البرنامج : <?php echo $Program_Name ?></h4>
+                            <h4 class="card-title">تاريخ تعيينك كمنسق للبرنامج : <?php echo $Program_date ?></h4>
 
                         </div>
                     </div>
-
-
-
                 </div><br>
                 <!-- content-wrapper ends -->
                 <div class="col-lg-12">
-
-
                     <div class="card">
                         <div class="card-body">
                             <button class='btn btn-success mb-3' id='add-data-btn' data-toggle='modal'
@@ -368,7 +322,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header" style="direction: rtl;">
-                                            <h5 class="modal-title" id="insertModalLabel">أضافة مقرر الى برنامج
+                                            <h5 class="modal-title" id="insertModalLabel">إضافة مقرر الى برنامج
                                                 <?php echo $Program_Name; ?> </h5>
                                             <button type="button" class="close-left btn btn-danger" data-dismiss="modal"
                                                 aria-label="Close">
@@ -387,7 +341,7 @@
                                                                 readonly>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="programID" class="form-label">رقم
+                                                            <label for="programID" class="form-label">رمز
                                                                 البرنامج</label><br>
                                                             <input type="number" class="form-control" name="programID"
                                                                 id="programID" value="<?php echo $Program_ID; ?>"
@@ -402,7 +356,7 @@
                                                                 id="subjectName" value="" required>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="subjectCode" class="form-label">كود
+                                                            <label for="subjectCode" class="form-label">رمز
                                                                 المقرر</label><br>
                                                             <input type="text" class="form-control" name="subjectCode"
                                                                 id="subjectCode" value="" required>
@@ -416,7 +370,7 @@
                                                     </div>
                                                 </div>
                                                 <br /> <br />
-                                                <button class="btn btn-primary" id="sbtn">أضافة</button>
+                                                <button class="btn btn-primary" id="sbtn">إضافة</button>
                                                 <button class="btn btn-secondary" data-dismiss="modal"
                                                     aria-label="Close">إلغاء</button>
                                             </div>

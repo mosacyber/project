@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Melody Admin</title>
+  <title>التقارير</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -234,6 +234,7 @@ if ($result->num_rows > 0) {
         </div>
           </div>
           <br>
+          <br>
           <div class="page-header">
             <h3 class="page-title">
 التقارير
@@ -251,7 +252,7 @@ if ($result->num_rows > 0) {
         <div class="col-lg-4 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">معدلات الطلاب</h4>
+                    <h4 class="card-title">معدلات الطلاب:</h4>
                     <canvas id="chart2"></canvas>
 
                 </div>
@@ -371,20 +372,10 @@ if ($result_departments->num_rows > 0) {
 $department_names = array_keys($students_count_per_department);
 $students_count = array_values($students_count_per_department);
 ?>
-
-
-
-
-
-
-
-
-
-
         <div class="col-lg-4 ">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">عدد الطلاب لكل  قسم</h4>
+                    <h4 class="card-title">عدد الطلاب لكل  قسم:</h4>
                     <!-- عنصر Canvas لرسم الرسم البياني -->
                     <canvas id="barChart3"></canvas>
                 </div>
@@ -437,25 +428,10 @@ $students_count = array_values($students_count_per_department);
     );
 </script>
 
-
-
-
-        
-
-
-
-
-
-
-
- 
-
-
-
 <div class="col-lg-2">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">عدد الطلاب</h4>
+            <h4 class="card-title">عدد الطلاب:</h4>
             <?php
   
 
@@ -473,30 +449,6 @@ $students_count = array_values($students_count_per_department);
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 
@@ -539,20 +491,16 @@ if ($result->num_rows > 0) {
     echo "لا توجد بيانات";
 }
 ?>
-
-
-
         <div class="col-lg-2 ">
             <div class="card"><!--  academic_record اعلى سمستر -->
                 <div class="card-body">
-                <h4 class="card-title">السمستر الحالي | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
+                <h4 class="card-title">السنة الحالية | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
                 <h4 class="card-title">الفصل الدراسي  | <?php echo $name ?></h4>
-
                 <hr>
-                    <h4 class="card-title">عدد الطلاب المتفوقين</h4>
+                    <h4 class="card-title">عدد الطلاب المتفوقين:</h4>
                     <h3><?php echo $count_students1 + $count_students2  ?></h3>
                     <br>
-                    <h4 class="card-title">عدد الطلاب المتعثرين</h4>
+                    <h4 class="card-title">عدد الطلاب المتعثرين:</h4>
                     <h3><?php echo $count_students5  ?></h3>
                 </div>
             </div>
@@ -561,8 +509,6 @@ if ($result->num_rows > 0) {
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-
 <?php
 
 
@@ -570,11 +516,6 @@ if ($result->num_rows > 0) {
     $Number2 = 5;
     $Number3 = 5;
     $Number4 = 5;
-
-
-
-
-
     ?>
     <!-- الكود اللازم لرسم الرسم البياني -->
     <script>
@@ -609,12 +550,7 @@ if ($result->num_rows > 0) {
 
     </script>
 </div>
-
-
-
-        
-
-        
+       
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {

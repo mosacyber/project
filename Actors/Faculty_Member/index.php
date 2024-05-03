@@ -8,7 +8,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Melody Admin</title>
+  <title>الصفحة الرئيسية</title>
+
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -22,10 +23,7 @@ for ($i = 0; $i < 9; $i++) {
         break;
     }
 }
-
-
     ?>
-
   <style>
     <?php
     $navbar_path = "tools/tools.php";
@@ -66,8 +64,6 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -94,33 +90,6 @@ for ($i = 0; $i < 9; $i++) {
            عضو هيئة التدريس 
             </h3>
           </div>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- Revenue Card -->
         <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
@@ -256,7 +225,6 @@ if ($result->num_rows > 0) {
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
                   </div>
 
-
 <div class="row">
     <div class="col-lg-3 col-md-4 label">التخصص</div>
     <div class="col-lg-9 col-md-8"><?php echo  $Major  ?></div>
@@ -276,30 +244,9 @@ if ($result->num_rows > 0) {
     <div class="col-lg-3 col-md-4 label">الكليه</div>
     <div class="col-lg-9 col-md-8"><?php echo $college ?></div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
-       
-       
-       
-       
-
-
         </div>
-        <!-- content-wrapper ends -->
-
-        
+        <!-- content-wrapper ends -->        
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {
@@ -310,9 +257,6 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
-
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -322,20 +266,6 @@ for ($i = 0; $i < 9; $i++) {
   <!-- container-scroller -->
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 // Download and print JavaScript functions (presumably defined elsewhere)

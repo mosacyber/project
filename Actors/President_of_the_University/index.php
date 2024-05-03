@@ -8,10 +8,9 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Melody Admin</title>
+  <title>الصفحة الرئيسية</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
 
   <?php
     $navbar_path = "tools/css.php";
@@ -22,8 +21,6 @@ for ($i = 0; $i < 9; $i++) {
         break;
     }
 }
-
-
     ?>
 
   <style>
@@ -66,8 +63,6 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -91,43 +86,12 @@ for ($i = 0; $i < 9; $i++) {
           </div>
           <div class="page-header">
             <h3 class="page-title">
- المرشد الاكاديمي
+مدير الجامعة
             </h3>
           </div>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- Revenue Card -->
         <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
-
-      
-        
-
               </ul>
               <div class="tab-content pt-2">
 
@@ -178,10 +142,7 @@ if ($result->num_rows > 0) {
     <hr>
         <p>لا يوجد بيانات عضو هيئة تدريس</p>
 </div>";
-}
-
-    
-    
+} 
     // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
     switch ($_SESSION['role']) {
         case '1':
@@ -276,30 +237,9 @@ if ($result->num_rows > 0) {
     <div class="col-lg-3 col-md-4 label">الكليه</div>
     <div class="col-lg-9 col-md-8"><?php echo $college ?></div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
-       
-       
-       
-       
-
-
         </div>
-        <!-- content-wrapper ends -->
-
-        
+        <!-- content-wrapper ends -->    
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {
@@ -310,9 +250,6 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
-
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -320,22 +257,7 @@ for ($i = 0; $i < 9; $i++) {
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 // Download and print JavaScript functions (presumably defined elsewhere)
@@ -360,5 +282,4 @@ for ($i = 0; $i < 9; $i++) {
   }
 }
 ?>
-
 </html>
