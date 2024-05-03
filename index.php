@@ -24,30 +24,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == '1') {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $connection = [
   'host' => 'localhost',
   'user' => 'root',
@@ -64,11 +40,6 @@ if ($mysqli->connect_error) {
 
   die("Error connecting to database" . $mysqli->connect_error);
 }
-
-
-/* if(isset($_SESSION['logged_in'])) {
-  header('location: index.php');
-}*/
 
 $errors = [];
 $Account_ID = '';
@@ -153,18 +124,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   <!-- style css File RTL-->
   <link rel="stylesheet" href="assets/css_rtl/style.css" />
-
   <!-- style css File Ltr-->
   <!-- <link rel="stylesheet" href="css_ltr/style.css" /> -->
-
   <!-- Title Icon -->
   <link rel="icon" href="assets/img/fav-icon.png" />
-
   <title>تسجيل الدخول</title>
   <link href="assets/css/navbar.css" rel="stylesheet">
-
-
-
   <link href="assets/css/navbar.css" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -178,23 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       font-size: large;
       border: 0px;
     }
-
-
-
-
-
-
-
     .navbar {
       margin-bottom: 20px;
       box-shadow: 0 4px 14px rgb(0 0 0 / 42%);
     }
-
-
-
-
-
-
     .llcol {
       background: linear-gradient(264.67deg, #7f7fd5 -9.26%, #86a8e7 45.82%, #91eae4 106.96%);
 
@@ -205,12 +157,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تجريبي</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
-
 <body>
-
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">تجريبي</a>
@@ -247,34 +195,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </div>
   </nav>
-
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-
 
   <!--
   container كامل الصفحه مع هوامش 
  container-fluid بدون هوامش 
  -->
-
-
-
-
-
-
   <div class="container-fluid">
-
-
-
-
     <div class="col-12 col-lg-12">
-
-
-
-
-
-
       <div class="row justify-content-center align-items-center vh-100">
         <div class="col-6 col-lg-6">
           <div class="card">
@@ -304,8 +233,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       class="btn btn-primary btn-block llcol">انشاء - تفعيل الحساب الجامعي</button></a> -->
                 </div>
               </form>
-
-
             </div>
           </div>
         </div>
@@ -317,58 +244,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <img class='col-12 photo img-fluid' src="assets/img/uu.png" alt="">
               <img class='col-12 photo img-fluid' src="assets/img/fdfd1.png" alt="">
               <img class='col-12 photo img-fluid' src="https://shaguf.com/site/assets/img/stars.gif" alt="">
-
-
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-
-
-  <!-- Start Overlay Mobile -->
   <div class="overlay"></div>
-  <!-- End Overlay Mobile -->
-  <!-- Start Navbar -->
-
-  <!-- End Navbar -->
-
-  <!-- Start Create Account Form -->
-
   </div>
-
-
-
-
-
-
-
   </div>
-  <!-- End Create Account Form -->
-
   <!--Bootstrap  -->
   <script src="assets/js/js/bootstrap.bundle.min.js"></script>
 
   <!-- javascript file -->
   <script src="assets/js/js/script.js"></script>
-
-
-
-
-
-
-
-
-
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -377,18 +269,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   </script>
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
-
 </html>
