@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Melody Admin</title>
+  <title>الدرجات</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
 
@@ -86,12 +85,19 @@
 
                 <?php
 
-$sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
-$result4 = $conn->query($sql4);
-if ($result4->num_rows > 0) {
-    $row4 = $result4->fetch_assoc();
+        $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
+        $result4 = $conn->query($sql4);
+    
+    if ($result4->num_rows > 0) {
 
-    $sql5 = "SELECT * FROM programs WHERE Program_ID = {$row4['Program_ID']}";
+      
+      $row4 = $result4->fetch_assoc();
+
+    $student_id= $row4['student_id'];
+    $Program_ID= $row4['Program_ID'];
+   
+
+    $sql5 = "SELECT * FROM programs WHERE Program_ID = $Program_ID";
     $result5 = $conn->query($sql5);
 
     $firstDigit = substr($row4['Program_ID'], 0, 1);
@@ -222,10 +228,11 @@ if ($result4->num_rows > 0) {
           </div>
         </div><!-- End Revenue Card -->
         </div>
+        <br>
+
         <div class="page-header">
           <h3 class="page-title">
-            النتائج
-            المتوقعه من التنبؤ
+          درجات المقررات الحالية
           </h3>
         </div>
 
@@ -349,21 +356,7 @@ if ($result4->num_rows > 0) {
             }
           }
           </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+  
           <hr>
             ';
           } ?>
@@ -452,45 +445,137 @@ if ($result4->num_rows > 0) {
           <h1></h1>
           <h1></h1>
 
-          <!-- Sales Card -->
+          <?php
+
+$sql8 = "SELECT * FROM students where student_id = $student_id";
+$result8 = $conn->query($sql8);
+if ($result8->num_rows > 0) {
+    $row8 = $result8->fetch_assoc();
+
+    $school_type = $row8['School_type_id'];
+    $school_percentage = $row8['school_percentage'];
+    $aptitude_test = $row8['aptitude_test'];
+    $acadmic_achievement = $row8['acadmic_achievement'];
+}
+
+$programming1=0; $programming2=0; $visual_programming =0;  $data_structure=0;
+   
+
+$sql10 = "SELECT grade FROM academic_record where student_id = $student_id AND subject_code = 'CSC101' 
+AND Semster_Number  = (SELECT MAX(Semster_Number) FROM academic_record)";
+
+$result10 = $conn->query($sql10);
+
+if ($result10->num_rows > 0) {
+
+    $row10 = $result10->fetch_assoc();
+    $programming1 = $row10['grade'];
+
+}
+
+$sql11 = "SELECT grade FROM academic_record where student_id = $student_id AND subject_code = 'CSC201' 
+AND Semster_Number  = (SELECT MAX(Semster_Number) FROM academic_record)";
+
+$result11 = $conn->query($sql11);
+
+if ($result11->num_rows > 0) {
+
+    $row11 = $result11->fetch_assoc();
+    $programming2 = $row11['grade'];
+
+}
+
+$sql12 = "SELECT grade FROM academic_record where student_id = $student_id AND subject_code = 'CSC301' 
+AND Semster_Number  = (SELECT MAX(Semster_Number) FROM academic_record)";
+
+$result12 = $conn->query($sql12);
+
+if ($result12->num_rows > 0) {
+
+    $row12 = $result12->fetch_assoc();
+    $visual_programming = $row12['grade'];
+
+}
+
+$sql13 = "SELECT grade FROM academic_record where student_id = $student_id AND subject_code = 'CSC220' 
+AND Semster_Number  = (SELECT MAX(Semster_Number) FROM academic_record)";
+
+$result13 = $conn->query($sql13);
+
+if ($result13->num_rows > 0) {
+
+    $row13 = $result13->fetch_assoc();
+    $data_structure = $row13['grade'];
+
+}
+$output=-1;
+$mark = "";
+    if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0 && $visual_programming > 0 && $data_structure > 0){
+      
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction.year3 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $data_structure $visual_programming $school_type 2>&1";
+
+      $output = shell_exec($command);
+
+    } elseif ($school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0) {
+     
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
+    
+      $output = shell_exec($command);
+ 
+    } else {
+
+      $output=-2;
+
+    }
+
+    
+
+    if ($output == 1 || $output == 0) {
+      $mark = "A+";
+    } else if ($output == 2) {
+      $mark = "A";
+    } else if ($output == 3) {
+      $mark = "B+";
+    } else if ($output == 4) {
+      $mark = "B";
+    } else if ($output == 5) {
+      $mark = "C+";
+    } else if ($output == 6) {
+      $mark = "C";
+    } else if ($output == 7) {
+      $mark = "D+";
+    } else if ($output == 8) {
+      $mark = "D";
+    } else if ($output == -2) {
+      $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
+    }else {
+      $mark = "F";
+    }
+     
+    
+            ?>
+         
           <div class="col-xxl-12 col-md-12">
             <div class="card info-card sales-card">
               <div class="card-body">
-                <h2>التنبؤ بالتخرج</h2>
+                <h2>التقدير المتوقع الحصول عليه عند التخرج:</h2>
                 <hr>
+                <br>
+                <?php 
+                
+                echo "
                 <h5>
-                  التقدير المتوقع الحصول عليه </h5><br>
-                <h5>
-                  B+
+                $mark
                 </h5>
-                <h5>
-                  اللون
-                </h5>
-                <!-- دائره بداخلها الدرجه b+ والدائره فيها اللون -->
-                <!--
-
-
-
- من
- student_gpa
- 
-  Semster_Number 
-
-مثلا 
-451
-الفصل الاول 
-452 الثاني
--->
+     
+                ";  
+                ?>
+               
               </div>
             </div>
           </div>
-          <!-- End Sales Card -->
-
-
+          
         </div>
-
-
-
 
 
       </div>

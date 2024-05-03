@@ -128,7 +128,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
       </li>
       <li class="nav-item">
       <a class="nav-link" href="'.$config['Actors'].'student/Current_Semester.php">
-        <i class="fa fa-home menu-icon"></i>
+        <i class="fa bi bi-journals menu-icon"></i>
         <span class="menu-title">
         المقررات المسجلة
         </span>
@@ -136,15 +136,15 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
     </li>
     <li class="nav-item">
     <a class="nav-link" href="'.$config['Actors'].'student/Prediction.php">
-      <i class="fa fa-home menu-icon"></i>
+      <i class="fa bi bi-journals menu-icon"></i>
       <span class="menu-title">
-      التنبؤ 
+      الدرجات
       </span>
     </a>
   </li>
     <li class="nav-item">
     <a class="nav-link" href="'.$config['Actors'].'student/acadmic_record.php">
-      <i class="fa fa-home menu-icon"></i>
+      <i class="fab fa-trello menu-icon"></i>
       <span class="menu-title">
 السجل الاكاديمي
       </span>
@@ -204,7 +204,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
   <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
     <i class="fa bi bi-journals menu-icon"></i>
     <span class="menu-title">
- المواد
+    المقررات
     </span>
   </a>
 </li>
@@ -282,7 +282,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '7') {
   <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
     <i class="fa bi bi-journals menu-icon"></i>
     <span class="menu-title">
- المواد
+    المقررات
     </span>
   </a>
 </li>
@@ -328,7 +328,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '2') {
 <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
   <i class="fa bi bi-journals menu-icon"></i>
   <span class="menu-title">
-المواد
+  المقررات
   </span>
 </a>
 </li>
@@ -394,7 +394,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '6') {
 <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
   <i class="fa bi bi-journals menu-icon"></i>
   <span class="menu-title">
-المواد
+  المقررات
   </span>
 </a>
 </li>
@@ -460,7 +460,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '5') {
 <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
   <i class="fa bi bi-journals menu-icon"></i>
   <span class="menu-title">
-المواد
+  المقررات
   </span>
 </a>
 </li>

@@ -10,7 +10,9 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Melody Admin</title>
+  <title>السجل الاكاديمي</title>
+
+  
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -224,11 +226,14 @@ if ($result4->num_rows > 0) {
           </div>
         </div><!-- End Revenue Card -->
         </div>
+        <br>
+
         <div class="page-header">
           <h3 class="page-title">
             السجل الاكاديمي
           </h3>
         </div>
+        <hr>
 
         <div class="row">
           <?php
