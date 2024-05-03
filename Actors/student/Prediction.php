@@ -188,38 +188,38 @@
 
 
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">الاسم</div>
+<div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الاسم :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
                   </div>
 
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">الرقم الجامعي</div>
+                    <div class="col-lg-3 col-md-4 label ">الرقم الجامعي :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
                   </div>
 
 
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">التخصص</div>
+                    <div class="col-lg-3 col-md-4 label ">التخصص :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $Major ?></div>
                   </div>
 
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">الدرجه العلميه</div>
+                    <div class="col-lg-3 col-md-4 label">الدرجة العلمية :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $Degree ?></div>
                   </div>
 
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">القسم</div>
+                    <div class="col-lg-3 col-md-4 label">القسم :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $Department_Name ?></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">الكليه</div>
+                    <div class="col-lg-3 col-md-4 label">الكلية :</div>
                     <div class="col-lg-9 col-md-8"><?php echo $College_Name ?></div>
                   </div>
 
@@ -228,7 +228,7 @@
           </div>
         </div><!-- End Revenue Card -->
         </div>
-        <br>
+        <br><br>
 
         <div class="page-header">
           <h3 class="page-title">
