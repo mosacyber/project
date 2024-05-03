@@ -66,75 +66,14 @@ echo '
     <ul class="navbar-nav navbar-nav-right">
      
 
-      <li class="nav-item dropdown">
-        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-          <i class="fas fa-bell mx-0"></i>
-          <span class="count">0</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-          <a class="dropdown-item">
-            <p class="mb-0 font-weight-normal float-left">You have 16 new notifications
-            </p>
-            <span class="badge badge-pill badge-warning float-right">View all</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-danger">
-                <i class="fas fa-exclamation-circle mx-0"></i>
-              </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-medium">Application Error</h6>
-              <p class="font-weight-light small-text">
-                Just now
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-warning">
-                <i class="fas fa-wrench mx-0"></i>
-              </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-medium">Settings</h6>
-              <p class="font-weight-light small-text">
-                Private message
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-info">
-                <i class="far fa-envelope mx-0"></i>
-              </div>
-            </div> 
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-medium">New user registration</h6>
-              <p class="font-weight-light small-text">
-                2 days ago
-              </p>
-            </div>
-          </a>
-        </div>
-      </li>
-      <li class="nav-item dropdown" >
-      <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="'.$config["app_url"].'mail/index.php" data-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-envelope mx-0"></i>
-      </a>
-    </li>
+
+
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
           <img src="../../assets/img/profile-img.png" alt="profile"/>
         </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-          <a class="dropdown-item">
-            <i class="fas fa-cog text-primary"></i>
-            الاعدادات
-          </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown">
+
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="'.$config["app_url"].'logout/logout.php">
             <i class="fas fa-power-off text-primary"></i>
@@ -213,7 +152,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
   </li>
   <li class="nav-item">
   <a class="nav-link" href="'.$config['app_url'].'mail">
-    <i class="fa fa-home menu-icon"></i>
+    <i class="fa bi bi-envelope-fill menu-icon"></i>
     <span class="menu-title">
 التواصل
     </span>
@@ -263,7 +202,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
 
   <li class="nav-item">
   <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
-    <i class="fa fa-home menu-icon"></i>
+    <i class="fa bi bi-journals menu-icon"></i>
     <span class="menu-title">
  المواد
     </span>
@@ -272,7 +211,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
 
   <li class="nav-item">
   <a class="nav-link" href="'.$config['app_url'].'mail">
-    <i class="fa fa-home menu-icon"></i>
+    <i class="fa bi bi-envelope-fill menu-icon"></i>
     <span class="menu-title">
 التواصل
     </span>
@@ -292,12 +231,20 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '4') {
    
     <li class="nav-item"> 
     <a class="nav-link" href="'.$config['Actors'].'Academic_Advisor/students.php">
+    <i class="fa bi bi-person-lines-fill menu-icon"></i>
+    <span class="menu-title">
     الطلاب 
+   </span>
+    
     </a>
     </li>
     <li class="nav-item d-none d-lg-block"> 
     <a class="nav-link" href="'.$config['Actors'].'Academic_Advisor/report.php">
+    <i class="fa bi bi-file-text menu-icon"></i>
+    <span class="menu-title">
     التقارير 
+   </span>
+     
     </a>
     </li>
   </ul>
@@ -333,7 +280,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '7') {
 
   <li class="nav-item">
   <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
-    <i class="fa fa-home menu-icon"></i>
+    <i class="fa bi bi-journals menu-icon"></i>
     <span class="menu-title">
  المواد
     </span>
@@ -342,7 +289,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '7') {
 
   <li class="nav-item">
   <a class="nav-link" href="'.$config['app_url'].'mail">
-    <i class="fa fa-home menu-icon"></i>
+    <i class="fa bi bi-envelope-fill menu-icon"></i>
     <span class="menu-title">
 التواصل
     </span>
@@ -379,7 +326,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '2') {
   
 <li class="nav-item">
 <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
-  <i class="fa fa-home menu-icon"></i>
+  <i class="fa bi bi-journals menu-icon"></i>
   <span class="menu-title">
 المواد
   </span>
@@ -388,7 +335,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '2') {
 
 <li class="nav-item">
 <a class="nav-link" href="'.$config['app_url'].'mail">
-  <i class="fa fa-home menu-icon"></i>
+  <i class="fa bi bi-envelope-fill menu-icon"></i>
   <span class="menu-title">
 التواصل
   </span>
@@ -409,7 +356,10 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '2') {
 
   <li class="nav-item d-none d-lg-block"> 
   <a class="nav-link" href="'.$config['Actors'].'Dean_of_the_College/report.php">
+  <i class="fa bi bi-file-text menu-icon"></i>
+  <span class="menu-title">
   التقارير 
+ </span>
   </a>
   </li>
 </ul>
@@ -442,7 +392,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '6') {
 
 <li class="nav-item">
 <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
-  <i class="fa fa-home menu-icon"></i>
+  <i class="fa bi bi-journals menu-icon"></i>
   <span class="menu-title">
 المواد
   </span>
@@ -451,7 +401,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '6') {
 
 <li class="nav-item">
 <a class="nav-link" href="'.$config['app_url'].'mail">
-  <i class="fa fa-home menu-icon"></i>
+  <i class="fa bi bi-envelope-fill menu-icon"></i>
   <span class="menu-title">
 التواصل
   </span>
@@ -472,8 +422,10 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '6') {
 
   <li class="nav-item d-none d-lg-block"> 
   <a class="nav-link" href="'.$config['Actors'].'President_of_the_University/report.php">
+  <i class="fa bi bi-file-text menu-icon"></i>
+  <span class="menu-title">
   التقارير 
-  </a>
+ </span>  </a>
   </li>
 </ul>
 </div>
@@ -506,7 +458,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '5') {
     
 <li class="nav-item">
 <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
-  <i class="fa fa-home menu-icon"></i>
+  <i class="fa bi bi-journals menu-icon"></i>
   <span class="menu-title">
 المواد
   </span>
@@ -515,7 +467,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '5') {
 
 <li class="nav-item">
 <a class="nav-link" href="'.$config['app_url'].'mail">
-  <i class="fa fa-home menu-icon"></i>
+  <i class="fa bi bi-envelope-fill menu-icon"></i>
   <span class="menu-title">
 التواصل
   </span>
@@ -536,7 +488,10 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '5') {
 
   <li class="nav-item d-none d-lg-block"> 
   <a class="nav-link" href="'.$config['Actors'].'Vice_President_for_Academic_Affairs/report.php">
+  <i class="fa bi bi-file-text menu-icon"></i>
+  <span class="menu-title">
   التقارير 
+ </span>
   </a>
   </li>
 </ul>
@@ -569,7 +524,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '8') {
 
 <li class="nav-item">
 <a class="nav-link" href="'.$config['admin'].'/data.php">
-  <i class="fa fa-home menu-icon"></i>
+  <i class="fa bi bi-database-fill menu-icon"></i>
   <span class="menu-title">
 البيانات
   </span>
@@ -577,10 +532,10 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '8') {
 </li>
 <li class="nav-item">
 <a class="nav-link" href="'.$config['admin'].'/report2.php">
-  <i class="fa fa-home menu-icon"></i>
-  <span class="menu-title">
-التقارير
-  </span>
+<i class="fa bi bi-file-text menu-icon"></i>
+<span class="menu-title">
+التقارير 
+</span>
 </a>
 </li>
 
@@ -618,7 +573,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
 
       <li class="nav-item">
       <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
-        <i class="fa fa-home menu-icon"></i>
+        <i class="fa bi bi-journals menu-icon"></i>
         <span class="menu-title">
      المواد
         </span>
@@ -648,7 +603,10 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
       
         <li class="nav-item d-none d-lg-block"> 
         <a class="nav-link" href="'.$config['Actors'].'Program_Coordinator/report.php">
+        <i class="fa bi bi-file-text menu-icon"></i>
+        <span class="menu-title">
         التقارير 
+       </span>
         </a>
         </li>
               
