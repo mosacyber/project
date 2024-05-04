@@ -65,17 +65,6 @@ body > div.container-fluid > div > div:nth-child(1) > div > div > form > div:nth
           </div>
         </div>
       </div>
-      <div class="col-6 col-lg-6">
-  <div class="card">
-    <div class="card-body2" >
-      <img class='col-12 photo img-fluid' src="../assets/img/uu.png" alt="">
-      <img class='col-12 photo img-fluid' src="../assets/img/fdfd1.png" alt="">
-      <img class='col-12 photo img-fluid' src="../assets/img/uu.png" alt="">
-      <img class='col-12 photo img-fluid' src="../assets/img/fdfd1.png" alt="">
-      <img class='col-12 photo img-fluid' src="https://shaguf.com/site/assets/img/stars.gif" alt="">
-    </div>
-  </div>
-</div>
       </div>
     </div>
   </div>
