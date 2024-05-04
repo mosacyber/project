@@ -339,16 +339,7 @@ if ($result->num_rows > 0) {
     </div>
 </div>
 
-<?php
-$navbar_path = "footer/Footer.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-        include $path;
-        break;
-    }
-}
-?>
+
 
     <!-- partial -->
   </div>
