@@ -72,166 +72,17 @@ for ($i = 0; $i < 9; $i++) {
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
-          <div class="col-xxl-12 col-md-12">
-          <div class="card info-card revenue-card">
-
-      
-        
-
-              </ul>
-              <div class="tab-content pt-2">
-
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-
-                <?php
-if (isset($_SESSION['role'])) {
-// استعلام SQL لاسترداد البيانات من جدول faculty_member
-$sql = "SELECT * FROM faculty_member WHERE Faculty_member_ID = $_SESSION[Account_ID]";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-
-    $sql2 = "SELECT * FROM departments WHERE Department_ID =  $row[Department_ID]";
-    $result2 = $conn->query($sql2);
-    if ($result2->num_rows > 0) {
-        $row2 = $result2->fetch_assoc();
-
-        $firstDigit = substr($row['Department_ID'], 0, 1);
-
-        $sql3 = "SELECT * FROM colleges WHERE College_ID =  $firstDigit";
-        $result3 = $conn->query($sql3);
-        if ($result3->num_rows > 0) {
-            $row3 = $result3->fetch_assoc();
-
-            $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
-            $result4 = $conn->query($sql4);
-            if ($result4->num_rows > 0) {
-                // بيانات الطالب موجودة ويمكن معالجتها هنا
-            } else {
-
-            }
-        } else {
-            echo "لا يوجد بيانات كلية";
-        }
-    } else {
-        echo "
-        <div class='alert alert-danger'>
-        تنبيه
-        <hr>
-            <p>لا يوجد بيانات قسم</p>
-    </div>";
-    }
-} else {
-  echo "
-    <div class='alert alert-danger'>
-    تنبيه
-    <hr>
-        <p>لا يوجد بيانات عضو هيئة تدريس</p>
-</div>";
-}
-
-    
-    
-    // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
-    switch ($_SESSION['role']) {
-        case '1':
-            $Specialization = "";
-            $Degree = "طالب";
-
-
-            $Major = $row4['Program_ID']; 
-
-            break;
-        case '2':
-            $Specialization = "عميد الكلية";
-            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
-            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
-            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
-            $Major = isset($row['Major']) ? $row['Major'] : "";
-            
-            break;
-        case '3':
-            $Specialization = "منسق البرنامج";
-            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
-            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
-            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
-            $Major = isset($row['Major']) ? $row['Major'] : "";
-            
-            break;
-        case '4':
-            $Specialization = "المرشد الاكاديمي";
-            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
-            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
-            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
-            $Major = isset($row['Major']) ? $row['Major'] : "";
-            break;
-        case '8':
-            $Specialization = "عضو هيئة التدريس";
-            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
-            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
-            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
-            $Major = isset($row['Major']) ? $row['Major'] : "";
-            break;
-        case '6':
-            $Specialization = "وكيل شؤون الطلاب التعليمية";
-            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
-            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
-            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
-            $Major = isset($row['Major']) ? $row['Major'] : "";
-            break;
-        case '7':
-            $Specialization = "مدير الجامعة";
-            $Degree = isset($row['Academic_Rank']) ? $row['Academic_Rank'] : "";
-            $departments = isset($row2['Department_Name']) ? $row2['Department_Name'] : "";
-            $college = isset($row3['College_Name']) ? $row3['College_Name'] : "";
-            $Major = isset($row['Major']) ? $row['Major'] : "";
-            break;
-        case 'admin':
-            // تعيين التخصص لحالة الادمن هنا
-            break;
-        default:
-            // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
-            break;
+          <?php
+// استدعاء ملف الشاشة البداية
+$loading_path = "content/content.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $loading_path;
+    if (file_exists($path)) {
+        include $path;
+        break;
     }
 }
 ?>
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">الاسم</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">الرقم الوظيفي</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
-                  </div>
-
-
-<div class="row">
-    <div class="col-lg-3 col-md-4 label">التخصص</div>
-    <div class="col-lg-9 col-md-8"><?php echo  $Major  ?></div>
-</div>
-
-<div class="row">
-    <div class="col-lg-3 col-md-4 label">الدرجه العلميه</div>
-    <div class="col-lg-9 col-md-8"><?php echo $Degree ?></div>
-</div>
-
-<div class="row">
-    <div class="col-lg-3 col-md-4 label">القسم</div>
-    <div class="col-lg-9 col-md-8"><?php echo $departments ?></div>
-</div>
-
-<div class="row">
-    <div class="col-lg-3 col-md-4 label">الكليه</div>
-    <div class="col-lg-9 col-md-8"><?php echo $college ?></div>
-</div>
-
-
-          </div>
-
-
-        </div>
           </div>
           <br>
           <br>
@@ -307,19 +158,19 @@ if ($result->num_rows > 0) {
             label: 'عدد الطلاب',
             data: [<?php echo $count_students1?>, <?php echo $count_students2?>, <?php echo $count_students3?>, <?php echo $count_students4?>, <?php echo $count_students5?>],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 205, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)'
-            ],
+                'rgba(54, 162, 235, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(255, 205, 86, 0.2)',
+    'rgba(255, 159, 64, 0.2)',
+    'rgba(255, 99, 132, 0.2)'
+],
+borderColor: [
+    'rgb(54, 162, 235)',
+    'rgb(75, 192, 192)',
+    'rgb(255, 205, 86)',
+    'rgb(255, 159, 64)',
+    'rgb(255, 99, 132)'
+],
             borderWidth: 1
         }]
     };
@@ -395,23 +246,19 @@ $students_count = array_values($students_count_per_Programs);
             label: 'عدد الطلاب',
             data: <?php echo json_encode($students_count); ?>,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 205, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
-            ],
+    'rgba(255, 205, 86, 0.2)',
+    'rgba(255, 159, 64, 0.2)',
+    'rgba(255, 99, 132, 0.2)'
+],
+borderColor: [
+    'rgb(54, 162, 235)',
+    'rgb(75, 192, 192)',
+    'rgb(255, 205, 86)',
+    'rgb(255, 159, 64)',
+    'rgb(255, 99, 132)'
+],
+
             borderWidth: 1
         }]
     };
@@ -492,6 +339,60 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+        <div class="col-lg-2 ">
+            <div class="card"><!--  academic_record اعلى سمستر -->
+                <div class="card-body">
+<h5>مجموع ساعات المواد</h5>
+<h4>
+<?php 
+$total_credit_hours = 0; // تهيئة المتغير لحفظ إجمالي الساعات
+
+$sql = "SELECT * FROM subjects WHERE program_id = $program_id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // جمع قيم الساعات من كل صف وإضافتها إلى المتغير النهائي
+        $total_credit_hours += $row['credit_hours'];
+    }
+    echo "إجمالي الساعات: " . $total_credit_hours;
+} else {
+    echo "لا توجد بيانات";
+}
+ ?>
+<br><br>
+
+<?php
+if ($result->num_rows > 0) {
+
+    $num_subjects = $result->num_rows;
+
+
+
+    $average_credit_hours = $total_credit_hours / $num_subjects;
+    echo "متوسط عدد الساعات لكل مادة: " . $average_credit_hours;
+}
+
+
+?>
+</h4>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

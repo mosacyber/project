@@ -135,7 +135,7 @@ if (isset($_SESSION['alert'])) {
                 $first_name = $fetch['First_Name']; 
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-                $result = mysqli_query($connect, "UPDATE accounts SET Email='$email', Password='$password_hash' WHERE account_id='$accountid'");
+                $result = mysqli_query($connect, "UPDATE accounts SET Email='$email', Password='$password_hash',Status_ID=1 WHERE account_id='$accountid'");
     
                 if ($result) {
                     $otp = rand(100000, 999999);
@@ -150,10 +150,10 @@ if (isset($_SESSION['alert'])) {
                     $mail->SMTPAuth = true;
                     $mail->SMTPSecure = 'tls';
     
-                    $mail->Username = '';
-                    $mail->Password = '';
+                    $mail->Username = 'mosazzxxc@gmail.com';
+                    $mail->Password = 'flyb cmdg azvl oiip';
     
-                    $mail->setFrom('', 'فريق الدعم');
+                    $mail->setFrom('mosazzxxc@gmail.com', 'فريق الدعم');
                     $mail->addAddress($email);
     
                     $mail->isHTML(true);

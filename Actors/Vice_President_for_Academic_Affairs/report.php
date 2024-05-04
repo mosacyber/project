@@ -71,24 +71,17 @@ for ($i = 0; $i < 9; $i++) {
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="raw">
-          <div class="col-md-12 grid-margin ">
-            <div class="card">
-                <div class="card-body">               
-                  <div class="template-demo">
-                    <nav>
-                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">
-                         الصفحة الرئيسية 
-                      </li>
-                      </ol>
-                    </nav>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+       <?php
+// استدعاء ملف الشاشة البداية
+$loading_path = "content/content.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $loading_path;
+    if (file_exists($path)) {
+        include $path;
+        break;
+    }
+}
+?>
           <br>
           <br>
           <div class="page-header">

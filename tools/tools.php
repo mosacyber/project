@@ -9,9 +9,9 @@ function css() {
 
 
   <!-- plugins:css -->
-  <link rel="stylesheet" href="../../vendors/iconfonts/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="../../assets/vendors/iconfonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.addons.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -36,8 +36,8 @@ $css_files = [
   "images/favicon.png",
   "assets/vendor/simple-datatables/style.css",
   "assets/css/css/materialize.min.css",
-  "vendors/css/vendor.bundle.addons.css",
-  "vendors/css/vendor.bundle.base.css",
+  "assets/vendors/css/vendor.bundle.addons.css",
+  "assets/vendors/css/vendor.bundle.base.css",
 ];
 // تحقق من وجود ملفات الـ CSS وقم بتضمينها
 foreach ($css_files as $css_file) {
@@ -53,7 +53,7 @@ foreach ($css_files as $css_file) {
   ';
 }
 
-function js() {
+function loading_css() {
 
   echo'
   

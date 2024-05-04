@@ -1,5 +1,4 @@
 <?php
-
 $js_files = [
     "assets/vendor/apexcharts/apexcharts.min.js",
     "assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
@@ -10,21 +9,22 @@ $js_files = [
     "assets/vendor/tinymce/tinymce.min.js",
     "assets/vendor/php-email-form/validate.js",
     "assets/js/main.js",
-    "vendors/js/vendor.bundle.base.js",
-    "vendors/js/vendor.bundle.addons.js",
-    "assets/js/js/off-canvas.js",
-    "assets/js/js/hoverable-collapse.js",
-    "assets/js/js/misc.js",
-    "assets/js/js/settings.js",
-    "assets/js/js/todolist.js",
-    "assets/js/js/dashboard.js",
-    "assets/js/js/off-canvas.js",
-    "vendors/css/vendor.bundle.addons.css",
-    "vendors/css/vendor.bundle.base.css",
-    "vendors/iconfonts/font-awesome/css/all.min.css",
+    "assets/vendors/js/vendor.bundle.base.js",
+    "assets/vendors/js/vendor.bundle.addons.js",
+    "assets/js/off-canvas.js",
+    "assets/js/hoverable-collapse.js",
+    "assets/js/misc.js",
+    "assets/js/settings.js",
+    "assets/js/todolist.js",
+    "assets/js/dashboard.js",
+    "assets/vendors/css/vendor.bundle.addons.css",
+    "assets/vendors/css/vendor.bundle.base.css",
+    "assets/vendors/iconfonts/font-awesome/css/all.min.css",
     "tools/style.css",
-    'assets/js/js/just-gage.js',
-    'assets/js/js/chart.js'
+    'assets/js/just-gage.js',
+    'assets/js/chart.js',
+    'assets/js/jquery.min.js',
+    'assets/js/bootstrap.min.js'
   ];
   // تحقق من وجود ملفات الـ CSS وقم بتضمينها
   foreach ($js_files as $js_file) {

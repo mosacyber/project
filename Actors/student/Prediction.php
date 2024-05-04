@@ -47,186 +47,58 @@
       font-size: 1rem;
       background-color: #392e6e;
       color: #fff;
+    }<?php 
+$navbar_path = "loading/loading.css";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
     }
-  </style>
+}
+?> 
+</style>
 </head>
-
 <body class="rtl">
   <div class="container-scroller">
-
-
-    <?php
-    $navbar_path = "Navbar/rtl/nav.php";
-    for ($i = 0; $i < 9; $i++) {
-      $path = str_repeat("../", $i) . $navbar_path;
-      if (file_exists($path)) {
+<?php
+// استدعاء ملف التصميم
+$navbar_path = "Navbar/rtl/nav.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
         include $path;
         break;
-      }
     }
-    ?>
+}
+// استدعاء ملف الشاشة البداية
+$loading_path = "loading/loading.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $loading_path;
+    if (file_exists($path)) {
+        include $path;
+        break;
+    }
+}
+?>
 
 
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="raw">
-        <!-- Revenue Card -->
-        <div class="col-xxl-12 col-md-12">
-          <div class="card info-card revenue-card">
-
-      
-        
-
-              </ul>
-              <div class="tab-content pt-2">
-
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-
-                <?php
-
-        $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
-        $result4 = $conn->query($sql4);
-    
-    if ($result4->num_rows > 0) {
-
-      
-      $row4 = $result4->fetch_assoc();
-
-    $student_id= $row4['student_id'];
-    $Program_ID= $row4['Program_ID'];
-   
-
-    $sql5 = "SELECT * FROM programs WHERE Program_ID = $Program_ID";
-    $result5 = $conn->query($sql5);
-
-    $firstDigit = substr($row4['Program_ID'], 0, 1);
-
-    $startPosition = 1; // الموضع البدئي للرقمين المطلوبين
-    $middleDigits = substr($row4['Program_ID'], $startPosition, 2); // يأخذ رقمين ابتداءً من الموضع البدئي
-    
-
-    $endDigits = substr($row4['Program_ID'], -2);
-    
-
-
-
-    $sql6 = "SELECT * FROM colleges WHERE College_ID = $firstDigit";
-    $result6 = $conn->query($sql6);
-    if ($result6->num_rows > 0) {
-        $row6 = $result6->fetch_assoc();
-
-
-        $College_Name= $row6['College_Name'];
-        
-
+ 
+<?php
+// استدعاء ملف الشاشة البداية
+$loading_path = "content/content.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $loading_path;
+    if (file_exists($path)) {
+        include $path;
+        break;
     }
-
-    $sql7 = "SELECT * FROM departments WHERE Department_ID = '{$firstDigit}{$middleDigits}'";
-    $result7 = $conn->query($sql7);
-    if ($result7->num_rows > 0) {
-        $row7 = $result7->fetch_assoc();
-
-
-        $Department_Name= $row7['Department_Name'];
-        
-
-    }
-
-
-
-
-
-
-
-
-
-
-    if ($result5->num_rows > 0) {
-        $row5 = $result5->fetch_assoc();
-    } else {
-        // عرض التنبيه في حالة عدم العثور على البرنامج
-        echo "
-        <div class='alert alert-danger'>
-            <p>تنبيه: لا يوجد بيانات برنامج</p>
-        </div>";
-        // تعيين قيم افتراضية
-        $row5 = array('Program_Name' => 'برنامج غير معروف'); 
-    }
-
-    if (isset($_SESSION['role'])) {
-        // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
-        switch ($_SESSION['role']) {
-            case '1':
-                $Specialization = "";
-                $Degree = "طالب";
-                $Major = $row5['Program_Name'];
-                break;
-            default:
-                // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
-                break;
-        }
-    }
-} else {
-    // عرض التنبيه في حالة عدم العثور على الطالب
-    echo "
-    <div class='alert alert-danger'>
-        <p>تنبيه: لا يوجد بيانات طالب</p>
-    </div>";
-    // تعيين قيم افتراضية
-    $row4 = array();
-    $row5 = array('Program_Name' => 'برنامج غير معروف');
-    $Specialization = "تخصص غير معروف";
-    $Degree = "درجة غير معروفة";
-    $Major = "تخصص غير معروف";
 }
-
-
-
-
-                ?>            
-
-
-
-<div class="row">
-                    <div class="col-lg-3 col-md-4 label ">الاسم :</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">الرقم الجامعي :</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
-                  </div>
-
-
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">التخصص :</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $Major ?></div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">الدرجة العلمية :</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $Degree ?></div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">القسم :</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $Department_Name ?></div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">الكلية :</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $College_Name ?></div>
-                  </div>
-
-
-
-          </div>
-        </div><!-- End Revenue Card -->
+?>
         </div>
         <br><br>
 

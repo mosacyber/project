@@ -1,0 +1,32 @@
+{
+    "position": [
+        {
+            "position_id": "1",
+            "position_name": "طالب"
+        },
+        {
+            "position_id": "2",
+            "position_name": "عميد الكلية"
+        },
+        {
+            "position_id": "3",
+            "position_name": "منسق البرنامج"
+        },
+        {
+            "position_id": "4",
+            "position_name": "المرشد الاكاديمي"
+        },
+        {
+            "position_id": "5",
+            "position_name": "وكيل شؤون الطلاب التعليمية"
+        },
+        {
+            "position_id": "6",
+            "position_name": "مدير الجامعة"
+        },
+        {
+            "position_id": "7",
+            "position_name": "عضو هيئة التدريس"
+        }
+    ]
+}

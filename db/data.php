@@ -14,8 +14,14 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+$text ="where Position = 3";
+$none="";
+
+
+$ok = "";
+
 // استعلام SQL لاسترداد البيانات
-$sql = "SELECT * FROM accounts";
+$sql = "SELECT * FROM accounts $ok";
 
 // التحقق من وجود فلتر محدد وتحديد الفلتر الذي يجب تطبيقه
 if (isset($_GET['filter'])) {
@@ -42,77 +48,19 @@ $result = $conn->query($sql);
 
 
 
-$currentPage = basename($_SERVER['PHP_SELF']);
-// التحقق من كونها صفحة index
-if ($currentPage === 'index.php') {
-  $sql = "SELECT * FROM  greaaaaad";
-  $result = $conn->query($sql);
 
-
-
-
-
-  while($row = $result->fetch_assoc()) {
-
-  
-
-    
-    echo "<tr>";
-    echo "<td>" . $row["frist_name"] . "</td>";
-    echo "<td>" . $row["dqh"] . "</td>";
-    echo "<td>";
-    echo "<div class='progress'>";
-    if ($row["coupon"] < 50) {
-        echo "<div class='progress-bar bg-danger' role='progressbar' style='width: " . $row["coupon"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
-    } else if($row["coupon"] < 70){
-        echo "<div class='progress-bar bg-warning' role='progressbar' style='width: " . $row["coupon"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
-    }else if($row["coupon"] < 100){
-      echo "<div class='progress-bar bg-success' role='progressbar' style='width: " . $row["coupon"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
-    }else{
-      echo "<div class='progress-bar bg-primary' role='progressbar' style='width: " . $row["coupon"] . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>";
-
-    }
-    echo "</div>";
-    echo "</td>";
-    echo "<td>" . $row["coupon"] . "</td>";
-    echo "<td>" . $row["copy"] . "</td>";
-    echo "</tr>";
-    
-  }
-
-
-
-}else if ($currentPage === 'Student2.php') {
-
-  $sql = "SELECT * FROM accounts";
-  $result = $conn->query($sql);
-
-  echo "<div class='row'>";
-  while($row = $result->fetch_assoc()) {
-    echo "<div class='card col-3'>";
-    echo "  <div class='card-body'>";
-    echo "    <h5 class='card-title'>" . $row["First_Name"] . " " . $row["Last_Name"] . "</h5>";
-    echo "    <p class='card-text'>" . $row["Account_ID"] . "</p>";
-    echo "    <p class='card-text'><small class='text-muted'>" . $row["Email"] . "</small></p>";
-    echo " <button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#filterModal'><i class='bi bi-info-circle'>  </i>معلومات</button>";
-    echo "  </div>";
-    echo "</div>";
-  }
-
-  echo "</div>"; // إغلاق الصف row
-}else{
   if ($result->num_rows > 0) {
     // إخراج البيانات بشكل جدول
     echo "<table class='table datatable'>";
-    echo "<thead><tr><th>First_Name</th><th>First_Name</th><th>Last_Name</th><th>Email</th><th>المنصب</th></tr></thead>";
+    echo "<thead><tr><th>Account_ID</th><th>Name</th><th>Email</th><th>Mobile</th><th>Position</th></tr></thead>";
     echo "<tbody>";
     // إخراج البيانات في كل صف
     while($row = $result->fetch_assoc()) {
       echo "<tr>";
+      echo "<td>" . $row["Account_ID"] . "</td>";
       echo "<td>" . $row["First_Name"] . "</td>";
-      echo "<td>" . $row["First_Name"] . "</td>";
-      echo "<td>" . $row["Last_Name"] . "</td>";
       echo "<td>" . $row["Email"] . "</td>";
+      echo "<td>" . $row["Mobile"] . "</td>";
       echo "<td>" . $row["Position"] . "</td>";
       echo "</tr>";
     }
@@ -122,7 +70,7 @@ if ($currentPage === 'index.php') {
     echo "0 results";
   }
   
- }
+ 
 
 
 

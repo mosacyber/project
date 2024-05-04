@@ -65,8 +65,12 @@
       font-size: 1rem;
       background-color: #392e6e;
       color: #fff;
-    }
-    </style>
+    }.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+    </style> 
 </head>
 
 <body class="rtl">

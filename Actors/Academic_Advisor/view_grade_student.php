@@ -1,6 +1,12 @@
 <?php
-$conn = @mysqli_connect("localhost", "root", "", "university_info") 
-    or die(mysqli_connect_error());
+    $navbar_path = "db/db.php";
+    for ($i = 0; $i < 9; $i++) {
+        $path = str_repeat("../", $i) . $navbar_path;
+        if (file_exists($path)) {
+          include $path;
+            break;
+        }
+    }
 
 
         $studentId = $_POST['student_id'];

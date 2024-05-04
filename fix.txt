@@ -1,5 +1,80 @@
-اصلاح المرشد الاكاديمي في التواصل يظهر المدرس للمقرر 
-يبي لي اتاكد من مرشده الاكاديمي
+nav 
+التقفيل والتسكير
 
 
-حل مشكله دخول المرشد الاكاديمي بحيث يتاكد هل هو مرشد اكاديمي او لا
+الدرجات ما تتعدى 100
+
+
+
+
+
+
+<?php 
+$navbar_path = "loading/loading.css";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+}
+?>
+
+
+
+
+
+<?php 
+$navbar_path = "loading/loading.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+}
+?>
+
+
+
+
+
+
+
+
+
+
+<?php 
+$navbar_path = "loading/loading.css";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      include $path;
+        break;
+    }
+}
+?>
+</style>
+</head>
+<body class="rtl">
+  <div class="container-scroller">
+<?php
+// استدعاء ملف التصميم
+$navbar_path = "Navbar/rtl/nav.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+        include $path;
+        break;
+    }
+}
+// استدعاء ملف الشاشة البداية
+$loading_path = "loading/loading.php";
+for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $loading_path;
+    if (file_exists($path)) {
+        include $path;
+        break;
+    }
+}
+?>

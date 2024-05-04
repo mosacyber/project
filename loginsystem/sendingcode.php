@@ -141,10 +141,10 @@ if (isset($_POST["recover"])) {
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
 
-        $mail->Username = ''; 
-        $mail->Password = '';
+        $mail->Username = 'mosazzxxc@gmail.com';
+        $mail->Password = 'flyb cmdg azvl oiip';
 
-        $mail->setFrom('', 'فريق الدعم الخاص بمنصة الجامعة الألكترونية');
+        $mail->setFrom('mosazzxxc@gmail.com', 'فريق الدعم الخاص بمنصة الجامعة ');
         $mail->addAddress($email);
 
         $mail->isHTML(true);

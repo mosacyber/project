@@ -55,8 +55,31 @@ echo '
 <!-- partial:../../partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-    <a class="navbar-brand brand-logo" href="' . $config['admin'] . '/index.php"><img src="../../assets/img/logoo.png" alt="logo"/></a>
-    <a class="navbar-brand brand-logo-mini" href="' . $config['admin'] . '/index.php"><img src="../../assets/img/logoo.png" alt="logo"/></a>
+  <a class="navbar-brand brand-logo" href="' . $config['admin'] . '/index.php">';
+  
+  $navbar_path = "assets/img/logoo.png";
+  for ($i = 0; $i < 9; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      echo '<img src="' . $path . '" alt="logo"/>';
+      break;
+    }
+  }
+  
+  echo '</a>
+  <a class="navbar-brand brand-logo-mini" href="' . $config['admin'] . '/index.php">';
+  
+  $navbar_path = "assets/img/logoo.png";
+  for ($i = 0; $i < 11; $i++) {
+    $path = str_repeat("../", $i) . $navbar_path;
+    if (file_exists($path)) {
+      echo '<img src="' . $path . '" alt="logo"/>';
+      break;
+    }
+  }
+  
+  echo '</a>
+  
    </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -69,9 +92,18 @@ echo '
 
 
       <li class="nav-item nav-profile dropdown">
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-          <img src="../../assets/img/profile-img.png" alt="profile"/>
-        </a>
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">';
+  
+        $navbar_path = "assets/img/profile-img.png";
+        for ($i = 0; $i < 11; $i++) {
+          $path = str_repeat("../", $i) . $navbar_path;
+          if (file_exists($path)) {
+            echo '<img src="' . $path . '" alt="logo"/>';
+            break;
+          }
+        }
+        
+        echo ' </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown">
 
           <div class="dropdown-divider"></div>
@@ -97,9 +129,18 @@ echo '
     <ul class="nav">
       <li class="nav-item nav-profile">
         <div class="nav-link">
-          <div class="profile-image">
-            <img src="../../assets/img/profile-img.png" alt="image"/>
-          </div>
+          <div class="profile-image">';
+  
+          $navbar_path = "assets/img/profile-img.png";
+          for ($i = 0; $i < 11; $i++) {
+            $path = str_repeat("../", $i) . $navbar_path;
+            if (file_exists($path)) {
+              echo '<img src="' . $path . '" alt="logo"/>';
+              break;
+            }
+          }
+          
+          echo ' </div>
           <div class="profile-name">';
           if(isset($_SESSION['role'])) {
             echo '<p class="name">' . $_SESSION['Name'] . '</p>';
@@ -531,7 +572,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '8') {
 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="'.$config['admin'].'/report2.php">
+<a class="nav-link" href="'.$config['admin'].'/report.php">
 <i class="fa bi bi-file-text menu-icon"></i>
 <span class="menu-title">
 التقارير 
@@ -600,7 +641,6 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
     <div class="collapse" id="page-layouts">
       <ul class="nav flex-column sub-menu">
        
-      
         <li class="nav-item d-none d-lg-block"> 
         <a class="nav-link" href="'.$config['Actors'].'Program_Coordinator/report.php">
         <i class="fa bi bi-file-text menu-icon"></i>
