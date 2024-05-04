@@ -302,9 +302,46 @@ if ($result->num_rows > 0) {
 </div>";
 }
 
+
+
 // إغلاق الاتصال بقاعدة البيانات
-$conn->close();
+
 ?>
+
+<?php
+
+$DB_grade = array(1, 1);
+$mid1=-1;$quiz1=-1;$quiz2=-1;
+$mid2=-1;$quiz3=-1;$Project=-1;
+$LABquiz=-1;$LABFinal=-1;$bouns=-1;
+
+
+$sql = "SELECT coursework_Mark FROM grades WHERE student_ID = {$_SESSION['Account_ID']} AND Subject_Code = 'CIT234' ORDER BY coursework_id";
+
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $DB_grade = array(); // إعادة تعيين المصفوفة لتكون فارغة
+    while($row = $result->fetch_assoc()) {
+        array_push($DB_grade, $row['coursework_Mark']); // إضافة كل قيمة إلى المصفوفة
+    }
+
+    $mid1=$DB_grade[0];
+    $quiz1=$DB_grade[1];
+    $quiz2=$DB_grade[2];
+
+
+} else {
+    $DB_grade = array(2, 2);
+}
+
+
+echo $mid1 . " / " . $quiz1 . " / " . $quiz2; 
+
+
+
+
+$conn->close();
+ ?>
 
       </div>
     </div>

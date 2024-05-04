@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Melody Admin</title>
+  <title>البرنامج</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -49,34 +49,12 @@ for ($i = 0; $i < 9; $i++) {
     color: #fff;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* للجدول  */
 .datatable-table > thead > tr > th {
     vertical-align: bottom;
     text-align: right;
     border-bottom: 1px solid #d9d9d9;
 }
-
-
-
-
-
-
-
-
-
-
 
   </style>
       <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script> -->
@@ -135,6 +113,7 @@ $sql_program = "SELECT * FROM program_coordinator WHERE Program_Coordinator_ID =
 $result_program = $conn->query($sql_program);
 $row_program = $result_program->fetch_assoc();
 $Program_ID = $row_program['Program_ID'];
+$Program_date = $row_program['From_To'];
 $_SESSION['Program_ID'] = $row_program['Program_ID'];
 $sql = "SELECT * FROM faculty_member WHERE Faculty_member_ID = $_SESSION[Account_ID]";
 $result = $conn->query($sql);
@@ -308,7 +287,9 @@ $Program_Name = $row_program['Program_Name'];
 
 
 ?>
+
              <h4 class="card-title">البرنامج : <?php  echo $Program_Name   ?></h4>
+             <h4 class="card-title">تاريخ تعيينك كمنسق للبرنامج : <?php  echo $Program_date  ?></h4>
    
     </div>
 </div>
@@ -370,7 +351,7 @@ $Program_Name = $row_program['Program_Name'];
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header" style="direction: rtl;">
-          <h5 class="modal-title" id="insertModalLabel">أضافة برنامج</h5>
+          <h5 class="modal-title" id="insertModalLabel">اضافة برنامج</h5>
           <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
           </button>
@@ -380,7 +361,7 @@ $Program_Name = $row_program['Program_Name'];
             <div class="row">
               <div class="col-md-6">
               <div class="mb-3">
-                  <label for="programName" class="form-label">أسم البرنامج</label><br>
+                  <label for="programName" class="form-label">اسم البرنامج</label><br>
                   <input type="text" class="form-control" name="programName" id="programName" value="<?php echo $Program_Name; ?>" readonly>
                 </div>
                 <div class="mb-3">
@@ -390,11 +371,11 @@ $Program_Name = $row_program['Program_Name'];
                </div>
               <div class="col-md-6">
               <div class="mb-3">
-                  <label for="subjecName" class="form-label">أسم المقرر</label><br>
+                  <label for="subjecName" class="form-label">اسم المقرر</label><br>
                   <input type="text" class="form-control" name="subjectName" id="subjectName" value="" required>
                 </div>
                 <div class="mb-3">
-                  <label for="subjectCode" class="form-label">كود المقرر</label><br>
+                  <label for="subjectCode" class="form-label">رمز المقرر</label><br>
                   <input type="text" class="form-control" name="subjectCode" id="subjectCode" value="" required>
                </div>
                <div class="mb-3">
@@ -404,7 +385,7 @@ $Program_Name = $row_program['Program_Name'];
               </div>
           </div>
           <br /> <br />
-            <button class="btn btn-primary" id="sbtn">أضافة</button>
+            <button class="btn btn-primary" id="sbtn">اضافة</button>
             <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">إلغاء</button>
         </div>
       </div>
@@ -646,54 +627,11 @@ $(document).ready(function(){
 });
 </script>
 
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
-
-
-
         </div>
-       
-       
-
-
-
-
-        </div>
+    </div>
         <!-- content-wrapper ends -->
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {
@@ -704,8 +642,6 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
 
         <!-- partial -->
       </div>

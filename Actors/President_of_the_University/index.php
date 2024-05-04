@@ -81,11 +81,7 @@ for ($i = 0; $i < 9; $i++) {
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-مدير الجامعة
-            </h3>
-          </div>
+          
           <?php
 // استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";

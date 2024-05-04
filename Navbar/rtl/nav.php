@@ -169,7 +169,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
       </li>
       <li class="nav-item">
       <a class="nav-link" href="'.$config['Actors'].'student/Current_Semester.php">
-        <i class="fa bi bi-journals menu-icon"></i>
+        <i class="fa bi bi-collection menu-icon"></i>
         <span class="menu-title">
         المقررات المسجلة
         </span>
@@ -185,7 +185,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
   </li>
     <li class="nav-item">
     <a class="nav-link" href="'.$config['Actors'].'student/acadmic_record.php">
-      <i class="fab fa-trello menu-icon"></i>
+      <i class="fab bi bi-card-checklist menu-icon"></i>
       <span class="menu-title">
 السجل الاكاديمي
       </span>
@@ -616,14 +616,14 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
       <a class="nav-link" href="'.$config['Actors'].'Faculty_Member/Subject_grades.php">
         <i class="fa bi bi-journals menu-icon"></i>
         <span class="menu-title">
-     المواد
+        المقررات
         </span>
       </a>
     </li>
     
       <li class="nav-item">
       <a class="nav-link" href="'.$config['app_url'].'mail">
-        <i class="fa fa-home menu-icon"></i>
+        <i class="fa bi bi-envelope-fill menu-icon"></i>
         <span class="menu-title">
     التواصل
         </span>
@@ -649,12 +649,17 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
        </span>
         </a>
         </li>
-              
+
         <li class="nav-item d-none d-lg-block"> 
         <a class="nav-link" href="'.$config['Actors'].'Program_Coordinator/programs.php">
+        <i class="fa bi bi-file-post menu-icon"></i>
+        <span class="menu-title">
         البرنامج 
+       </span>
         </a>
         </li>
+
+        
       </ul>
     </div>
     </li>
