@@ -148,7 +148,7 @@ if (isset($_POST['subjectCode'])) {
                 echo "</div>";
             }
         } else {
-            echo "<p>لا يوجد طلاب مسجلين في هذا القمرر.</p>";
+            echo "<p>لا يوجد طلاب مسجلين في هذا المقرر.</p>";
         }
     } else {
         echo "<p>لا يوجد أنواع عمل دراسي مسجلة لهذا المقرر.</p>";
@@ -192,7 +192,7 @@ echo "
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header" style="direction: rtl;">
-                <h5 class="modal-title" id="insertModalLabel">أضافة درجات طالب</h5>
+                <h5 class="modal-title" id="insertModalLabel">إضافة درجات طالب</h5>
                 <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -239,7 +239,7 @@ echo "
                         </div>
                     </div>
                     <br /> <br />
-                    <button class="btn btn-primary" id="sbtn">أضافة</button>
+                    <button class="btn btn-primary" id="sbtn">إضافة</button>
                     <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">إلغاء</button>
                 </div>
             </div>
