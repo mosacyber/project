@@ -254,6 +254,11 @@ ORDER BY c.Semester_Number DESC
 LIMIT 1;";
   // استعلام SQL آخر لاسترداد بيانات معينة من الجدول الآخر
  
+
+  $sql4 = " SELECT * from academic_advisor_for_student WHERE student_id = 421004034 LIMIT 1";
+  $result4 = $conn->query($sql4);
+  $row4 = $result4->fetch_assoc();
+
 // تنفيذ الاستعلام
 $result = $conn->query($sql);
 
@@ -271,7 +276,7 @@ if ($result->num_rows > 0) {
       // عرض بيانات الحساب
       while($row_accounts = $result_accounts->fetch_assoc()) { 
           echo "<h2>اسم المشرف الاكاديمي : " . $row_accounts["Faculty_Name"] . "</h2><br>";
-          echo '<a href="'.$config['mail']."?id=".$row_accounts["Account_ID"]."&subject_code="."Advisor".'"><button>تواصل</button></a>';
+          echo '<a href="'.$config['mail']."?id=".$row4["Academic_Advisor_ID"]."&subject_code="."Advisor".'"><button type="button" class="btn btn-primary">تواصل</button></a>';
       }    
   }
      else {
