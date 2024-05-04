@@ -415,8 +415,13 @@
                                                 </div>
                                                 <br /> <br />
                                                 <button class="btn btn-primary" id="Ebtn">حفظ التغييرات</button>
-                                                <button class="btn btn-secondary" id="closeForm"
-                                                    data-dismiss="modal">إلغاء</button>
+                                                <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close" onclick="refreshPage()">إلغاء</button>
+
+<script>
+function refreshPage() {
+    window.location.reload();
+}
+</script>
                                             </div>
                                         </div>
                                     </div>
@@ -456,8 +461,13 @@
                                                         <div class="d-flex justify-content-start">
                                                             <button class="btn btn-danger" id="Dbtn">حذف</button>
                                                             <span style="color: white;">h</span>
-                                                            <button class="btn btn-secondary" data-dismiss="modal"
-                                                                aria-label="Close">إلغاء</button>
+                                                            <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close" onclick="refreshPage()">إلغاء</button>
+
+<script>
+function refreshPage() {
+    window.location.reload();
+}
+</script>
                                                         </div>
                                                     </div>
                                                 </div>
