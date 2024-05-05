@@ -48,6 +48,13 @@
       background-color: #392e6e;
       color: #fff;
     }
+
+
+    body > div.container-scroller > div > div > div > div > div > div.row > div.col-12 > div > div{
+
+      background-image: radial-gradient(at 72% 48%, hsl(249deg 38.46% 30.59% / 0%) 0px, transparent 50%), radial-gradient(at 32% 44%, hsl(249deg 38.46% 30.59% / 0%) 0px, transparent 50%), radial-gradient(at 100% 100%, hsl(351.21deg 100% 45.49% / 0%) 0px, transparent 50%), radial-gradient(at 2% 96%, hsl(169.68deg 66.24% 46.47% / 0%) 0px, #00000000 50%), radial-gradient(at 52% 100%, hsl(351.21deg 4.46% 16.69% / 0%) 0px, #85819754 50%);
+    color: #39306c;
+    }  
   </style>
 </head>
 
@@ -264,7 +271,7 @@
           $B = 8;
           $C = 0;
           $result = $con->query($sql);
-
+          $total = 0;
           if ($result->num_rows > 0) {
             $previous_subject = '';
 
@@ -273,28 +280,32 @@
                 $A++;
                 $C = 0;
                 if ($previous_subject != '') {
-                  echo '</tbody></table></div></div></div></div><br><br>';
+                  echo '<tr>
+                          <td colspan="2">المجموع</td>
+                          <td>' . $total . '</td>
+                        </tr></tbody></table></div></div></div></div><br><br>';
                 }
-
+            
+                $total = 0; // إعادة تعيين المجموع إلى الصفر عند بداية عرض مادة جديدة
+            
                 echo '<div class="col-xxl-10 col-md-12">
-              <div class="card info-card sales-card">
-                <div class="card-body">
-                  <h2>' . $row["subject_name"] . ' ' . $row["subject_code"] . '</h2>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">نوع النشاط الدراسي</th>
-                          <th scope="col">درجة النشاط الدراسي</th>
-                          <th scope="col">درجة الطالب</th>
-                        </tr>
-                      </thead>
-                      <tbody>';
-
+                        <div class="card info-card sales-card">
+                          <div class="card-body">
+                            <h2>' . $row["subject_name"] . ' ' . $row["subject_code"] . '</h2>
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">نوع النشاط الدراسي</th>
+                                    <th scope="col">درجة النشاط الدراسي</th>
+                                    <th scope="col">درجة الطالب</th>
+                                  </tr>
+                                </thead>
+                                <tbody>';
               }
-
+                          
               $progress_width = ($row["coursework_mark"] / $row["coursework_grade"]) * 100;
-
+              $total += $row["coursework_mark"];
               if ($progress_width >= 90) {
                 $progress_color = "#6fe381";
               } elseif ($progress_width >= 80 && $progress_width <= 89) {
@@ -306,7 +317,7 @@
               } else {
                 $progress_color = "#ed4c36";
               }
-
+            
               echo '<tr>
                       <td>' . $row["coursework_type_name"] . '</td>
                       <td>' . $row["coursework_grade"] . '</td>
@@ -320,9 +331,14 @@
               $C++;
               $previous_subject = $row["subject_name"];
               if ($count == $A && $C == $B) {
+                echo '<tr>
+                        <td colspan="2">المجموع</td>
+                        <td>' . $total . '</td>
+                      </tr>';
                 break;
               }
             }
+            
             echo '</tbody></table></div></div></div></div><br><br>
             
             
@@ -509,16 +525,16 @@ if ($result13->num_rows > 0) {
 
 }
 $output=-1;
-$mark = "";
+$mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
     if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0 && $visual_programming > 0 && $data_structure > 0){
       
-      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction.year3 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $data_structure $visual_programming $school_type 2>&1";
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;G:\java\model\GraduateProject\build\classes\" course_Predction.year3 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $data_structure $visual_programming $school_type 2>&1";
 
       $output = shell_exec($command);
 
     } elseif ($school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0) {
-     
-      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
+      
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;G:\java\model\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
     
       $output = shell_exec($command);
  
@@ -555,25 +571,53 @@ $mark = "";
     
             ?>
          
-          <div class="col-xxl-12 col-md-12">
-            <div class="card info-card sales-card">
-              <div class="card-body">
-                <h2>التقدير المتوقع الحصول عليه عند التخرج:</h2>
-                <hr>
-                <br>
-                <?php 
-                
-                echo "
-                <h5>
-                $mark
-                </h5>
-     
-                ";  
-                ?>
-               
-              </div>
-            </div>
-          </div>
+         <div class="col-12">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="text-center">التقدير المتوقع الحصول عليه عند التخرج:</h2>
+      <hr>
+      <br>
+      <div class="text-center">
+        <?php
+        switch ($mark) {
+          case "A+":
+            echo '<h5 class="text-success" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الأخضر لتقدير A+
+            break;
+          case "A":
+            echo '<h5 class="text-primary" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الأزرق لتقدير A
+            break;
+          case "B+":
+            echo '<h5 class="text-info" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الأزرق الفاتح لتقدير B+
+            break;
+          case "B":
+            echo '<h5 class="text-warning" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الأصفر لتقدير B
+            break;
+          case "C+":
+            echo '<h5 class="text-orange" style="font-size: 68px;">' . $mark . '</h5>'; // اللون البرتقالي لتقدير C+
+            break;
+          case "C":
+            echo '<h5 class="text-secondary" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الرمادي لتقدير C
+            break;
+          case "D+":
+            echo '<h5 class="text-danger" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الأحمر لتقدير D+
+            break;
+          case "D":
+            echo '<h5 class="text-danger" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الأحمر لتقدير D
+            break;
+          case "-2":
+            echo '<h5 class="text-muted" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الرمادي للنص التنبؤ غير متوفر
+            break;
+          default:
+            echo '<h5 class="text-danger" style="font-size: 68px;">' . $mark . '</h5>'; // اللون الأحمر لتقدير F
+            break;
+        }
+        ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+
           
         </div>
 
