@@ -270,6 +270,7 @@
           $count = $S[0];
           $B = 8;
           $C = 0;
+          $subject_total_marks = 0;
           $result = $con->query($sql);
           $total = 0;
           if ($result->num_rows > 0) {
@@ -280,14 +281,17 @@
                 $A++;
                 $C = 0;
                 if ($previous_subject != '') {
-                  echo '<tr>
-                          <td colspan="2">المجموع</td>
-                          <td>' . $total . '</td>
-                        </tr></tbody></table></div></div></div></div><br><br>';
+                  echo "<td colspan='1' space='col'>المجمــــوع</td>";
+                  echo "<td colspan='2'><div class='progress'>
+                           <div class='progress-bar' role='progressbar' style='width: " . $subject_total_marks . "%; background-color: " . $pr_color . "; color: black;' aria-valuenow='" . $subject_total_marks . "'
+                             aria-valuemin='0' aria-valuemax='100'>" . $subject_total_marks . "</div>
+                              </div>
+                               </td>";
+                    echo "</tr>";
+                    echo " </tr></tbody></table></div></div></div></div><br><br>";
+                      $subject_total_marks = 0;
                 }
-            
-                $total = 0; // إعادة تعيين المجموع إلى الصفر عند بداية عرض مادة جديدة
-            
+                        
                 echo '<div class="col-xxl-10 col-md-12">
                         <div class="card info-card sales-card">
                           <div class="card-body">
@@ -303,6 +307,21 @@
                                 </thead>
                                 <tbody>';
               }
+              $subject_total_marks += $row["coursework_mark"];
+              //الألوان الخاصة بمجموع الدرجات لكل مقرر
+              $pr_color = "";
+              if ($subject_total_marks > 90) {
+                $pr_color = "#6fe381";
+              } elseif ($subject_total_marks >= 80 && $subject_total_marks <= 89) {
+                $pr_color = "#d3ef5e";
+              } elseif ($subject_total_marks >= 70 && $subject_total_marks <= 79) {
+                $pr_color = "#fee43f";
+              } elseif ($subject_total_marks >= 60 && $subject_total_marks <= 69) {
+                $pr_color = "#f19c26";
+              } else {
+                $pr_color = "#ed4c36";
+              }
+
                           
               $progress_width = ($row["coursework_mark"] / $row["coursework_grade"]) * 100;
               $total += $row["coursework_mark"];
@@ -323,7 +342,7 @@
                       <td>' . $row["coursework_grade"] . '</td>
                       <td>
                         <div class="progress">
-                          <div class="progress-bar" role="progressbar" style="width:' . $progress_width . '%; background-color:' . $progress_color . ';" aria-valuenow="' . $progress_width . '"
+                          <div class="progress-bar" role="progressbar" style="width:' . $progress_width . '%; background-color:' . $progress_color . '; color: black;" aria-valuenow="' . $progress_width . '"
                             aria-valuemin="0" aria-valuemax="100">' . $row["coursework_mark"] . '</div>
                         </div>
                       </td>
@@ -331,14 +350,18 @@
               $C++;
               $previous_subject = $row["subject_name"];
               if ($count == $A && $C == $B) {
-                echo '<tr>
-                        <td colspan="2">المجموع</td>
-                        <td>' . $total . '</td>
-                      </tr>';
+               
                 break;
               }
+
             }
-            
+            echo "<td colspan='1' space='col'>المجمــــوع</td>";
+                echo "<td colspan='2'><div class='progress'>
+                    <div class='progress-bar' role='progressbar' style='width: " . $subject_total_marks . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $subject_total_marks . "' aria-valuemin='0' aria-valuemax='100'>" . $subject_total_marks . "</div>
+                    </div>
+                </td>";
+                echo "</tr>";
+
             echo '</tbody></table></div></div></div></div><br><br>
             
             
