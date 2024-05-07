@@ -120,6 +120,10 @@ for ($i = 0; $i < 9; $i++) {
 <!-- Revenue Card -->
 <div class="col-md-12">
     <div class="row">
+
+
+
+
         <div class="col-lg-4 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -199,6 +203,126 @@ borderColor: [
     );
 </script>
      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-lg-4 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">معدلات الطلاب:</h4>
+            <canvas id="chart3"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels3 = ['4.75', '4.25', '3.75', '3', '2'];
+    const data3 = {
+        labels: labels3,
+        datasets: [{
+            label: 'عدد الطلاب',
+            data: [55, 55, 66, 99, 99], // تعديل البيانات للقيم الثابتة
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(75, 192, 192)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const config3 = {
+        type: 'bar',
+        data: data3,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    };
+
+    const myChart3 = new Chart(
+        document.getElementById('chart3'),
+        config3
+    );
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="col-lg-2">
     <div class="card">
