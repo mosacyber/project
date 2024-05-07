@@ -281,10 +281,29 @@ if ($result15->num_rows > 0) {
         <tr>
 
 <?php 
+
+
+
+
+$sql = "SELECT * FROM school_type WHERE School_type_id  = $school_type";
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $name_school = $row['School_type_name']; 
+} else {
+  $name_school = ''; 
+}
+
+
+
+
+
+
 if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0 && $visual_programming > 0 && $data_structure > 0){  
 ?>
          <td><?php echo $school_percentage  ?></td>
-         <td><?php echo $school_type  ?></td>
+         <td><?php echo $name_school  ?></td>
          <td><?php echo $aptitude_test  ?></td>
          <td><?php echo $acadmic_achievement  ?></td>
          <td><?php echo $programming1  ?></td>
@@ -296,7 +315,7 @@ if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic
   } elseif ($school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0) {
   ?>
          <td><?php echo $school_percentage  ?></td>
-         <td><?php echo $school_type  ?></td>
+         <td><?php echo $name_school  ?></td>
          <td><?php echo $aptitude_test  ?></td>
          <td><?php echo $acadmic_achievement  ?></td>
          <td><?php echo $programming1  ?></td>
@@ -305,7 +324,7 @@ if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic
   }else {
 ?>
          <td><?php echo $school_percentage  ?></td>
-         <td><?php echo $school_type  ?></td>
+         <td><?php echo $name_school  ?></td>
          <td><?php echo $aptitude_test  ?></td>
          <td><?php echo $acadmic_achievement  ?></td>
 <?php

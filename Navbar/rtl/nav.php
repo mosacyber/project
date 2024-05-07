@@ -687,14 +687,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
     <div class="collapse" id="page-layouts">
       <ul class="nav flex-column sub-menu">
        
-        <li class="nav-item d-none d-lg-block"> 
-        <a class="nav-link" href="'.$config['Actors'].'Program_Coordinator/report.php">
-        <i class="fa bi bi-file-text menu-icon"></i>
-        <span class="menu-title">
-        التقارير 
-       </span>
-        </a>
-        </li>
+
 
         <li class="nav-item d-none d-lg-block"> 
         <a class="nav-link" href="'.$config['Actors'].'Program_Coordinator/programs.php">
@@ -704,7 +697,14 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '3') {
        </span>
         </a>
         </li>
-
+        <li class="nav-item d-none d-lg-block"> 
+        <a class="nav-link" href="'.$config['Actors'].'Program_Coordinator/report.php">
+        <i class="fa bi bi-file-text menu-icon"></i>
+        <span class="menu-title">
+        التقارير 
+       </span>
+        </a>
+        </li>
         
       </ul>
     </div>

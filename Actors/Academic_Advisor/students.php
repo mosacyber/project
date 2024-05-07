@@ -125,6 +125,7 @@
                       <th scope="col">المعدل</th> <!-- معدله كل ترم من قاعده البيانات student_gpa -->
                       <th scope="col">المقررات الحالية</th>
                       <th scope="col">السجل الأكاديمي</th>
+                      <th scope="col">التنبؤ بالتخرج</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -162,6 +163,9 @@
                           echo '</td>';
                           echo '<td>';
                           echo '<button type="button" class="btn btn-primary view" data-toggle="modal" data-target="#acadimicrecord" data-student-id="' . $student_id . '" data-student-name="' . $student_name . '">عرض</button>';
+                          echo '</td>';
+                          echo '<td>';
+                          echo '<button type="button" class="btn btn-primary view" data-toggle="modal" data-target="#acadimicrecord2" data-student-id="' . $student_id . '" data-student-name="' . $student_name . '">عرض</button>';
                           echo '</td>';
                           // جدول الدراسات
                           echo '<td>';
@@ -434,6 +438,64 @@
         </script>
 
 
+
+
+
+
+
+
+<script>
+          $(document).ready(function () {
+            $('body').on('click', '.view', function () {
+              var row = $(this).closest('tr');
+              var studentId = row.find('td:eq(0)').text();
+              var studentName = row.find('td:eq(1)').text();
+
+              $.ajax({
+                type: "POST",
+                url: "view_graduate_prediction.php",
+                data: {
+                  student_id: studentId,
+                  studentName: studentName
+                },
+                success: function (response) {
+                  $('#acadimicrecord2').html(response);
+                }
+              });
+            });
+          });
+        </script>
+<div class="modal fade" id="acadimicrecord2" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">التنبؤ بالتخرج</h5>
+                <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+
+          $('#acadimicrecord2').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var student_id = button.data('student-id');
+            var student_name = button.data('student-name');
+
+            $(this).find('.student-name').text(student_name);
+            $(this).find('.student-id').text(student_id);
+          });
+
+        </script>
 
 
       </div>

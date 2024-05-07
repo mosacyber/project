@@ -271,7 +271,7 @@
       WHERE 
           grades.student_id = $_SESSION[Account_ID] 
           AND coursework.subject_code = grades.subject_code 
-          AND subjects.subject_code = 'CIS340' 
+          AND subjects.subject_code = 'CSC201' 
       ORDER BY  
           subjects.subject_code;";
           $SQL2 = mysqli_query($con, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count

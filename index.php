@@ -154,7 +154,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <img src="assets/img/logoo.png" style="width: 44px;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+ 
+  </div>
+</nav>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
@@ -183,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <br>
 
-                <!-- <a href="./reast/res.php" for="كلمة المرور"> هل نسيت كلمة المرور؟ استعادة </a><br> -->
+         
                 <a href="loginsystem/sendingcode.php" for="كلمة المرور">هل نسيت كلمة المرور؟</a><br>
                 <br>
                 <?php include './errors/errors.php'; ?>
@@ -193,6 +202,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       class="btn btn-primary btn-block llcol">انشاء - تفعيل الحساب الجامعي</button></a> -->
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="col-6 col-lg-6">
+          <div class="card">
+            <div class="card-body">
+            <img src="assets/img/uu4.png" style="width: 100%; height: 100%;">
+             
             </div>
           </div>
         </div>

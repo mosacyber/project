@@ -551,5 +551,5 @@ echo "
 </script>
 
 
-<script src="jquery.min.js"></script>
-<script src="bootstrap.min.js"></script>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>

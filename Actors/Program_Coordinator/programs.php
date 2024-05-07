@@ -494,8 +494,8 @@ $Program_Name = $row_program['Program_Name'];
         </div>
     </div>
 </div>
-<script src="jquery.min.js"></script>
-<script src="bootstrap.min.js"></script>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
 <script>
  document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("sbtn").addEventListener("click", function() {

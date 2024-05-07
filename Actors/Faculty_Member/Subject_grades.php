@@ -197,8 +197,8 @@ for ($i = 0; $i < 9; $i++) {
   <!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller -->
   <!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller -->
 
-  <script src="jquery.min.js"></script>
-  <script src="bootstrap.min.js"></script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
 
 </body>
 
