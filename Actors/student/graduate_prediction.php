@@ -9,11 +9,9 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>المقررات المسجلة</title>
+  <title>التنبؤ بالتخرج</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
-
   <?php
     $navbar_path = "tools/css.php";
 for ($i = 0; $i < 9; $i++) {
@@ -23,10 +21,7 @@ for ($i = 0; $i < 9; $i++) {
         break;
     }
 }
-
-
     ?>
-
   <style>
     <?php
     $navbar_path = "tools/tools.php";
@@ -82,14 +77,10 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="raw">
-
-     
+          <div class="raw">    
 <?php
 // استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
@@ -120,9 +111,6 @@ for ($i = 0; $i < 9; $i++) {
          <tr>
        <?php
 
-
-
-
 $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
 $result4 = $conn->query($sql4);
 if ($result4->num_rows > 0) {
@@ -131,11 +119,6 @@ if ($result4->num_rows > 0) {
 
   $student_id= $row4['student_id'];
 }
-
-
-
-
-
 
 $sql8 = "SELECT * FROM students where student_id = $student_id";
 $result8 = $conn->query($sql8);
@@ -202,11 +185,10 @@ $output=-1;
 $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
     if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0 && $visual_programming > 0 && $data_structure > 0){
       
-      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;G:\java\model\GraduateProject\build\classes\" course_Predction.year3 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $data_structure $visual_programming $school_type 2>&1";
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction.year3 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $data_structure $visual_programming $school_type 2>&1";
 
       $output = shell_exec($command);
       ?>
-
               <th scope="col">نسبة المدرسة</th>
               <th scope="col">نوع المدرسة</th>
               <th scope="col"> القدرات العامة</th>
@@ -215,72 +197,80 @@ $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة 
               <th scope="col"> برمجة 2</th>
               <th scope="col"> تراكيب البيانات والخواريزميات</th>
               <th scope="col"> البرمجة المرئية</th>
-
       <?php
 
     } elseif ($school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0) {
       
-      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;G:\java\model\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
     
       $output = shell_exec($command);
- 
-
 ?>
-
               <th scope="col">نسبة المدرسة</th>
               <th scope="col">نوع المدرسة</th>
               <th scope="col"> القدرات العامة</th>
               <th scope="col"> التحصيل الدراسي</th>
               <th scope="col"> برمجة 1</th>
               <th scope="col"> برمجة 2</th>
-
-
-
-
-
 <?php
     } else {
 
       $output=-2;
 ?>
-
               <th scope="col">نسبة المدرسة</th>
               <th scope="col">نوع المدرسة</th>
               <th scope="col"> القدرات العامة</th>
               <th scope="col"> التحصيل الدراسي</th>
-
 <?php
-
     }
-
-    
-
     if ($output == 1 || $output == 0) {
       $mark = "ممتاز";
+      $pr_color = "#6fe381";
     } else if ($output == 2) {
       $mark = "ممتاز";
+      $pr_color = "#6fe381";
     } else if ($output == 3) {
       $mark = "جيد جدا";
+      $pr_color = "#d3ef5e";
     } else if ($output == 4) {
       $mark = "جيد جدا";
+      $pr_color = "#d3ef5e";
     } else if ($output == 5) {
       $mark = "جيد";
+      $pr_color = "#fee43f";
     } else if ($output == 6) {
       $mark = "جيد";
+      $pr_color = "#fee43f";
     } else if ($output == 7) {
       $mark = "مقبول";
+      $pr_color = "#f19c26";
     } else if ($output == 8) {
       $mark = "مقبول";
+      $pr_color = "#f19c26";
     } else if ($output == -2) {
       $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
+      $pr_color = "#ed4c36";
     }else {
       $mark = "ضعيف";
+      $pr_color = "#ed4c36";
     }
-     
+          
+    $sql15 = "SELECT Prediction_grade_ID FROM Prediction WHERE student_id = $student_id AND Semster_Number = (SELECT MAX(Semster_Number) FROM Prediction)";
+    $result15 = $conn->query($sql15);
     
-            ?>
-
-            
+    if ($result15->num_rows > 0) {
+        // Handle the case when a result is found
+    } else {
+        // Handle the case when no result is found
+        $sql16 = "INSERT INTO `prediction` (`Student_ID`, `Prediction_grade_ID`, `Semster_Number`) 
+                  SELECT '$student_id', '$output', MAX(Semster_Number) FROM Prediction";
+                  if ($conn->query($sql16) === TRUE) {      
+                } else {
+                    echo "Error: " . $sql16 . "<br>" . $conn->error;
+                }
+    }
+    
+ ?>
+       
 </tr>
           </thead>
           <tbody>
@@ -297,7 +287,7 @@ if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic
          <td><?php echo $programming2  ?></td>
          <td><?php echo $data_structure  ?></td>
          <td><?php echo $visual_programming  ?></td>
-
+         
 <?php
   } elseif ($school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0) {
   ?>
@@ -317,37 +307,7 @@ if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic
 <?php
   }
 ?>
-
-
-
-
-
-
-
          </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           </tbody>
         </table>
@@ -355,50 +315,7 @@ if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic
     </div>
   </div>
 </div>
-<!-- End Sales Card -->
-
-<h1></h1>
-
-
-
-
-<?php
-
-
-if ($output == 1 || $output == 0) {
-  $mark = "ممتاز";
-  $pr_color = "#6fe381";
-} else if ($output == 2) {
-  $mark = "ممتاز";
-  $pr_color = "#6fe381";
-} else if ($output == 3) {
-  $mark = "جيد جدا";
-  $pr_color = "#d3ef5e";
-} else if ($output == 4) {
-  $mark = "جيد جدا";
-  $pr_color = "#d3ef5e";
-} else if ($output == 5) {
-  $mark = "جيد";
-  $pr_color = "#fee43f";
-} else if ($output == 6) {
-  $mark = "جيد";
-  $pr_color = "#fee43f";
-} else if ($output == 7) {
-  $mark = "مقبول";
-  $pr_color = "#f19c26";
-} else if ($output == 8) {
-  $mark = "مقبول";
-  $pr_color = "#f19c26";
-} else if ($output == -2) {
-  $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
-  $pr_color = "#ed4c36";
-}else {
-  $mark = "ضعيف";
-  $pr_color = "#ed4c36";
-}
- 
-        ?>
-     
+<!-- End Sales Card -->    
      <div class="col-12">
   <div class="card">
     <div class="card-body">
@@ -444,21 +361,6 @@ if ($output == 1 || $output == 0) {
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
     // الحصول على العنصر الذي يحتوي على شريط التقدم
     var progressBar = document.querySelector('.progress-bar');
@@ -476,10 +378,7 @@ if ($output == 1 || $output == 0) {
           </div>    
         </div>
       </div>
-    </div>
-       
-
-        
+    </div>      
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {
@@ -524,5 +423,4 @@ for ($i = 0; $i < 9; $i++) {
   }
 }
 ?>
-
 </html>
