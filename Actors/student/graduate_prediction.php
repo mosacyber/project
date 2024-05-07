@@ -256,18 +256,22 @@ $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة 
           
     $sql15 = "SELECT Prediction_grade_ID FROM Prediction WHERE student_id = $student_id AND Semster_Number = (SELECT MAX(Semster_Number) FROM Prediction)";
     $result15 = $conn->query($sql15);
-    
-    if ($result15->num_rows > 0) {
-        // Handle the case when a result is found
-    } else {
-        // Handle the case when no result is found
+
+if ($result15->num_rows > 0) {
+    // Handle the case when a result is found and $output is -2
+} else {
+    // Handle the case when no result is found or $output is not -2
+    if ($output != -2) {
         $sql16 = "INSERT INTO `prediction` (`Student_ID`, `Prediction_grade_ID`, `Semster_Number`) 
                   SELECT '$student_id', '$output', MAX(Semster_Number) FROM Prediction";
-                  if ($conn->query($sql16) === TRUE) {      
-                } else {
-                    echo "Error: " . $sql16 . "<br>" . $conn->error;
-                }
+        if ($conn->query($sql16) === TRUE) {      
+            // Insertion successful
+        } else {
+            echo "Error: " . $sql16 . "<br>" . $conn->error;
+        }
     }
+}
+
     
  ?>
        
