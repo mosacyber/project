@@ -50,36 +50,18 @@ for ($i = 0; $i < 9; $i++) {
     background-color: #392e6e;
     color: #fff;
 }
-<?php 
-$navbar_path = "loading/loading.css";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
-        break;
-    }
-}
-?> 
-</style>
+  </style>
 </head>
 <body class="rtl">
   <div class="container-scroller">
-<?php
-// استدعاء ملف التصميم
+
+
+<?php 
 $navbar_path = "Navbar/rtl/nav.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $navbar_path;
     if (file_exists($path)) {
-        include $path;
-        break;
-    }
-}
-// استدعاء ملف الشاشة البداية
-$loading_path = "loading/loading.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $loading_path;
-    if (file_exists($path)) {
-        include $path;
+      include $path;
         break;
     }
 }
@@ -89,10 +71,7 @@ for ($i = 0; $i < 9; $i++) {
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="raw">
-
-
-          <?php
+       <?php
 // استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
 for ($i = 0; $i < 9; $i++) {
@@ -103,7 +82,6 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-          </div>
           <br>
           <br>
           <div class="page-header">
@@ -291,7 +269,87 @@ $students_count = array_values($students_count_per_Programs);
         config2
     );
 </script>
-        
+
+<?php
+$sql = "SELECT COUNT(CASE WHEN Prediction_grade_ID >= 9 THEN 1 END) AS count_students5,
+COUNT(CASE WHEN Prediction_grade_ID >= 7 AND Prediction_grade_ID < 9 THEN 1 END) AS count_students4,
+COUNT(CASE WHEN Prediction_grade_ID >= 5 AND Prediction_grade_ID < 7 THEN 1 END) AS count_students3,
+COUNT(CASE WHEN Prediction_grade_ID >= 3 AND Prediction_grade_ID < 5 THEN 1 END) AS count_students2,
+COUNT(CASE WHEN Prediction_grade_ID >= 0 AND Prediction_grade_ID < 3 THEN 1 END) AS count_students1 FROM students St
+INNER JOIN Prediction P ON P.student_ID = St.student_id";
+
+
+
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $count_students11 = $row['count_students1'];
+    $count_students22 = $row['count_students2'];
+    $count_students33 = $row['count_students3'];
+    $count_students44 = $row['count_students4'];
+    $count_students55 = $row['count_students5'];
+} else {
+    $count_students11 = 0;
+    $count_students22 = 0;
+    $count_students33 = 0;
+    $count_students44 = 0;
+    $count_students55 = 0;
+}
+?>
+
+<div class="col-lg-4 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">التنبؤ بالتخرج للطلاب:</h4>
+            <canvas id="chart3"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels3 = ['ممتاز', 'جيد جدا', 'جيد', 'مقبول', 'ضعيف'];
+    const data3 = {
+        labels: labels3,
+        datasets: [{
+            label: 'عدد الطلاب',
+            data: [<?php echo $count_students11?>, <?php echo $count_students22?>, <?php echo $count_students33?>, <?php echo $count_students44?>, <?php echo $count_students55?>], // تعديل البيانات للقيم الثابتة
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(75, 192, 192)',
+                'rgb(255, 205, 86)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 99, 132)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const config3 = {
+        type: 'bar',
+        data: data3,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    };
+
+    const myChart3 = new Chart(
+        document.getElementById('chart3'),
+        config3
+    );
+</script>
+
 
 <div class="col-lg-2">
     <div class="card">
@@ -388,10 +446,6 @@ if ($result->num_rows > 0) {
     $Number3 = 5;
     $Number4 = 5;
 
-
-
-
-
     ?>
     <!-- الكود اللازم لرسم الرسم البياني -->
     <script>
@@ -427,11 +481,6 @@ if ($result->num_rows > 0) {
     </script>
 </div>
 
-
-
-        
-
-        
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {

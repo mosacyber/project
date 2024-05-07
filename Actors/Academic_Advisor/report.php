@@ -202,39 +202,37 @@ borderColor: [
         config
     );
 </script>
-     
+  
+<?php
+$sql = "SELECT COUNT(CASE WHEN Prediction_grade_ID >= 9 THEN 1 END) AS count_students5,
+COUNT(CASE WHEN Prediction_grade_ID >= 7 AND Prediction_grade_ID < 9 THEN 1 END) AS count_students4,
+COUNT(CASE WHEN Prediction_grade_ID >= 5 AND Prediction_grade_ID < 7 THEN 1 END) AS count_students3,
+COUNT(CASE WHEN Prediction_grade_ID >= 3 AND Prediction_grade_ID < 5 THEN 1 END) AS count_students2,
+COUNT(CASE WHEN Prediction_grade_ID >= 0 AND Prediction_grade_ID < 3 THEN 1 END) AS count_students1 FROM academic_advisor_for_student A
+INNER JOIN Prediction P ON P.student_ID = A.student_id
+WHERE A.Academic_Advisor_ID = $_SESSION[Account_ID];";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $count_students11 = $row['count_students1'];
+    $count_students22 = $row['count_students2'];
+    $count_students33 = $row['count_students3'];
+    $count_students44 = $row['count_students4'];
+    $count_students55 = $row['count_students5'];
+} else {
+    $count_students11 = 0;
+    $count_students22 = 0;
+    $count_students33 = 0;
+    $count_students44 = 0;
+    $count_students55 = 0;
+}
+?>
 
 <div class="col-lg-4 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">معدلات الطلاب:</h4>
+            <h4 class="card-title">التنبؤ بالتخرج للطلاب:</h4>
             <canvas id="chart3"></canvas>
         </div>
     </div>
@@ -242,12 +240,12 @@ borderColor: [
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const labels3 = ['4.75', '4.25', '3.75', '3', '2'];
+    const labels3 = ['ممتاز', 'جيد جدا', 'جيد', 'مقبول', 'ضعيف'];
     const data3 = {
         labels: labels3,
         datasets: [{
             label: 'عدد الطلاب',
-            data: [55, 55, 66, 99, 99], // تعديل البيانات للقيم الثابتة
+            data: [<?php echo $count_students11?>, <?php echo $count_students22?>, <?php echo $count_students33?>, <?php echo $count_students44?>, <?php echo $count_students55?>], // تعديل البيانات للقيم الثابتة
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
@@ -283,46 +281,6 @@ borderColor: [
         config3
     );
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="col-lg-2">
     <div class="card">
