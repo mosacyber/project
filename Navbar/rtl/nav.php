@@ -176,13 +176,43 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
       </a>
     </li>
     <li class="nav-item">
-    <a class="nav-link" href="'.$config['Actors'].'student/Prediction.php">
-      <i class="fa bi bi-journals menu-icon"></i>
+    <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+      <i class="fab fa-trello menu-icon"></i>
       <span class="menu-title">
-      الدرجات
-      </span>
+    الدرجات 
+     </span>
+      <i class="menu-arrow"></i>
     </a>
-  </li>
+    <div class="collapse" id="page-layouts">
+      <ul class="nav flex-column sub-menu">
+      <li class="nav-item">
+      <a class="nav-link" href="'.$config['Actors'].'student/Prediction.php">
+        <i class="fa bi bi-journals menu-icon"></i>
+        <span class="menu-title">
+        المقررات الحالية
+        </span>
+      </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="'.$config['Actors'].'student/Database_prediction.php">
+    <i class="fa bi-file-earmark-bar-graph-fill menu-icon"></i>
+    <span class="menu-title">
+    التنبؤ بمقرر
+    </span>
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="'.$config['Actors'].'student/graduate_prediction.php">
+    <i class="fa bi bi-mortarboard-fill menu-icon"></i>
+    <span class="menu-title">
+    التنبؤ بالتخرج
+    </span>
+    </a>
+    </li>
+      </ul>
+    </div>
+    </li>
+
     <li class="nav-item">
     <a class="nav-link" href="'.$config['Actors'].'student/acadmic_record.php">
       <i class="fab bi bi-card-checklist menu-icon"></i>
@@ -200,6 +230,22 @@ if(isset($_SESSION['role']) && $_SESSION['role'] === '1') {
   </a>
 </li>
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      ';
       }
 /*********************************/

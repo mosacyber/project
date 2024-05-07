@@ -239,7 +239,7 @@
 
         <div class="page-header">
           <h3 class="page-title">
-          درجات المقررات الحالية
+التنبؤ بمقرر
           </h3>
         </div>
 
@@ -254,12 +254,26 @@
           $previous_subject = null; // تعريف متغير لتتبع اسم المادة السابقة
           $A = 0;
 
-          $sql = "SELECT DISTINCT subjects.subject_code, subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
-          FROM grades
-          INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
-          INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
-          INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
-          WHERE grades.student_id = " . $_SESSION['Account_ID'] . " AND coursework.subject_code = grades.subject_code ORDER by  subjects.subject_code";
+          $sql = "SELECT DISTINCT 
+          subjects.subject_code, 
+          subjects.subject_name, 
+          coursework_type.coursework_type_name, 
+          coursework.coursework_grade, 
+          grades.coursework_mark
+      FROM 
+          grades
+      INNER JOIN 
+          coursework ON grades.coursework_id = coursework.coursework_id
+      INNER JOIN 
+          subjects ON coursework.subject_code = subjects.subject_code
+      INNER JOIN 
+          coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
+      WHERE 
+          grades.student_id = $_SESSION[Account_ID] 
+          AND coursework.subject_code = grades.subject_code 
+          AND subjects.subject_code = 'CIS340' 
+      ORDER BY  
+          subjects.subject_code;";
           $SQL2 = mysqli_query($con, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
           FROM grades
           INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
@@ -368,7 +382,9 @@
 
             
 
-          <hr>
+
+  
+          
             ';
           } ?>
 
@@ -384,42 +400,15 @@
 
           $result1 = mysqli_query($con, $sql1);
 
-          if ($result1->num_rows > 0) {
-            while ($row1 = $result1->fetch_assoc()) {
-              echo '<div class="col-xxl-12 col-md-12">
-                <div class="card info-card sales-card">
-                    <div class="card-body">
-                        <h2>' . $row1["subject_name"] . ' ' . $row1["subject_code"] . '</h2>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">نوع النشاط الدراسي</th>
-                                        <th scope="col">درجة النشاط الدراسي</th>
-                                        <th scope="col">درجة الطالب</th>
-                                    </tr>
-                                </thead>
-                                <tbody>';
-              echo '</tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div><br><br>      
-            
-            
-            
-          
-          
-          
-          
-          <hr>
-          ';
-            }
-          }
+         
           ?>
 
 
+
+          <!-- End Sales Card -->
+          <!-- Sales Card -->
+          <!-- End Sales Card -->
+         
 
           
         </div>

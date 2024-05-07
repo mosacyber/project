@@ -142,7 +142,8 @@ if (isset($_POST['subjectCode'])) {
                 }
                 echo "<tr>";
                 echo "<td colspan='1' space='col'>المجموع:</td>";
-                echo "<td colspan='3'><div class='progress'>
+                echo "<td colspan='3'>
+                <div class='progress'>
                         <div class='progress-bar' role='progressbar' style='width: " . $total . "%; background-color: " . $progress_color . ";' aria-valuenow='" . $total . "'
                             aria-valuemin='0' aria-valuemax='100'>" . $total . "</div>
                         </div>

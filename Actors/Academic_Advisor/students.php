@@ -378,7 +378,7 @@
         </div>
         <!-- End Sales Card -->
         <h1></h1>
-        <script src="jquery.min.js"></script>
+        <script src="../../assets/js/jquery.min.js"></script>
         <script>
           $(document).ready(function () {
             $('body').on('click', '.view', function () {

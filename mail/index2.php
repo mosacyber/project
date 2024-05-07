@@ -104,7 +104,17 @@
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
-        <div class="email-wrapper wrapper">
+        <div class="email-wrapper wrapper"><?php
+// استدعاء ملف الشاشة البداية
+  $loading_path = "content/content.php";
+    for ($i = 0; $i < 9; $i++) {
+      $path = str_repeat("../", $i) . $loading_path;
+      if (file_exists($path)) {
+      include $path;
+      break;
+    }
+  }
+?><br>
           <div class="row align-items-stretch">
             <div class="mail-sidebar d-none d-lg-block col-md-2 pt-3 bg-white">
               <div class="menu-bar">
