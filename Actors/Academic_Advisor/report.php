@@ -304,21 +304,15 @@ if ($result->num_rows > 0) {
 
 <?php
 
-$sql = "SELECT Semster_Number, COUNT(CASE WHEN grade >= 85 THEN 1 END) AS passing_students,
-        COUNT(CASE WHEN grade <= 60 THEN 1 END) AS failing_students
-        FROM academic_record
-        WHERE Semster_Number = (SELECT MAX(Semster_Number) FROM academic_record)";
+$sql = "SELECT MAX(Semester_Number) AS max_semester FROM current_semester";
 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
-    $sum_students1 = $row['passing_students'];
-    $sum_students2 = $row['failing_students'];
-
     // عرض الفصل الدراسي
-    $Max_Semster_Number = $row['Semster_Number'];
+    $Max_Semster_Number = $row['max_semester'];
     // التأكد من وجود الفصل الدراسي
     if ($Max_Semster_Number !== null) {
         // استخدام switch مباشرة للتحقق من الفصل الدراسي
@@ -347,8 +341,6 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-
-
         <div class="col-lg-2 ">
             <div class="card"><!--  academic_record اعلى سمستر -->
             <div class="card-body">
@@ -367,19 +359,11 @@ if ($result->num_rows > 0) {
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
 <?php
-
-
     $Number1 = 5;
     $Number2 = 5;
     $Number3 = 5;
     $Number4 = 5;
-
-
-
-
-
     ?>
     <!-- الكود اللازم لرسم الرسم البياني -->
     <script>
