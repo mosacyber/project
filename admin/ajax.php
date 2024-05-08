@@ -32,7 +32,7 @@ if(isset($_POST['selectedValue'])) {
    // إنشاء الجدول لعرض البيانات
    if ($result->num_rows > 0) {
     echo "<table class='table datatable'>";
-    echo "<thead><tr><th>رقم المعرف</th><th>الاسم</th><th>الايميل</th><th>رقم الجوال</th><th>المنصب</th><th>تعديل</th><th>حذف</th></tr></thead>";
+    echo "<thead><tr><th>رقم المعرف</th><th>الاسم</th><th>الايميل</th><th>رقم الجوال</th><th>المنصب</th></tr></thead>";
     echo "<tbody>";
     while($row = $result->fetch_assoc()) {
         // استرجاع اسم المنصب من جدول المناصب
@@ -48,12 +48,7 @@ if(isset($_POST['selectedValue'])) {
         echo "<td>" . $row["Email"] . "</td>";
         echo "<td>" . $row["Mobile"] . "</td>";
         echo "<td>" . $position_name . "</td>";
-        echo "<td>";
-        echo "<a href='#' class='edit-button' data-toggle='modal' data-target='#exampleModal' data-department-id='". $row["Account_ID"] ."' data-department-name='". $row["First_Name"] ."' style='text-decoration: none !important;'><i class='material-icons'>edit</i></a> ";
-        echo "</td>";      
-        echo "<td>";
-        echo "<a href='#' onclick='openDeleteModal(\"".$row["First_Name"]."\")' style='text-decoration: none !important;'><i class='material-icons'>delete</i></a> ";
-        echo "</td>";
+
         
         echo "</tr>";
     }

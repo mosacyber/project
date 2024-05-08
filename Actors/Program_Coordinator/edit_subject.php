@@ -89,9 +89,16 @@
         <div class="modal-content">
             <div class="modal-header" style="direction: rtl;">
                 <h5 class="modal-title" id="editModalLabel">تعديل</h5>
-                <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="close-left btn btn-danger" onclick="closeModal();" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
             </div>
             <div class="modal-body">
                 <div class="popup-form" id="popupForm">
@@ -126,7 +133,13 @@
                     </div>
                     <br /> <br />
                     <button class="btn btn-primary" id="Ebtn">حفظ التغييرات</button>
-                    <button class="btn btn-secondary" id="closeForm" data-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إلغاء</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
                 </div>
             </div>
         </div>

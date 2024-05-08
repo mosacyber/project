@@ -79,7 +79,28 @@ for ($i = 0; $i < 9; $i++) {
             </h3>
           </div>
 
+          <div class="col-xxl-12 col-md-12">
+          <div class="card info-card revenue-card">
 
+      
+        
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الاسم</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الرقم الوظيفي</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
+                  </div>
+                  </div>
+        </div>
+        </div>
+        </div>
 
         </div>
         <!-- content-wrapper ends -->

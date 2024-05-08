@@ -72,22 +72,28 @@ for ($i = 0; $i < 9; $i++) {
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
-          <div class="col-md-12 grid-margin ">
-            <div class="card">
-                <div class="card-body">               
-                  <div class="template-demo">
-                    <nav>
-                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">
-                         الصفحة الرئيسية 
-                      </li>
-                      </ol>
-                    </nav>
-                    
+          <div class="col-xxl-12 col-md-12">
+          <div class="card info-card revenue-card">
+
+      
+        
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الاسم</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
                   </div>
-                </div>
-              </div>
-            </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">الرقم الوظيفي</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
+                  </div>
+                  </div>
+        </div>
+        </div>
+        </div><br>
           </div>
           <div class="page-header">
             <h3 class="page-title">
@@ -120,7 +126,47 @@ for ($i = 0; $i < 9; $i++) {
             <?php
             $sql = "SELECT COUNT(*) AS total_students FROM accounts WHERE Position  = 1";
             $result = $conn->query($sql);
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $total_students = $row['total_students'];
+                echo "<h3>$total_students</h3>";
+            } else {
+                echo "<p>لا توجد بيانات</p>";
+            }
+            ?>
+        </div>
+    </div>
+</div>
 
+
+
+<div class="col-lg-2">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">عدد اعضاء هيئة التدريس</h4>
+            <?php
+            $sql = "SELECT COUNT(*) AS total_students FROM accounts WHERE Position  = 7";
+            $result = $conn->query($sql);
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $total_students = $row['total_students'];
+                echo "<h3>$total_students</h3>";
+            } else {
+                echo "<p>لا توجد بيانات</p>";
+            }
+            ?>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-lg-2">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">عدد العمداء  </h4>
+            <?php
+            $sql = "SELECT COUNT(*) AS total_students FROM accounts WHERE Position  = 2            ";
+            $result = $conn->query($sql);
             if ($result && $result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $total_students = $row['total_students'];
@@ -141,6 +187,24 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
+<div class="col-lg-2">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">عدد منسقين البرامج  </h4>
+            <?php
+            $sql = "SELECT COUNT(*) AS total_students FROM accounts WHERE Position  = 3";
+            $result = $conn->query($sql);
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $total_students = $row['total_students'];
+                echo "<h3>$total_students</h3>";
+            } else {
+                echo "<p>لا توجد بيانات</p>";
+            }
+            ?>
+        </div>
+    </div>
+</div>
 
 
 
@@ -150,15 +214,24 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
-
-
-
-
-
-
-
-
-
+<div class="col-lg-2">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">عدد وكلاء الجامعه  </h4>
+            <?php
+            $sql = "SELECT COUNT(*) AS total_students FROM accounts WHERE Position  = 5";
+            $result = $conn->query($sql);
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $total_students = $row['total_students'];
+                echo "<h3>$total_students</h3>";
+            } else {
+                echo "<p>لا توجد بيانات</p>";
+            }
+            ?>
+        </div>
+    </div>
+</div>
 
 
 

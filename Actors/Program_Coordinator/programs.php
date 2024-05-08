@@ -386,7 +386,13 @@ $Program_Name = $row_program['Program_Name'];
           </div>
           <br /> <br />
             <button class="btn btn-primary" id="sbtn">اضافة</button>
-            <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">إلغاء</button>
+            <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إلغاء</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
         </div>
       </div>
     </div>
@@ -424,7 +430,13 @@ $Program_Name = $row_program['Program_Name'];
                     </div>
                     <br /> <br />
                     <button class="btn btn-primary" id="Ebtn">حفظ التغييرات</button>
-                    <button class="btn btn-secondary" id="closeForm" data-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إلغاء</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
                 </div>
             </div>
         </div>
@@ -456,7 +468,13 @@ $Program_Name = $row_program['Program_Name'];
                             <div class="d-flex justify-content-start">
                                 <button class="btn btn-danger" id="Dbtn">حذف</button>
                                 <span style="color: white;">h</span>
-                                <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close">إلغاء</button>
+                                <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إلغاء</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
                             </div>
                         </div>
                     </div>

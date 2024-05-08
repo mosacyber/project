@@ -17,9 +17,16 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="ModalLabel">التنبؤ بالتخرج</h5>
-                  <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="close-left btn btn-danger" onclick="closeModal();" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
                 </div>
                 <div class="modal-body">
                   <h6>اسم الطالب: <?php echo $studentName; ?></h6>
@@ -348,37 +355,37 @@ if ($output == 1 || $output == 0) {
       <hr>
       <br>
       <div class="text-center">
-        <?php
+      <?php
         switch ($mark) {
           case "A+":
-            echo '<h5 class="text bg-success">' . $mark . '</h5>'; // اللون الأخضر لتقدير A+
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الأخضر لتقدير A+
             break;
           case "A":
-            echo '<h5 class="text bg-primary">' . $mark . '</h5>'; // اللون الأزرق لتقدير A
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الأزرق لتقدير A
             break;
           case "B+":
-            echo '<h5 class="text bg-info">' . $mark . '</h5>'; // اللون الأزرق الفاتح لتقدير B+
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الأزرق الفاتح لتقدير B+
             break;
           case "B":
-            echo '<h5 class="text bg-warning">' . $mark . '</h5>'; // اللون الأصفر لتقدير B
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الأصفر لتقدير B
             break;
           case "C+":
-            echo '<h5 class="text bg-orange">' . $mark . '</h5>'; // اللون البرتقالي لتقدير C+
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون البرتقالي لتقدير C+
             break;
           case "C":
-            echo '<h5 class="text bg-secondary">' . $mark . '</h5>'; // اللون الرمادي لتقدير C
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الرمادي لتقدير C
             break;
           case "D+":
-            echo '<h5 class="text bg-danger">' . $mark . '</h5>'; // اللون الأحمر لتقدير D+
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D+
             break;
           case "D":
-            echo '<h5 class="text bg-danger">' . $mark . '</h5>'; // اللون الأحمر لتقدير D
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D
             break;
           case "-2":
-            echo '<h5 class="text bg-secondary">' . $mark . '</h5>'; // اللون الرمادي للنص التنبؤ غير متوفر
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;   " class="text">' . $mark . '</h5>'; // اللون الرمادي للنص التنبؤ غير متوفر
             break;
           default:
-            echo '<h5 class="text bg-danger">' . $mark . '</h5>'; // اللون الأحمر لتقدير F
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 29px;    " class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير F
             break;
         }
         ?>
@@ -437,8 +444,14 @@ if ($output == 1 || $output == 0) {
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                  <button type="button" class="btn btn-primary">تواصل</button>
+                <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إغلاق</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
+
                 </div>
               </div>
             </div>

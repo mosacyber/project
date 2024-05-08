@@ -17,9 +17,16 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="ModalLabel">السجل الأكاديمي</h5>
-                  <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="close-left btn btn-danger" onclick="closeModal();" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
                 </div>
                 <div class="modal-body">
                   <h6>اسم الطالب: <?php echo $studentName; ?></h6>
@@ -278,8 +285,14 @@
                   ?>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                  <button type="button" class="btn btn-primary">تواصل</button>
+                <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إغلاق</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
+
                 </div>
               </div>
             </div>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php 
+include '../../config/app.php'
+?>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -323,15 +325,19 @@
                                 </div>
                             </div>
                         </div>    
-                    </div><br><br>';
+                    </div><br>';
                             }
                           }
                           echo '<div class="modal-footer">';
-                          echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>';
-                          echo '<button type="button" class="btn btn-primary" data-dismiss="modal">تواصل</button>';
-
+                          echo '<button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إغلاق</button>
+                          <script>
+                          function closeModal() {
+                              $("#myModal").modal("hide");
+                              location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+                          }
+                          </script>
+                          ';
                           echo '</div>';
-
                         }
                       } else {
                         echo "
@@ -418,8 +424,15 @@
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                <button type="button" class="btn btn-primary">تواصل</button>
+              <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إغلاق</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
+
+               
               </div>
             </div>
           </div>
@@ -471,15 +484,28 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="ModalLabel">التنبؤ بالتخرج</h5>
-                <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="close-left btn btn-danger" onclick="closeModal();" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+<script>
+function closeModal() {
+    $('#myModal').modal('hide');
+}
+</script>
+
               </div>
               <div class="modal-body">
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+              <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إغلاق</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
+
               </div>
             </div>
           </div>

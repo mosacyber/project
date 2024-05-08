@@ -87,22 +87,11 @@ for ($i = 0; $i < 9; $i++) {
                     <div class="col-lg-3 col-md-4 label ">الاسم</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Name'] ?></div>
                   </div>
-
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">الرقم الوظيفي</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
                   </div>
-
-
-
-          </div>
-       
-       
-       
-       
-
-
+                  </div>
         </div>
         </div>
         </div>
@@ -125,7 +114,7 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
-        <!-- Sales Card -->
+        <!-- Sales Card
         <div class="col-xxl-4 col-md-6">
           <div class="card info-card sales-card">
 
@@ -148,7 +137,7 @@ for ($i = 0; $i < 9; $i++) {
           </a> 
 
           </div><br>
-        </div><!-- End Sales Card -->
+        </div> End Sales Card -->
 
 
 
