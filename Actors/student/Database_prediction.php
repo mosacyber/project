@@ -141,14 +141,6 @@
     }
 
 
-
-
-
-
-
-
-
-
     if ($result5->num_rows > 0) {
         $row5 = $result5->fetch_assoc();
     } else {
@@ -245,6 +237,7 @@
 
         <div class="row">
           <!-- Sales Card -->
+
           <?php
           $host = "localhost";
           $name = "root";
@@ -271,7 +264,7 @@
       WHERE 
           grades.student_id = $_SESSION[Account_ID] 
           AND coursework.subject_code = grades.subject_code 
-          AND subjects.subject_code = 'CSC201' 
+          AND subjects.subject_code = 'CIS340' 
       ORDER BY  
           subjects.subject_code;";
           $SQL2 = mysqli_query($con, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
@@ -322,6 +315,7 @@
                                 <tbody>';
               }
               $subject_total_marks += $row["coursework_mark"];
+             
               //الألوان الخاصة بمجموع الدرجات لكل مقرر
               $pr_color = "";
               if ($subject_total_marks > 90) {
@@ -369,6 +363,7 @@
               }
 
             }
+
             echo "<td colspan='1' space='col'>المجمــــوع</td>";
                 echo "<td colspan='2'><div class='progress'>
                     <div class='progress-bar' role='progressbar' style='width: " . $subject_total_marks . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $subject_total_marks . "' aria-valuemin='0' aria-valuemax='100'>" . $subject_total_marks . "</div>
@@ -376,17 +371,11 @@
                 </td>";
                 echo "</tr>";
 
-            echo '</tbody></table></div></div></div></div><br><br>
-            
-            
-
-            
-
-
-  
-          
+            echo '</tbody></table></div></div></div></div><br><br>         
             ';
-          } ?>
+          } else {
+            echo "<h3>لا يمكن التنبؤ في مادة نظم قواعد البيانات ما لم يتم دراستها في الفصل الحالي.</h3>";
+        } ?>
 
           <?php
           $sql1 = "SELECT cs.subject_code, s.subject_name
@@ -403,20 +392,66 @@
          
           ?>
 
-
-
-          <!-- End Sales Card -->
-          <!-- Sales Card -->
-          <!-- End Sales Card -->
          
-
-          
         </div>
 
 
       </div>
       <!-- content-wrapper ends -->
 
+          
+      <?php
+
+$DB_grade = array(0, 0);
+$mid1=-1;$quiz1=-1;$quiz2=-1;
+$mid2=-1;$quiz3=-1;$Project=-1;
+$LABquiz=-1;$LABFinal=-1;$Final=-1;
+
+
+$sql = "SELECT coursework_Mark FROM grades WHERE student_ID = {$_SESSION['Account_ID']} AND Subject_Code = 'CIS340' ORDER BY coursework_id";
+
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $DB_grade = array(); // Reset the array to be empty
+    while($row = $result->fetch_assoc()) {
+        array_push($DB_grade, $row['coursework_Mark']); // Add each value to the array
+    }
+
+    // Access array elements with error checking
+    $quiz1 = isset($DB_grade[0]) ? $DB_grade[0] : -1;
+    $mid1 = isset($DB_grade[1]) ? $DB_grade[1] : -1;
+    $LABquiz = isset($DB_grade[2]) ? $DB_grade[2] : -1;
+
+    $quiz2 = isset($DB_grade[3]) ? $DB_grade[3] : -1;
+    $mid2 = isset($DB_grade[4]) ? $DB_grade[4] : -1;
+    $Project = isset($DB_grade[5]) ? $DB_grade[5] : -1;
+    $quiz3 = isset($DB_grade[6]) ? $DB_grade[6] : -1;
+    $LABFinal = isset($DB_grade[7]) ? $DB_grade[7] : -1;
+
+} else {
+    $DB_grade = array(0, 0); // Set default values if no data found
+}
+
+
+$output=-1;
+$mark = "التنبؤ غير متوفر لحد مايتم احتساب اول 3 متطلبات من المادة على الاقل.";
+    if( $quiz1 > -1 && $mid1 > -1 && $LABquiz > -1 && $quiz2 > -1 && $mid2 > -1 && $Project > -1 && $quiz3 > -1 && $LABFinal > -1){
+      
+      //$command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction.year3 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $data_structure $visual_programming $school_type 2>&1";
+
+      //$output = shell_exec($command);
+
+    } elseif ($quiz1 > -1 && $mid1 > -1 && $LABquiz > -1) {
+      
+      //$command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
+    
+      //$output = shell_exec($command);
+    
+    } else {
+     // $output=-2;
+
+    }
+ ?>
 
       <?php
       $navbar_path = "footer/Footer.php";

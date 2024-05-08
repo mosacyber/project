@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2024 at 07:13 PM
+-- Generation Time: May 08, 2024 at 04:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -206,36 +206,45 @@ CREATE TABLE `coursework` (
 --
 
 INSERT INTO `coursework` (`coursework_id`, `coursework_type_ID`, `coursework_grade`, `subject_code`) VALUES
+(1, 4, 3, 'CIS340'),
 (1, 1, 20, 'CIT203'),
 (1, 1, 20, 'CIT234'),
 (1, 1, 20, 'CIT453'),
 (1, 1, 15, 'CSC101'),
 (1, 1, 15, 'CSC201'),
+(2, 1, 10, 'CIS340'),
 (2, 2, 20, 'CIT203'),
 (2, 2, 20, 'CIT234'),
 (2, 2, 20, 'CIT453'),
 (2, 2, 15, 'CSC101'),
 (2, 2, 15, 'CSC201'),
+(3, 10, 5, 'CIS340'),
 (3, 4, 10, 'CIT203'),
 (3, 4, 5, 'CIT234'),
 (3, 6, 5, 'CIT453'),
 (3, 4, 5, 'CSC101'),
 (3, 4, 10, 'CSC201'),
+(4, 5, 3, 'CIS340'),
 (4, 5, 10, 'CIT203'),
 (4, 5, 5, 'CIT234'),
 (4, 7, 5, 'CIT453'),
 (4, 5, 5, 'CSC101'),
 (4, 5, 10, 'CSC201'),
+(5, 2, 10, 'CIS340'),
 (5, 3, 40, 'CIT203'),
 (5, 8, 10, 'CIT234'),
 (5, 4, 10, 'CIT453'),
 (5, 4, 10, 'CSC101'),
 (5, 8, 20, 'CSC201'),
+(6, 8, 15, 'CIS340'),
 (6, 3, 40, 'CIT234'),
 (6, 3, 40, 'CIT453'),
 (6, 8, 20, 'CSC101'),
 (6, 3, 30, 'CSC201'),
-(7, 3, 30, 'CSC101');
+(7, 11, 4, 'CIS340'),
+(7, 3, 30, 'CSC101'),
+(8, 9, 10, 'CIS340'),
+(9, 3, 40, 'CIS340');
 
 -- --------------------------------------------------------
 
@@ -260,7 +269,10 @@ INSERT INTO `coursework_type` (`coursework_type_id`, `coursework_type_name`) VAL
 (5, 'اختبار قصير 2'),
 (6, 'الواجب الاول'),
 (7, 'الواجب الثاني'),
-(8, 'المشروع');
+(8, 'المشروع'),
+(9, 'الاختبار العملي'),
+(10, 'اختبار قصير عملي'),
+(11, 'اختبار قصير 3');
 
 -- --------------------------------------------------------
 
@@ -376,18 +388,30 @@ INSERT INTO `grades` (`student_ID`, `coursework_id`, `coursework_Mark`, `Subject
 (381003233, 5, 20, 'CSC201'),
 (381003233, 6, 28, 'CIT234'),
 (381003233, 6, 30, 'CSC201'),
+(421002999, 1, 3, 'CIS340'),
 (421002999, 1, 12, 'CSC201'),
+(421002999, 2, 10, 'CIS340'),
 (421002999, 2, 11, 'CSC201'),
+(421002999, 3, 5, 'CIS340'),
 (421002999, 3, 8, 'CSC201'),
 (421002999, 4, 9, 'CSC201'),
 (421002999, 5, 18, 'CSC201'),
 (421002999, 6, 21, 'CSC201'),
+(421004034, 1, 3, 'CIS340'),
 (421004034, 1, 18, 'CIT234'),
+(421004034, 2, 9, 'CIS340'),
 (421004034, 2, 19, 'CIT234'),
+(421004034, 3, 5, 'CIS340'),
 (421004034, 3, 5, 'CIT234'),
+(421004034, 4, 3, 'CIS340'),
 (421004034, 4, 4, 'CIT234'),
+(421004034, 5, 8, 'CIS340'),
 (421004034, 5, 10, 'CIT234'),
-(421004034, 6, 38, 'CIT234');
+(421004034, 6, 15, 'CIS340'),
+(421004034, 6, 38, 'CIT234'),
+(421004034, 7, 3, 'CIS340'),
+(421004034, 8, 8, 'CIS340'),
+(421004034, 9, 38, 'CIS340');
 
 -- --------------------------------------------------------
 
@@ -413,6 +437,52 @@ INSERT INTO `position` (`position_id`, `position_name`) VALUES
 (6, 'مدير الجامعة'),
 (7, 'عضو هيئة التدريس'),
 (8, 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prediction`
+--
+
+CREATE TABLE `prediction` (
+  `Student_ID` int(9) NOT NULL,
+  `Prediction_grade_ID` int(1) NOT NULL,
+  `Semster_Number` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `prediction`
+--
+
+INSERT INTO `prediction` (`Student_ID`, `Prediction_grade_ID`, `Semster_Number`) VALUES
+(421004034, 2, 452),
+(381003212, 3, 452);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prediction_grade_type`
+--
+
+CREATE TABLE `prediction_grade_type` (
+  `Prediction_grade_ID` int(1) NOT NULL,
+  `Prediction_grade_type` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `prediction_grade_type`
+--
+
+INSERT INTO `prediction_grade_type` (`Prediction_grade_ID`, `Prediction_grade_type`) VALUES
+(1, 'ممتاز'),
+(2, 'ممتاز'),
+(3, 'جيد جدأ'),
+(4, 'جيد جدأ'),
+(5, 'جيد'),
+(6, 'جيد'),
+(7, 'مقبول'),
+(8, 'مقبول'),
+(9, 'ضعيف');
 
 -- --------------------------------------------------------
 
@@ -511,7 +581,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `School_type_id`, `school_percentage`, `aptitude_test`, `acadmic_achievement`, `Program_ID`) VALUES
-(381003212, 2, 88, 80, 90, 70201),
+(381003212, 2, 88, 80, 90, 70101),
 (381003233, 2, 92, 78, 82, 70201),
 (421002999, 1, 89, 89, 90, 70101),
 (421004034, 1, 98, 87, 85, 70101);
@@ -709,6 +779,20 @@ ALTER TABLE `position`
   ADD PRIMARY KEY (`position_id`);
 
 --
+-- Indexes for table `prediction`
+--
+ALTER TABLE `prediction`
+  ADD PRIMARY KEY (`Student_ID`,`Semster_Number`),
+  ADD KEY `Student_ID` (`Student_ID`),
+  ADD KEY `Prediction_grade_ID` (`Prediction_grade_ID`);
+
+--
+-- Indexes for table `prediction_grade_type`
+--
+ALTER TABLE `prediction_grade_type`
+  ADD PRIMARY KEY (`Prediction_grade_ID`);
+
+--
 -- Indexes for table `programs`
 --
 ALTER TABLE `programs`
@@ -790,13 +874,13 @@ ALTER TABLE `colleges`
 -- AUTO_INCREMENT for table `coursework`
 --
 ALTER TABLE `coursework`
-  MODIFY `coursework_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `coursework_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `coursework_type`
 --
 ALTER TABLE `coursework_type`
-  MODIFY `coursework_type_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `coursework_type_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -889,6 +973,13 @@ ALTER TABLE `grades`
   ADD CONSTRAINT `Grade_coursework` FOREIGN KEY (`coursework_id`) REFERENCES `coursework` (`coursework_id`),
   ADD CONSTRAINT `Grade_student` FOREIGN KEY (`student_ID`) REFERENCES `students` (`student_id`),
   ADD CONSTRAINT `Grade_subject` FOREIGN KEY (`Subject_Code`) REFERENCES `subjects` (`subject_code`);
+
+--
+-- Constraints for table `prediction`
+--
+ALTER TABLE `prediction`
+  ADD CONSTRAINT `Prediction_Student` FOREIGN KEY (`Student_ID`) REFERENCES `students` (`student_id`),
+  ADD CONSTRAINT `Prediction_grade` FOREIGN KEY (`Prediction_grade_ID`) REFERENCES `prediction_grade_type` (`Prediction_grade_ID`);
 
 --
 -- Constraints for table `program_coordinator`
