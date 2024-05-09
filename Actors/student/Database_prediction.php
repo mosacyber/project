@@ -280,6 +280,7 @@
           $subject_total_marks = 0;
           $result = $con->query($sql);
           $total = 0;
+          $Div=0;
           if ($result->num_rows > 0) {
             $previous_subject = '';
 
@@ -375,6 +376,7 @@
             ';
           } else {
             echo "<h3>لا يمكن التنبؤ في مادة نظم قواعد البيانات ما لم يتم دراستها في الفصل الحالي.</h3>";
+            $Div=1;
         } ?>
 
           <?php
@@ -387,20 +389,11 @@
             AND g.subject_code = cs.subject_code
         ) ORDER BY cs.subject_code";
 
-          $result1 = mysqli_query($con, $sql1);
-
-         
-          ?>
-
-         
+          $result1 = mysqli_query($con, $sql1);      
+          ?>         
         </div>
-
-
       </div>
-      <!-- content-wrapper ends -->
-
-          
-      <?php
+    <?php
 
 $DB_grade = array(0, 0);
 $mid1=-1;$quiz1=-1;$quiz2=-1;
@@ -441,58 +434,57 @@ $mark = "التنبؤ غير متوفر لحد مايتم احتساب اول 3 
 
       $output = shell_exec($command);
 
-      echo $output . " /  2";
-
-
     } elseif ($quiz1 > -1 && $mid1 > -1 && $LABquiz > -1) {
       
       $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" Database_Predction.First $quiz1 $mid1 $LABquiz 2>&1";
     
       $output = shell_exec($command);
       
-      echo $output . " /  1";
-
     } else {
+
       $output=-2;
-      echo $output . " /  21";
+
     }
   
   if ($output == 1 || $output == 0) {
-    $mark = "ممتاز";
+    $mark = "A+";
     $pr_color = "#6fe381";
   } else if ($output == 2) {
-    $mark = "ممتاز";
+    $mark = "A";
     $pr_color = "#6fe381";
   } else if ($output == 3) {
-    $mark = "جيد جدا";
+    $mark = "B+";
     $pr_color = "#d3ef5e";
   } else if ($output == 4) {
-    $mark = "جيد جدا";
+    $mark = "B";
     $pr_color = "#d3ef5e";
   } else if ($output == 5) {
-    $mark = "جيد";
+    $mark = "C+";
     $pr_color = "#fee43f";
   } else if ($output == 6) {
-    $mark = "جيد";
+    $mark = "C";
     $pr_color = "#fee43f";
   } else if ($output == 7) {
-    $mark = "مقبول";
+    $mark = "D+";
     $pr_color = "#f19c26";
   } else if ($output == 8) {
-    $mark = "مقبول";
+    $mark = "D+";
     $pr_color = "#f19c26";
   } else if ($output == -2) {
-    $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
+    $mark = "التنبؤ غير متوفر لحد مايتم احتساب اول 3 متطلبات من المادة على الاقل.";
     $pr_color = "#ed4c36";
   }else {
-    $mark = "ضعيف";
+    $mark = "F";
     $pr_color = "#ed4c36";
   }
  ?>
+ <?php
+
+ if($Div==0){ ?>
      <div class="col-12">
   <div class="card">
     <div class="card-body">
-      <h2 class="text-center">التقدير المتوقع الحصول عليه عند التخرج:</h2>
+      <h2 class="text-center">التقدير المتوقع الحصول عليه في مادة نظم قواعد البيانات:</h2>
       <hr>
       <br>
       <div class="text-center">
@@ -534,20 +526,10 @@ $mark = "التنبؤ غير متوفر لحد مايتم احتساب اول 3 
     </div>
   </div>
 </div>
-<script>
-    // الحصول على العنصر الذي يحتوي على شريط التقدم
-    var progressBar = document.querySelector('.progress-bar');
+<?php
+ } else {
 
-    // قراءة النسبة المئوية من العنصر
-    var percentage = parseFloat(progressBar.style.width);
-
-    // حساب النسبة المئوية من 5
-    var calculatedPercentage = (percentage / 100) * 5;
-
-    // تحديث نص النسبة المئوية في العنصر
-    progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
-
-</script>
+ } ?>
       <?php
       $navbar_path = "footer/Footer.php";
       for ($i = 0; $i < 9; $i++) {
