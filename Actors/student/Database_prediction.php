@@ -437,19 +437,24 @@ $output=-1;
 $mark = "التنبؤ غير متوفر لحد مايتم احتساب اول 3 متطلبات من المادة على الاقل.";
     if( $quiz1 > -1 && $mid1 > -1 && $LABquiz > -1 && $quiz2 > -1 && $mid2 > -1 && $Project > -1 && $quiz3 > -1 && $LABFinal > -1){
       
-      //$command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction.year3 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $data_structure $visual_programming $school_type 2>&1";
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" Database_Predction2.Seconde  $quiz1 $mid1 $LABquiz $quiz2 $mid2 $Project $quiz3 $LABFinal 2>&1";
 
-      //$output = shell_exec($command);
+      $output = shell_exec($command);
+
+      echo $output . " /  2";
+
 
     } elseif ($quiz1 > -1 && $mid1 > -1 && $LABquiz > -1) {
       
-      //$command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
+      $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;D:\Downloads_D\Java\Projects\GraduateProject\build\classes\" Database_Predction.First $quiz1 $mid1 $LABquiz 2>&1";
     
-      //$output = shell_exec($command);
-    
-    } else {
-     // $output=-2;
+      $output = shell_exec($command);
+      
+      echo $output . " /  1";
 
+    } else {
+      $output=-2;
+      echo $output . " /  21";
     }
  ?>
 
@@ -475,20 +480,6 @@ $mark = "التنبؤ غير متوفر لحد مايتم احتساب اول 3 
   <!-- container-scroller -->
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 // Download and print JavaScript functions (presumably defined elsewhere)

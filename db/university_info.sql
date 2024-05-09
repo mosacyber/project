@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2024 at 04:25 PM
+-- Generation Time: May 09, 2024 at 06:54 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -390,9 +390,9 @@ INSERT INTO `grades` (`student_ID`, `coursework_id`, `coursework_Mark`, `Subject
 (381003233, 6, 30, 'CSC201'),
 (421002999, 1, 3, 'CIS340'),
 (421002999, 1, 12, 'CSC201'),
-(421002999, 2, 10, 'CIS340'),
+(421002999, 2, 4, 'CIS340'),
 (421002999, 2, 11, 'CSC201'),
-(421002999, 3, 5, 'CIS340'),
+(421002999, 3, 3, 'CIS340'),
 (421002999, 3, 8, 'CSC201'),
 (421002999, 4, 9, 'CSC201'),
 (421002999, 5, 18, 'CSC201'),
@@ -455,8 +455,8 @@ CREATE TABLE `prediction` (
 --
 
 INSERT INTO `prediction` (`Student_ID`, `Prediction_grade_ID`, `Semster_Number`) VALUES
-(421004034, 2, 452),
-(381003212, 3, 452);
+(421004034, 1, 452),
+(381003212, 2, 452);
 
 -- --------------------------------------------------------
 
@@ -475,14 +475,10 @@ CREATE TABLE `prediction_grade_type` (
 
 INSERT INTO `prediction_grade_type` (`Prediction_grade_ID`, `Prediction_grade_type`) VALUES
 (1, 'ممتاز'),
-(2, 'ممتاز'),
-(3, 'جيد جدأ'),
-(4, 'جيد جدأ'),
-(5, 'جيد'),
-(6, 'جيد'),
-(7, 'مقبول'),
-(8, 'مقبول'),
-(9, 'ضعيف');
+(2, 'جيد جدأ'),
+(3, 'جيد'),
+(4, 'مقبول'),
+(5, 'ضعيف');
 
 -- --------------------------------------------------------
 

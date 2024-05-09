@@ -226,24 +226,12 @@ $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة 
       $mark = "ممتاز";
       $pr_color = "#6fe381";
     } else if ($output == 2) {
-      $mark = "ممتاز";
-      $pr_color = "#6fe381";
+      $mark = "جيد جدا";
+      $pr_color = "#d3ef5e";
     } else if ($output == 3) {
-      $mark = "جيد جدا";
-      $pr_color = "#d3ef5e";
+      $mark = "جيد";
+      $pr_color = "#fee43f";
     } else if ($output == 4) {
-      $mark = "جيد جدا";
-      $pr_color = "#d3ef5e";
-    } else if ($output == 5) {
-      $mark = "جيد";
-      $pr_color = "#fee43f";
-    } else if ($output == 6) {
-      $mark = "جيد";
-      $pr_color = "#fee43f";
-    } else if ($output == 7) {
-      $mark = "مقبول";
-      $pr_color = "#f19c26";
-    } else if ($output == 8) {
       $mark = "مقبول";
       $pr_color = "#f19c26";
     } else if ($output == -2) {
