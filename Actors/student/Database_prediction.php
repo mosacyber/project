@@ -456,8 +456,98 @@ $mark = "التنبؤ غير متوفر لحد مايتم احتساب اول 3 
       $output=-2;
       echo $output . " /  21";
     }
+  
+  if ($output == 1 || $output == 0) {
+    $mark = "ممتاز";
+    $pr_color = "#6fe381";
+  } else if ($output == 2) {
+    $mark = "ممتاز";
+    $pr_color = "#6fe381";
+  } else if ($output == 3) {
+    $mark = "جيد جدا";
+    $pr_color = "#d3ef5e";
+  } else if ($output == 4) {
+    $mark = "جيد جدا";
+    $pr_color = "#d3ef5e";
+  } else if ($output == 5) {
+    $mark = "جيد";
+    $pr_color = "#fee43f";
+  } else if ($output == 6) {
+    $mark = "جيد";
+    $pr_color = "#fee43f";
+  } else if ($output == 7) {
+    $mark = "مقبول";
+    $pr_color = "#f19c26";
+  } else if ($output == 8) {
+    $mark = "مقبول";
+    $pr_color = "#f19c26";
+  } else if ($output == -2) {
+    $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
+    $pr_color = "#ed4c36";
+  }else {
+    $mark = "ضعيف";
+    $pr_color = "#ed4c36";
+  }
  ?>
+     <div class="col-12">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="text-center">التقدير المتوقع الحصول عليه عند التخرج:</h2>
+      <hr>
+      <br>
+      <div class="text-center">
+        <?php
+        switch ($mark) {
+          case "A+":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأخضر لتقدير A+
+            break;
+          case "A":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأزرق لتقدير A
+            break;
+          case "B+":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأزرق الفاتح لتقدير B+
+            break;
+          case "B":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأصفر لتقدير B
+            break;
+          case "C+":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون البرتقالي لتقدير C+
+            break;
+          case "C":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الرمادي لتقدير C
+            break;
+          case "D+":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D+
+            break;
+          case "D":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D
+            break;
+          case "-2":
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الرمادي للنص التنبؤ غير متوفر
+            break;
+          default:
+            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 29px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 400px 28px 400px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير F
+            break;
+        }
+        ?>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    // الحصول على العنصر الذي يحتوي على شريط التقدم
+    var progressBar = document.querySelector('.progress-bar');
 
+    // قراءة النسبة المئوية من العنصر
+    var percentage = parseFloat(progressBar.style.width);
+
+    // حساب النسبة المئوية من 5
+    var calculatedPercentage = (percentage / 100) * 5;
+
+    // تحديث نص النسبة المئوية في العنصر
+    progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
+
+</script>
       <?php
       $navbar_path = "footer/Footer.php";
       for ($i = 0; $i < 9; $i++) {
