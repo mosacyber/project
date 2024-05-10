@@ -2,16 +2,12 @@
 <html lang="en">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>التقارير</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
 
   <?php
     $navbar_path = "tools/css.php";
@@ -21,11 +17,7 @@ for ($i = 0; $i < 9; $i++) {
       include $path;
         break;
     }
-}
-
-
-    ?>
-
+} ?>
   <style>
     <?php
     $navbar_path = "tools/tools.php";
@@ -41,7 +33,6 @@ for ($i = 0; $i < 9; $i++) {
     footer_css()
 
     ?>
-
 .table thead th, .jsgrid .jsgrid-table thead th {
     border-top: 0;
     border-bottom-width: 1px;
@@ -54,8 +45,6 @@ for ($i = 0; $i < 9; $i++) {
 </head>
 <body class="rtl">
   <div class="container-scroller">
-
-
 <?php 
 $navbar_path = "Navbar/rtl/nav.php";
 for ($i = 0; $i < 9; $i++) {
@@ -68,11 +57,9 @@ for ($i = 0; $i < 9; $i++) {
 ?>
 
 
-      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
        <?php
-// استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -89,13 +76,6 @@ for ($i = 0; $i < 9; $i++) {
 التقارير
             </h3>
           </div>
-
-  
-
-
-
-
-<!-- Revenue Card -->
 <div class="col-md-12">
     <div class="row">
         <div class="col-lg-4 grid-margin stretch-card">
@@ -108,9 +88,6 @@ for ($i = 0; $i < 9; $i++) {
             </div>
         </div>   
         <?php
-
-
-
 $sql = "SELECT COUNT(CASE WHEN GPA >= 4.75 THEN 1 END) AS count_students1,
 COUNT(CASE WHEN GPA >= 4.25 AND GPA < 4.75 THEN 1 END) AS count_students2,
 COUNT(CASE WHEN GPA >= 3.75 AND GPA < 4.25 THEN 1 END) AS count_students3,
@@ -181,33 +158,26 @@ if ($result->num_rows > 0) {
 </script>
 
 <?php
-
-// الاستعلام عن الأقسام المتوفرة
 $sql_programs = "SELECT * FROM colleges";
 $result_programs = $conn->query($sql_programs);
 
-// مصفوفة لتخزين عدد الطلاب لكل قسم
 $students_count_per_Programs = [];
 
 if ($result_programs->num_rows > 0) {
     while ($row_Program = $result_programs->fetch_assoc()) {
-        // الاستعلام عن عدد الطلاب في القسم المحدد
         $college_id = $row_Program['College_ID'];
         $sql_students_count = "SELECT COUNT(*) AS students_count FROM students WHERE LEFT(Program_ID, 1) = $college_id";
         $result_students_count = $conn->query($sql_students_count);
 
         if ($result_students_count && $result_students_count->num_rows > 0) {
             $row_students_count = $result_students_count->fetch_assoc();
-            // تخزين عدد الطلاب لهذا القسم
             $students_count_per_Programs[$row_Program['College_Name']] = $row_students_count['students_count'];
         } else {
-            // في حالة عدم العثور على عدد الطلاب لهذا القسم
             $students_count_per_Programs[$row_Program['College_Name']] = 0;
         }
     }
 }
 
-// تحويل البيانات إلى صيغة قابلة للاستخدام في JavaScript
 $Program_names = array_keys($students_count_per_Programs);
 $students_count = array_values($students_count_per_Programs);
 
@@ -218,7 +188,6 @@ $students_count = array_values($students_count_per_Programs);
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">عدد طلاب الكليات:</h4>
-                    <!-- عنصر Canvas لرسم الرسم البياني -->
                     <canvas id="barChart3"></canvas>
                 </div>
             </div>
@@ -313,7 +282,7 @@ if ($result->num_rows > 0) {
         labels: labels3,
         datasets: [{
             label: 'عدد الطلاب',
-            data: [<?php echo $count_students11?>, <?php echo $count_students22?>, <?php echo $count_students33?>, <?php echo $count_students44?>, <?php echo $count_students55?>], // تعديل البيانات للقيم الثابتة
+            data: [<?php echo $count_students11?>, <?php echo $count_students22?>, <?php echo $count_students33?>, <?php echo $count_students44?>, <?php echo $count_students55?>],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
@@ -350,7 +319,6 @@ if ($result->num_rows > 0) {
     );
 </script>
 
-
 <div class="col-lg-2">
     <div class="card">
         <div class="card-body">
@@ -374,9 +342,7 @@ if ($result->num_rows > 0) {
     </div>
 </div>
 
-
 <?php
-
 $sql = "SELECT DISTINCT Semester_Number  
 FROM current_semester 
 WHERE Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester)";
@@ -416,11 +382,8 @@ if ($result->num_rows > 0) {
     echo "لا توجد بيانات";
 }
 ?>
-
-
-
         <div class="col-lg-2 ">
-            <div class="card"><!--  academic_record اعلى سمستر -->
+            <div class="card">
                 <div class="card-body">
                 <h4 class="card-title">السنة الحالية | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
                 <h4 class="card-title">الفصل الدراسي  | <?php echo $name ?></h4>
@@ -436,11 +399,7 @@ if ($result->num_rows > 0) {
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 <?php
-
-
     $Number1 = 5;
     $Number2 = 5;
     $Number3 = 5;
@@ -474,10 +433,6 @@ if ($result->num_rows > 0) {
                 responsive: false,
             }
         });
-
-
-
-
     </script>
 </div>
 
@@ -492,20 +447,12 @@ for ($i = 0; $i < 9; $i++) {
 }
 ?>
 
-
-
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-
 </body>
 
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
 download_js();
 print_js();
 ?>
@@ -517,8 +464,6 @@ print_js();
 
 <?php
 $navbar_path = "tools/js.php";
-
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {

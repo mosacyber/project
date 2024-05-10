@@ -4,15 +4,12 @@
 include '../../config/app.php'
 ?>
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>الطلاب</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
-  <!-- تضمين CSS -->
   <?php
   $navbar_path = "tools/css.php";
   for ($i = 0; $i < 9; $i++) {
@@ -46,8 +43,6 @@ include '../../config/app.php'
       background-color: #392e6e;
       color: #fff;
     }
-
-    /* تنسيق الجدول */
     .table {
       width: 100%;
       margin-bottom: 1rem;
@@ -71,10 +66,8 @@ include '../../config/app.php'
     }
   </style>
 </head>
-
 <body class="rtl">
   <div class="container-scroller">
-
     <?php
     $navbar_path = "Navbar/rtl/nav.php";
     for ($i = 0; $i < 9; $i++) {
@@ -85,12 +78,10 @@ include '../../config/app.php'
       }
     }
     ?>
-    <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="raw">
           <?php
-          // استدعاء ملف الشاشة البداية
           $loading_path = "content/content.php";
           for ($i = 0; $i < 9; $i++) {
             $path = str_repeat("../", $i) . $loading_path;
@@ -101,7 +92,6 @@ include '../../config/app.php'
           }
           ?>
         </div>
-        <!-- content-wrapper ends -->
       </div>
       <br>
       <br>
@@ -111,9 +101,6 @@ include '../../config/app.php'
       </div>
 
       <div class="row">
-
-
-        <!-- Sales Card -->
         <div class="col-xxl-12 col-md-12">
           <div class="card info-card sales-card">
             <div class="card-body">
@@ -124,7 +111,7 @@ include '../../config/app.php'
                       <th scope="col">رقم الطالب الجامعي</th>
                       <th scope="col">اسم الطالب</th>
                       <th scope="col">التخصص</th>
-                      <th scope="col">المعدل</th> <!-- معدله كل ترم من قاعده البيانات student_gpa -->
+                      <th scope="col">المعدل</th> 
                       <th scope="col">المقررات الحالية</th>
                       <th scope="col">السجل الأكاديمي</th>
                       <th scope="col">التنبؤ بالتخرج</th>
@@ -133,9 +120,7 @@ include '../../config/app.php'
                   <tbody>
 
                     <?php
-
                     if (isset($_SESSION['Account_ID'])) {
-                      // استعلام SQL لاسترداد بيانات معينة من الجدول
                       $sql = "SELECT a.Account_ID,CONCAT(a.First_Name, ' ', a.Last_Name) AS Student_Name,
               p.Program_Name,sg.GPA
               FROM academic_advisor_for_student ad
@@ -147,17 +132,13 @@ include '../../config/app.php'
 
                       $result = $conn->query($sql);
 
-                      // التحقق من وجود بيانات للعرض
                       if ($result->num_rows > 0) {
-                        // عرض البيانات
                         while ($row = $result->fetch_assoc()) {
                           echo '<tr>';
                           echo '<td>' . $row["Account_ID"] . '</td>';
                           echo '<td>' . $row["Student_Name"] . '</td>';
                           echo '<td>' . $row["Program_Name"] . '</td>';
                           echo '<td>' . $row["GPA"] . '</td>';
-                          // زر "عرض" لفتح ال Modal
-                          // داخل الحلقة التي تعرض بيانات الطالب
                           $student_id = $row["Account_ID"];
                           $student_name = $row["Student_Name"];
                           echo '<td>';
@@ -169,7 +150,6 @@ include '../../config/app.php'
                           echo '<td>';
                           echo '<button type="button" class="btn btn-primary view" data-toggle="modal" data-target="#acadimicrecord2" data-student-id="' . $student_id . '" data-student-name="' . $student_name . '">عرض</button>';
                           echo '</td>';
-                          // جدول الدراسات
                           echo '<td>';
                           echo '<div class="modal fade" id="detailsModal' . $row["Account_ID"] . '" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel' . $row["Account_ID"] . '" aria-hidden="true">';
                           echo '<div class="modal-dialog" role="document">';
@@ -181,7 +161,6 @@ include '../../config/app.php'
                           echo '</button>';
                           echo '</div>';
                           echo '<div class="modal-body">';
-                          // تفاصيل الصف تظهر هنا
                           echo '<p>الرقم الجامعي : ' . $row["Account_ID"] . '</p>';
                           echo '<p>اسم الطالب : ' . $row["Student_Name"] . '</p>';
                           echo '<br>';
@@ -201,7 +180,7 @@ include '../../config/app.php'
                   INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
                   WHERE grades.student_id =  " . $row["Account_ID"] . " ");
                           $S = mysqli_fetch_array($SQL2);
-                          $count = $S[0]; // قيمة العدد المحسوب
+                          $count = $S[0]; 
                           $B = 8;
                           $subject_total_marks = 0;
                           $result1 = $conn->query($sql1);
@@ -238,7 +217,6 @@ include '../../config/app.php'
                                                 <tbody>';
                               }
                               $subject_total_marks += $row1["coursework_mark"];
-                              //الألوان الخاصة بمجموع الدرجات لكل مقرر
                               $pr_color = "";
                               if ($subject_total_marks > 90) {
                                 $pr_color = "#6fe381";
@@ -251,7 +229,6 @@ include '../../config/app.php'
                               } else {
                                 $pr_color = "#ed4c36";
                               }
-
 
                               $progress_width = ($row1["coursework_mark"] / $row1["coursework_grade"]) * 100;
 
@@ -301,10 +278,7 @@ include '../../config/app.php'
                   AND g.subject_code = cs.subject_code) ORDER BY cs.subject_code";
 
                           $result2 = mysqli_query($conn, $sql2);
-
-                          // التحقق من وجود بيانات للعرض
                           if ($result2->num_rows > 0) {
-                            // عرض المواد التي لم تحصل على درجات بعد
                             while ($row2 = $result2->fetch_assoc()) {
                               echo '<div class="col-xxl-12 col-md-12">
                         <div class="card info-card sales-card">
@@ -359,7 +333,6 @@ include '../../config/app.php'
 
                     <script>
                       $('#detailsModal<?php echo $row["Account_ID"]; ?>').on('shown.bs.modal', function () {
-                        // استدعاء AJAX لجلب بيانات الجدول
                         $.ajax({
                           success: function (response) {
                             var html = '';
@@ -372,8 +345,7 @@ include '../../config/app.php'
                             });
                             $('#subjectTableBody<?php echo $row["Account_ID"]; ?>').html(html);
                           },
-                          error: function (xhr, status, error) { // دالة تُنفذ في حال حدوث خطأ
-                            // عند حدوث خطأ، يمكنك تنفيذ إجراءات إضافية هنا، مثلاً عرض رسالة خطأ
+                          error: function (xhr, status, error) { 
                             console.error(xhr.responseText);
                           }
                         });
@@ -386,7 +358,6 @@ include '../../config/app.php'
             </div>
           </div>
         </div>
-        <!-- End Sales Card -->
         <h1></h1>
         <script src="../../assets/js/jquery.min.js"></script>
         <script>
@@ -428,7 +399,7 @@ include '../../config/app.php'
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
 
@@ -449,13 +420,6 @@ function closeModal() {
           });
 
         </script>
-
-
-
-
-
-
-
 
 <script>
           $(document).ready(function () {
@@ -502,7 +466,7 @@ function closeModal() {
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
 
@@ -520,20 +484,9 @@ function closeModal() {
             $(this).find('.student-name').text(student_name);
             $(this).find('.student-id').text(student_id);
           });
-
         </script>
-
-
       </div>
-
-
-
-
-
     </div>
-    <!-- content-wrapper ends -->
-
-
     <?php
     $navbar_path = "footer/Footer.php";
     for ($i = 0; $i < 9; $i++) {
@@ -544,17 +497,11 @@ function closeModal() {
       }
     }
     ?>
-
-
-
-    <!-- partial -->
   </div>
-  <!-- main-panel ends -->
   </div>
-  <!-- page-body-wrapper ends -->
 </body>
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
+
 download_js();
 print_js();
 ?>
@@ -570,7 +517,6 @@ print_js();
 <?php
 $navbar_path = "tools/js.php";
 
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {

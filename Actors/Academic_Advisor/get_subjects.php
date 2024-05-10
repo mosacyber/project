@@ -7,30 +7,22 @@ for ($i = 0; $i < 9; $i++) {
         break;
     }
 }
-?><?php
-
-
-// الاستعلام لاسترجاع بيانات المواد الدراسية
+?>
+<?php
 $sql = "SELECT * FROM subjects";
 $result = $conn->query($sql);
 
-// تحقق من وجود نتائج
 if ($result->num_rows > 0) {
-    // إنشاء مصفوفة لتخزين البيانات
     $subjects = array();
 
-    // حلقة لجمع البيانات وتخزينها في المصفوفة
     while ($row = $result->fetch_assoc()) {
         $subjects[] = $row;
     }
 
-    // إرجاع البيانات بتنسيق JSON
     echo json_encode($subjects);
 } else {
-    // إذا لم يتم العثور على بيانات
     echo json_encode(array('message' => 'لا يوجد بيانات'));
 }
 
-// إغلاق الاتصال بقاعدة البيانات
 $conn->close();
 ?>

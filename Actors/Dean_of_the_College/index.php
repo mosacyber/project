@@ -3,15 +3,12 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
 
-<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>الصفحة الرئيسية</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
 
   <?php
     $navbar_path = "tools/css.php";
@@ -21,10 +18,7 @@ for ($i = 0; $i < 9; $i++) {
       include $path;
         break;
     }
-}
-
-
-    ?>
+}?>
 
   <style>
     <?php
@@ -39,8 +33,7 @@ for ($i = 0; $i < 9; $i++) {
     download_css();
     print_css();
     footer_css()
-
-    ?>
+?>
 
 .table thead th, .jsgrid .jsgrid-table thead th {
     border-top: 0;
@@ -55,7 +48,6 @@ for ($i = 0; $i < 9; $i++) {
 <body class="rtl">
   <div class="container-scroller">
 
-
 <?php 
 $navbar_path = "Navbar/rtl/nav.php";
 for ($i = 0; $i < 9; $i++) {
@@ -67,8 +59,6 @@ for ($i = 0; $i < 9; $i++) {
 }
 ?>
 
-
-      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
@@ -81,7 +71,6 @@ for ($i = 0; $i < 9; $i++) {
           </div>
 
           <?php
-// استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -92,7 +81,6 @@ for ($i = 0; $i < 9; $i++) {
 }
 ?>
 
-        
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {
@@ -103,35 +91,11 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
-
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
 download_js();
 print_js();
 ?>
@@ -143,8 +107,6 @@ print_js();
 
 <?php
 $navbar_path = "tools/js.php";
-
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {

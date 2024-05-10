@@ -68,7 +68,7 @@ for ($i = 0; $i < 9; $i++) {
 ?>
 
 
-      <!-- partial -->
+      
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
@@ -97,7 +97,7 @@ for ($i = 0; $i < 9; $i++) {
           </div>
           <div class="page-header">
             <h3 class="page-title">
-البيانات
+بيانات الحسابات
             </h3>
           </div>
 
@@ -258,7 +258,7 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
-        <!-- partial -->
+        
       </div>
       <!-- main-panel ends -->
     </div>

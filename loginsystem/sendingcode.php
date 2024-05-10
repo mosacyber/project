@@ -104,7 +104,7 @@ if (isset($_POST["recover"])) {
             alert("عذراً لايوجد حساب بالرقم المدخل!");
         </script>
         <?php
-    } else if ($fetch["status"] == 0) {
+    } else if ($fetch["status"] != 0) {
         ?>
             <script>
                 alert("عذراً، لايمكنك تغيير كلمة السر، يجب عليك تفعيل حسابك أولاً!");

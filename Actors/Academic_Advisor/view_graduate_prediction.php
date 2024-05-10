@@ -7,8 +7,6 @@
             break;
         }
     }
-
-
         $studentId = $_POST['student_id'];
         $studentName = $_POST['studentName'];
 
@@ -24,20 +22,13 @@
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
                 </div>
                 <div class="modal-body">
                   <h6>اسم الطالب: <?php echo $studentName; ?></h6>
                   <h6>رقم الطالب: <?php echo $studentId; ?></h6>
-                  
-                  
-
-
-
-
-
 
                   <div class="row">
         <div class="col-xxl-12 col-md-12">
@@ -50,9 +41,6 @@ function closeModal() {
          <tr>
        <?php
 
-
-
-
 $sql4 = "SELECT * FROM students WHERE student_id = $studentId";
 $result4 = $conn->query($sql4);
 if ($result4->num_rows > 0) {
@@ -61,11 +49,6 @@ if ($result4->num_rows > 0) {
 
   $student_id= $row4['student_id'];
 }
-
-
-
-
-
 
 $sql8 = "SELECT * FROM students where student_id =$studentId";
 $result8 = $conn->query($sql8);
@@ -145,28 +128,19 @@ $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة 
               <th scope="col"> برمجة 2</th>
               <th scope="col"> تراكيب البيانات والخواريزميات</th>
               <th scope="col"> البرمجة المرئية</th>
-
       <?php
 
     } elseif ($school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0) {
       
       $command = "java -cp \"C:\Program Files\Weka-3-8-6\\weka.jar;G:\java\model\GraduateProject\build\classes\" course_Predction2.year2 $school_percentage $aptitude_test $acadmic_achievement $programming1 $programming2 $school_type 2>&1";
-    
       $output = shell_exec($command);
- 
-
 ?>
-
               <th scope="col">نسبة المدرسة</th>
               <th scope="col">نوع المدرسة</th>
               <th scope="col"> القدرات العامة</th>
               <th scope="col"> التحصيل الدراسي</th>
               <th scope="col"> برمجة 1</th>
               <th scope="col"> برمجة 2</th>
-
-
-
-
 
 <?php
     } else {
@@ -178,13 +152,9 @@ $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة 
               <th scope="col">نوع المدرسة</th>
               <th scope="col"> القدرات العامة</th>
               <th scope="col"> التحصيل الدراسي</th>
-
 <?php
 
     }
-
-    
-
     if ($output == 1 || $output == 0) {
       $mark = "ممتاز";
     } else if ($output == 2) {
@@ -205,21 +175,14 @@ $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة 
       $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة برمجة 1 وبرمجة 2 على الاقل.";
     }else {
       $mark = "ضعيف";
-    }
+    }?>
      
-    
-            ?>
-
-             
 </tr>
           </thead>
           <tbody>
         <tr>
 
 <?php 
-
-
-
 
 $sql = "SELECT * FROM school_type WHERE School_type_id  = $school_type";
 $result = $conn->query($sql);
@@ -230,11 +193,6 @@ if ($result && $result->num_rows > 0) {
 } else {
   $name_school = ''; 
 }
-
-
-
-
-
 
 if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0 && $visual_programming > 0 && $data_structure > 0){  
 ?>
@@ -266,53 +224,16 @@ if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic
 <?php
   }
 ?>
-
-
-
-
-
-
-
-         </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
-<!-- End Sales Card -->
 
 <h1></h1>
-
-
-
-
 <?php
-
 
 if ($output == 1 || $output == 0) {
   $mark = "ممتاز";
@@ -344,9 +265,7 @@ if ($output == 1 || $output == 0) {
 }else {
   $mark = "ضعيف";
   $pr_color = "#ed4c36";
-}
- 
-        ?>
+} ?>
      
      <div class="col-12">
   <div class="card">
@@ -393,22 +312,6 @@ if ($output == 1 || $output == 0) {
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
     // الحصول على العنصر الذي يحتوي على شريط التقدم
     var progressBar = document.querySelector('.progress-bar');
@@ -423,32 +326,14 @@ if ($output == 1 || $output == 0) {
     progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
 
 </script>
-          </div>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  
+          </div>      
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إغلاق</button>
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
 

@@ -114,16 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Bootstrap -->
   <link rel="stylesheet" href="assets/css_rtl/bootstrap.min.css" />
-
-  <!-- style css File RTL-->
   <link rel="stylesheet" href="assets/css_rtl/style.css" />
-  <!-- style css File Ltr-->
-  <!-- <link rel="stylesheet" href="css_ltr/style.css" /> -->
-  <!-- Title Icon -->
-  <link rel="icon" href="assets/img/fav-icon.png" />
+  <link rel="icon" href="assets/img/uu5.png" />
   <title>تسجيل الدخول</title>
   <link href="assets/css/navbar.css" rel="stylesheet">
   <link href="assets/css/navbar.css" rel="stylesheet">
@@ -147,6 +140,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       background: linear-gradient(264.67deg, #7f7fd5 -9.26%, #86a8e7 45.82%, #91eae4 106.96%);
 
       border: 0px solid #fff;
+    }body > div.container-fluid > div > div > div:nth-child(2) > div{
+
+      height: 100%;
+
+    }body > div.container-fluid > div > div > div:nth-child(2){
+      height: 100%;
+
+    }
+
+    @media only screen and (min-width: 600px) {
+      body > div.container-fluid > div > div > div:nth-child(2) > div > div > img{
+    width: 84%;
+    height: 67%;
+    margin: 131px 71px 0px 0px;
+   }
+}
+
+
+@media only screen and (max-width: 600px) {
+      body > div.container-fluid > div > div > div:nth-child(2) > div > div > img{
+      width: 112%;
+      height: 30%;
+      margin: 228px -14px 0px 0px;
+      }
     }
   </style>
   <meta charset="UTF-8">
@@ -154,16 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <img src="assets/img/logoo.png" style="width: 44px;">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
- 
-  </div>
-</nav>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
@@ -181,8 +189,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <h2 class="text-center mb-4">تسجيل الدخول</h2>
               <form action="" method="POST">
                 <div class="form-floating">
-                  <input name="Account_ID" type="number" class="form-control" placeholder="الرقم الجامعي " />
-                  <label for="الرقم الجامعي">الرقم الجامعي</label>
+                  <input name="Account_ID" type="number" class="form-control" placeholder="رقم  المعرف " />
+                  <label for=" رقم المعرف">رقم المعرف </label>
                 </div>
                 <br>
                 <div class="form-floating">
@@ -198,29 +206,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php include './errors/errors.php'; ?>
                 <div align="center">
                   <button type="submit" class="btn btn-primary btn-block llcol">تسجيل الدخول</button>
-                  <!-- <a href="loginsystem/Activated_Account.php"><button type="button"
-                      class="btn btn-primary btn-block llcol">انشاء - تفعيل الحساب الجامعي</button></a> -->
                 </div>
               </form>
             </div>
           </div>
         </div>
 
-
-
-
-
-
-
-
         <div class="col-6 col-lg-6">
           <div class="card">
             <div class="card-body">
-            <img src="assets/img/uu4.png" style="width: 100%; height: 100%;">
+            <img src="assets/img/uu4.png" >
              
             </div>
           </div>
         </div>
+
+
       </div>
     </div>
   </div>

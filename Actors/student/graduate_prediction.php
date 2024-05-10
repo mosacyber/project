@@ -3,10 +3,7 @@
 <html lang="en">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>التنبؤ بالتخرج</title>
@@ -58,7 +55,6 @@ for ($i = 0; $i < 9; $i++) {
 <body class="rtl">
   <div class="container-scroller">
 <?php
-// استدعاء ملف التصميم
 $navbar_path = "Navbar/rtl/nav.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $navbar_path;
@@ -67,7 +63,6 @@ for ($i = 0; $i < 9; $i++) {
         break;
     }
 }
-// استدعاء ملف الشاشة البداية
 $loading_path = "loading/loading.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -77,12 +72,10 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">    
 <?php
-// استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -246,14 +239,11 @@ $mark = "التنبؤ غير متوفر لحد مايتم اجتياز مادة 
     $result15 = $conn->query($sql15);
 
 if ($result15->num_rows > 0) {
-    // Handle the case when a result is found and $output is -2
 } else {
-    // Handle the case when no result is found or $output is not -2
     if ($output != -2) {
         $sql16 = "INSERT INTO `prediction` (`Student_ID`, `Prediction_grade_ID`, `Semster_Number`) 
                   SELECT '$student_id', '$output', MAX(Semster_Number) FROM Prediction";
         if ($conn->query($sql16) === TRUE) {      
-            // Insertion successful
         } else {
             echo "Error: " . $sql16 . "<br>" . $conn->error;
         }
@@ -270,9 +260,6 @@ if ($result15->num_rows > 0) {
 
 <?php 
 
-
-
-
 $sql = "SELECT * FROM school_type WHERE School_type_id  = $school_type";
 $result = $conn->query($sql);
 
@@ -282,12 +269,6 @@ if ($result && $result->num_rows > 0) {
 } else {
   $name_school = ''; 
 }
-
-
-
-
-
-
 if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic_achievement > 0 && $programming1 > 0 && $programming2 > 0 && $visual_programming > 0 && $data_structure > 0){  
 ?>
          <td><?php echo $school_percentage  ?></td>
@@ -326,66 +307,51 @@ if( $school_type > 0 && $school_percentage > 0 && $aptitude_test > 0 && $acadmic
     </div>
   </div>
 </div>
-<!-- End Sales Card -->    
-     <div class="col-12">
-  <div class="card">
-    <div class="card-body">
-      <h2 class="text-center">التقدير المتوقع الحصول عليه عند التخرج:</h2>
-      <hr>
-      <br>
-      <div class="text-center">
-        <?php
-        switch ($mark) {
-          case "A+":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأخضر لتقدير A+
-            break;
-          case "A":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأزرق لتقدير A
-            break;
-          case "B+":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأزرق الفاتح لتقدير B+
-            break;
-          case "B":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأصفر لتقدير B
-            break;
-          case "C+":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون البرتقالي لتقدير C+
-            break;
-          case "C":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الرمادي لتقدير C
-            break;
-          case "D+":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D+
-            break;
-          case "D":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D
-            break;
-          case "-2":
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الرمادي للنص التنبؤ غير متوفر
-            break;
-          default:
-            echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 29px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 400px 28px 400px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير F
-            break;
-        }
-        ?>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-    // الحصول على العنصر الذي يحتوي على شريط التقدم
-    var progressBar = document.querySelector('.progress-bar');
-
-    // قراءة النسبة المئوية من العنصر
-    var percentage = parseFloat(progressBar.style.width);
-
-    // حساب النسبة المئوية من 5
-    var calculatedPercentage = (percentage / 100) * 5;
-
-    // تحديث نص النسبة المئوية في العنصر
-    progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
-
-</script>
+              <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="text-center">التقدير المتوقع الحصول عليه عند التخرج:</h2>
+                <hr>
+                <br>
+                <div class="text-center">
+                  <?php
+                  switch ($mark) {
+                    case "A+":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأخضر لتقدير A+
+                      break;
+                    case "A":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأزرق لتقدير A
+                      break;
+                    case "B+":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأزرق الفاتح لتقدير B+
+                      break;
+                    case "B":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأصفر لتقدير B
+                      break;
+                    case "C+":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون البرتقالي لتقدير C+
+                      break;
+                    case "C":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الرمادي لتقدير C
+                      break;
+                    case "D+":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D+
+                      break;
+                    case "D":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير D
+                      break;
+                    case "-2":
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 49px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 600px 28px 600px;" class="text">' . $mark . '</h5>'; // اللون الرمادي للنص التنبؤ غير متوفر
+                      break;
+                    default:
+                      echo '<h5 style="background-color: ' . $pr_color . '; color: black; font-size: 29px;    border-radius: 48px;padding: 27px 0px 30px 0px;margin: 32px 400px 28px 400px;" class="text">' . $mark . '</h5>'; // اللون الأحمر لتقدير F
+                      break;
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>    
         </div>
       </div>
@@ -400,19 +366,13 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
 
 </body>
 
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
 download_js();
 print_js();
 ?>
@@ -425,7 +385,6 @@ print_js();
 <?php
 $navbar_path = "tools/js.php";
 
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {

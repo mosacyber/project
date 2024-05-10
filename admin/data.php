@@ -68,7 +68,7 @@ for ($i = 0; $i < 9; $i++) {
 ?>
 
 
-      <!-- partial -->
+      
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
@@ -95,67 +95,20 @@ for ($i = 0; $i < 9; $i++) {
         </div>
         </div>
         </div>
-        <!-- content-wrapper ends -->
 
 
           </div><br>
 
-
-  
-
-
-
-
-<!-- Revenue Card -->
 <div class="col-md-12">
     <div class="row">
-
-
-
-
-
-        <!-- Sales Card
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
-
-           
-
-          <a href="add.php"> 
-            <div class="card-body">
-              <h5 class="card-title"> </h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
-                </div>
-                <div class="ps-3">
-                  <h6> اضافه </h6>
-
-                </div>
-              </div>
-            </div>
-          </a> 
-
-          </div><br>
-        </div> End Sales Card -->
-
-
-
-
-
-
-
-
-
-
-
 
 
 
         <div class="col-lg-12 ">
             <div class="card"><!--  academic_record اعلى سمستر -->
             <div class="card-body">
-
+                <a href="add.php"><button class='btn btn-success' type='submit'>اضافه</button></a>
+<hr>
     <div class="form-group">
       
         <label for="position">البيانات</label>
@@ -225,8 +178,197 @@ for ($i = 0; $i < 9; $i++) {
 </div>
 
 
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="direction: rtl;">
+                <h5 class="modal-title" id="editModalLabel">تعديل</h5>
+                <button type="button" class="close-left btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="popup-form" id="popupForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="Ecode" class="form-label">رمز المقرر</label>
+                                <input type="text" class="form-control" id="Ecode" name="Ecode" value="" readonly/>
+                            </div>
+                            <div class="mb-3 center">
+                                <label for="Hour" class="form-label">عدد الساعات</label>
+                                <input type="number" class="form-control" min="1" numaxlength="1" id="Hour" name="Hour" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="Esubject" class="form-label">اسم المقرر</label>
+                                <input type="text" class="form-control" id="Esubject" name="Esubject" value="" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <br /> <br />
+                    <button class="btn btn-primary" id="Ebtn">حفظ التغييرات</button>
+                    <button type="button" class="btn btn-secondary" id="closeModalBtn" onclick="closeModal()">إلغاء</button>
+<script>
+function closeModal() {
+    $("#myModal").modal("hide");
+    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+}
+</script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("sbtn").addEventListener("click", function() {
+         var programName = document.getElementById("programName").value;
+         var programID = document.getElementById("programID").value;
+         var subjectName = document.getElementById("subjectName").value;
+         var subjectCode = document.getElementById("subjectCode").value;
+         var numberHour = document.getElementById("NumberHour").value;
+            if (programName === '' || programID === '' || subjectName === '' || subjectCode === '' || numberHour === '') {
+                alert("يرجى ملء جميع الحقول");
+            } else {
+                var programID = $('#programName').val();
+                var subjectName = $('#subjectName').val();
+                var subjectCode = $('#subjectCode').val();
+                var numberHour = $('#NumberHour').val();
+                 $.ajax({
+                        url: 'insert_subject.php',
+                        type: 'POST',
+                        data: {
+                            programID: programID,
+                            subjectName: subjectName,
+                            subjectCode: subjectCode,
+                            numberHour: numberHour
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $('#insertModal').modal('hide');
+                            $('#OKModal').modal('show');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+            }
+        });
+    });
+$('#NumberHour').on('input', function() {
+         var enteredValue = parseFloat($(this).val());
+        if (enteredValue > 9) {
+            alert("القيمة المدخلة يجب ألا تتجاوز " + 9);
+            $(this).val(0);
+            }
+});
+$(document).ready(function(){
+    var originalHour;
+    $('body').on('click', '.btn-warning', function(){
+        var row = $(this).closest('tr');
+        var Scode = row.find('td:eq(0)').text();
+        var Sname = row.find('td:eq(1)').text();
+        var Hour = row.find('td:eq(2)').text();
+        originalHour = Hour;
+        $('#Ecode').val(Scode); 
+        $('#Esubject').val(Sname);
+        $('#Hour').val(Hour);
+        $('#Hour').attr('max', 9);
+        $('#editModal').modal('show');
+        $('#Hour').on('input', function() {
+            var enteredValue = parseFloat($(this).val());
+            if (enteredValue > 9) {
+                alert("القيمة المدخلة يجب ألا تتجاوز " + 9);
+                $(this).val(originalHour);
+            }
+        });
+    });
+});
+$(document).on('click', '#Ebtn', function(){
+    var subjectName = $('#Esubject').val();
+    var Hour = $('#Hour').val();
+    $.ajax({
+        url: 'update_subject.php',
+        type: 'POST',
+        data: {
+            subjectName: subjectName,
+            Hour: Hour
+        },
+        success: function(response) {
+            console.log(response);
+            $('#editModal').modal('hide');
+            $('#OKModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+});
+$(document).ready(function(){
+    $('body').on('click', '.DeleteBtn', function(){
+        var row = $(this).closest('tr');
+        var Sname = row.find('td:eq(1)').text();
+        var Hour = row.find('td:eq(2)').text();
+        var code = row.find('td:eq(0)').text();
+        $('#Dsubject').val(Sname);
+        $('#Dhour').val(Hour);
+        $('#code').val(code);
+        $('#WarningModal').modal('show');
+    });
+});
+$(document).on('click', '#Dbtn', function(){
+    var subjectName = $('#Dsubject').val();
+    var Hour = $('#Dhour').val();
+    var code = $('#code').val();
+    $.ajax({
+        url: 'delete_subject.php',
+        type: 'POST',
+        data: {
+            subjectName: subjectName,
+            Hour: Hour,
+            code: code
+        },
+        success: function(response) {
+            console.log(response);
+            $('#WarningModal').modal('hide');
+            $('#OKModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+});
+$(document).on('click', '#OK', function(){
+    $('#OKModal').modal('hide');
+    location.reload();
+});
+$(document).ready(function(){
+    $('body').on('click', '.close-left', function(){
+        $('#editModal').modal('hide');
+        $('#WarningModal').modal('hide');
+    });
+});
+
+</script>
+
 
         
 <?php
@@ -251,18 +393,6 @@ for ($i = 0; $i < 9; $i++) {
   <!-- container-scroller -->
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

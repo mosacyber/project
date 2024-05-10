@@ -7,11 +7,8 @@
             break;
         }
     }
-
-
         $studentId = $_POST['student_id'];
         $studentName = $_POST['studentName'];
-
 ?>
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -24,7 +21,7 @@
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
                 </div>
@@ -139,8 +136,6 @@ function closeModal() {
                     foreach ($data as $course) {
                       $grade = $course['grade'];
                       $hours = $course['credit_hours'];
-
-                      // تحويل الدرجة إلى نقاط
                       if (!empty($grade) && is_numeric($grade)) {
                         if ($grade >= 95) {
                           $points = 5.0;
@@ -289,7 +284,7 @@ function closeModal() {
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
 

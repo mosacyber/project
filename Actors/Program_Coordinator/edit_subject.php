@@ -21,41 +21,21 @@
     </form>
 
     <?php
-    // قم بتحديد المسار النسبي لملف قاعدة البيانات
     $navbar_path = "db/db.php";
-    // استخدم حلقة للتحقق من وجود ملف قاعدة البيانات في مسارات مختلفة
     for ($i = 0; $i < 9; $i++) {
         $path = str_repeat("../", $i) . $navbar_path;
         if (file_exists($path)) {
             include $path;
-            // بمجرد العثور على ملف قاعدة البيانات، انهي الحلقة
             break;
         }
     }
 
-    // التحقق من وجود بيانات تم إرسالها عبر POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // التحقق من وجود الحقول المطلوبة
         if (!empty($_POST["subject_code"]) && !empty($_POST["subject_name"]) && !empty($_POST["credit_hours"])) {
-            // استقبال البيانات المرسلة عبر POST
             $subject_code = $_POST["subject_code"];
             $subject_name = $_POST["subject_name"];
             $credit_hours = $_POST["credit_hours"];
-
-            // تحديث البيانات في قاعدة البيانات
-            // هنا يجب إضافة كود الاتصال بقاعدة البيانات وتنفيذ الاستعلام اللازم
-            // على سبيل المثال:
-            // $sql = "UPDATE subjects SET subject_name = '$subject_name', credit_hours = '$credit_hours' WHERE subject_code = '$subject_code'";
-            // $result = $conn->query($sql);
-            
-            // التحقق من نجاح العملية
-            // if ($result) {
-            //     echo "تم تحديث البيانات بنجاح";
-            // } else {
-            //     echo "حدث خطأ أثناء تحديث البيانات: " . $conn->error;
-            // }
         } else {
-            // إذا لم يتم ملء الحقول المطلوبة، عرض رسالة توجيهية
             echo "الرجاء ملء جميع الحقول المطلوبة";
         }
     }
@@ -64,26 +44,6 @@
 </html>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- واجهة التعديل -->
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -96,7 +56,7 @@
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
             </div>
@@ -137,7 +97,7 @@ function closeModal() {
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload();
 }
 </script>
                 </div>

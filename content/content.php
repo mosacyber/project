@@ -1,12 +1,5 @@
     
     
-
-    
-    
-    
-    
-    
-    
     
 <!--********************************/
 /*********************************/
@@ -21,7 +14,7 @@
 ?>
     
     
-    <!-- Revenue Card -->
+    
         <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
 
@@ -45,8 +38,8 @@ if ($result4->num_rows > 0) {
 
     $firstDigit = substr($row4['Program_ID'], 0, 1);
 
-    $startPosition = 1; // الموضع البدئي للرقمين المطلوبين
-    $middleDigits = substr($row4['Program_ID'], $startPosition, 2); // يأخذ رقمين ابتداءً من الموضع البدئي
+    $startPosition = 1; 
+    $middleDigits = substr($row4['Program_ID'], $startPosition, 2);
     
 
     $endDigits = substr($row4['Program_ID'], -2);
@@ -81,17 +74,17 @@ if ($result4->num_rows > 0) {
     if ($result5->num_rows > 0) {
         $row5 = $result5->fetch_assoc();
     } else {
-        // عرض التنبيه في حالة عدم العثور على البرنامج
+        
         echo "
         <div class='alert alert-danger'>
             <p>تنبيه: لا يوجد بيانات برنامج</p>
         </div>";
-        // تعيين قيم افتراضية
+        
         $row5 = array('Program_Name' => 'برنامج غير معروف'); 
     }
 
     if (isset($_SESSION['role'])) {
-        // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
+        
         switch ($_SESSION['role']) {
             case '1':
                 $Specialization = "";
@@ -99,17 +92,17 @@ if ($result4->num_rows > 0) {
                 $Major = $row5['Program_Name'];
                 break;
             default:
-                // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
+                
                 break;
         }
     }
 } else {
-    // عرض التنبيه في حالة عدم العثور على الطالب
+    
     echo "
     <div class='alert alert-danger'>
         <p>تنبيه: لا يوجد بيانات طالب</p>
     </div>";
-    // تعيين قيم افتراضية
+    
     $row4 = array();
     $row5 = array('Program_Name' => 'برنامج غير معروف');
     $Specialization = "تخصص غير معروف";
@@ -159,14 +152,14 @@ if ($result4->num_rows > 0) {
 
 
           </div>
-        </div><!-- End Revenue Card -->
+        </div>
 
 
           </div>
        
 
         </div>
-        <!-- content-wrapper ends -->
+        
 
         <?php }?>
 
@@ -176,19 +169,6 @@ if ($result4->num_rows > 0) {
 /*********************************/
 /*********************************/
 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -207,7 +187,7 @@ if ($result4->num_rows > 0) {
 ?>
 
 
-        <!-- Revenue Card -->
+        
         <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
               </ul>
@@ -217,7 +197,7 @@ if ($result4->num_rows > 0) {
 
                 <?php
 if (isset($_SESSION['role'])) {
-// استعلام SQL لاسترداد البيانات من جدول faculty_member
+
 $sql = "SELECT * FROM faculty_member WHERE Faculty_member_ID = $_SESSION[Account_ID]";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -238,7 +218,7 @@ if ($result->num_rows > 0) {
             $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
             $result4 = $conn->query($sql4);
             if ($result4->num_rows > 0) {
-                // بيانات الطالب موجودة ويمكن معالجتها هنا
+                
             } else {
 
             }
@@ -261,7 +241,7 @@ if ($result->num_rows > 0) {
         <p>لا يوجد بيانات عضو هيئة تدريس</p>
 </div>";
 } 
-    // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
+    
     switch ($_SESSION['role']) {
         case '1':
             $Specialization = "";
@@ -316,10 +296,8 @@ if ($result->num_rows > 0) {
             $Major = isset($row['Major']) ? $row['Major'] : "";
             break;
         case 'admin':
-            // تعيين التخصص لحالة الادمن هنا
             break;
         default:
-            // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
             break;
     }
 }
@@ -357,7 +335,7 @@ if ($result->num_rows > 0) {
 </div>
           </div>
         </div>
-        <!-- content-wrapper ends -->    
+            
         </div>
 
         <?php }?>
@@ -368,27 +346,6 @@ if ($result->num_rows > 0) {
 /*********************************/
 /*********************************/
 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -410,7 +367,7 @@ if ($result->num_rows > 0) {
 ?>
 
 
- <!-- Revenue Card -->
+ 
  <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
 
@@ -424,7 +381,7 @@ if ($result->num_rows > 0) {
 
                 <?php
 if (isset($_SESSION['role'])) {
-// استعلام SQL لاسترداد البيانات من جدول faculty_member
+
 $sql = "SELECT * FROM faculty_member WHERE Faculty_member_ID = $_SESSION[Account_ID]";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -445,7 +402,7 @@ if ($result->num_rows > 0) {
             $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
             $result4 = $conn->query($sql4);
             if ($result4->num_rows > 0) {
-                // بيانات الطالب موجودة ويمكن معالجتها هنا
+                
             } else {
 
             }
@@ -471,7 +428,7 @@ if ($result->num_rows > 0) {
 
     
     
-    // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
+    
     switch ($_SESSION['role']) {
         case '1':
             $Specialization = "";
@@ -526,10 +483,10 @@ if ($result->num_rows > 0) {
             $Major = isset($row['Major']) ? $row['Major'] : "";
             break;
         case 'admin':
-            // تعيين التخصص لحالة الادمن هنا
+            
             break;
         default:
-            // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
+            
             break;
     }
 }
@@ -567,7 +524,7 @@ if ($result->num_rows > 0) {
 </div>
           </div>
         </div>
-        <!-- content-wrapper ends -->
+        
         </div>
 
 <?php }?>

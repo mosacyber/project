@@ -3,9 +3,6 @@
 
 echo '
 
-
-
-
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -15,10 +12,6 @@ echo '
         </div>
     </div>
 </footer>
-
-
-
-
 
 
 '; ?><?php

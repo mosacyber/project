@@ -69,7 +69,7 @@ for ($i = 0; $i < 9; $i++) {
 ?>
 
 
-      <!-- partial -->
+      
       <div class="main-panel">
         <div class="content-wrapper">
           
@@ -119,7 +119,7 @@ for ($i = 0; $i < 9; $i++) {
 
 
 
-        <!-- partial -->
+        
       </div>
       <!-- main-panel ends -->
     </div>

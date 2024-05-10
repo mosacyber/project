@@ -18,7 +18,7 @@ $sql = "DELETE FROM `grades` WHERE `student_ID` = '$studentid' AND `coursework_i
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
-    echo "تم حذف البيانات بنجاح!|{$subjectCode}"; // قيمة السبجت كود مضافة هنا
+    echo "تم حذف البيانات بنجاح!|{$subjectCode}";
 } else {
     echo "حدث خطأ أثناء تحديث البيانات!";
 }

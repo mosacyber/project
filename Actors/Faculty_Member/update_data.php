@@ -11,7 +11,7 @@
 $studentid = $_POST['studentid'];
 $studentName = $_POST['studentName'];
 $subjectCode = $_POST['subjectCode'];
-$activityName = $_POST['activityName']; // تغيير هنا
+$activityName = $_POST['activityName']; 
 $studentGrade = $_POST['studentGrade'];
 $courseworkid = $_POST['courseworkid'];
 

@@ -2,16 +2,12 @@
 <html lang="en">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>التقارير</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
 
   <?php
     $navbar_path = "tools/css.php";
@@ -22,9 +18,7 @@ for ($i = 0; $i < 9; $i++) {
         break;
     }
 }
-
-
-    ?>
+?>
 
   <style>
     <?php
@@ -39,9 +33,7 @@ for ($i = 0; $i < 9; $i++) {
     download_css();
     print_css();
     footer_css()
-
-    ?>
-
+?>
 .table thead th, .jsgrid .jsgrid-table thead th {
     border-top: 0;
     border-bottom-width: 1px;
@@ -67,13 +59,10 @@ for ($i = 0; $i < 9; $i++) {
 }
 ?>
 
-
-      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
           <?php
-// استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -92,12 +81,6 @@ for ($i = 0; $i < 9; $i++) {
             </h3>
           </div>
 
-  
-
-
-
-
-<!-- Revenue Card -->
 <div class="col-md-12">
     <div class="row">
         <div class="col-lg-4 grid-margin stretch-card">
@@ -110,14 +93,10 @@ for ($i = 0; $i < 9; $i++) {
             </div>
         </div>   
         <?php
-
-
 $sql2 = "SELECT Program_ID FROM students";
 $result2 = $conn->query($sql2);
 $row2 = $result2->fetch_assoc();
 $first_digit = substr($row2['Program_ID'], 0, 1);     
-
-
 
 
 $sql = "SELECT COUNT(CASE WHEN GPA >= 4.75 THEN 1 END) AS count_students1,
@@ -191,35 +170,26 @@ if ($result->num_rows > 0) {
 </script>
 
 <?php
-// الاستعلام عن الأقسام المتوفرة
 $sql_departments = "SELECT * FROM departments";
 $result_departments = $conn->query($sql_departments);
-
-// قائمة لتخزين عدد الطلاب لكل قسم
 $students_count_per_department = [];
 
 if ($result_departments->num_rows > 0) {
     while ($row_department = $result_departments->fetch_assoc()) {
-        // الحصول على بادئة القسم
-        $department_prefix = substr($row_department['Department_ID'], 0, 3); // افتراضاً أن بادئة القسم تتكون من 3 أرقام
+        $department_prefix = substr($row_department['Department_ID'], 0, 3); 
 
-        // الاستعلام عن عدد الطلاب في القسم المحدد
         $sql_students_count = "SELECT COUNT(*) AS students_count FROM students WHERE Program_ID LIKE '$department_prefix%'";
         $result_students_count = $conn->query($sql_students_count);
 
-        // إذا تم العثور على عدد الطلاب
         if ($result_students_count && $result_students_count->num_rows > 0) {
             $row_students_count = $result_students_count->fetch_assoc();
-            // تخزين عدد الطلاب لهذا القسم
             $students_count_per_department[$row_department['Department_Name']] = $row_students_count['students_count'];
         } else {
-            // في حالة عدم العثور على عدد الطلاب لهذا القسم
             $students_count_per_department[$row_department['Department_Name']] = 0;
         }
     }
 }
 
-// تحويل البيانات إلى صيغة قابلة للاستخدام في JavaScript
 $department_names = array_keys($students_count_per_department);
 $students_count = array_values($students_count_per_department);
 ?>
@@ -227,7 +197,6 @@ $students_count = array_values($students_count_per_department);
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">عدد الطلاب لكل  قسم:</h4>
-                    <!-- عنصر Canvas لرسم الرسم البياني -->
                     <canvas id="barChart3"></canvas>
                 </div>
             </div>
@@ -323,7 +292,7 @@ if ($result->num_rows > 0) {
         labels: labels3,
         datasets: [{
             label: 'عدد الطلاب',
-            data: [<?php echo $count_students11?>, <?php echo $count_students22?>, <?php echo $count_students33?>, <?php echo $count_students44?>, <?php echo $count_students55?>], // تعديل البيانات للقيم الثابتة
+            data: [<?php echo $count_students11?>, <?php echo $count_students22?>, <?php echo $count_students33?>, <?php echo $count_students44?>, <?php echo $count_students55?>],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
@@ -360,14 +329,11 @@ if ($result->num_rows > 0) {
     );
 </script>
 
-
 <div class="col-lg-2">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">عدد الطلاب:</h4>
             <?php
-  
-
             $sql = "SELECT COUNT(*) AS total_students FROM students WHERE $first_digit = $firstDigit";
             $result = $conn->query($sql);
 
@@ -393,13 +359,8 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-
-
-    // عرض الفصل الدراسي
     $Max_Semster_Number = $row['Semester_Number'];
-    // التأكد من وجود الفصل الدراسي
     if ($Max_Semster_Number !== null) {
-        // استخدام switch مباشرة للتحقق من الفصل الدراسي
         switch (substr($Max_Semster_Number, 2, 3)) {
             case 1:
                 $name = "الأول";
@@ -425,7 +386,7 @@ if ($result->num_rows > 0) {
 }
 ?>
         <div class="col-lg-2 ">
-            <div class="card"><!--  academic_record اعلى سمستر -->
+            <div class="card">
                 <div class="card-body">
                 <h4 class="card-title">السنة الحالية | 14<?php echo substr($Max_Semster_Number, 0, 2); ?> هـ</h4>
                 <h4 class="card-title">الفصل الدراسي  | <?php echo $name ?></h4>
@@ -450,7 +411,6 @@ if ($result->num_rows > 0) {
     $Number3 = 5;
     $Number4 = 5;
     ?>
-    <!-- الكود اللازم لرسم الرسم البياني -->
     <script>
         var ctx = document.getElementById('pieChart').getContext('2d');
         var pieChart = new Chart(ctx, {
@@ -482,8 +442,7 @@ if ($result->num_rows > 0) {
 
 
     </script>
-</div>
-       
+</div> 
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {
@@ -494,20 +453,11 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
-
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-
 </body>
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
 download_js();
 print_js();
 ?>
@@ -516,11 +466,9 @@ print_js();
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
 <?php
 $navbar_path = "tools/js.php";
 
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {

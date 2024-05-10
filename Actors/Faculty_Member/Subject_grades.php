@@ -2,14 +2,11 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+      <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>المقررات</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- تضمين ملفات CSS -->
     <?php
     $navbar_path = "tools/css.php";
     for ($i = 0; $i < 9; $i++) {
@@ -23,7 +20,6 @@
 
     <style>
         <?php
-        // تضمين ملفات CSS من داخل PHP
         $navbar_path = "tools/tools.php";
         for ($i = 0; $i < 9; $i++) {
             $path = str_repeat("../", $i) . $navbar_path;
@@ -35,8 +31,6 @@
         download_css();
         print_css();
         ?>
-
-        /* تنسيق الجدول */
         .table {
             width: 100%;
             margin-bottom: 1rem;
@@ -75,8 +69,6 @@
 
 <body class="rtl">
     <div class="container-scroller">
-
-        <!-- تضمين نافبار -->
         <?php
         $navbar_path = "Navbar/rtl/nav.php";
         for ($i = 0; $i < 9; $i++) {
@@ -93,7 +85,6 @@
                 <div class="raw">
                     <div class="col-md-12 grid-margin ">
                     <?php
-// استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -160,13 +151,13 @@ for ($i = 0; $i < 9; $i++) {
         $(document).ready(function(){
             $('.subject-button').click(function(){
                 var subjectCode = $(this).data('subject-code');
-                var subjectName = $(this).text(); // الحصول على قيمة النص من الزر
+                var subjectName = $(this).text();
                 $.ajax({
                     url: 'process_grades.php',
                     method: 'POST',
                     data: { 
                         subjectCode: subjectCode,
-                        subjectName: subjectName // تمرير قيمة النص كمتغير جديد
+                        subjectName: subjectName 
                     },
                     success: function(response){
                         $('#grades-table').html(response);
@@ -184,19 +175,9 @@ for ($i = 0; $i < 9; $i++) {
     <div class='table-responsive'>
     </div>
 </div>
-
-
-
-    <!-- partial -->
   </div>
-  <!-- main-panel ends -->
   </div>
-  <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-  <!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller -->
-  <!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller --><!-- container-scroller -->
-
   <script src="../../assets/js/jquery.min.js"></script>
   <script src="../../assets/js/bootstrap.min.js"></script>
 
@@ -207,15 +188,11 @@ download_js();
 print_js();
 ?>
 
-<!-- Google Fonts -->
 <link href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-<!-- تضمين Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
 
-<!-- تضمين Bootstrap السكريبت -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <?php

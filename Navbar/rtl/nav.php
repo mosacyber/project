@@ -31,7 +31,23 @@ $result2 = $conn->query($sql2);
 $row2 = $result2->fetch_assoc();
 $_SESSION['Max_Semester_Number'] = $row2['Max_Semester_Number'];
 
-$_SESSION['Name'] =$row['First_Name']." ".$row['Last_Name'];
+
+
+
+
+
+
+if($row['Position'] >1 && $row['Position']<8 ){
+  $_SESSION['Name'] ="د. ".$row['First_Name']." ".$row['Last_Name'];
+}else {
+  $_SESSION['Name'] =$row['First_Name']." ".$row['Last_Name'];
+}
+
+
+
+
+
+
 $_SESSION['Mobile'] =$row['Mobile'];
 $_SESSION['Email'] =$row['Email'];
 $_SESSION['P'] =$row['Position'];
@@ -57,7 +73,7 @@ echo '
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
   <a class="navbar-brand brand-logo" href="' . $config['admin'] . '/index.php">';
   
-  $navbar_path = "assets/img/logoo.png";
+  $navbar_path = "assets/img/uu5.png";
   for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $navbar_path;
     if (file_exists($path)) {
@@ -69,7 +85,7 @@ echo '
   echo '</a>
   <a class="navbar-brand brand-logo-mini" href="' . $config['admin'] . '/index.php">';
   
-  $navbar_path = "assets/img/logoo.png";
+  $navbar_path = "assets/img/uu5.png";
   for ($i = 0; $i < 11; $i++) {
     $path = str_repeat("../", $i) . $navbar_path;
     if (file_exists($path)) {

@@ -1,19 +1,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>المقررات المسجلة</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
-
   <?php
     $navbar_path = "tools/css.php";
 for ($i = 0; $i < 9; $i++) {
@@ -22,11 +16,7 @@ for ($i = 0; $i < 9; $i++) {
       include $path;
         break;
     }
-}
-
-
-    ?>
-
+}?>
   <style>
     <?php
     $navbar_path = "tools/tools.php";
@@ -63,7 +53,6 @@ for ($i = 0; $i < 9; $i++) {
 <body class="rtl">
   <div class="container-scroller">
 <?php
-// استدعاء ملف التصميم
 $navbar_path = "Navbar/rtl/nav.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $navbar_path;
@@ -72,7 +61,6 @@ for ($i = 0; $i < 9; $i++) {
         break;
     }
 }
-// استدعاء ملف الشاشة البداية
 $loading_path = "loading/loading.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -82,16 +70,10 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
-      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
-
-     
 <?php
-// استدعاء ملف الشاشة البداية
 $loading_path = "content/content.php";
 for ($i = 0; $i < 9; $i++) {
     $path = str_repeat("../", $i) . $loading_path;
@@ -127,17 +109,15 @@ WHERE c.student_id = $_SESSION[Account_ID]
 AND c.Semester_Number = (SELECT MAX(Semester_Number) FROM current_semester WHERE student_id = $_SESSION[Account_ID])
 ORDER BY c.Semester_Number DESC;";
 
-// تنفيذ الاستعلام
 $result = $conn->query($sql);
 
-// التحقق من نجاح الاستعلام
+
 if ($result) {
-    // التحقق من عدم عودة نتائج فارغة
+
     if ($result->num_rows > 0) {
-        // استخدام البيانات المسترجعة
+
         $row = $result->fetch_assoc();
 
-        // تحديد الفصل الدراسي بناءً على قيمة Semester_Number
         $semester_number = $row["Semester_Number"];
         $last_digit = substr($semester_number, -1);
         $semester_name = "";
@@ -152,25 +132,18 @@ if ($result) {
             case "3":
                 $semester_name = "الثالث";
                 break;
-            // إضافة حالات إضافية حسب الحاجة
             default:
-                // حالة الافتراضية في حالة عدم تطابق الرقم
                 $semester_name = "غير محدد";
                 break;
         }
-
-        // عرض اسم الفصل الدراسي
         echo '<h4>الفصل الدراسي : <span>'.$semester_name.'</span></h4>';
 
-        // استخراج العام الدراسي من Semester_Number
         $academic_year = substr($semester_number, 0, 2);
         echo '<h4>العام الدراسي : 14'.$academic_year.'هـ</span></h4>';
     } else {
-        // عرض رسالة في حالة عدم وجود بيانات
         echo '<div class="alert alert-danger">تنبيه: لا توجد بيانات لعرضها.</div>';
     }
 } else {
-    // عرض رسالة في حالة فشل الاستعلام
     echo '<div class="alert alert-danger">تنبيه: فشل في استعلام قاعدة البيانات.</div>';
 }
 
@@ -185,7 +158,6 @@ if ($result) {
           <tbody>
           <?php
            if(isset($_SESSION['Account_ID'])) {
-                        // استعلام SQL لاسترداد بيانات معينة من الجدول
                         $sql = "SELECT a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
                             FROM current_semester c
                             INNER JOIN accounts a ON a.Account_ID = c.student_id 
@@ -196,20 +168,17 @@ if ($result) {
                             ORDER BY c.Semester_Number DESC;";
                         $result = $conn->query($sql);
 
-                        // التحقق من وجود بيانات للعرض
                         if ($result->num_rows > 0) {
-                            // عرض البيانات
                             while ($row = $result->fetch_assoc()) {
-                                // عرض الصفوف لكل بيان في الجدول
                                 echo '<tr>';
                                 echo '<td>' . $row["subject_code"] . '</td>';
                                 echo '<td>' . $row["subject_name"] . '</td>';
                                 echo '<td>' . $row["credit_hours"] . '</td>';
-                                echo '<td>' . $row["Faculty_Name"] . '</td>';
+                                echo '<td>د. ' . $row["Faculty_Name"] . '</td>';
                                 echo '</tr>';
                             }
                         } else {
-                            // إذا لم يتم العثور على بيانات
+                     
                             echo '<tr><td colspan="4">لا يوجد بيانات لعرضها</td></tr>';
                         }
                       }else {
@@ -230,10 +199,8 @@ if ($result) {
     </div>
   </div>
 </div>
-<!-- End Sales Card -->
-<h1></h1>
 
-        <!-- Sales Card -->
+<h1></h1>
         <div class="col-xxl-12 col-md-12">
   <div class="card info-card sales-card">
     <div class="card-body">
@@ -241,9 +208,8 @@ if ($result) {
 
 <?php
 
-  //  للتحقق من السشن اذا موجود او لا
+
   if(isset($_SESSION['Account_ID'])) {
-// استعلام SQL لاسترداد بيانات معينة من الجدول
 $sql = "SELECT  a.Account_ID, c.subject_code, c.Semester_Number, s.subject_name, s.credit_hours, CONCAT(a2.First_Name, ' ', a2.Last_Name) AS Faculty_Name
 FROM current_semester c
 INNER JOIN accounts a ON a.Account_ID = c.student_id 
@@ -252,7 +218,6 @@ INNER JOIN subjects s ON c.subject_code = s.subject_code
 WHERE c.student_id = {$_SESSION['Account_ID']}
 ORDER BY c.Semester_Number DESC
 LIMIT 1;";
-  // استعلام SQL آخر لاسترداد بيانات معينة من الجدول الآخر
  
 
   $sql4 = " SELECT * from academic_advisor_for_student WHERE student_id = 421004034 LIMIT 1";
@@ -262,20 +227,16 @@ LIMIT 1;";
 // تنفيذ الاستعلام
 $result = $conn->query($sql);
 
-// التحقق من وجود نتائج
 if ($result->num_rows > 0) {
   // عرض البيانات
   while($row = $result->fetch_assoc()) {
   
-    
-    // تنفيذ الاستعلام
     $result_accounts = $conn->query($sql);
 
-    // التحقق من وجود نتائج
     if ($result_accounts->num_rows > 0) {
-      // عرض بيانات الحساب
+     
       while($row_accounts = $result_accounts->fetch_assoc()) { 
-          echo "<h2>اسم المشرف الاكاديمي : " . $row_accounts["Faculty_Name"] . "</h2><br>";
+          echo "<h2>اسم المشرف الاكاديمي : د. " . $row_accounts["Faculty_Name"] . "</h2><br>";
           echo '<a href="'.$config['mail']."?id=".$row4["Academic_Advisor_ID"]."&subject_code="."Advisor".'"><button type="button" class="btn btn-primary">تواصل</button></a>';
       }    
   }
@@ -301,10 +262,6 @@ if ($result->num_rows > 0) {
       </p>
 </div>";
 }
-
-
-
-// إغلاق الاتصال بقاعدة البيانات
 $conn->close();
 ?>
 
@@ -312,23 +269,7 @@ $conn->close();
     </div>
   </div>
 </div>
-<!-- End Sales Card -->
 <h1></h1>
-
-<script>
-    // الحصول على العنصر الذي يحتوي على شريط التقدم
-    var progressBar = document.querySelector('.progress-bar');
-
-    // قراءة النسبة المئوية من العنصر
-    var percentage = parseFloat(progressBar.style.width);
-
-    // حساب النسبة المئوية من 5
-    var calculatedPercentage = (percentage / 100) * 5;
-
-    // تحديث نص النسبة المئوية في العنصر
-    progressBar.textContent = calculatedPercentage.toFixed(2) + " legH";
-
-</script>
           </div>    
         </div>
       </div>
@@ -346,19 +287,11 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-
 </body>
-
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
 download_js();
 print_js();
 ?>
@@ -371,7 +304,6 @@ print_js();
 <?php
 $navbar_path = "tools/js.php";
 
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {

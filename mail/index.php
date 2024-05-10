@@ -160,7 +160,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=".$row["subject_code"].'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row["full"].'</p><p class="u-designation">'.$row["subject_name"]." - ".$row["subject_code"].'</p></div> </a></li>';
+        echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row["Account_ID"]."&subject_code=".$row["subject_code"].'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">د. '.$row["full"].'</p><p class="u-designation">'.$row["subject_name"]." - ".$row["subject_code"].'</p></div> </a></li>';
     }
 } else {
   echo "
@@ -212,7 +212,7 @@ if ($row2) {
     if ($result3->num_rows > 0) {
         // عرض البيانات
         while ($row3 = $result3->fetch_assoc()) {
-            echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row3["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">'.$row3["full"].'</p><p class="u-designation">'.$Pos.'</p></div> </a></li>';
+            echo '<li class="profile-list-item"> <a href="'.$config['mail']."?id=".$row3["Account_ID"]."&subject_code=Advisor".'"> <span class="pro-pic"><img src="../assets/img/profile-img.png" alt=""></span><div class="user"><p class="u-name">د. '.$row3["full"].'</p><p class="u-designation">'.$Pos.'</p></div> </a></li>';
         }
     } else {
         // إذا لم يتم العثور على بيانات

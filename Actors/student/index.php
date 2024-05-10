@@ -46,69 +46,63 @@ for ($i = 0; $i < 9; $i++) {
 </style>
 </head>
 <body class="rtl">
-  <div class="container-scroller">
-<?php
-// استدعاء ملف التصميم
-$navbar_path = "Navbar/rtl/nav.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-        include $path;
-        break;
-    }
-}
-// استدعاء ملف الشاشة البداية
-$loading_path = "loading/loading.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $loading_path;
-    if (file_exists($path)) {
-        include $path;
-        break;
-    }
-}
-?>
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-            لوحه البيانات للطالب
-            </h3>
+      <div class="container-scroller">
+            <?php
+            // استدعاء ملف التصميم
+            $navbar_path = "Navbar/rtl/nav.php";
+            for ($i = 0; $i < 9; $i++) {
+                $path = str_repeat("../", $i) . $navbar_path;
+                if (file_exists($path)) {
+                    include $path;
+                    break;
+                }
+            }
+            // استدعاء ملف الشاشة البداية
+            $loading_path = "loading/loading.php";
+            for ($i = 0; $i < 9; $i++) {
+                $path = str_repeat("../", $i) . $loading_path;
+                if (file_exists($path)) {
+                    include $path;
+                    break;
+                }
+            }
+            ?>
+                      <!-- partial -->
+                      <div class="main-panel">
+                        <div class="content-wrapper">
+                          <div class="page-header">
+                            <h3 class="page-title">
+                            لوحه البيانات للطالب
+                            </h3>
+                          </div>
+
+                          <div class="row">
+                                <?php
+                      // استدعاء ملف الشاشة البداية
+                      $loading_path = "content/content.php";
+                      for ($i = 0; $i < 9; $i++) {
+                          $path = str_repeat("../", $i) . $loading_path;
+                          if (file_exists($path)) {
+                              include $path;
+                              break;
+                          }
+                      }
+                      ?>
+                            <?php
+                            $navbar_path = "footer/Footer.php";
+                            for ($i = 0; $i < 9; $i++) {
+                                $path = str_repeat("../", $i) . $navbar_path;
+                                if (file_exists($path)) {
+                                  include $path;
+                                    break;
+                                }
+                            }
+                            ?>
           </div>
-
-          <div class="row">
-          <?php
-// استدعاء ملف الشاشة البداية
-$loading_path = "content/content.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $loading_path;
-    if (file_exists($path)) {
-        include $path;
-        break;
-    }
-}
-?>
-<?php
-$navbar_path = "footer/Footer.php";
-for ($i = 0; $i < 9; $i++) {
-    $path = str_repeat("../", $i) . $navbar_path;
-    if (file_exists($path)) {
-      include $path;
-        break;
-    }
-}
-?>
-        <!-- partial -->
+        </div>
       </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-
 </body>
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
 download_js();
 print_js();
 ?>
@@ -120,8 +114,6 @@ print_js();
 
 <?php
 $navbar_path = "tools/js.php";
-
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {

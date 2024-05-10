@@ -3,15 +3,12 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
 
-<!-- Mirrored from www.urbanui.com/melody/template/pages/layout/rtl-layout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:05:55 GMT -->
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>البرنامج</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
 
   <?php
     $navbar_path = "tools/css.php";
@@ -21,11 +18,7 @@ for ($i = 0; $i < 9; $i++) {
       include $path;
         break;
     }
-}
-
-
-    ?>
-
+}?>
   <style>
     <?php
     $navbar_path = "tools/tools.php";
@@ -49,7 +42,6 @@ for ($i = 0; $i < 9; $i++) {
     color: #fff;
 }
 
-/* للجدول  */
 .datatable-table > thead > tr > th {
     vertical-align: bottom;
     text-align: right;
@@ -57,8 +49,6 @@ for ($i = 0; $i < 9; $i++) {
 }
 
   </style>
-      <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script> -->
-
 </head>
 <body class="rtl">
   <div class="container-scroller">
@@ -74,29 +64,13 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-
-      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="raw">
-
           </div>
-
-
           <div class="row">
-            
-
-
-
-
-        <!-- Revenue Card -->
-        <div class="col-xxl-12 col-md-12">
+                <div class="col-xxl-12 col-md-12">
           <div class="card info-card revenue-card">
-
-      
-        
-
               </ul>
               <div class="tab-content pt-2">
 
@@ -105,10 +79,6 @@ for ($i = 0; $i < 9; $i++) {
                 <?php
 
 if (isset($_SESSION['role'])) {
-// استعلام SQL لاسترداد البيانات من جدول faculty_member
-
-
-
 $sql_program = "SELECT * FROM program_coordinator WHERE Program_Coordinator_ID = $_SESSION[Account_ID]";
 $result_program = $conn->query($sql_program);
 $row_program = $result_program->fetch_assoc();
@@ -135,7 +105,6 @@ if ($result->num_rows > 0) {
             $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
             $result4 = $conn->query($sql4);
             if ($result4->num_rows > 0) {
-                // بيانات الطالب موجودة ويمكن معالجتها هنا
             } else {
 
             }
@@ -158,10 +127,6 @@ if ($result->num_rows > 0) {
         <p>لا يوجد بيانات عضو هيئة تدريس</p>
 </div>";
 }
-
-    
-    
-    // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
     switch ($_SESSION['role']) {
         case '1':
             $Specialization = "";
@@ -216,10 +181,8 @@ if ($result->num_rows > 0) {
             $Major = isset($row['Major']) ? $row['Major'] : "";
             break;
         case 'admin':
-            // تعيين التخصص لحالة الادمن هنا
             break;
         default:
-            // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
             break;
     }
 }
@@ -234,8 +197,6 @@ if ($result->num_rows > 0) {
                     <div class="col-lg-3 col-md-4 label ">الرقم الوظيفي</div>
                     <div class="col-lg-9 col-md-8"><?php echo $_SESSION['Account_ID'] ?></div>
                   </div>
-
-
 <div class="row">
     <div class="col-lg-3 col-md-4 label">التخصص</div>
     <div class="col-lg-9 col-md-8"><?php echo  $Major  ?></div>
@@ -255,27 +216,12 @@ if ($result->num_rows > 0) {
     <div class="col-lg-3 col-md-4 label">الكليه</div>
     <div class="col-lg-9 col-md-8"><?php echo $college ?></div>
 </div>
-
-
           </div>
-       
-       
-       
-       
-
-
         </div>
         </div>
         </div>
-
-
-
-
-
           </div><br>
           <div class="col-lg-12">
-
-
 <div class="card">
     <div class="card-body">
 <?php
@@ -283,24 +229,13 @@ $sql_program = "SELECT * FROM programs WHERE Program_ID = $Program_ID";
 $result_program = $conn->query($sql_program);
 $row_program = $result_program->fetch_assoc();
 $Program_Name = $row_program['Program_Name'];
-
-
-
 ?>
-
              <h4 class="card-title">البرنامج : <?php  echo $Program_Name   ?></h4>
              <h4 class="card-title">تاريخ تعيينك كمنسق للبرنامج : <?php  echo $Program_date  ?></h4>
-   
     </div>
 </div>
-
-
-
 </div><br>
-        <!-- content-wrapper ends -->
         <div class="col-lg-12">
-
-
             <div class="card">
                 <div class="card-body">
                 <button class='btn btn-success mb-3' id='add-data-btn' data-toggle='modal' data-target='#insertModal' >
@@ -331,7 +266,6 @@ $Program_Name = $row_program['Program_Name'];
                         <td><?= $row["credit_hours"] ?></td>
                         <td>
                         <a class='btn btn-warning' data-toggle='modal' data-target='#editModal'>تعديل</a></td>
-
                         <td>
                             <button type="button" class="btn btn-danger DeleteBtn" data-toggle="modal" data-target="#WarningModal">
                                 حذف
@@ -344,8 +278,6 @@ $Program_Name = $row_program['Program_Name'];
         <p>لا توجد بيانات متاحة</p>
     <?php endif; ?>
 </form>
-
-<!-- Window Insert -->
 <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -390,7 +322,7 @@ $Program_Name = $row_program['Program_Name'];
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
         </div>
@@ -398,7 +330,6 @@ function closeModal() {
     </div>
   </div>
 </div>
-<!-- window Update -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -434,7 +365,7 @@ function closeModal() {
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload();
 }
 </script>
                 </div>
@@ -442,9 +373,6 @@ function closeModal() {
         </div>
     </div>
 </div>
-
-
-<!-- Window Delete -->
 <div class="modal fade" id="WarningModal" tabindex="-1" role="dialog" aria-labelledby="WarningModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -472,7 +400,7 @@ function closeModal() {
 <script>
 function closeModal() {
     $("#myModal").modal("hide");
-    location.reload(); // إعادة تحميل الصفحة بشكل اجباري
+    location.reload(); 
 }
 </script>
                             </div>
@@ -483,7 +411,6 @@ function closeModal() {
         </div>
     </div>
 </div>
-<!-- واجهة نجاح التنفيذ -->
 <div class="modal fade" id="OKModal" tabindex="-1" role="dialog" aria-labelledby="OKModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -649,7 +576,6 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-        <!-- content-wrapper ends -->
 <?php
 $navbar_path = "footer/Footer.php";
 for ($i = 0; $i < 9; $i++) {
@@ -660,20 +586,11 @@ for ($i = 0; $i < 9; $i++) {
     }
 }
 ?>
-
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-
 </body>
-
-
 <?php
-// Download and print JavaScript functions (presumably defined elsewhere)
 download_js();
 print_js();
 ?>
@@ -686,7 +603,6 @@ print_js();
 <?php
 $navbar_path = "tools/js.php";
 
-// Search for navbar.php in parent directories
 for ($i = 0; $i < 9; $i++) {
   $path = str_repeat("../", $i) . $navbar_path;
   if (file_exists($path)) {
