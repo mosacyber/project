@@ -50,11 +50,11 @@
     }
 
 
-    body > div.container-scroller > div > div > div > div > div > div.row > div.col-12 > div > div{
+    body>div.container-scroller>div>div>div>div>div>div.row>div.col-12>div>div {
 
       background-image: radial-gradient(at 72% 48%, hsl(249deg 38.46% 30.59% / 0%) 0px, transparent 50%), radial-gradient(at 32% 44%, hsl(249deg 38.46% 30.59% / 0%) 0px, transparent 50%), radial-gradient(at 100% 100%, hsl(351.21deg 100% 45.49% / 0%) 0px, transparent 50%), radial-gradient(at 2% 96%, hsl(169.68deg 66.24% 46.47% / 0%) 0px, #00000000 50%), radial-gradient(at 52% 100%, hsl(351.21deg 4.46% 16.69% / 0%) 0px, #85819754 50%);
-    color: #39306c;
-    }  
+      color: #39306c;
+    }
   </style>
 </head>
 
@@ -78,69 +78,67 @@
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="raw">
-        <!-- Revenue Card -->
-        <div class="col-xxl-12 col-md-12">
-          <div class="card info-card revenue-card">
+          <!-- Revenue Card -->
+          <div class="col-xxl-12 col-md-12">
+            <div class="card info-card revenue-card">
 
-      
-        
+
+
 
               </ul>
               <div class="tab-content pt-2">
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
-                <?php
+                  <?php
 
-        $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
-        $result4 = $conn->query($sql4);
-    
-    if ($result4->num_rows > 0) {
+                  $sql4 = "SELECT * FROM students WHERE student_id = '{$_SESSION['Account_ID']}'";
+                  $result4 = $conn->query($sql4);
 
-      
-      $row4 = $result4->fetch_assoc();
-
-    $student_id= $row4['student_id'];
-    $Program_ID= $row4['Program_ID'];
-   
-
-    $sql5 = "SELECT * FROM programs WHERE Program_ID = $Program_ID";
-    $result5 = $conn->query($sql5);
-
-    $firstDigit = substr($row4['Program_ID'], 0, 1);
-
-    $startPosition = 1; // الموضع البدئي للرقمين المطلوبين
-    $middleDigits = substr($row4['Program_ID'], $startPosition, 2); // يأخذ رقمين ابتداءً من الموضع البدئي
-    
-
-    $endDigits = substr($row4['Program_ID'], -2);
-    
+                  if ($result4->num_rows > 0) {
 
 
+                    $row4 = $result4->fetch_assoc();
 
-    $sql6 = "SELECT * FROM colleges WHERE College_ID = $firstDigit";
-    $result6 = $conn->query($sql6);
-    if ($result6->num_rows > 0) {
-        $row6 = $result6->fetch_assoc();
-
-
-        $College_Name= $row6['College_Name'];
-        
-
-    }
-
-    $sql7 = "SELECT * FROM departments WHERE Department_ID = '{$firstDigit}{$middleDigits}'";
-    $result7 = $conn->query($sql7);
-    if ($result7->num_rows > 0) {
-        $row7 = $result7->fetch_assoc();
+                    $student_id = $row4['student_id'];
+                    $Program_ID = $row4['Program_ID'];
 
 
-        $Department_Name= $row7['Department_Name'];
-        
+                    $sql5 = "SELECT * FROM programs WHERE Program_ID = $Program_ID";
+                    $result5 = $conn->query($sql5);
 
-    }
+                    $firstDigit = substr($row4['Program_ID'], 0, 1);
+
+                    $startPosition = 1; // الموضع البدئي للرقمين المطلوبين
+                    $middleDigits = substr($row4['Program_ID'], $startPosition, 2); // يأخذ رقمين ابتداءً من الموضع البدئي
+                  
+
+                    $endDigits = substr($row4['Program_ID'], -2);
 
 
+
+
+                    $sql6 = "SELECT * FROM colleges WHERE College_ID = $firstDigit";
+                    $result6 = $conn->query($sql6);
+                    if ($result6->num_rows > 0) {
+                      $row6 = $result6->fetch_assoc();
+
+
+                      $College_Name = $row6['College_Name'];
+
+
+                    }
+
+                    $sql7 = "SELECT * FROM departments WHERE Department_ID = '{$firstDigit}{$middleDigits}'";
+                    $result7 = $conn->query($sql7);
+                    if ($result7->num_rows > 0) {
+                      $row7 = $result7->fetch_assoc();
+
+
+                      $Department_Name = $row7['Department_Name'];
+
+
+                    }
 
 
 
@@ -149,49 +147,51 @@
 
 
 
-    if ($result5->num_rows > 0) {
-        $row5 = $result5->fetch_assoc();
-    } else {
-        // عرض التنبيه في حالة عدم العثور على البرنامج
-        echo "
+
+
+                    if ($result5->num_rows > 0) {
+                      $row5 = $result5->fetch_assoc();
+                    } else {
+                      // عرض التنبيه في حالة عدم العثور على البرنامج
+                      echo "
         <div class='alert alert-danger'>
             <p>تنبيه: لا يوجد بيانات برنامج</p>
         </div>";
-        // تعيين قيم افتراضية
-        $row5 = array('Program_Name' => 'برنامج غير معروف'); 
-    }
+                      // تعيين قيم افتراضية
+                      $row5 = array('Program_Name' => 'برنامج غير معروف');
+                    }
 
-    if (isset($_SESSION['role'])) {
-        // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
-        switch ($_SESSION['role']) {
-            case '1':
-                $Specialization = "";
-                $Degree = "طالب";
-                $Major = $row5['Program_Name'];
-                break;
-            default:
-                // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
-                break;
-        }
-    }
-} else {
-    // عرض التنبيه في حالة عدم العثور على الطالب
-    echo "
+                    if (isset($_SESSION['role'])) {
+                      // تحديد التخصص والدرجة العلمية استنادًا إلى قيمة $_SESSION['role']
+                      switch ($_SESSION['role']) {
+                        case '1':
+                          $Specialization = "";
+                          $Degree = "طالب";
+                          $Major = $row5['Program_Name'];
+                          break;
+                        default:
+                          // تعيين التخصص الافتراضي هنا في حالة عدم تطابق أي من الحالات السابقة
+                          break;
+                      }
+                    }
+                  } else {
+                    // عرض التنبيه في حالة عدم العثور على الطالب
+                    echo "
     <div class='alert alert-danger'>
         <p>تنبيه: لا يوجد بيانات طالب</p>
     </div>";
-    // تعيين قيم افتراضية
-    $row4 = array();
-    $row5 = array('Program_Name' => 'برنامج غير معروف');
-    $Specialization = "تخصص غير معروف";
-    $Degree = "درجة غير معروفة";
-    $Major = "تخصص غير معروف";
-}
+                    // تعيين قيم افتراضية
+                    $row4 = array();
+                    $row5 = array('Program_Name' => 'برنامج غير معروف');
+                    $Specialization = "تخصص غير معروف";
+                    $Degree = "درجة غير معروفة";
+                    $Major = "تخصص غير معروف";
+                  }
 
 
 
 
-                ?>            
+                  ?>
 
 
 
@@ -232,67 +232,69 @@
 
 
 
-          </div>
-        </div><!-- End Revenue Card -->
-        </div>
-        <br>
+                </div>
+              </div><!-- End Revenue Card -->
+            </div>
+            <br>
 
-        <div class="page-header">
-          <h3 class="page-title">
-          درجات المقررات الحالية
-          </h3>
-        </div>
+            <div class="page-header">
+              <h3 class="page-title">
+                درجات المقررات الحالية
+              </h3>
+            </div>
 
-        <div class="row">
-          <!-- Sales Card -->
-          <?php
-          $host = "localhost";
-          $name = "root";
-          $pass = "";
-          $DB = "university_info";
-          $con = @mysqli_connect($host, $name, $pass, $DB) or die(mysqli_connect_error());
-          $previous_subject = null; // تعريف متغير لتتبع اسم المادة السابقة
-          $A = 0;
+            <div class="row">
+              <!-- Sales Card -->
+              <?php
+              $host = "localhost";
+              $name = "root";
+              $pass = "";
+              $DB = "university_info";
+              $con = @mysqli_connect($host, $name, $pass, $DB) or die(mysqli_connect_error());
+              $previous_subject = null; // تعريف متغير لتتبع اسم المادة السابقة
+              $A = 0;
 
-          $sql = "SELECT DISTINCT subjects.subject_code, subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
+              $sql = "SELECT DISTINCT subjects.subject_code, subjects.subject_name, coursework_type.coursework_type_name, coursework.coursework_grade, grades.coursework_mark
           FROM grades
           INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
           INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
           INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
           WHERE grades.student_id = " . $_SESSION['Account_ID'] . " AND coursework.subject_code = grades.subject_code ORDER by  subjects.subject_code";
-          $SQL2 = mysqli_query($con, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
+              $SQL2 = mysqli_query($con, "SELECT COUNT(DISTINCT subjects.subject_name) AS subject_count
           FROM grades
           INNER JOIN coursework ON grades.coursework_id = coursework.coursework_id
           INNER JOIN subjects ON coursework.subject_code = subjects.subject_code
           INNER JOIN coursework_type ON coursework.coursework_type_id = coursework_type.coursework_type_id
           WHERE grades.student_id = " . $_SESSION['Account_ID'] . "");
-          $S = mysqli_fetch_array($SQL2);
-          $count = $S[0];
-          $B = 8;
-          $C = 0;
-          $subject_total_marks = 0;
-          $result = $con->query($sql);
-          $total = 0;
-          if ($result->num_rows > 0) {
-            $previous_subject = '';
+              $S = mysqli_fetch_array($SQL2);
+              $count = $S[0];
+              $B = 8;
+              $C = 0;
+              $student_total_marks = 0;
+              $subject_total_marks = 0;
+              $result = $con->query($sql);
+              $total = 0;
+              if ($result->num_rows > 0) {
+                $previous_subject = '';
 
-            while ($row = $result->fetch_assoc()) {
-              if ($row["subject_name"] != $previous_subject) {
-                $A++;
-                $C = 0;
-                if ($previous_subject != '') {
-                  echo "<td colspan='1' space='col'>المجمــــوع</td>";
-                  echo "<td colspan='2'><div class='progress'>
-                           <div class='progress-bar' role='progressbar' style='width: " . $subject_total_marks . "%; background-color: " . $pr_color . "; color: black;' aria-valuenow='" . $subject_total_marks . "'
-                             aria-valuemin='0' aria-valuemax='100'>" . $subject_total_marks . "</div>
+                while ($row = $result->fetch_assoc()) {
+                  if ($row["subject_name"] != $previous_subject) {
+                    $A++;
+                    $C = 0;
+                    if ($previous_subject != '') {
+                      echo "<td colspan='1' space='col'>المجمــــوع</td>";
+                      echo "<td colspan='2'><div class='progress'>
+                           <div class='progress-bar' role='progressbar' style='width: " . $student_total_marks . "%; background-color: " . $pr_color . "; color: black;' aria-valuenow='" . $student_total_marks . "'
+                             aria-valuemin='0' aria-valuemax='100'>" . $student_total_marks . "</div>
                               </div>
                                </td>";
-                    echo "</tr>";
-                    echo " </tr></tbody></table></div></div></div></div><br><br>";
+                      echo "</tr>";
+                      echo " </tr></tbody></table></div></div></div></div><br><br>";
                       $subject_total_marks = 0;
-                }
-                        
-                echo '<div class="col-xxl-12 col-md-12">
+                      $student_total_marks = 0;
+                    }
+
+                    echo '<div class="col-xxl-12 col-md-12">
                         <div class="card info-card sales-card">
                           <div class="card-body">
                             <h2>' . $row["subject_name"] . ' ' . $row["subject_code"] . '</h2>
@@ -306,38 +308,43 @@
                                   </tr>
                                 </thead>
                                 <tbody>';
-              }
-              $subject_total_marks += $row["coursework_mark"];
-              //الألوان الخاصة بمجموع الدرجات لكل مقرر
-              $pr_color = "";
-              if ($subject_total_marks > 90) {
-                $pr_color = "#6fe381";
-              } elseif ($subject_total_marks >= 80 && $subject_total_marks <= 89) {
-                $pr_color = "#d3ef5e";
-              } elseif ($subject_total_marks >= 70 && $subject_total_marks <= 79) {
-                $pr_color = "#fee43f";
-              } elseif ($subject_total_marks >= 60 && $subject_total_marks <= 69) {
-                $pr_color = "#f19c26";
-              } else {
-                $pr_color = "#ed4c36";
-              }
+                  }
+                  $subject_total_marks += $row["coursework_grade"];
+                  $student_total_marks += $row["coursework_mark"];
+                  if ($subject_total_marks > 0) {
+                    $percentage = ($student_total_marks / $subject_total_marks) * 100;
+                  } else {
+                    $percentage = 0;
+                  }
+                  //الألوان الخاصة بمجموع الدرجات لكل مقرر
+                  $pr_color = "";
+                  if ($percentage > 90) {
+                    $pr_color = "#6fe381";
+                  } elseif ($percentage >= 80 && $percentage <= 89) {
+                    $pr_color = "#d3ef5e";
+                  } elseif ($percentage >= 70 && $percentage <= 79) {
+                    $pr_color = "#fee43f";
+                  } elseif ($percentage >= 60 && $percentage <= 69) {
+                    $pr_color = "#f19c26";
+                  } else {
+                    $pr_color = "#ed4c36";
+                  }
 
-                          
-              $progress_width = ($row["coursework_mark"] / $row["coursework_grade"]) * 100;
-              $total += $row["coursework_mark"];
-              if ($progress_width >= 90) {
-                $progress_color = "#6fe381";
-              } elseif ($progress_width >= 80 && $progress_width <= 89) {
-                $progress_color = "#d3ef5e";
-              } elseif ($progress_width >= 70 && $progress_width <= 79) {
-                $progress_color = "#fee43f";
-              } elseif ($progress_width >= 60 && $progress_width <= 69) {
-                $progress_color = "#f19c26";
-              } else {
-                $progress_color = "#ed4c36";
-              }
-            
-              echo '<tr>
+                  $progress_width = ($row["coursework_mark"] / $row["coursework_grade"]) * 100;
+                  $total += $row["coursework_mark"];
+                  if ($progress_width >= 90) {
+                    $progress_color = "#6fe381";
+                  } elseif ($progress_width >= 80 && $progress_width <= 89) {
+                    $progress_color = "#d3ef5e";
+                  } elseif ($progress_width >= 70 && $progress_width <= 79) {
+                    $progress_color = "#fee43f";
+                  } elseif ($progress_width >= 60 && $progress_width <= 69) {
+                    $progress_color = "#f19c26";
+                  } else {
+                    $progress_color = "#ed4c36";
+                  }
+
+                  echo '<tr>
                       <td>' . $row["coursework_type_name"] . '</td>
                       <td>' . $row["coursework_grade"] . '</td>
                       <td>
@@ -347,33 +354,27 @@
                         </div>
                       </td>
                     </tr>';
-              $C++;
-              $previous_subject = $row["subject_name"];
-              if ($count == $A && $C == $B) {
-               
-                break;
-              }
+                  $C++;
+                  $previous_subject = $row["subject_name"];
+                  if ($count == $A && $C == $B) {
 
-            }
-            echo "<td colspan='1' space='col'>المجمــــوع</td>";
+                    break;
+                  }
+
+                }
+                echo "<td colspan='1' space='col'>المجمــــوع</td>";
                 echo "<td colspan='2'><div class='progress'>
-                    <div class='progress-bar' role='progressbar' style='width: " . $subject_total_marks . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $subject_total_marks . "' aria-valuemin='0' aria-valuemax='100'>" . $subject_total_marks . "</div>
+                    <div class='progress-bar' role='progressbar' style='width: " . $student_total_marks . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $student_total_marks . "' aria-valuemin='0' aria-valuemax='100'>" . $student_total_marks . "</div>
                     </div>
                 </td>";
                 echo "</tr>";
-
-            echo '</tbody></table></div></div></div></div><br><br>
-            
-            
-
-            
-
+                echo '</tbody></table></div></div></div></div><br><br>                 
           <hr>
             ';
-          } ?>
+              } ?>
 
-          <?php
-          $sql1 = "SELECT cs.subject_code, s.subject_name
+              <?php
+              $sql1 = "SELECT cs.subject_code, s.subject_name
         FROM current_semester cs
         LEFT JOIN subjects s ON cs.subject_code = s.subject_code
         WHERE cs.student_id = " . $_SESSION['Account_ID'] . " AND NOT EXISTS (
@@ -382,11 +383,11 @@
             AND g.subject_code = cs.subject_code
         ) ORDER BY cs.subject_code";
 
-          $result1 = mysqli_query($con, $sql1);
+              $result1 = mysqli_query($con, $sql1);
 
-          if ($result1->num_rows > 0) {
-            while ($row1 = $result1->fetch_assoc()) {
-              echo '<div class="col-xxl-12 col-md-12">
+              if ($result1->num_rows > 0) {
+                while ($row1 = $result1->fetch_assoc()) {
+                  echo '<div class="col-xxl-12 col-md-12">
                 <div class="card info-card sales-card">
                     <div class="card-body">
                         <h2>' . $row1["subject_name"] . ' ' . $row1["subject_code"] . '</h2>
@@ -400,7 +401,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>';
-              echo '</tbody>
+                  echo '</tbody>
                             </table>
                         </div>
                     </div>
@@ -415,40 +416,40 @@
           
           <hr>
           ';
+                }
+              }
+              ?>
+
+
+
+
+            </div>
+
+
+          </div>
+          <!-- content-wrapper ends -->
+
+
+          <?php
+          $navbar_path = "footer/Footer.php";
+          for ($i = 0; $i < 9; $i++) {
+            $path = str_repeat("../", $i) . $navbar_path;
+            if (file_exists($path)) {
+              include $path;
+              break;
             }
           }
           ?>
 
 
 
-          
+          <!-- partial -->
         </div>
-
-
+        <!-- main-panel ends -->
       </div>
-      <!-- content-wrapper ends -->
-
-
-      <?php
-      $navbar_path = "footer/Footer.php";
-      for ($i = 0; $i < 9; $i++) {
-        $path = str_repeat("../", $i) . $navbar_path;
-        if (file_exists($path)) {
-          include $path;
-          break;
-        }
-      }
-      ?>
-
-
-
-      <!-- partial -->
+      <!-- page-body-wrapper ends -->
     </div>
-    <!-- main-panel ends -->
-  </div>
-  <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+    <!-- container-scroller -->
 
 </body>
 
@@ -472,9 +473,12 @@ download_js();
 print_js();
 ?>
 <link href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+  rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-nlTQm9jZ9raA8qk4Mk4pGvS2Zz5cDgKPzFDLW1WWCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <?php
