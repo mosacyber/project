@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 06:54 PM
+-- Generation Time: May 10, 2024 at 09:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -292,8 +292,8 @@ CREATE TABLE `current_semester` (
 --
 
 INSERT INTO `current_semester` (`student_id`, `subject_code`, `Faculty_member_ID`, `Semester_Number`) VALUES
+(381003233, 'CIS340', 123456, 452),
 (381003233, 'CIT203', 123456, 452),
-(381003233, 'CSC201', 123456, 452),
 (421002999, 'CIT234', 123456, 452),
 (421004034, 'CIT234', 123456, 452),
 (381003212, 'CIT453', 211091, 452),
@@ -371,6 +371,7 @@ CREATE TABLE `grades` (
 --
 
 INSERT INTO `grades` (`student_ID`, `coursework_id`, `coursework_Mark`, `Subject_Code`) VALUES
+(381003233, 1, 2, 'CIS340'),
 (381003233, 1, 20, 'CIT203'),
 (381003233, 1, 13, 'CIT234'),
 (381003233, 1, 14, 'CSC201'),
