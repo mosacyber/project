@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2024 at 09:38 PM
+-- Generation Time: May 11, 2024 at 09:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -412,7 +412,7 @@ INSERT INTO `grades` (`student_ID`, `coursework_id`, `coursework_Mark`, `Subject
 (421004034, 6, 38, 'CIT234'),
 (421004034, 7, 3, 'CIS340'),
 (421004034, 8, 8, 'CIS340'),
-(421004034, 9, 38, 'CIS340');
+(421004034, 9, 32, 'CIS340');
 
 -- --------------------------------------------------------
 
