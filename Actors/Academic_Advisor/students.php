@@ -183,6 +183,7 @@ include '../../config/app.php'
                           $count = $S[0]; 
                           $B = 8;
                           $subject_total_marks = 0;
+                          $student_total_marks = 0;
                           $result1 = $conn->query($sql1);
 
                           if ($result1->num_rows > 0) {
@@ -195,10 +196,11 @@ include '../../config/app.php'
                                 if ($previous_subject != '') {
                                   echo "<td colspan='1' space='col'>المجمــــوع</td>";
                                   echo "<td colspan='2'><div class='progress'>
-                                          <div class='progress-bar' role='progressbar' style='width: " . $subject_total_marks . "%; background-color: " . $pr_color . "; color: black;' aria-valuenow='" . $subject_total_marks . "'aria-valuemin='0' aria-valuemax='100'>" . $subject_total_marks . "</div></div></td>";
+                                          <div class='progress-bar' role='progressbar' style='width: " . $percentage . "%; background-color: " . $pr_color . "; color: black;' aria-valuenow='" . $percentage . "'aria-valuemin='0' aria-valuemax='100'>" . $student_total_marks . "</div></div></td>";
                                   echo "</tr>";
                                   echo '</tbody></table></div></div></div></div><br><br>';
                                   $subject_total_marks = 0;
+                                  $student_total_marks = 0;
                                 }
 
                                 echo '<div class="col-xxl-12 col-md-12">
@@ -216,15 +218,21 @@ include '../../config/app.php'
                                                 </thead>
                                                 <tbody>';
                               }
-                              $subject_total_marks += $row1["coursework_mark"];
+                              $subject_total_marks += $row1["coursework_grade"];
+                              $student_total_marks += $row1["coursework_mark"];
+                              if ($subject_total_marks > 0) {
+                                $percentage = ($student_total_marks / $subject_total_marks) * 100;
+                              } else {
+                                $percentage = 0;
+                              }
                               $pr_color = "";
-                              if ($subject_total_marks > 90) {
+                              if ($percentage > 90) {
                                 $pr_color = "#6fe381";
-                              } elseif ($subject_total_marks >= 80 && $subject_total_marks <= 89) {
+                              } elseif ($percentage >= 80 && $percentage <= 89) {
                                 $pr_color = "#d3ef5e";
-                              } elseif ($subject_total_marks >= 70 && $subject_total_marks <= 79) {
+                              } elseif ($percentage >= 70 && $percentage <= 79) {
                                 $pr_color = "#fee43f";
-                              } elseif ($subject_total_marks >= 60 && $subject_total_marks <= 69) {
+                              } elseif ($percentage >= 60 && $percentage <= 69) {
                                 $pr_color = "#f19c26";
                               } else {
                                 $pr_color = "#ed4c36";
@@ -262,8 +270,8 @@ include '../../config/app.php'
                             }
                             echo "<td colspan='1' space='col'>المجمــــوع</td>";
                             echo "<td colspan='2'><div class='progress'>
-                                    <div class='progress-bar' role='progressbar' style='width: " . $subject_total_marks . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $subject_total_marks . "' aria-valuemin='0' aria-valuemax='100'>" . $subject_total_marks . "</div>
-                                    </div </td>";
+                                    <div class='progress-bar' role='progressbar' style='width: " . $percentage . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $percentage . "' aria-valuemin='0' aria-valuemax='100'>" . $student_total_marks . "</div>
+                                    </div> </td>";
                             echo "</tr>";
                             echo '</tbody></table></div></div></div></div><br><br>';
                           } else {

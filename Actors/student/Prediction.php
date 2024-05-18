@@ -284,7 +284,7 @@
                     if ($previous_subject != '') {
                       echo "<td colspan='1' space='col'>المجمــــوع</td>";
                       echo "<td colspan='2'><div class='progress'>
-                           <div class='progress-bar' role='progressbar' style='width: " . $student_total_marks . "%; background-color: " . $pr_color . "; color: black;' aria-valuenow='" . $student_total_marks . "'
+                           <div class='progress-bar' role='progressbar' style='width: " . $percentage . "%; background-color: " . $pr_color . "; color: black;' aria-valuenow='" . $percentage . "'
                              aria-valuemin='0' aria-valuemax='100'>" . $student_total_marks . "</div>
                               </div>
                                </td>";
@@ -364,7 +364,7 @@
                 }
                 echo "<td colspan='1' space='col'>المجمــــوع</td>";
                 echo "<td colspan='2'><div class='progress'>
-                    <div class='progress-bar' role='progressbar' style='width: " . $student_total_marks . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $student_total_marks . "' aria-valuemin='0' aria-valuemax='100'>" . $student_total_marks . "</div>
+                    <div class='progress-bar' role='progressbar' style='width: " . $percentage . "%; background-color: " . $pr_color . ";color: black;' aria-valuenow='" . $percentage . "' aria-valuemin='0' aria-valuemax='100'>" . $student_total_marks . "</div>
                     </div>
                 </td>";
                 echo "</tr>";
